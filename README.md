@@ -1,2 +1,2 @@
-# wget - Download - Setup
+# uri - wget - Download - Setup
  
