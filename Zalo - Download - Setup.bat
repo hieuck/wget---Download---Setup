@@ -12,48 +12,48 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat WinRAR. Vui Long Cho
+@echo                 Dang Cai Dat Zalo. Vui Long Cho
 @echo off
 
-taskkill /F /IM WinRAR.exe
+taskkill /F /IM Zalo.exe
 if exist %Windir%\SysWOW64 goto X64
 
-if exist WinRAR*.exe goto I32
-if not exist WinRAR*.exe goto D32
+if exist Zalo*.exe goto I32
+if not exist Zalo*.exe goto D32
 
 :D32
 @echo Dang Tai Xuong...
-wget -q --show-progress https://www.rarlab.com/rar/winrar-x32-620.exe
+powershell -Command "Invoke-WebRequest -Uri 'https://zalo.me/download/zalo-pc?utm=90000' -OutFile 'Zalo_HieuckIT.exe'"
 @echo Tai Xuong Hoan Thanh.
 goto I32
 
 :I32
 @echo Dang Cai Dat...
-FOR %%i IN ("WinRAR*.exe") DO Set FileName="%%i"
+FOR %%i IN ("Zalo*.exe") DO Set FileName="%%i"
 %FileName% /S
 goto Lic
 
 :X64
-if  exist WinRAR*.exe goto I64
-if not exist WinRAR*.exe goto D64
+if  exist Zalo*.exe goto I64
+if not exist Zalo*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong...
-wget -q --show-progress https://www.rarlab.com/rar/winrar-x64-620.exe
+powershell -Command "Invoke-WebRequest -Uri 'https://zalo.me/download/zalo-pc?utm=90000' -OutFile 'Zalo_HieuckIT.exe'"
 @echo Tai Xuong Hoan Thanh.
 goto I64
 
 :I64
 @echo Dang Cai Dat...
-FOR %%i IN ("WinRAR*.exe") DO Set FileName="%%i"
+FOR %%i IN ("Zalo*.exe") DO Set FileName="%%i"
 %FileName% /S
 goto Lic
 
 :Lic
-copy /y "rarreg.key" "%ProgramFiles%\WinRAR"
+::copy /y "ban_quyen_neu_co" "vao_day"
 goto END
 
 :END
-del WinRAR*.exe
+del Zalo*.exe
 echo.
 echo Installation completed successfully
