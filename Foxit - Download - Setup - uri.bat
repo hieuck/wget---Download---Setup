@@ -34,8 +34,8 @@ FOR %%i IN ("Foxit*Reader*Setup*.exe") DO Set FileName="%%i"
 goto Lic
 
 :X64
-if  exist WinRAR*.exe goto I64
-if not exist WinRAR*.exe goto D64
+if  exist Foxit*.exe goto I64
+if not exist Foxit*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong...
