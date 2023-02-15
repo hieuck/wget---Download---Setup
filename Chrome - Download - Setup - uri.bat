@@ -30,7 +30,7 @@ goto I32
 :I32
 @echo Dang Cai Dat...
 FOR %%i IN ("Chrome*32*.exe") DO Set FileName="%%i"
-%FileName% /S
+%FileName%
 goto Lic
 
 :X64
@@ -46,7 +46,7 @@ goto I64
 :I64
 @echo Dang Cai Dat...
 FOR %%i IN ("Chrome*64*.exe") DO Set FileName="%%i"
-%FileName% /S
+%FileName%
 goto Lic
 
 :Lic

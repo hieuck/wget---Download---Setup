@@ -12,42 +12,50 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat TeamViewer. Vui Long Cho
+@echo                 Dang Cai Dat danvaoday. Vui Long Cho
 @echo off
+
+taskkill /F /IM danvaoday.exe
 if exist %Windir%\SysWOW64 goto X64
 
-if exist TeamViewer_Setup.exe goto I32
-if not exist TeamViewer_Setup.exe goto D32
+if exist danvaoday*32*.exe goto I32
+if not exist danvaoday*32*.exe goto D32
 
 :D32
-wget -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup.exe
+@echo Dang Tai Xuong...
+powershell -Command "Invoke-WebRequest -Uri ''danvaoday' -OutFile 'danvaoday-32_HieuckIT.exe'"
 @echo Tai Xuong Hoan Thanh.
 goto I32
 
 :I32
 @echo Dang Cai Dat...
-FOR %%i IN ("Team*Setup.exe") DO Set FileName="%%i"
+FOR %%i IN ("danvaoday*32*.exe") DO Set FileName="%%i"
 %FileName% /S
 @echo Cai Dat Thanh Cong.
-goto END
+goto Lic
 
 :X64
-if  exist TeamViewer_Setup_x64.exe goto I64
-if not exist TeamViewer_Setup_x64.exe goto D64
+if  exist danvaoday*64*.exe goto I64
+if not exist danvaoday*64*..exe goto D64
 
 :D64
-wget -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
+@echo Dang Tai Xuong...
+powershell -Command "Invoke-WebRequest -Uri 'danvaoday' -OutFile 'danvaoday-64_HieuckIT.exe'"
 @echo Tai Xuong Hoan Thanh.
 goto I64
 
 :I64
 @echo Dang Cai Dat...
-FOR %%i IN ("Team*Setup*64.exe") DO Set FileName="%%i"
+FOR %%i IN ("danvaoday*64*.exe") DO Set FileName="%%i"
 %FileName% /S
 @echo Cai Dat Thanh Cong.
+goto Lic
+
+:Lic
+::copy /y "banquyenneuco" "vaoday"
 goto END
 
 :END
-del TeamViewer*.exe
+del danvaoday*.exe
 echo.
 echo Installation completed successfully

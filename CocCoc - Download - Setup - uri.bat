@@ -12,42 +12,50 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat TeamViewer. Vui Long Cho
+@echo                 Dang Cai Dat Coc Coc. Vui Long Cho
 @echo off
+
+::taskkill /F /IM Foxit.exe
 if exist %Windir%\SysWOW64 goto X64
 
-if exist TeamViewer_Setup.exe goto I32
-if not exist TeamViewer_Setup.exe goto D32
+if exist coccoc*32*.exe goto I32
+if not exist coccoc*32*.exe goto D32
 
 :D32
-wget -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup.exe
+@echo Dang Tai Xuong...
+powershell -Command "Invoke-WebRequest -Uri 'https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe' -OutFile 'coccoc_vi_32_HieuckIT.exe'"
 @echo Tai Xuong Hoan Thanh.
 goto I32
 
 :I32
 @echo Dang Cai Dat...
-FOR %%i IN ("Team*Setup.exe") DO Set FileName="%%i"
-%FileName% /S
+FOR %%i IN ("coccoc*32*.exe") DO Set FileName="%%i"
+%FileName% /INSTALL
 @echo Cai Dat Thanh Cong.
-goto END
+goto Lic
 
 :X64
-if  exist TeamViewer_Setup_x64.exe goto I64
-if not exist TeamViewer_Setup_x64.exe goto D64
+if  exist coccoc*64*.exe goto I64
+if not exist coccoc*64*..exe goto D64
 
 :D64
-wget -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
+@echo Dang Tai Xuong...
+powershell -Command "Invoke-WebRequest -Uri 'https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe' -OutFile 'coccoc_vi_64_HieuckIT.exe'"
 @echo Tai Xuong Hoan Thanh.
 goto I64
 
 :I64
 @echo Dang Cai Dat...
-FOR %%i IN ("Team*Setup*64.exe") DO Set FileName="%%i"
-%FileName% /S
+FOR %%i IN ("coccoc*64*.exe") DO Set FileName="%%i"
+%FileName% /INSTALL
 @echo Cai Dat Thanh Cong.
+goto Lic
+
+:Lic
+::copy /y "ban_quyen_neu_co" "vao_day"
 goto END
 
 :END
-del TeamViewer*.exe
+del coccoc*.exe
 echo.
 echo Installation completed successfully
