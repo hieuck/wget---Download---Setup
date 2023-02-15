@@ -23,7 +23,7 @@ if not exist danvaoday*32*.exe goto D32
 
 :D32
 @echo Dang Tai Xuong...
-wget -q --show-progress danvaoday
+wget -O danvaoday-32_HieuckIT.exe -q --show-progress danvaoday
 @echo Tai Xuong Hoan Thanh.
 goto I32
 
@@ -40,7 +40,7 @@ if not exist danvaoday*64*..exe goto D64
 
 :D64
 @echo Dang Tai Xuong...
-wget -q --show-progress danvaoday
+wget -O danvaoday-32_HieuckIT.exe -q --show-progress danvaoday
 @echo Tai Xuong Hoan Thanh.
 goto I64
 
