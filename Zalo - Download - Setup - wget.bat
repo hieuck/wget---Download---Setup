@@ -24,6 +24,7 @@ wget -q --show-progress https://res-download-pc-te-vnno-pt-2.zadn.vn/hybrid/Zalo
 :I32
 FOR %%i IN ("Zalo*.exe") DO Set FileName="%%i"
 %FileName% /S
+@echo Cai Dat Thanh Cong.
 
 goto END
 
@@ -36,6 +37,7 @@ wget -q --show-progress https://res-download-pc-te-vnno-pt-2.zadn.vn/hybrid/Zalo
 :I64
 FOR %%i IN ("Zalo*.exe") DO Set FileName="%%i"
 %FileName% /S
+@echo Cai Dat Thanh Cong.
 
 goto END
 

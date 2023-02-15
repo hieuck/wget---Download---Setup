@@ -29,6 +29,7 @@ goto I32
 @echo Dang Cai Dat...
 FOR %%i IN ("UltraViewer*.exe") DO Set FileName="%%i"
 %FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
+@echo Cai Dat Thanh Cong.
 goto END
 
 :X64
@@ -45,6 +46,7 @@ goto I64
 @echo Dang Cai Dat...
 FOR %%i IN ("UltraViewer*.exe") DO Set FileName="%%i"
 %FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
+@echo Cai Dat Thanh Cong.
 goto END
 
 :END

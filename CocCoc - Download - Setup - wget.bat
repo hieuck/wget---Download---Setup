@@ -27,6 +27,7 @@ wget -O coccoc_vi_32.exe -q --show-progress https://files-cdn.coccoc.com/browser
 @echo Dang Cai Dat...
 FOR %%i IN ("coccoc*32.exe") DO Set FileName="%%i"
 %FileName% /install
+@echo Cai Dat Thanh Cong.
 
 goto END
 
@@ -42,6 +43,7 @@ wget -O coccoc_vi_64.exe -q --show-progress https://files-cdn.coccoc.com/browser
 @echo Dang Cai Dat...
 FOR %%i IN ("coccoc*64.exe") DO Set FileName="%%i"
 %FileName% /install
+@echo Cai Dat Thanh Cong.
 
 goto END
 

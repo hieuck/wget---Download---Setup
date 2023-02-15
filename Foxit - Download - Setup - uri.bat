@@ -31,6 +31,7 @@ goto I32
 @echo Dang Cai Dat...
 FOR %%i IN ("Foxit*Reader*Setup*.exe") DO Set FileName="%%i"
 %FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
+@echo Cai Dat Thanh Cong.
 goto Lic
 
 :X64
@@ -47,6 +48,7 @@ goto I64
 @echo Dang Cai Dat...
 FOR %%i IN ("Foxit*Reader*Setup*.exe") DO Set FileName="%%i"
 %FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
+@echo Cai Dat Thanh Cong.
 goto Lic
 
 :Lic
