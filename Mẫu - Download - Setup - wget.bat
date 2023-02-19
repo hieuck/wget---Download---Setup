@@ -23,7 +23,7 @@ if not exist tentep*32*.exe goto D32
 
 :D32
 @echo Dang Tai Xuong tenphanmem...
-wget -O tentep-32_HieuckIT.exe -q --show-progress link32
+wget --no-check-certificate -O tentep-32_HieuckIT.exe -q --show-progress link32
 @echo Tai Xuong tenphanmem Hoan Thanh.
 goto I32
 
@@ -40,7 +40,7 @@ if not exist tentep*64*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong tenphanmem...
-wget -O tentep-64_HieuckIT.exe -q --show-progress link64
+wget --no-check-certificate -O tentep-64_HieuckIT.exe -q --show-progress link64
 @echo Tai Xuong tenphanmem Hoan Thanh.
 goto I64
 
