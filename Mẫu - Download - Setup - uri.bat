@@ -36,7 +36,7 @@ goto Lic
 
 :X64
 if  exist tentep*64*.exe goto I64
-if not exist tentep*64*..exe goto D64
+if not exist tentep*64*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong tenphanmem...
