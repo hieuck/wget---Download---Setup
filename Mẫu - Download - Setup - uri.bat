@@ -12,43 +12,43 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat danvaoday. Vui Long Cho
+@echo                 Dang Cai Dat tenphanmem. Vui Long Cho
 @echo off
 
-taskkill /F /IM danvaoday.exe
+taskkill /F /IM tentep.exe
 if exist %Windir%\SysWOW64 goto X64
 
-if exist danvaoday*32*.exe goto I32
-if not exist danvaoday*32*.exe goto D32
+if exist tentep*32*.exe goto I32
+if not exist tentep*32*.exe goto D32
 
 :D32
-@echo Dang Tai Xuong...
-powershell -Command "Invoke-WebRequest -Uri ''danvaoday' -OutFile 'danvaoday-32_HieuckIT.exe'"
-@echo Tai Xuong Hoan Thanh.
+@echo Dang Tai Xuong tenphanmem...
+powershell -Command "Invoke-WebRequest -Uri ''link32' -OutFile 'tentep-32_HieuckIT.exe'"
+@echo Tai Xuong tenphanmem Hoan Thanh.
 goto I32
 
 :I32
-@echo Dang Cai Dat...
-FOR %%i IN ("danvaoday*32*.exe") DO Set FileName="%%i"
+@echo Dang Cai Dat tenphanmem...
+FOR %%i IN ("tentep*32*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat Thanh Cong.
+@echo Cai Dat tenphanmem Thanh Cong.
 goto Lic
 
 :X64
-if  exist danvaoday*64*.exe goto I64
-if not exist danvaoday*64*..exe goto D64
+if  exist tentep*64*.exe goto I64
+if not exist tentep*64*..exe goto D64
 
 :D64
-@echo Dang Tai Xuong...
-powershell -Command "Invoke-WebRequest -Uri 'danvaoday' -OutFile 'danvaoday-64_HieuckIT.exe'"
-@echo Tai Xuong Hoan Thanh.
+@echo Dang Tai Xuong tenphanmem...
+powershell -Command "Invoke-WebRequest -Uri 'link64' -OutFile 'tentep-64_HieuckIT.exe'"
+@echo Tai Xuong tenphanmem Hoan Thanh.
 goto I64
 
 :I64
-@echo Dang Cai Dat...
-FOR %%i IN ("danvaoday*64*.exe") DO Set FileName="%%i"
+@echo Dang Cai Dat tenphanmem...
+FOR %%i IN ("tentep*64*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat Thanh Cong.
+@echo Cai Dat tenphanmem Thanh Cong.
 goto Lic
 
 :Lic
@@ -56,6 +56,6 @@ goto Lic
 goto END
 
 :END
-del danvaoday*.exe
+del tentep*.exe
 echo.
 echo Installation completed successfully
