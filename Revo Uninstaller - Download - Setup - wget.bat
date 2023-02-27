@@ -23,7 +23,7 @@ if not exist Revo*.exe goto D32
 
 :D32
 @echo Dang Tai Xuong...
-wget -q --show-progress https://download.revouninstaller.com/download/RevoUninProSetup.exe
+wget --no-check-certificate -q --show-progress https://download.revouninstaller.com/download/RevoUninProSetup.exe
 @echo Tai Xuong Hoan Thanh.
 goto I32
 
@@ -40,7 +40,7 @@ if not exist Revo*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong...
-wget -q --show-progress https://download.revouninstaller.com/download/RevoUninProSetup.exe
+wget --no-check-certificate -q --show-progress https://download.revouninstaller.com/download/RevoUninProSetup.exe
 @echo Tai Xuong Hoan Thanh.
 goto I64
 
