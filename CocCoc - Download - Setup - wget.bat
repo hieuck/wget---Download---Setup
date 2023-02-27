@@ -21,7 +21,7 @@ if not exist coccoc_vi_32.exe goto D32
 
 :D32
 @echo Dang Tai Xuong...
-wget -O coccoc_vi_32.exe -q --show-progress https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe goto I32
+wget --no-check-certificate -O coccoc_vi_32.exe -q --show-progress https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe goto I32
 
 :I32
 @echo Dang Cai Dat...
@@ -37,7 +37,7 @@ if not exist coccoc_vi_64.exe goto D64
 
 :D64
 @echo Dang Tai Xuong...
-wget -O coccoc_vi_64.exe -q --show-progress https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe goto I64
+wget --no-check-certificate -O coccoc_vi_64.exe -q --show-progress https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe goto I64
 
 :I64
 @echo Dang Cai Dat...
