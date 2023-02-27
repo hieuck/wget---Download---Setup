@@ -23,7 +23,7 @@ if not exist TeamViewer*32*.exe goto D32
 
 :D32
 @echo Dang Tai Xuong TeamViewer...
-wget -O TeamViewer-32_HieuckIT.exe -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup.exe
+wget --no-check-certificate -O TeamViewer-32_HieuckIT.exe -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup.exe
 @echo Tai Xuong TeamViewer Hoan Thanh.
 goto I32
 
@@ -40,7 +40,7 @@ if not exist TeamViewer*64*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong TeamViewer...
-wget -O TeamViewer-64_HieuckIT.exe -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
+wget --no-check-certificate -O TeamViewer-64_HieuckIT.exe -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
 @echo Tai Xuong TeamViewer Hoan Thanh.
 goto I64
 
