@@ -23,7 +23,7 @@ if not exist GoogleDriveFS*32*.exe goto D32
 
 :D32
 @echo Dang Tai Xuong Google Drive...
-wget -O GoogleDriveFS-32_HieuckIT.exe -q --show-progress https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe
+wget --no-check-certificate -O GoogleDriveFS-32_HieuckIT.exe -q --show-progress https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe
 @echo Tai Xuong Google Drive Hoan Thanh.
 goto I32
 
@@ -40,7 +40,7 @@ if not exist GoogleDriveFS*64*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong Google Drive...
-wget -O GoogleDriveFS-64_HieuckIT.exe -q --show-progress https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe
+wget --no-check-certificate -O GoogleDriveFS-64_HieuckIT.exe -q --show-progress https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe
 @echo Tai Xuong Google Drive Hoan Thanh.
 goto I64
 
