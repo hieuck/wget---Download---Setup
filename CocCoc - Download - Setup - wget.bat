@@ -15,7 +15,7 @@ echo.
 @echo                 Dang Cai Dat Coc Coc. Vui Long Cho
 @echo off
 
-taskkill /F /IM CocCoc.exe
+taskkill /F /IM browser.exe
 if exist %Windir%\SysWOW64 goto X64
 
 if exist CocCoc*32*.exe goto I32
