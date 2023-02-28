@@ -15,47 +15,47 @@ echo.
 @echo                 Dang Cai Dat Coc Coc. Vui Long Cho
 @echo off
 
-::taskkill /F /IM Foxit.exe
+taskkill /F /IM browser.exe
 if exist %Windir%\SysWOW64 goto X64
 
-if exist coccoc*32*.exe goto I32
-if not exist coccoc*32*.exe goto D32
+if exist CocCoc*32*.exe goto I32
+if not exist CocCoc*32*.exe goto D32
 
 :D32
-@echo Dang Tai Xuong...
-powershell -Command "Invoke-WebRequest -Uri 'https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe' -OutFile 'coccoc_vi_32_HieuckIT.exe'"
-@echo Tai Xuong Hoan Thanh.
+@echo Dang Tai Xuong Coc Coc...
+powershell -Command "Invoke-WebRequest -Uri ''https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe' -OutFile 'CocCoc-32_HieuckIT.exe'"
+@echo Tai Xuong Coc Coc Hoan Thanh.
 goto I32
 
 :I32
-@echo Dang Cai Dat...
-FOR %%i IN ("coccoc*32*.exe") DO Set FileName="%%i"
-%FileName% /INSTALL
-@echo Cai Dat Thanh Cong.
+@echo Dang Cai Dat Coc Coc...
+FOR %%i IN ("CocCoc*32*.exe") DO Set FileName="%%i"
+%FileName% /install
+@echo Cai Dat Coc Coc Thanh Cong.
 goto Lic
 
 :X64
-if  exist coccoc*64*.exe goto I64
-if not exist coccoc*64*..exe goto D64
+if  exist CocCoc*64*.exe goto I64
+if not exist CocCoc*64*.exe goto D64
 
 :D64
-@echo Dang Tai Xuong...
-powershell -Command "Invoke-WebRequest -Uri 'https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe' -OutFile 'coccoc_vi_64_HieuckIT.exe'"
-@echo Tai Xuong Hoan Thanh.
+@echo Dang Tai Xuong Coc Coc...
+powershell -Command "Invoke-WebRequest -Uri 'https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe' -OutFile 'CocCoc-64_HieuckIT.exe'"
+@echo Tai Xuong Coc Coc Hoan Thanh.
 goto I64
 
 :I64
-@echo Dang Cai Dat...
-FOR %%i IN ("coccoc*64*.exe") DO Set FileName="%%i"
-%FileName% /INSTALL
-@echo Cai Dat Thanh Cong.
+@echo Dang Cai Dat Coc Coc...
+FOR %%i IN ("CocCoc*64*.exe") DO Set FileName="%%i"
+%FileName% /install
+@echo Cai Dat Coc Coc Thanh Cong.
 goto Lic
 
 :Lic
-::copy /y "ban_quyen_neu_co" "vao_day"
+::copy /y "banquyenneuco" "vaoday"
 goto END
 
 :END
-del coccoc*.exe
+del CocCoc*.exe
 echo.
 echo Installation completed successfully
