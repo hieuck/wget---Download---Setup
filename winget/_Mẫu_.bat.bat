@@ -12,6 +12,6 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat danvaoday Tu Dong. Vui Long Cho
+@echo                 Dang Cai Dat tenphanmem Tu Dong. Vui Long Cho
 @echo off
-winget install -e --id danvaoday
+winget install -e --id idphanmem
