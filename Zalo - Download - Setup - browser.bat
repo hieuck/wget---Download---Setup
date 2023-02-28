@@ -18,36 +18,17 @@ echo.
 @pushd "%UserProfile%\Downloads"
 @cd /d "%UserProfile%\Downloads"
 taskkill /F /IM Zalo.exe
-if exist %Windir%\SysWOW64 goto X64
 
-if exist Zalo*.exe goto I32
-if not exist Zalo*.exe goto D32
+if exist Zalo*.exe goto I
+if not exist Zalo*.exe goto D
 
-:D32
-@echo Dang Tai Xuong...
-powershell -Command "Invoke-WebRequest -Uri 'https://zalo.me/download/zalo-pc?utm=90000' -OutFile 'Zalo_HieuckIT.exe'"
-@echo Tai Xuong Hoan Thanh.
-goto I32
+:D
+@echo Dang Tai Xuong Bang Trinh Duyet...
+@echo Hay Cho Den Khi Tai Xuong Hoan Tat.
+start https://zalo.me/download/zalo-pc?utm=90000
+pause
 
-:I32
-@echo Dang Cai Dat...
-FOR %%i IN ("Zalo*.exe") DO Set FileName="%%i"
-%FileName% /S
-@echo Cai Dat Thanh Cong.
-goto Lic
-
-:X64
-
-if  exist Zalo*.exe goto I64
-if not exist Zalo*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong...
-powershell -Command "Invoke-WebRequest -Uri 'https://zalo.me/download/zalo-pc?utm=90000' -OutFile 'Zalo_HieuckIT.exe'"
-@echo Tai Xuong Hoan Thanh.
-goto I64
-
-:I64
+:I
 @echo Dang Cai Dat...
 FOR %%i IN ("Zalo*.exe") DO Set FileName="%%i"
 %FileName% /S

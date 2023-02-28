@@ -23,7 +23,7 @@ if not exist WinRAR*32*.exe goto D32
 
 :D32
 @echo Dang Tai Xuong...
-wget -q --show-progress https://www.rarlab.com/rar/winrar-x32-620.exe
+wget --no-check-certificate -q --show-progress https://www.rarlab.com/rar/winrar-x32-621.exe
 @echo Tai Xuong Hoan Thanh.
 goto I32
 
@@ -40,7 +40,7 @@ if not exist WinRAR*64*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong...
-wget -q --show-progress https://www.rarlab.com/rar/winrar-x64-620.exe
+wget --no-check-certificate -q --show-progress https://www.rarlab.com/rar/winrar-x64-621.exe
 @echo Tai Xuong Hoan Thanh.
 goto I64
 
