@@ -15,6 +15,7 @@ echo.
 @echo                 Dang Cai Dat tenphanmem. Vui Long Cho
 @echo off
 
+pushd "%~dp0"
 taskkill /F /IM tenkill.exe
 if exist %Windir%\SysWOW64 goto X64
 
