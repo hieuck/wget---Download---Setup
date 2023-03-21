@@ -14,5 +14,6 @@ echo.
 @echo.  
 @echo                 Dang Cai Dat Revo Uninstaller Pro Tu Dong. Vui Long Cho
 @echo off
+pushd "%~dp0"
 winget install -e --id RevoUninstaller.RevoUninstallerPro
 copy /y "revouninstallerpro5.lic" "%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro\"
