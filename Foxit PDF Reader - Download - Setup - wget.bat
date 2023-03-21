@@ -36,7 +36,7 @@ goto Lic
 
 :X64
 if  exist Foxit*64*.exe goto I64
-if not exist Foxit*64*..exe goto D64
+if not exist Foxit*64*.exe goto D64
 
 :D64
 @echo Dang Tai Xuong Foxit Reader...
