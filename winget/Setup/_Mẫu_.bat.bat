@@ -14,4 +14,5 @@ echo.
 @echo.  
 @echo                 Dang Cai Dat tenphanmem Tu Dong. Vui Long Cho
 @echo off
+pushd "%~dp0"
 winget install -e --id idphanmem
