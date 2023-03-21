@@ -14,7 +14,7 @@ echo.
 @echo.  
 @echo                 Dang Cai Dat WinRAR. Vui Long Cho
 @echo off
-
+pushd "%~dp0"
 taskkill /F /IM WinRAR.exe
 if exist %Windir%\SysWOW64 goto X64
 
