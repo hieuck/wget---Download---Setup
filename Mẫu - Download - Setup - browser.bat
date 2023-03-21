@@ -15,6 +15,7 @@ echo.
 @echo                 Dang Cai Dat tenphanmem. Vui Long Cho
 @echo off
 
+pushd "%~dp0"
 @pushd "%UserProfile%\Downloads"
 @cd /d "%UserProfile%\Downloads"
 taskkill /F /IM tenkill.exe
