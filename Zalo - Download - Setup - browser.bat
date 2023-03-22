@@ -23,7 +23,7 @@ if exist Zalo*.exe goto Install
 if not exist Zalo*.exe goto Download
 
 :Download
-@echo Dang Tai Zalo Xuong Bang Trinh Duyet...
+@echo Dang Tai Xuong Zalo Bang Trinh Duyet...
 start https://zalo.me/download/zalo-pc?utm=90000
 goto Check
 :Check
