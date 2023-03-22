@@ -19,16 +19,22 @@ echo.
 @cd /d "%UserProfile%\Downloads"
 taskkill /F /IM Zalo.exe
 
-if exist Zalo*.exe goto I
-if not exist Zalo*.exe goto D
+if exist Zalo*.exe goto Install
+if not exist Zalo*.exe goto Download
 
-:D
+:Download
 @echo Dang Tai Xuong Bang Trinh Duyet...
-@echo Hay Cho Den Khi Tai Xuong Hoan Tat.
 start https://zalo.me/download/zalo-pc?utm=90000
-pause
+goto Check
+:Check
+if not exist Zalo*.exe (
+  timeout /t 5 >nul
+  goto Check
+)
 
-:I
+goto Install
+
+:Install
 @echo Dang Cai Dat...
 FOR %%i IN ("Zalo*.exe") DO Set FileName="%%i"
 %FileName% /S
@@ -40,6 +46,5 @@ goto Lic
 goto END
 
 :END
-del Zalo*.exe
 echo.
 echo Installation completed successfully
