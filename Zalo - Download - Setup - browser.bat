@@ -23,7 +23,7 @@ if exist Zalo*.exe goto Install
 if not exist Zalo*.exe goto Download
 
 :Download
-@echo Dang Tai Xuong Bang Trinh Duyet...
+@echo Dang Tai Zalo Xuong Bang Trinh Duyet...
 start https://zalo.me/download/zalo-pc?utm=90000
 goto Check
 :Check
@@ -35,10 +35,10 @@ if not exist Zalo*.exe (
 goto Install
 
 :Install
-@echo Dang Cai Dat...
+@echo Dang Cai Dat Zalo...
 FOR %%i IN ("Zalo*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat Thanh Cong.
+@echo Cai Dat Zalo Thanh Cong.
 goto Lic
 
 :Lic
