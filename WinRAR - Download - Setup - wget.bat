@@ -22,16 +22,16 @@ if exist WinRAR*32*.exe goto I32
 if not exist WinRAR*32*.exe goto D32
 
 :D32
-@echo Dang Tai Xuong...
+@echo Dang Tai Xuong WinRAR...
 wget --no-check-certificate -q --show-progress https://www.rarlab.com/rar/winrar-x32-621.exe
-@echo Tai Xuong Hoan Thanh.
+@echo Tai Xuong WinRAR Hoan Thanh.
 goto I32
 
 :I32
-@echo Dang Cai Dat...
+@echo Dang Cai Dat WinRAR...
 FOR %%i IN ("WinRAR*32*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat Thanh Cong.
+@echo Cai Dat WinRAR Thanh Cong.
 goto Lic
 
 :X64
@@ -39,16 +39,16 @@ if  exist WinRAR*64*.exe goto I64
 if not exist WinRAR*64*.exe goto D64
 
 :D64
-@echo Dang Tai Xuong...
+@echo Dang Tai Xuong WinRAR...
 wget --no-check-certificate -q --show-progress https://www.rarlab.com/rar/winrar-x64-621.exe
-@echo Tai Xuong Hoan Thanh.
+@echo Tai Xuong WinRAR Hoan Thanh.
 goto I64
 
 :I64
-@echo Dang Cai Dat...
+@echo Dang Cai Dat WinRAR...
 FOR %%i IN ("WinRAR*64*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat Thanh Cong.
+@echo Cai Dat WinRAR Thanh Cong.
 goto Lic
 
 :Lic
