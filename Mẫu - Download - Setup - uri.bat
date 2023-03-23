@@ -16,7 +16,7 @@ echo.
 @echo off
 
 pushd "%~dp0"
-taskkill /F /IM tenkill.exe
+taskkill /F /IM "tenkill.exe"
 if exist %Windir%\SysWOW64 goto X64
 
 if exist tentep*32*.exe goto I32
