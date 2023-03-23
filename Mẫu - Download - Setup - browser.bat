@@ -29,7 +29,14 @@ if not exist tentep*32*.exe goto D32
 @echo Dang Tai Xuong tenphanmem Bang Trinh Duyet...
 @echo Hay Cho Den Khi Tai Xuong tenphanmem Hoan Tat.
 start link32
-pause
+
+goto Check
+:Check
+if not exist tentep*32*.exe (
+  timeout /t 5 >nul
+  goto Check
+)
+
 goto I32
 
 :I32
@@ -47,7 +54,14 @@ if not exist tentep*64*.exe goto D64
 @echo Dang Tai Xuong tenphanmem Bang Trinh Duyet...
 @echo Hay Cho Den Khi Tai Xuong tenphanmem Hoan Tat.
 start link64
-pause
+
+goto Check
+:Check
+if not exist tentep*64*.exe (
+  timeout /t 5 >nul
+  goto Check
+)
+
 goto I64
 
 :I64
