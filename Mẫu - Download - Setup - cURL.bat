@@ -31,7 +31,7 @@ curl -L --max-redirs 20 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKi
 @echo Tai Xuong tenphanmem Hoan Thanh.
 goto Check
 :Check
-if not exist Zalo*.exe (
+if not exist tentep*32*.exe (
   timeout /t 5 >nul
   goto Check
 )
@@ -55,7 +55,7 @@ curl -L --max-redirs 20 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKi
 @echo Tai Xuong tenphanmem Hoan Thanh.
 goto Check
 :Check
-if not exist Zalo*.exe (
+if not exist tentep*64*.exe (
   timeout /t 5 >nul
   goto Check
 )
