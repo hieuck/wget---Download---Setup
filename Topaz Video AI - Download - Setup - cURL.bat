@@ -23,7 +23,7 @@ if not exist TopazVideoAI*.msi goto Download
 
 :Download
 @echo Dang Tai Xuong Topaz Video AI...
-curl -L --max-redirs 20 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3" -o TopazPhotoAI-HieuckIT.msi https://topazlabs.com/d/tvai/latest/win/full
+curl -L --max-redirs 20 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3" -o TopazVideoAI-HieuckIT.msi https://topazlabs.com/d/tvai/latest/win/full
 @echo Tai Xuong Topaz Video AI Hoan Thanh.
 goto Install
 
