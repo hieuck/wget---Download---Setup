@@ -16,9 +16,7 @@ echo.
 @echo off
 
 pushd "%~dp0"
-@pushd "%UserProfile%\Downloads"
-@cd /d "%UserProfile%\Downloads"
-taskkill /F /IM tenkill.exe
+taskkill /F /IM "tenkill.exe"
 
 if exist %Windir%\SysWOW64 goto X64
 
