@@ -29,13 +29,6 @@ if not exist tentep*32*.exe goto D32
 @echo Dang Tai Xuong tenphanmem...
 curl -L --max-redirs 20 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3" -o tentep-32_HieuckIT.exe link32
 @echo Tai Xuong tenphanmem Hoan Thanh.
-goto Check
-:Check
-if not exist tentep*32*.exe (
-  timeout /t 5 >nul
-  goto Check
-)
-
 goto I32
 
 :I32
@@ -53,13 +46,6 @@ if not exist tentep*64*.exe goto D64
 @echo Dang Tai Xuong tenphanmem...
 curl -L --max-redirs 20 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3" -o tentep-64_HieuckIT.exe link64
 @echo Tai Xuong tenphanmem Hoan Thanh.
-goto Check
-:Check
-if not exist tentep*64*.exe (
-  timeout /t 5 >nul
-  goto Check
-)
-
 goto I64
 
 :I64
