@@ -30,9 +30,9 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Download
 echo Downloading tenphanmem...
 if %ARCH%==x64 (
-    curl -L --max-redirs 20 -A "%USERAGENT%" -o "tentep-HieuckIT.exe" "link64"
+    curl -o "tentep-HieuckIT.exe" "link64" -L --max-redirs 20 -A "%USERAGENT%"
 ) else (
-    curl -L --max-redirs 20 -A "%USERAGENT%" -o "tentep-HieuckIT.exe" "link32"
+    curl -o "tentep-HieuckIT.exe" "link32" -L --max-redirs 20 -A "%USERAGENT%"
 )
 
 :: Install
