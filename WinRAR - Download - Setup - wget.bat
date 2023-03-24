@@ -14,48 +14,42 @@ echo.
 @echo.  
 @echo                 Dang Cai Dat WinRAR. Vui Long Cho
 @echo off
+
 pushd "%~dp0"
-taskkill /F /IM WinRAR.exe
-if exist %Windir%\SysWOW64 goto X64
+taskkill /F /IM "WinRAR.exe"
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if exist WinRAR*32*.exe goto I32
-if not exist WinRAR*32*.exe goto D32
+:: Download
+echo Downloading WinRAR...
+if %ARCH%==x64 (
+    wget --no-check-certificate -q --show-progress -O "WinRAR-HieuckIT.exe" "https://www.rarlab.com/rar/winrar-x64-621.exe"
+) else (
+    wget --no-check-certificate -q --show-progress -O "WinRAR-HieuckIT.exe" "https://www.rarlab.com/rar/winrar-x32-621.exe"
+)
 
-:D32
-@echo Dang Tai Xuong WinRAR...
-wget --no-check-certificate -q --show-progress https://www.rarlab.com/rar/winrar-x32-621.exe
-@echo Tai Xuong WinRAR Hoan Thanh.
-goto I32
-
-:I32
-@echo Dang Cai Dat WinRAR...
-FOR %%i IN ("WinRAR*32*.exe") DO Set FileName="%%i"
+:: Install
+echo Installing WinRAR...
+FOR %%i IN ("WinRAR*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat WinRAR Thanh Cong.
-goto Lic
+if exist "%ProgramFiles%\WinRAR\WinRAR.exe" (
+	echo Installation WinRAR complete.
+) else (
+	echo Installation WinRAR failed.
+)
+::License
+copy /y "%~dp0\WinRAR Cr4ck\rarreg.key" "%ProgramFiles%\WinRAR"
+if exist "%ProgramFiles%\WinRAR\rarreg.key" (
+	echo Cr4ck WinRAR complete.
+) else (
+	echo Cr4ck WinRAR failed.
+)
 
-:X64
-if  exist WinRAR*64*.exe goto I64
-if not exist WinRAR*64*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong WinRAR...
-wget --no-check-certificate -q --show-progress https://www.rarlab.com/rar/winrar-x64-621.exe
-@echo Tai Xuong WinRAR Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat WinRAR...
-FOR %%i IN ("WinRAR*64*.exe") DO Set FileName="%%i"
-%FileName% /S
-@echo Cai Dat WinRAR Thanh Cong.
-goto Lic
-
-:Lic
-copy /y "rarreg.key" "%ProgramFiles%\WinRAR"
-goto END
-
-:END
-del WinRAR*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "WinRAR*.exe"
+timeout /t 5
+popd
