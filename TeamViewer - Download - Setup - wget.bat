@@ -15,47 +15,36 @@ echo.
 @echo                 Dang Cai Dat TeamViewer. Vui Long Cho
 @echo off
 
-taskkill /F /IM TeamViewer.exe
-if exist %Windir%\SysWOW64 goto X64
+pushd "%~dp0"
+taskkill /F /IM "TeamViewer.exe"
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if exist TeamViewer*32*.exe goto I32
-if not exist TeamViewer*32*.exe goto D32
+:: Download
+echo Downloading TeamViewer...
+if %ARCH%==x64 (
+    wget --no-check-certificate -q --show-progress -O "TeamViewer-HieuckIT.exe" "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
+) else (
+    wget --no-check-certificate -q --show-progress -O "TeamViewer-HieuckIT.exe" "https://download.teamviewer.com/download/TeamViewer_Setup.exe"
+)
 
-:D32
-@echo Dang Tai Xuong TeamViewer...
-wget --no-check-certificate -O TeamViewer-32_HieuckIT.exe -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup.exe
-@echo Tai Xuong TeamViewer Hoan Thanh.
-goto I32
-
-:I32
-@echo Dang Cai Dat TeamViewer...
-FOR %%i IN ("TeamViewer*32*.exe") DO Set FileName="%%i"
+:: Install
+echo Installing TeamViewer...
+FOR %%i IN ("TeamViewer*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat TeamViewer Thanh Cong.
-goto Lic
+if exist "%ProgramFiles%\TeamViewer\TeamViewer.exe" (
+	echo Installation TeamViewer complete.
+) else (
+	echo Installation TeamViewer failed.
+)
+::License
+::copy /y "%~dp0\banquyenneuco" "vaoday"
 
-:X64
-if  exist TeamViewer*64*.exe goto I64
-if not exist TeamViewer*64*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong TeamViewer...
-wget --no-check-certificate -O TeamViewer-64_HieuckIT.exe -q --show-progress https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe
-@echo Tai Xuong TeamViewer Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat TeamViewer...
-FOR %%i IN ("TeamViewer*64*.exe") DO Set FileName="%%i"
-%FileName% /S
-@echo Cai Dat TeamViewer Thanh Cong.
-goto Lic
-
-:Lic
-::copy /y "banquyenneuco" "vaoday"
-goto END
-
-:END
-del TeamViewer*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "TeamViewer*.exe"
+timeout /t 5
+popd
