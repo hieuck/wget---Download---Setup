@@ -31,6 +31,10 @@ goto Install
 @echo Dang Cai Dat Topaz Photo AI...
 FOR %%i IN ("TopazPhotoAI*.msi") DO Set FileName="%%i"
 %FileName% /quiet /norestart
+if not exist "%ProgramFiles%\Topaz Labs LLC\Topaz Photo AI\Topaz Photo AI.exe" (
+	@echo Cai Dat Topaz Photo AI That Bai. Dang Thu Lai...
+	goto Install
+)
 @echo Cai Dat Topaz Photo AI Thanh Cong.
 goto Lic
 
