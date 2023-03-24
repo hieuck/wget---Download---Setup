@@ -45,7 +45,7 @@ if exist "%ProgramFiles%\path\tenkill.exe" (
 	echo Installation tenphanmem failed.
 )
 ::License
-::copy /y "banquyenneuco" "vaoday"
+::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
 del "tentep*.exe"
