@@ -37,9 +37,9 @@ echo Installing tenphanmem...
 FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
 %FileName% /S
 if exist "%ProgramFiles%\path\tenkill.exe" (
-	echo Installation complete.
+	echo Installation tenphanmem complete.
 ) else (
-	echo Installation failed.
+	echo Installation tenphanmem failed.
 )
 ::License
 ::copy /y "banquyenneuco" "vaoday"
