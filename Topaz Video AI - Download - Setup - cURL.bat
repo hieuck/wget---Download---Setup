@@ -31,6 +31,10 @@ goto Install
 @echo Dang Cai Dat Topaz Video AI...
 FOR %%i IN ("TopazVideoAI*.msi") DO Set FileName="%%i"
 %FileName% /quiet /norestart
+if not exist "%ProgramFiles%\Topaz Labs LLC\Topaz Video AI\Topaz Video AI.exe" (
+	@echo Cai Dat Topaz Video AI That Bai. Dang Thu Lai...
+	goto Install
+)
 @echo Cai Dat Topaz Video AI Thanh Cong.
 goto Lic
 
@@ -42,4 +46,3 @@ goto END
 ::del TopazVideoAI*.msi
 echo.
 echo Installation completed successfully
-pause
