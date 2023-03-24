@@ -16,49 +16,37 @@ echo.
 @echo off
 
 pushd "%~dp0"
-taskkill /F /IM RevoUninPro.exe
-if exist %Windir%\SysWOW64 goto X64
+taskkill /F /IM "RevoUninPro.exe"
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if exist Revo*.exe goto I32
-if not exist Revo*.exe goto D32
+:: Download
+echo Downloading Revo Uninstaller...
+if %ARCH%==x64 (
+    wget --no-check-certificate -q --show-progress -O "Revo-HieuckIT.exe" "https://download.revouninstaller.com/download/RevoUninProSetup.exe"
+) else (
+    wget --no-check-certificate -q --show-progress -O "Revo-HieuckIT.exe" "https://download.revouninstaller.com/download/RevoUninProSetup.exe"
+)
 
-:D32
-@echo Dang Tai Xuong Revo Uninstaller...
-wget --no-check-certificate -q --show-progress https://download.revouninstaller.com/download/RevoUninProSetup.exe
-@echo Tai Xuong Revo Uninstaller Hoan Thanh.
-goto I32
-
-:I32
-@echo Dang Cai Dat Revo Uninstaller...
+:: Install
+echo Installing Revo Uninstaller...
 FOR %%i IN ("Revo*.exe") DO Set FileName="%%i"
 %FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
-@echo Cai Dat Revo Uninstaller Thanh Cong.
-goto Lic
-
-:X64
-if  exist Revo*.exe goto I64
-if not exist Revo*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong Revo Uninstaller...
-wget --no-check-certificate -q --show-progress https://download.revouninstaller.com/download/RevoUninProSetup.exe
-@echo Tai Xuong Revo Uninstaller Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat Revo Uninstaller...
-FOR %%i IN ("Revo*.exe") DO Set FileName="%%i"
-%FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
-@echo Cai Dat Revo Uninstaller Thanh Cong.
-goto Lic
-
-:Lic
+if exist "%ProgramFiles%\VS Revo Group\Revo Uninstaller Pro\RevoUninPro.exe" (
+	echo Installation Revo Uninstaller complete.
+) else (
+	echo Installation Revo Uninstaller failed.
+)
+::License
 @echo Dang Kich Hoat Revo Uninstaller...
 del "%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro\revouninstallerpro5.lic"
 copy /y "revouninstallerpro5.lic" "%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro\"
-goto END
 
-:END
-del Revo*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "Revo*.exe"
+timeout /t 5
+popd
