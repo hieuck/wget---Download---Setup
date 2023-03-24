@@ -15,47 +15,40 @@ echo.
 @echo                 Dang Cai Dat Google Drive. Vui Long Cho
 @echo off
 
-taskkill /F /IM GoogleDriveFS.exe
-if exist %Windir%\SysWOW64 goto X64
+pushd "%~dp0"
+taskkill /F /IM "GoogleDriveFS.exe"
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if exist GoogleDriveFS*32*.exe goto I32
-if not exist GoogleDriveFS*32*.exe goto D32
+:: Download
+echo Downloading Google Drive...
+if %ARCH%==x64 (
+    wget --no-check-certificate -q --show-progress -O "GoogleDriveFS-HieuckIT.exe" "https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe"
+) else (
+    wget --no-check-certificate -q --show-progress -O "GoogleDriveFS-HieuckIT.exe" "https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe"
+)
 
-:D32
-@echo Dang Tai Xuong Google Drive...
-wget --no-check-certificate -O GoogleDriveFS-32_HieuckIT.exe -q --show-progress https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe
-@echo Tai Xuong Google Drive Hoan Thanh.
-goto I32
-
-:I32
-@echo Dang Cai Dat Google Drive...
-FOR %%i IN ("GoogleDriveFS*32*.exe") DO Set FileName="%%i"
+:: Install
+echo Installing Google Drive...
+FOR %%i IN ("GoogleDriveFS*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat Google Drive Thanh Cong.
-goto Lic
+for /f "usebackq" %%A in  (`dir "%%DRIVE_FS_DIR%%\*" /a:d /o:-d /t:c /b`) do (
+  set EXE_PATH=!DRIVE_FS_DIR!\%%A\GoogleDriveFS.exe
+  if exist "!EXE_PATH!" (
+	echo Installation Google Drive complete.
+) else (
+	echo Installation Google Drive failed.
+)
+)
+endlocal
+::License
+::copy /y "%~dp0\banquyenneuco" "vaoday"
 
-:X64
-if  exist GoogleDriveFS*64*.exe goto I64
-if not exist GoogleDriveFS*64*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong Google Drive...
-wget --no-check-certificate -O GoogleDriveFS-64_HieuckIT.exe -q --show-progress https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe
-@echo Tai Xuong Google Drive Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat Google Drive...
-FOR %%i IN ("GoogleDriveFS*64*.exe") DO Set FileName="%%i"
-%FileName% /S
-@echo Cai Dat Google Drive Thanh Cong.
-goto Lic
-
-:Lic
-::copy /y "banquyenneuco" "vaoday"
-goto END
-
-:END
-del GoogleDriveFS*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "GoogleDriveFS*.exe"
+timeout /t 5
+popd
