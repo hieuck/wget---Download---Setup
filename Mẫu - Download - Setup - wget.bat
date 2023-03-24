@@ -27,9 +27,9 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Download
 echo Downloading tenphanmem...
 if %ARCH%==x64 (
-    wget link64 --no-check-certificate -O tentep-HieuckIT.exe -q --show-progress
+    wget --no-check-certificate -q --show-progress -O "tentep-HieuckIT.exe" "link64"
 ) else (
-    wget link32 --no-check-certificate -O tentep-HieuckIT.exe -q --show-progress
+    wget --no-check-certificate -q --show-progress -O "tentep-HieuckIT.exe" "link32"
 )
 
 :: Install
