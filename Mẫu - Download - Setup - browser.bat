@@ -21,17 +21,17 @@ taskkill /F /IM "tenkill.exe"
 
 if exist %Windir%\SysWOW64 goto X64
 
-if exist tentep*32*.exe goto I32
-if not exist tentep*32*.exe goto D32
+if exist "tentep*32*.exe" goto I32
+if not exist "tentep*32*.exe" goto D32
 
 :D32
 @echo Dang Tai Xuong tenphanmem Bang Trinh Duyet...
 @echo Hay Cho Den Khi Tai Xuong tenphanmem Hoan Tat.
-start link32
+start "link32"
 
 goto Check
 :Check
-if not exist tentep*32*.exe (
+if not exist "tentep*32*.exe" (
   timeout /t 5 >nul
   goto Check
 )
@@ -46,17 +46,17 @@ FOR %%i IN ("tentep*32*.exe") DO Set FileName="%%i"
 goto Lic
 
 :X64
-if  exist tentep*64*.exe goto I64
-if not exist tentep*64*.exe goto D64
+if  exist "tentep*64*.exe" goto I64
+if not exist "tentep*64*.exe" goto D64
 
 :D64
 @echo Dang Tai Xuong tenphanmem Bang Trinh Duyet...
 @echo Hay Cho Den Khi Tai Xuong tenphanmem Hoan Tat.
-start link64
+start "link64"
 
 goto Check
 :Check
-if not exist tentep*64*.exe (
+if not exist "tentep*64*.exe" (
   timeout /t 5 >nul
   goto Check
 )
@@ -75,6 +75,6 @@ goto Lic
 goto END
 
 :END
-del tentep*.exe
+del "tentep*.exe"
 echo.
 echo Installation completed successfully
