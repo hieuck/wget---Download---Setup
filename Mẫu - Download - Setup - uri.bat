@@ -17,46 +17,34 @@ echo.
 
 pushd "%~dp0"
 taskkill /F /IM "tenkill.exe"
-if exist %Windir%\SysWOW64 goto X64
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if exist tentep*32*.exe goto I32
-if not exist tentep*32*.exe goto D32
+:: Download
+echo Downloading tenphanmem...
+if %ARCH%==x64 (
+    powershell -Command "Invoke-WebRequest -Uri 'link64' -OutFile 'tentep-64_HieuckIT.exe'"
+) else (
+    powershell -Command "Invoke-WebRequest -Uri ''link32' -OutFile 'tentep-32_HieuckIT.exe'"
+)
 
-:D32
-@echo Dang Tai Xuong tenphanmem...
-powershell -Command "Invoke-WebRequest -Uri ''link32' -OutFile 'tentep-32_HieuckIT.exe'"
-@echo Tai Xuong tenphanmem Hoan Thanh.
-goto I32
-
-:I32
-@echo Dang Cai Dat tenphanmem...
-FOR %%i IN ("tentep*32*.exe") DO Set FileName="%%i"
+:: Install
+echo Installing tenphanmem...
+FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
 %FileName% /S
-@echo Cai Dat tenphanmem Thanh Cong.
-goto Lic
-
-:X64
-if  exist tentep*64*.exe goto I64
-if not exist tentep*64*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong tenphanmem...
-powershell -Command "Invoke-WebRequest -Uri 'link64' -OutFile 'tentep-64_HieuckIT.exe'"
-@echo Tai Xuong tenphanmem Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat tenphanmem...
-FOR %%i IN ("tentep*64*.exe") DO Set FileName="%%i"
-%FileName% /S
-@echo Cai Dat tenphanmem Thanh Cong.
-goto Lic
-
-:Lic
+if exist "%ProgramFiles%\path\tenkill.exe" (
+	echo Installation tenphanmem complete.
+) else (
+	echo Installation tenphanmem failed.
+)
+::License
 ::copy /y "banquyenneuco" "vaoday"
-goto END
 
-:END
-del tentep*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "tentep*.exe"
+timeout /t 5
+popd
