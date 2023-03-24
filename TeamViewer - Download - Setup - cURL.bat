@@ -30,9 +30,9 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Download
 echo Downloading TeamViewer...
 if %ARCH%==x64 (
-    curl -L --max-redirs 20 -A "%USERAGENT%" -o "TeamViewer-HieuckIT.exe" "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
+    curl "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe" -O --insecure -L --max-redirs 20 -A "%USERAGENT%"
 ) else (
-    curl -L --max-redirs 20 -A "%USERAGENT%" -o "TeamViewer-HieuckIT.exe" "https://download.teamviewer.com/download/TeamViewer_Setup.exe"
+    curl "https://download.teamviewer.com/download/TeamViewer_Setup.exe" -O --insecure -L --max-redirs 20 -A "%USERAGENT%"
 )
 
 :: Install
