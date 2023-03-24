@@ -30,9 +30,9 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Download
 echo Downloading tenphanmem...
 if %ARCH%==x64 (
-    curl -o "tentep-HieuckIT.exe" "link64" -L --max-redirs 20 -A "%USERAGENT%"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "tentep-HieuckIT.exe" "link64"
 ) else (
-    curl -o "tentep-HieuckIT.exe" "link32" -L --max-redirs 20 -A "%USERAGENT%"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "tentep-HieuckIT.exe" "link32"
 )
 
 :: Install
@@ -40,9 +40,9 @@ echo Installing tenphanmem...
 FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
 %FileName% /S
 if exist "%ProgramFiles%\path\tenkill.exe" (
-	echo Installation complete.
+	echo Installation tenphanmem complete.
 ) else (
-	echo Installation failed.
+	echo Installation tenphanmem failed.
 )
 ::License
 ::copy /y "banquyenneuco" "vaoday"
