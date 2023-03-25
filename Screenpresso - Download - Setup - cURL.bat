@@ -45,6 +45,7 @@ if exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
 ) else (
 	echo Installation Screenpresso failed.
 	echo Please try Run as Administrator.
+	timeout /t 5
 	exit
 )
 ::License
