@@ -47,6 +47,7 @@ if exist "%LocalAppData%\Programs\Bitwarden\Bitwarden.exe" (
 	echo Installation Bitwarden complete.
 ) else (
 	echo Installation Bitwarden failed.
+	echo Please try Run as Administrator.
 )
 ::License
 ::copy /y "%~dp0\banquyenneuco" "vaoday"
