@@ -16,7 +16,10 @@ echo.
 @echo off
 
 pushd "%~dp0"
-taskkill /F /IM "tenkill.exe"
+tasklist | find /i "tenkill.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im tenkill.exe /f
+)
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
@@ -44,13 +47,11 @@ if exist "%ProgramFiles%\path\tenkill.exe" (
 ) else (
 	echo Installation tenphanmem failed.
 	echo Please try Run as Administrator.
-	goto cleanup
 )
 ::License
 ::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
-:cleanup
 del "tentep*.exe"
 timeout /t 5
 popd
