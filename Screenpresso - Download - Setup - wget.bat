@@ -50,7 +50,7 @@ if exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
 	echo Please try Run as Administrator.
 )
 ::License
-echo Please Exit Screenpresso when Cr4ck complete
+echo Please exit Screenpresso when the 'Operation succeeded' command below appears
 "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
 netsh advfirewall firewall show rule name="Block Screenpresso" > nul
 if %errorlevel% neq 0 (
