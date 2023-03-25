@@ -41,7 +41,7 @@ if %ARCH%==x64 (
 echo Installing tenphanmem...
 FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
 %FileName% /S
-if exist "%ProgramFiles%\path\tenkill.exe" (
+if exist "%ProgramFiles%\path\" (
 	echo Installation tenphanmem complete.
 ) else (
 	echo Installation tenphanmem failed.
