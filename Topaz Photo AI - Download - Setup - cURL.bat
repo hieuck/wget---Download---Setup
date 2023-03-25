@@ -39,7 +39,7 @@ if %ARCH%==x64 (
 echo Installing Topaz Photo AI...
 FOR %%i IN ("TopazPhotoAI*.msi") DO Set FileName="%%i"
 %FileName% /quiet /norestart
-if exist "%ProgramFiles%\Topaz Labs LLC\Topaz Photo AI\Topaz Photo AI.exe" (
+if exist "%ProgramFiles%\Topaz Labs LLC\Topaz Photo AI\" (
 	echo Installation Topaz Photo AI complete.
 ) else (
 	echo Installation Topaz Photo AI failed.
