@@ -43,6 +43,7 @@ if exist "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe" (
 	echo Installation TreeSize Professional complete.
 ) else (
 	echo Installation TreeSize Professional failed.
+	echo Please try Run as Administrator.
 )
 ::License
 if exist "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe" (
@@ -51,7 +52,7 @@ if exist "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe" (
 	echo Cr4ck TreeSize Professional complete.
 ) else (
 	echo Cr4ck TreeSize Professional failed.
-	echo Please Run as Administrator.
+	echo Please try Run as Administrator.
 )
 :: Clean up
 del "TreeSize*.exe"
