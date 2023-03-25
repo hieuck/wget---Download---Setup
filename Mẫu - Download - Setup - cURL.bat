@@ -43,6 +43,7 @@ if exist "%ProgramFiles%\path\tenkill.exe" (
 	echo Installation tenphanmem complete.
 ) else (
 	echo Installation tenphanmem failed.
+	echo Please try Run as Administrator.
 )
 ::License
 ::copy /y "%~dp0\banquyenneuco" "vaoday"
