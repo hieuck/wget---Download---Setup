@@ -16,7 +16,12 @@ echo.
 @echo off
 
 pushd "%~dp0"
-taskkill /F /IM "TeamViewer.exe"
+:: Terminate the TeamViewer process
+tasklist | find /i "TeamViewer.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im TeamViewer.exe /f
+)
+
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
@@ -30,22 +35,23 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Download
 echo Downloading TeamViewer...
 if %ARCH%==x64 (
-    curl "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe" -O --insecure -L --max-redirs 20 -A "%USERAGENT%"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "TeamViewer-HieuckIT.exe" "https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
 ) else (
-    curl "https://download.teamviewer.com/download/TeamViewer_Setup.exe" -O --insecure -L --max-redirs 20 -A "%USERAGENT%"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "TeamViewer-HieuckIT.exe" "https://download.teamviewer.com/download/TeamViewer_Setup.exe"
 )
 
 :: Install
 echo Installing TeamViewer...
 FOR %%i IN ("TeamViewer*.exe") DO Set FileName="%%i"
 %FileName% /S
-if exist "%ProgramFiles%\TeamViewer\TeamViewer.exe" (
-	echo Installation complete.
+if exist "%ProgramFiles%\TeamViewer\" (
+	echo Installation TeamViewer complete.
 ) else (
-	echo Installation failed.
+	echo Installation TeamViewer failed.
+	echo Please try Run as Administrator.
 )
 ::License
-::copy /y "banquyenneuco" "vaoday"
+::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
 del "TeamViewer*.exe"
