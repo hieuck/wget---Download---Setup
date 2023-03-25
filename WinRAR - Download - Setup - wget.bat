@@ -38,15 +38,16 @@ FOR %%i IN ("WinRAR*.exe") DO Set FileName="%%i"
 %FileName% /S
 if exist "%ProgramFiles%\WinRAR\WinRAR.exe" (
 	echo Installation WinRAR complete.
+	::License
+	copy /y "%~dp0\WinRAR Cr4ck\rarreg.key" "%ProgramFiles%\WinRAR"
+	if exist "%ProgramFiles%\WinRAR\rarreg.key" (
+		echo Cr4ck WinRAR complete.
+	) else (
+		echo Cr4ck WinRAR failed.
+	)
+
 ) else (
 	echo Installation WinRAR failed.
-)
-::License
-copy /y "%~dp0\WinRAR Cr4ck\rarreg.key" "%ProgramFiles%\WinRAR"
-if exist "%ProgramFiles%\WinRAR\rarreg.key" (
-	echo Cr4ck WinRAR complete.
-) else (
-	echo Cr4ck WinRAR failed.
 )
 
 :: Clean up
