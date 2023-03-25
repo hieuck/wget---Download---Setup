@@ -16,6 +16,7 @@ echo.
 @echo off
 
 pushd "%~dp0"
+:: Terminate the Screenpresso process
 tasklist | find /i "Screenpresso.exe" > nul
 if %errorlevel% equ 0 (
     taskkill /im Screenpresso.exe /f
@@ -24,6 +25,7 @@ tasklist | find /i "ScreenpressoRpc.exe" > nul
 if %errorlevel% equ 0 (
     taskkill /im ScreenpressoRpc.exe /f
 )
+
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
