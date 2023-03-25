@@ -16,8 +16,14 @@ echo.
 @echo off
 
 pushd "%~dp0"
-taskkill /F /IM "Screenpresso.exe"
-taskkill /F /IM "ScreenpressoRpc.exe"
+tasklist | find /i "Screenpresso.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im Screenpresso.exe /f
+)
+tasklist | find /i "ScreenpressoRpc.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im ScreenpressoRpc.exe /f
+)
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
@@ -39,20 +45,30 @@ if %ARCH%==x64 (
 :: Install
 echo Installing Screenpresso...
 FOR %%i IN ("Screenpresso*.exe") DO Set FileName="%%i"
-%FileName% deploy --install -programfiles --quiet
+%FileName% deploy --install --programfiles --quiet
 if exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
 	echo Installation Screenpresso complete.
 ) else (
 	echo Installation Screenpresso failed.
 	echo Please try Run as Administrator.
-	goto cleanup
 )
 ::License
-netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
-%FileName% license -activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==]
+echo Please Exit Screenpresso when Cr4ck complete
+"%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
+netsh advfirewall firewall show rule name="Block Screenpresso" > nul
+if %errorlevel% neq 0 (
+    netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
+)
+tasklist | find /i "Screenpresso.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im Screenpresso.exe /f
+)
+tasklist | find /i "ScreenpressoRpc.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im ScreenpressoRpc.exe /f
+)
 
 :: Clean up
-:cleanup
 del "Screenpresso*.exe"
 timeout /t 5
 popd
