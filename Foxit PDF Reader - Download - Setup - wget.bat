@@ -12,50 +12,43 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Foxit Reader. Vui Long Cho
+@echo                 Dang Cai Dat Foxit PDF Reader. Vui Long Cho
 @echo off
 
-taskkill /F /IM FoxitPDFReader.exe
-if exist %Windir%\SysWOW64 goto X64
+pushd "%~dp0"
+tasklist | find /i "FoxitPDFReader.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im FoxitPDFReader.exe /f
+)
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if exist Foxit*32*.exe goto I32
-if not exist Foxit*32*.exe goto D32
+:: Download
+echo Downloading Foxit PDF Reader...
+if %ARCH%==x64 (
+    wget --no-check-certificate -q --show-progress -O "FoxitPDFReader-HieuckIT.exe" "https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
+) else (
+    wget --no-check-certificate -q --show-progress -O "FoxitPDFReader-HieuckIT.exe" "link32"
+)
 
-:D32
-@echo Dang Tai Xuong Foxit Reader...
-wget --no-check-certificate -O Foxit-32_HieuckIT.exe -q --show-progress https://www.foxit.com/downloads/latest.html?product=Foxit-Reader&platform=Windows&version=&package_type=&language=English&distID=
-@echo Tai Xuong Foxit Reader Hoan Thanh.
-goto I32
-
-:I32
-@echo Dang Cai Dat Foxit Reader...
-FOR %%i IN ("Foxit*32*.exe") DO Set FileName="%%i"
+:: Install
+echo Installing Foxit PDF Reader...
+FOR %%i IN ("FoxitPDFReader*.exe") DO Set FileName="%%i"
 %FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
-@echo Cai Dat Foxit Reader Thanh Cong.
-goto Lic
+if exist "%ProgramFiles%\path\FoxitPDFReader.exe" (
+	echo Installation Foxit PDF Reader complete.
+) else (
+	echo Installation Foxit PDF Reader failed.
+	echo Please try Run as Administrator.
+)
+::License
+::copy /y "%~dp0\banquyenneuco" "vaoday"
 
-:X64
-if  exist Foxit*64*.exe goto I64
-if not exist Foxit*64*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong Foxit Reader...
-wget --no-check-certificate -O Foxit-64_HieuckIT.exe -q --show-progress https://www.foxit.com/downloads/latest.html?product=Foxit-Reader
-@echo Tai Xuong Foxit Reader Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat Foxit Reader...
-FOR %%i IN ("Foxit*64*.exe") DO Set FileName="%%i"
-%FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
-@echo Cai Dat Foxit Reader Thanh Cong.
-goto Lic
-
-:Lic
-::copy /y "banquyenneuco" "vaoday"
-goto END
-
-:END
-del Foxit*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "FoxitPDFReader*.exe"
+timeout /t 5
+popd
