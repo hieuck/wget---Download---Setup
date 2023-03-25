@@ -50,7 +50,6 @@ if exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
 ::License
 netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
 %FileName% license -activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==]
-::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
 del "Screenpresso*.exe"
