@@ -16,7 +16,12 @@ echo.
 @echo off
 
 pushd "%~dp0"
-taskkill /F /IM "WinRAR.exe"
+:: Terminate the WinRAR process
+tasklist | find /i "WinRAR.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im WinRAR.exe /f
+)
+
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
