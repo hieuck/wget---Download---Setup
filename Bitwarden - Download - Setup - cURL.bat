@@ -16,7 +16,11 @@ echo.
 @echo off
 
 pushd "%~dp0"
-taskkill /F /IM "Bitwarden.exe"
+tasklist | find /i "Bitwarden.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im Bitwarden.exe /f
+)
+
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
