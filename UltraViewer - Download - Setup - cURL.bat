@@ -17,9 +17,9 @@ echo.
 
 pushd "%~dp0"
 :: Terminate the UltraViewer process
-tasklist | find /i "tenkill.exe" > nul
+tasklist | find /i "UltraViewer_Desktop.exe" > nul
 if %errorlevel% equ 0 (
-    taskkill /im tenkill.exe /f
+    taskkill /im UltraViewer_Desktop.exe /f
 )
 
 :: Detect Windows architecture
