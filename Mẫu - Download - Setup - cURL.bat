@@ -20,6 +20,7 @@ tasklist | find /i "tenkill.exe" > nul
 if %errorlevel% equ 0 (
     taskkill /im tenkill.exe /f
 )
+
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
