@@ -27,14 +27,14 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Download
 echo Downloading Coc Coc...
 if %ARCH%==x64 (
-    wget --no-check-certificate -q --show-progress -O "Coc Coc-HieuckIT.exe" "https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe"
+    wget --no-check-certificate -q --show-progress "https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe"
 ) else (
-    wget --no-check-certificate -q --show-progress -O "Coc Coc-HieuckIT.exe" "https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
+    wget --no-check-certificate -q --show-progress "https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
 )
 
 :: Install
 echo Installing Coc Coc...
-FOR %%i IN ("Coc Coc*.exe") DO Set FileName="%%i"
+FOR %%i IN ("coccoc*.exe") DO Set FileName="%%i"
 %FileName% /install
 if exist "%ProgramFiles%\path\browser.exe" (
 	echo Installation Coc Coc complete.
@@ -45,6 +45,6 @@ if exist "%ProgramFiles%\path\browser.exe" (
 ::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
-del "Coc Coc*.exe"
+del "coccoc*.exe"
 timeout /t 5
 popd
