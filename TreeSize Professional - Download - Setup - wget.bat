@@ -16,7 +16,12 @@ echo.
 @echo off
 
 pushd "%~dp0"
-taskkill /F /IM "TreeSize.exe"
+:: Terminate the TreeSize Professional process
+tasklist | find /i "TreeSize.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im TreeSize.exe /f
+)
+
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
@@ -41,19 +46,20 @@ FOR %%i IN ("TreeSize*.exe") DO Set FileName="%%i"
 %FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
 if exist "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe" (
 	echo Installation TreeSize Professional complete.
+	::License
+	if exist "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe" (
+		del "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe"
+		copy /y "%~dp0\TreeSize Professional Cr4ck\TreeSize.exe" "%ProgramFiles%\JAM Software\TreeSize\"
+		echo Cr4ck TreeSize Professional complete.
+	) else (
+		echo Cr4ck TreeSize Professional failed.
+		echo Please try Run as Administrator.
+	)
 ) else (
 	echo Installation TreeSize Professional failed.
 	echo Please try Run as Administrator.
 )
-::License
-if exist "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe" (
-	del "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe"
-	copy /y "%~dp0\TreeSize Professional Cr4ck\TreeSize.exe" "%ProgramFiles%\JAM Software\TreeSize\"
-	echo Cr4ck TreeSize Professional complete.
-) else (
-	echo Cr4ck TreeSize Professional failed.
-	echo Please try Run as Administrator.
-)
+
 :: Clean up
 del "TreeSize*.exe"
 timeout /t 5
