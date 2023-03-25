@@ -15,47 +15,36 @@ echo.
 @echo                 Dang Cai Dat Coc Coc. Vui Long Cho
 @echo off
 
-taskkill /F /IM browser.exe
-if exist %Windir%\SysWOW64 goto X64
+pushd "%~dp0"
+taskkill /F /IM "browser.exe"
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if exist CocCoc*32*.exe goto I32
-if not exist CocCoc*32*.exe goto D32
+:: Download
+echo Downloading Coc Coc...
+if %ARCH%==x64 (
+    wget --no-check-certificate -q --show-progress -O "Coc Coc-HieuckIT.exe" "https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe"
+) else (
+    wget --no-check-certificate -q --show-progress -O "Coc Coc-HieuckIT.exe" "https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
+)
 
-:D32
-@echo Dang Tai Xuong Coc Coc...
-wget --no-check-certificate -O CocCoc-32_HieuckIT.exe -q --show-progress https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe
-@echo Tai Xuong Coc Coc Hoan Thanh.
-goto I32
+:: Install
+echo Installing Coc Coc...
+FOR %%i IN ("Coc Coc*.exe") DO Set FileName="%%i"
+%FileName% /S
+if exist "%ProgramFiles%\path\browser.exe" (
+	echo Installation Coc Coc complete.
+) else (
+	echo Installation Coc Coc failed.
+)
+::License
+::copy /y "%~dp0\banquyenneuco" "vaoday"
 
-:I32
-@echo Dang Cai Dat Coc Coc...
-FOR %%i IN ("CocCoc*32*.exe") DO Set FileName="%%i"
-%FileName% /install
-@echo Cai Dat Coc Coc Thanh Cong.
-goto Lic
-
-:X64
-if  exist CocCoc*64*.exe goto I64
-if not exist CocCoc*64*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong Coc Coc...
-wget --no-check-certificate -O CocCoc-64_HieuckIT.exe -q --show-progress https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe
-@echo Tai Xuong Coc Coc Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat Coc Coc...
-FOR %%i IN ("CocCoc*64*.exe") DO Set FileName="%%i"
-%FileName% /install
-@echo Cai Dat Coc Coc Thanh Cong.
-goto Lic
-
-:Lic
-::copy /y "banquyenneuco" "vaoday"
-goto END
-
-:END
-del CocCoc*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "Coc Coc*.exe"
+timeout /t 5
+popd
