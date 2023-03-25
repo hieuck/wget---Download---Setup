@@ -39,7 +39,7 @@ if %ARCH%==x64 (
 echo Installing Foxit PDF Reader...
 FOR %%i IN ("FoxitPDFReader*.exe") DO Set FileName="%%i"
 %FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
-if exist "%ProgramFiles%\path\FoxitPDFReader.exe" (
+if exist "%ProgramFiles(x86)%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" (
 	echo Installation Foxit PDF Reader complete.
 ) else (
 	echo Installation Foxit PDF Reader failed.
