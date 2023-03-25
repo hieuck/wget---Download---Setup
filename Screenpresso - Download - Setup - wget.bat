@@ -14,53 +14,58 @@ echo.
 @echo.  
 @echo                 Dang Cai Dat Screenpresso. Vui Long Cho
 @echo off
+
 pushd "%~dp0"
-taskkill /F /IM Screenpresso.exe
-taskkill /F /IM ScreenpressoRpc.exe
-netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
+tasklist | find /i "Screenpresso.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im Screenpresso.exe /f
+)
+tasklist | find /i "ScreenpressoRpc.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im ScreenpressoRpc.exe /f
+)
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if exist %Windir%\SysWOW64 goto X64
+:: Download
+echo Downloading Screenpresso...
+if %ARCH%==x64 (
+    wget --no-check-certificate -q --show-progress -O Screenpresso-HieuckIT.exe https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe
+) else (
+    wget --no-check-certificate -q --show-progress -O Screenpresso-HieuckIT.exe https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe
+)
 
-if exist Screenpresso*32*.exe goto I32
-if not exist Screenpresso*32*.exe goto D32
-
-:D32
-@echo Dang Tai Xuong Screenpresso...
-wget --no-check-certificate -O Screenpresso-32_HieuckIT.exe -q --show-progress https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe
-@echo Tai Xuong Screenpresso Hoan Thanh.
-goto I32
-
-:I32
-@echo Dang Cai Dat Screenpresso...
-FOR %%i IN ("Screenpresso*32*.exe") DO Set FileName="%%i"
+:: Install
+echo Installing Screenpresso...
+FOR %%i IN ("Screenpresso*.exe") DO Set FileName="%%i"
 %FileName% deploy --install --programfiles --quiet
-::%FileName% license -activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==]
-@echo Cai Dat Screenpresso Thanh Cong.
-goto Lic
+if exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
+	echo Installation Screenpresso complete.
+) else (
+	echo Installation Screenpresso failed.
+	echo Please try Run as Administrator.
+)
+::License
+echo Please Exit Screenpresso when Cr4ck complete
+"%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
+netsh advfirewall firewall show rule name="Block Screenpresso" > nul
+if %errorlevel% neq 0 (
+    netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
+)
+tasklist | find /i "Screenpresso.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im Screenpresso.exe /f
+)
+tasklist | find /i "ScreenpressoRpc.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im ScreenpressoRpc.exe /f
+)
 
-:X64
-if  exist Screenpresso*64*.exe goto I64
-if not exist Screenpresso*64*.exe goto D64
-
-:D64
-@echo Dang Tai Xuong Screenpresso...
-wget --no-check-certificate -O Screenpresso-64_HieuckIT.exe -q --show-progress https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe
-@echo Tai Xuong Screenpresso Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat Screenpresso...
-FOR %%i IN ("Screenpresso*64*.exe") DO Set FileName="%%i"
-%FileName% deploy --install -programfiles --quiet
-::%FileName% license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==]
-@echo Cai Dat Screenpresso Thanh Cong.
-goto Lic
-
-:Lic
-::copy /y "banquyenneuco" "vaoday"
-goto END
-
-:END
-del Screenpresso*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "Screenpresso*.exe"
+timeout /t 5
+popd
