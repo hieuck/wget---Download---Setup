@@ -45,12 +45,13 @@ if exist "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe" (
 	echo Installation TreeSize Professional failed.
 )
 ::License
-del "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe"
-copy /y "%~dp0\TreeSize Professional Cr4ck\TreeSize.exe" "%ProgramFiles%\JAM Software\TreeSize\"
 if exist "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe" (
+	del "%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe"
+	copy /y "%~dp0\TreeSize Professional Cr4ck\TreeSize.exe" "%ProgramFiles%\JAM Software\TreeSize\"
 	echo Cr4ck TreeSize Professional complete.
 ) else (
 	echo Cr4ck TreeSize Professional failed.
+	echo Please Run as Administrator.
 )
 :: Clean up
 del "TreeSize*.exe"
