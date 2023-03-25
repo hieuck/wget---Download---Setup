@@ -36,15 +36,7 @@ if %ARCH%==x64 (
 echo Installing Google Drive...
 FOR %%i IN ("GoogleDriveFS*.exe") DO Set FileName="%%i"
 %FileName% /S
-for /f "usebackq" %%A in  (`dir "%%DRIVE_FS_DIR%%\*" /a:d /o:-d /t:c /b`) do (
-  set EXE_PATH=!DRIVE_FS_DIR!\%%A\GoogleDriveFS.exe
-  if exist "!EXE_PATH!" (
-	echo Installation Google Drive complete.
-) else (
-	echo Installation Google Drive failed.
-)
-)
-endlocal
+
 ::License
 ::copy /y "%~dp0\banquyenneuco" "vaoday"
 
