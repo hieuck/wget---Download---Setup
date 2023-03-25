@@ -30,14 +30,14 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Download
 echo Downloading Coc Coc...
 if %ARCH%==x64 (
-    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "Coc Coc-HieuckIT.exe" "https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -O "https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe"
 ) else (
-    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "Coc Coc-HieuckIT.exe" "https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -O "https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
 )
 
 :: Install
 echo Installing Coc Coc...
-FOR %%i IN ("Coc Coc*.exe") DO Set FileName="%%i"
+FOR %%i IN ("coccoc*.exe") DO Set FileName="%%i"
 %FileName% /install
 if exist "%ProgramFiles%\path\browser.exe" (
 	echo Installation Coc Coc complete.
@@ -48,6 +48,6 @@ if exist "%ProgramFiles%\path\browser.exe" (
 ::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
-del "Coc Coc*.exe"
+del "coccoc*.exe"
 timeout /t 5
 popd
