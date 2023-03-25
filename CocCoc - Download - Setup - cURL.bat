@@ -38,7 +38,7 @@ if %ARCH%==x64 (
 :: Install
 echo Installing Coc Coc...
 FOR %%i IN ("Coc Coc*.exe") DO Set FileName="%%i"
-%FileName% /S
+%FileName% /install
 if exist "%ProgramFiles%\path\browser.exe" (
 	echo Installation Coc Coc complete.
 ) else (
