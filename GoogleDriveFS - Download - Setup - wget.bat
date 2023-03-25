@@ -20,6 +20,7 @@ tasklist | find /i "GoogleDriveFS.exe" > nul
 if %errorlevel% equ 0 (
     taskkill /im GoogleDriveFS.exe /f
 )
+
 :: Detect Windows architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
