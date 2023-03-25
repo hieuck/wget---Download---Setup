@@ -44,13 +44,13 @@ if exist "%ProgramFiles%\path\tenkill.exe" (
 ) else (
 	echo Installation tenphanmem failed.
 	echo Please try Run as Administrator.
-	timeout /t 5
-	exit
+	goto cleanup
 )
 ::License
 ::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
+:cleanup
 del "tentep*.exe"
 timeout /t 5
 popd
