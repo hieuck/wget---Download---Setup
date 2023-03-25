@@ -43,12 +43,12 @@ FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
 %FileName% /S
 if exist "%ProgramFiles%\path\" (
 	echo Installation tenphanmem complete.
+	::License
+	::copy /y "%~dp0\banquyenneuco" "vaoday"
 ) else (
 	echo Installation tenphanmem failed.
 	echo Please try Run as Administrator.
 )
-::License
-::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
 del "tentep*.exe"
