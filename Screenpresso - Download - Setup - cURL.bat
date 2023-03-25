@@ -45,14 +45,14 @@ if exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
 ) else (
 	echo Installation Screenpresso failed.
 	echo Please try Run as Administrator.
-	timeout /t 5
-	exit
+	goto cleanup
 )
 ::License
 netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
 %FileName% license -activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==]
 
 :: Clean up
+:cleanup
 del "Screenpresso*.exe"
 timeout /t 5
 popd
