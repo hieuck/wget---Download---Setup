@@ -56,6 +56,7 @@ if exist "%ProgramFiles%\WinRAR\WinRAR.exe" (
 
 ) else (
 	echo Installation WinRAR failed.
+	echo Please try Run as Administrator.
 )
 
 :: Clean up
