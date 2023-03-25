@@ -1,7 +1,7 @@
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=20
 @cls
 echo.
 echo.
@@ -17,33 +17,46 @@ echo.
 
 pushd "%~dp0"
 taskkill /F /IM "Topaz Photo AI.exe"
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-if  exist TopazPhotoAI*.msi goto Install
-if not exist TopazPhotoAI*.msi goto Download
+:: Set user agent
+set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-:Download
-@echo Dang Tai Xuong Topaz Photo AI...
-curl -L --max-redirs 20 -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3" -o TopazPhotoAI-HieuckIT.msi https://topazlabs.com/d/photo/latest/win/full
-@echo Tai Xuong Topaz Photo AI Hoan Thanh.
-goto Install
+:: Download
+echo Downloading Topaz Photo AI...
+if %ARCH%==x64 (
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "TopazPhotoAI-HieuckIT.msi" "https://topazlabs.com/d/photo/latest/win/full"
+) else (
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "TopazPhotoAI-HieuckIT.msi" "link32"
+)
 
-:Install
-@echo Dang Cai Dat Topaz Photo AI...
+:: Install
+echo Installing Topaz Photo AI...
 FOR %%i IN ("TopazPhotoAI*.msi") DO Set FileName="%%i"
 %FileName% /quiet /norestart
-if not exist "%ProgramFiles%\Topaz Labs LLC\Topaz Photo AI\Topaz Photo AI.exe" (
-	@echo Cai Dat Topaz Photo AI That Bai. Dang Thu Lai...
-	goto Install
+if exist "%ProgramFiles%\Topaz Labs LLC\Topaz Photo AI\Topaz Photo AI.exe" (
+	echo Installation Topaz Photo AI complete.
+) else (
+	echo Installation Topaz Photo AI failed.
+	echo Please try Run as Administrator.
 )
-@echo Cai Dat Topaz Photo AI Thanh Cong.
-goto Lic
-
-:Lic
+::License
 copy /y "%~dp0\Topaz Photo AI Cr4ck\" "%ProgramFiles%\Topaz Labs LLC\Topaz Photo AI"
 regedit.exe /s "%ProgramFiles%\Topaz Labs LLC\Topaz Photo AI\token.reg"
-goto END
+if exist "%ProgramFiles%\Topaz Labs LLC\Topaz Photo AI\token.reg" (
+	echo Cr4ck Topaz Photo AI complete.
+) else (
+	echo Cr4ck Topaz Photo AI failed.
+	echo Please try Run as Administrator.
+)
 
-:END
-::del TopazPhotoAI*.msi
-echo.
-echo Installation completed successfully
+
+:: Clean up
+del "TopazPhotoAI*.msi"
+timeout /t 5
+popd
