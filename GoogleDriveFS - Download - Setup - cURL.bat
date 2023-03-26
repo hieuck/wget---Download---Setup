@@ -55,7 +55,7 @@ echo Installing Google Drive...
 "%FILENAME%" /S
 
 :: Check Installation Process
-if not exist "%ProgramFiles%\Google\Drive File Stream\drive_fs.ico.exe" (
+if not exist "%ProgramFiles%\Google\Drive File Stream\drive_fs.ico" (
 	echo Installation Google Drive failed.
 	echo Please try Run as Administrator.
 	timeout /t 5 /nobreak >nul
