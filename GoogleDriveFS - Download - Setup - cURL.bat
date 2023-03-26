@@ -53,8 +53,6 @@ for /f "usebackq" %%A in  (`dir "%%DRIVE_FS_DIR%%\*" /a:d /o:-d /t:c /b`) do (
 	echo Installation Google Drive failed.
 	echo Please try Run as Administrator.
 )
-::License
-::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
 del "GoogleDriveFS*.exe"
