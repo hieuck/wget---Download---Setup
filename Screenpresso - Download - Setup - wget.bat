@@ -15,6 +15,18 @@ echo.
 @echo                 Dang Cai Dat Screenpresso. Vui Long Cho
 @echo off
 pushd "%~dp0"
+net session >nul 2>&1
+if %errorlevel% == 0 (
+	echo Command Prompt is running as Administrator.
+) else (
+	echo Command Prompt is not running as Administrator.
+	echo Please try Run as Administrator. Exiting in 5 seconds...
+	for /l %%i in (5,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
+)
 
 :: Set File Name Link User Agent
 set "FILENAME=Screenpresso-HieuckIT.exe"
@@ -76,11 +88,13 @@ if not exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
 )
 
 :: License
+echo.
 echo Please exit Screenpresso when the 'Operation succeeded' command below appears
 "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
 netsh advfirewall firewall show rule name="Block Screenpresso" > nul
 if %errorlevel% neq 0 (
-	netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
+	netsh advfirewall firewall add rule name="Block S
+	creenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
 )
 :: Clean Up
 del "%FILENAME%"
