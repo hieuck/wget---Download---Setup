@@ -64,9 +64,6 @@ if not exist "%LocalAppData%\Authy\Authy Desktop.exe" (
 	echo Installation Authy complete.
 )
 
-:: License
-::copy /y "%~dp0\banquyenneuco" "vaoday"
-
 :: Clean Up
 del "%FILENAME%"
 echo The script will automatically close in 5 seconds.
