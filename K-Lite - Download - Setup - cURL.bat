@@ -57,7 +57,8 @@ echo Installing K-Lite Codec Pack Mega...
 :: Check Installation Process
 if not exist "%ProgramFiles(x86)%\K-Lite Codec Pack\MPC-HC64\mpc-hc64.exe" (
 	echo Installation K-Lite Codec Pack Mega failed.
-	echo Please try Run as Administrator.
+	echo Please try Run as Administrator. Exiting in 5 seconds...
+	timeout /t 5 /nobreak >nul
     exit
 ) else (
 	echo Installation K-Lite Codec Pack Mega complete.
