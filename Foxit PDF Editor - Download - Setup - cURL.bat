@@ -44,7 +44,7 @@ if %ARCH%==x64 (
 echo Installing Foxit PDF Editor...
 FOR %%i IN ("FoxitPDFEditor*.exe") DO Set FileName="%%i"
 %FileName% /q /norestart
-if exist "%ProgramFiles%\path\" (
+if exist "%ProgramFiles(x86)%\Foxit Software\Foxit PDF Editor\FoxitPDFEditor.exe" (
 	echo Installation Foxit PDF Editor complete.
 	::License
 	::copy /y "%~dp0\banquyenneuco" "vaoday"
