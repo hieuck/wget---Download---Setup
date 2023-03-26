@@ -25,29 +25,32 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Terminate the TenPhanMem Process
 tasklist | find /i "TenKill.exe" > nul
 if %errorlevel% equ 0 (
-    taskkill /im "TenKill.exe" /f
+	taskkill /im "TenKill.exe" /f
 )
 
 :: Detect Windows Architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
-    set "ARCH=x64"
+	set "ARCH=x64"
 ) else (
-    set "ARCH=x86"
+	set "ARCH=x86"
 )
 
 :: Download
 echo Downloading TenPhanMem...
 if %ARCH%==x64 (
-    wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK64%"
+	wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK64%"
 ) else (
-    wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK32%"
+	wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK32%"
 )
 
 if not exist "%FILENAME%" (
-    echo Download TenPhanMem failed.
-    echo Please check your network connection. Exiting in 5 seconds...
-    timeout /t 5 /nobreak >nul
-    exit
+	echo Download TenPhanMem failed.
+	echo Please check your network connection. Exiting in 5 seconds...
+	for /l %%i in (5,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
 )
 
 :: Install
@@ -57,8 +60,11 @@ echo Installing TenPhanMem...
 :: Check Installation Process
 if not exist "%ProgramFiles%\path\TenKill.exe" (
 	echo Installation TenPhanMem failed.
-	echo Please try Run as Administrator. Exiting in 5 seconds...
-	timeout /t 5 /nobreak >nul
+	echo Please check your network connection. Exiting in 5 seconds...
+	for /l %%i in (5,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
 	exit
 ) else (
 	echo Installation TenPhanMem complete.
@@ -70,5 +76,8 @@ if not exist "%ProgramFiles%\path\TenKill.exe" (
 :: Clean Up
 del "%FILENAME%"
 echo The script will automatically close in 5 seconds.
-timeout /t 5 /nobreak >nul
+for /l %%i in (5,-1,1) do (
+	echo Closing in %%i seconds...
+	timeout /t 1 /nobreak >nul
+)
 popd
