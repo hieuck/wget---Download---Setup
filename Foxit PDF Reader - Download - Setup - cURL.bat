@@ -48,8 +48,6 @@ if exist "%ProgramFiles(x86)%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe
 	echo Installation Foxit PDF Reader failed.
 	echo Please try Run as Administrator.
 )
-::License
-::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean up
 del "FoxitPDFReader*.exe"
