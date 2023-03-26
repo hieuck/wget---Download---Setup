@@ -1,7 +1,7 @@
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=20
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -15,7 +15,6 @@ echo.
 @echo                 Dang Cai Dat Bitwarden. Vui Long Cho
 @echo off
 pushd "%~dp0"
-
 :: Set File Name Link User Agent
 set "FILENAME=Bitwarden-HieuckIT.exe"
 set "LINK64=https://vault.bitwarden.com/download/?app=desktop&platform=windows"
@@ -36,6 +35,23 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Download
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat Bitwarden. Vui Long Cho
+@echo off
+pushd "%~dp0"
 echo Downloading Bitwarden...
 if %ARCH%==x64 (
     curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%"
@@ -51,6 +67,23 @@ if not exist "%FILENAME%" (
 )
 
 :: Install
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat Bitwarden. Vui Long Cho
+@echo off
+pushd "%~dp0"
 echo Installing Bitwarden...
 "%FILENAME%" /S
 
