@@ -57,7 +57,7 @@ echo Installing Foxit PDF Reader...
 :: Check Installation Process
 if not exist "%ProgramFiles(x86)%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" (
 	echo Installation Foxit PDF Reader failed.
-	echo Please try Run as Administrator.
+	echo Please try Run as Administrator. Exiting in 5 seconds...
 	timeout /t 5 /nobreak >nul
     exit
 ) else (
