@@ -14,47 +14,58 @@ echo.
 @echo.  
 @echo                 Dang Cai Dat Google Drive. Vui Long Cho
 @echo off
-
 pushd "%~dp0"
+
+:: Set File Name Link User Agent
+set "FILENAME=Google Drive-HieuckIT.exe"
+set "LINK64=https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe"
+set "LINK32=link"
+set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Terminate the Google Drive Process
 tasklist | find /i "GoogleDriveFS.exe" > nul
 if %errorlevel% equ 0 (
-    taskkill /im GoogleDriveFS.exe /f
+    taskkill /im "GoogleDriveFS.exe" /f
 )
-:: Detect Windows architecture
+
+:: Detect Windows Architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
 ) else (
     set "ARCH=x86"
 )
 
-:: Set user agent
-set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-
 :: Download
 echo Downloading Google Drive...
 if %ARCH%==x64 (
-    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "GoogleDriveFS-HieuckIT.exe" "https://dl.google.com/drive-file-stream/GoogleDriveSetup.exe"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%"
 ) else (
-    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "GoogleDriveFS-HieuckIT.exe" "link32"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%"
+)
+
+if not exist "%FILENAME%" (
+    echo Download Google Drive failed.
+    echo Please check your network connection. Exiting in 5 seconds...
+    timeout /t 5 /nobreak >nul
+    exit
 )
 
 :: Install
 echo Installing Google Drive...
-FOR %%i IN ("GoogleDriveFS*.exe") DO Set FileName="%%i"
-%FileName% /S
-rem Sort DRIVE_FS_DIR's subdirectories (/a:d) by reverse date (/o:-d) of
-rem creation (/t:c) and find the first one that contains the exe.
-for /f "usebackq" %%A in  (`dir "%%DRIVE_FS_DIR%%\*" /a:d /o:-d /t:c /b`) do (
-  set EXE_PATH=!DRIVE_FS_DIR!\%%A\GoogleDriveFS.exe
-  if exist "!EXE_PATH!" (
-	echo Installation Google Drive complete.
-  )
-) else (
+"%FILENAME%" /S
+
+:: Check Installation Process
+if not exist "%ProgramFiles%\Google\Drive File Stream\drive_fs.ico.exe" (
 	echo Installation Google Drive failed.
 	echo Please try Run as Administrator.
+	timeout /t 5 /nobreak >nul
+	exit
+) else (
+	echo Installation Google Drive complete.
 )
 
-:: Clean up
-del "GoogleDriveFS*.exe"
-timeout /t 5
+:: Clean Up
+del "%FILENAME%"
+echo The script will automatically close in 5 seconds.
+timeout /t 5 /nobreak >nul
 popd
