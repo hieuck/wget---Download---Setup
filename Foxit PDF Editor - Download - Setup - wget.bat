@@ -30,7 +30,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 ::Check Install File
-if exist "FoxitPDFEditor*.exe" (
+if exist "FoxitPDFEditor*HieuckIT.exe" (
 	goto Install
 )
 
