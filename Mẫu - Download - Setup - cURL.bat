@@ -29,6 +29,11 @@ if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x86"
 )
 
+::Check Install File
+if exist "tentep*.exe" (
+	goto Install
+)
+
 :: Set user agent
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -41,6 +46,7 @@ if %ARCH%==x64 (
 )
 
 :: Install
+:Install
 echo Installing tenphanmem...
 FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
 %FileName% /S
