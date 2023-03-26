@@ -52,7 +52,7 @@ if not exist "%FILENAME%" (
 
 :: Install
 echo Installing Foxit PDF Reader...
-"%FILENAME%" /S
+"%FILENAME%" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
 
 :: Check Installation Process
 if not exist "%ProgramFiles(x86)%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe" (
