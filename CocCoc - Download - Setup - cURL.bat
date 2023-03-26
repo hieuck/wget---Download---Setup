@@ -57,7 +57,7 @@ echo Installing Coc Coc...
 :: Check Installation Process
 if not exist "%ProgramFiles%\CocCoc\Browser\Application\browser.exe" (
 	echo Installation Coc Coc failed.
-	echo Please try Run as Administrator.
+	echo Please try Run as Administrator. Exiting in 5 seconds...
 	timeout /t 5 /nobreak >nul
 	exit
 ) else (
