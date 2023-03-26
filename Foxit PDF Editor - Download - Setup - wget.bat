@@ -12,50 +12,51 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Foxit. Vui Long Cho
+@echo                 Dang Cai Dat Foxit PDF Editor. Vui Long Cho
 @echo off
 
-taskkill /F /IM FoxitPDFReader.exe
-if exist %Windir%\SysWOW64 goto X64
+pushd "%~dp0"
+:: Terminate the Foxit PDF Editor process
+tasklist | find /i "FoxitPDFEditor.exe" > nul
+if %errorlevel% equ 0 (
+    taskkill /im "FoxitPDFEditor.exe" /f
+)
 
-if exist Foxit*32*.exe goto I32
-if not exist Foxit*32*.exe goto D32
+:: Detect Windows architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+    set "ARCH=x64"
+) else (
+    set "ARCH=x86"
+)
 
-:D32
-@echo Dang Tai Xuong...
-wget --no-check-certificate -O Foxit-32_HieuckIT.exe -q --show-progress https://www.foxit.com/downloads/latest.html?product=Foxit-Reader&platform=Windows&version=&package_type=&language=English&distID=
-@echo Tai Xuong Hoan Thanh.
-goto I32
+::Check Install File
+if exist "FoxitPDFEditor*.exe" (
+	goto Install
+)
 
-:I32
-@echo Dang Cai Dat...
-FOR %%i IN ("Foxit*32*.exe") DO Set FileName="%%i"
-%FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
-@echo Cai Dat Thanh Cong.
-goto Lic
+:: Download
+echo Downloading Foxit PDF Editor...
+if %ARCH%==x64 (
+    wget --no-check-certificate -q --show-progress -O "FoxitPDFEditor-HieuckIT.exe" "https://cdn01.foxitsoftware.com/product/phantomPDF/desktop/win/12.1.1/FoxitPDFEditor1211_L10N_Setup_Website.exe"
+) else (
+    wget --no-check-certificate -q --show-progress -O "FoxitPDFEditor-HieuckIT.exe" "link32"
+)
 
-:X64
-if  exist Foxit*64*.exe goto I64
-if not exist Foxit*64*..exe goto D64
+:: Install
+:Install
+echo Installing Foxit PDF Editor...
+FOR %%i IN ("FoxitPDFEditor*.exe") DO Set FileName="%%i"
+%FileName% /q /norestart
+if exist "%ProgramFiles%\path\" (
+	echo Installation Foxit PDF Editor complete.
+	::License
+	::copy /y "%~dp0\banquyenneuco" "vaoday"
+) else (
+	echo Installation Foxit PDF Editor failed.
+	echo Please try Run as Administrator.
+)
 
-:D64
-@echo Dang Tai Xuong...
-wget --no-check-certificate -O Foxit-64_HieuckIT.exe -q --show-progress https://www.foxit.com/downloads/pdf-editor-thanks.html?product=Foxit-PhantomPDF-Business
-@echo Tai Xuong Hoan Thanh.
-goto I64
-
-:I64
-@echo Dang Cai Dat...
-FOR %%i IN ("Foxit*64*.exe") DO Set FileName="%%i"
-%FileName% /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
-@echo Cai Dat Thanh Cong.
-goto Lic
-
-:Lic
-::copy /y "banquyenneuco" "vaoday"
-goto END
-
-:END
-del Foxit*.exe
-echo.
-echo Installation completed successfully
+:: Clean up
+del "FoxitPDFEditor*.exe"
+timeout /t 5
+popd
