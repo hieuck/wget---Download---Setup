@@ -43,8 +43,8 @@ if %ARCH%==x64 (
 :: Install
 echo Installing Authy...
 FOR %%i IN ("Authy*.exe") DO Set FileName="%%i"
-%FileName% /S
-if exist "%LocalAppData%\authy\Authy Desktop.exe" (
+%FileName% /S /D=C:\Program Files (x86)\Authy /TYPE=full
+if exist "%ProgramFiles(x86)%\Authy\Authy Desktop.exe" (
 	echo Installation Authy complete.
 	::License
 	::copy /y "%~dp0\banquyenneuco" "vaoday"
