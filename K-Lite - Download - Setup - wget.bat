@@ -118,7 +118,7 @@ if not exist "%ProgramFiles(x86)%\K-Lite Codec Pack\MPC-HC64\mpc-hc64.exe" (
 )
 
 :: Clean Up
-del"%FILENAME%"
+del "%FILENAME%"
 echo The script will automatically close in 5 seconds.
 for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
