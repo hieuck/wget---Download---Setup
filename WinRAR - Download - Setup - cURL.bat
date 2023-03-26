@@ -74,6 +74,7 @@ if exist "%ProgramFiles%\WinRAR\rarreg.key" (
 	timeout /t 5 /nobreak >nul
 	exit
 )
+
 :: Clean Up
 del "%FILENAME%"
 echo The script will automatically close in 5 seconds.
