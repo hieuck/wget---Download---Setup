@@ -23,9 +23,9 @@ set "LINK32=https://electron.authy.com/download?channel=stable&arch=x32&platform
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Terminate the Authy Process
-tasklist | find /i "Authy.exe" > nul
+tasklist | find /i "Authy Desktop.exe" > nul
 if %errorlevel% equ 0 (
-    taskkill /im "Authy.exe" /f
+    taskkill /im "Authy Desktop.exe" /f
 )
 
 :: Detect Windows Architecture
