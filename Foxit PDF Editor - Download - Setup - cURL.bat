@@ -29,6 +29,11 @@ if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x86"
 )
 
+::Check Install File
+if exist "FoxitPDFEditor*HieuckIT.exe" (
+	goto Install
+)
+
 :: Set user agent
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -40,7 +45,7 @@ if %ARCH%==x64 (
     curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "FoxitPDFEditor-HieuckIT.exe" "link32"
 )
 
-:: Install
+:Install
 echo Installing Foxit PDF Editor...
 FOR %%i IN ("FoxitPDFEditor*.exe") DO Set FileName="%%i"
 %FileName% /q /norestart
