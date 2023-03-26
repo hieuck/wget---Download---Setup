@@ -12,50 +12,60 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat tenphanmem. Vui Long Cho
+@echo                 Dang Cai Dat TenPhanMem. Vui Long Cho
 @echo off
 
 pushd "%~dp0"
-:: Terminate the tenphanmem process
-tasklist | find /i "tenkill.exe" > nul
+:Terminate the TenPhanMem Process
+tasklist | find /i "TenKill.exe" > nul
 if %errorlevel% equ 0 (
-    taskkill /im "tenkill.exe" /f
+    taskkill /im "TenKill.exe" /f
 )
 
-:: Detect Windows architecture
+:Detect Windows Architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
 ) else (
     set "ARCH=x86"
 )
 
-::Check Install File
-if exist "tentep*HieuckIT.exe" (
-	goto Install
+:Check Install File
+if exist "TenTep*HieuckIT.exe" (
+	goto "Install"
 )
 
-:: Download
-echo Downloading tenphanmem...
+:Download
+echo Downloading TenPhanMem...
 if %ARCH%==x64 (
-    wget --no-check-certificate -q --show-progress -O "tentep-HieuckIT.exe" "link64"
+    wget --no-check-certificate -q --show-progress -O "TenTep-HieuckIT.exe" "link64"
 ) else (
-    wget --no-check-certificate -q --show-progress -O "tentep-HieuckIT.exe" "link32"
+    wget --no-check-certificate -q --show-progress -O "TenTep-HieuckIT.exe" "link32"
+) else (
+	echo Download TenPhanMem failed.
+	echo Please check your network connection. Retrying in 5 seconds...
+	timeout /t 5 /nobreak >nul
+	goto "Download"
 )
 
 :Install
-echo Installing tenphanmem...
-FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
+echo Installing TenPhanMem...
+FOR %%i IN ("TenTep*.exe") DO Set FileName="%%i"
 %FileName% /S
+
+:Check Installation Process
 if exist "%ProgramFiles%\path\" (
-	echo Installation tenphanmem complete.
-	::License
-	::copy /y "%~dp0\banquyenneuco" "vaoday"
+	echo Installation TenPhanMem complete.
 ) else (
-	echo Installation tenphanmem failed.
+	echo Installation TenPhanMem failed.
 	echo Please try Run as Administrator.
+	goto "Clean Up"
 )
 
-:: Clean up
-del "tentep*.exe"
-timeout /t 5
+:License
+::copy /y "%~dp0\banquyenneuco" "vaoday"
+
+:Clean Up
+del "TenTep*.exe"
+echo The script will automatically close in 5 seconds.
+timeout /t 5 /nobreak >nul
 popd
