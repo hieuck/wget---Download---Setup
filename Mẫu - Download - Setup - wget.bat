@@ -29,6 +29,11 @@ if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x86"
 )
 
+::Check Install File
+if exist "tentep*.exe" (
+	goto Install
+)
+
 :: Download
 echo Downloading tenphanmem...
 if %ARCH%==x64 (
@@ -38,6 +43,7 @@ if %ARCH%==x64 (
 )
 
 :: Install
+:Install
 echo Installing tenphanmem...
 FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
 %FileName% /S
