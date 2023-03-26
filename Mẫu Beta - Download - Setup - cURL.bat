@@ -15,6 +15,18 @@ echo.
 @echo                 Dang Cai Dat TenPhanMem. Vui Long Cho
 @echo off
 pushd "%~dp0"
+net session >nul 2>&1
+if %errorlevel% == 0 (
+	echo Command Prompt is running as Administrator.
+) else (
+	echo Command Prompt is not running as Administrator.
+	echo Please try Run as Administrator. Exiting in 5 seconds...
+	for /l %%i in (5,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
+)
 
 :: Set File Name Link User Agent
 set "FILENAME=TenPhanMem-HieuckIT.exe"
