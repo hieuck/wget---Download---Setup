@@ -46,8 +46,6 @@ FOR %%i IN ("Authy*.exe") DO Set FileName="%%i"
 %FileName% /S
 if exist "%LocalAppData%\Authy\Authy Desktop.exe" (
 	echo Installation Authy complete.
-	::License
-	::copy /y "%~dp0\banquyenneuco" "vaoday"
 ) else (
 	echo Installation Authy failed.
 	echo Please try Run as Administrator.
