@@ -1,7 +1,7 @@
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=20
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -15,6 +15,13 @@ echo.
 @echo                 Dang Cai Dat Screenpresso. Vui Long Cho
 @echo off
 pushd "%~dp0"
+:: Set File Name Link User Agent
+set "FILENAME=Screenpresso-HieuckIT.exe"
+set "LINK64=https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe"
+set "LINK32=link"
+set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
@@ -27,12 +34,6 @@ if %errorlevel% == 0 (
 	)
 	exit
 )
-
-:: Set File Name Link User Agent
-set "FILENAME=Screenpresso-HieuckIT.exe"
-set "LINK64=https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe"
-set "LINK32=link"
-set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Terminate the Screenpresso Process
 tasklist | find /i "Screenpresso.exe" > nul
@@ -52,6 +53,23 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Download
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat Screenpresso. Vui Long Cho
+@echo off
+pushd "%~dp0"
 echo Downloading Screenpresso...
 if %ARCH%==x64 (
 	curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%"
@@ -70,6 +88,23 @@ if not exist "%FILENAME%" (
 )
 
 :: Install
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat Screenpresso. Vui Long Cho
+@echo off
+pushd "%~dp0"
 echo Installing Screenpresso...
 "%FILENAME%" deploy --install --programfiles --quiet
 
@@ -87,6 +122,7 @@ if not exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
 )
 
 :: License
+echo Cr4cking Screenpresso...
 echo Please exit Screenpresso when the 'Operation succeeded' command below appears
 "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
 netsh advfirewall firewall show rule name="Block Screenpresso" > nul
