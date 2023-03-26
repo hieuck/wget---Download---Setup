@@ -57,7 +57,7 @@ echo Installing Bitwarden...
 :: Check Installation Process
 if not exist "%LocalAppData%\Programs\Bitwarden\Bitwarden.exe" (
 	echo Installation Bitwarden failed.
-	echo Please try Run as Administrator.
+	echo Please try Run as Administrator. Exiting in 5 seconds...
 	timeout /t 5 /nobreak >nul
     exit
 ) else (
