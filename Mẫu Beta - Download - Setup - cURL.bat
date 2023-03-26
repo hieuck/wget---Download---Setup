@@ -52,7 +52,7 @@ if not exist "%FILENAME%" (
 
 :: Install
 echo Installing TenPhanMem...
-%FILENAME% /S
+"%FILENAME%" /S
 
 :: Check Installation Process
 if not exist "%ProgramFiles%\path\" (
