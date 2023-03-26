@@ -17,7 +17,7 @@ echo.
 pushd "%~dp0"
 
 :: Set File Name Link User Agent
-set "FILENAME=TenTep-HieuckIT.exe"
+set "FILENAME=TenPhanMem-HieuckIT.exe"
 set "LINK64=link"
 set "LINK32=link"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
