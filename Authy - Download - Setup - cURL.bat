@@ -107,12 +107,7 @@ echo Installing Authy...
 :: Check Installation Process
 if not exist "%LocalAppData%\Authy\Authy Desktop.exe" (
 	echo Installation Authy failed.
-	echo Please try Run as Administrator. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
+	echo Please try Run as Administrator.
 ) else (
 	echo Installation Authy complete.
 )
