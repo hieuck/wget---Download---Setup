@@ -55,7 +55,7 @@ echo Installing TenPhanMem...
 "%FILENAME%" /S
 
 :: Check Installation Process
-if not exist "%ProgramFiles%\path\" (
+if not exist "%ProgramFiles%\path\TenKill.exe" (
 	echo Installation TenPhanMem failed.
 	echo Please try Run as Administrator.
 	timeout /t 5 /nobreak >nul
