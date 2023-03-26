@@ -14,44 +14,61 @@ echo.
 @echo.  
 @echo                 Dang Cai Dat Authy. Vui Long Cho
 @echo off
-
 pushd "%~dp0"
-:: Terminate the Authy process
-tasklist | find /i "Authy Desktop.exe.exe" > nul
+
+:: Set File Name Link User Agent
+set "FILENAME=Authy-HieuckIT.exe"
+set "LINK64=https://electron.authy.com/download?channel=stable&arch=x64&platform=win32&version=latest&product=authy"
+set "LINK32=https://electron.authy.com/download?channel=stable&arch=x32&platform=win32&version=latest&product=authy"
+set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Terminate the Authy Process
+tasklist | find /i "Authy.exe" > nul
 if %errorlevel% equ 0 (
-    taskkill /im "Authy Desktop.exe.exe" /f
+    taskkill /im "Authy.exe" /f
 )
 
-:: Detect Windows architecture
+:: Detect Windows Architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
     set "ARCH=x64"
 ) else (
     set "ARCH=x86"
 )
 
-:: Set user agent
-set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-
 :: Download
 echo Downloading Authy...
 if %ARCH%==x64 (
-    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "Authy-HieuckIT.exe" "https://electron.authy.com/download?channel=stable&arch=x64&platform=win32&version=latest&product=authy"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%"
 ) else (
-    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "Authy-HieuckIT.exe" "https://electron.authy.com/download?channel=stable&arch=x32&platform=win32&version=latest&product=authy"
+    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%"
+)
+
+if not exist "%FILENAME%" (
+    echo Download Authy failed.
+    echo Please check your network connection. Exiting in 5 seconds...
+    timeout /t 5 /nobreak >nul
+    exit
 )
 
 :: Install
 echo Installing Authy...
-FOR %%i IN ("Authy*.exe") DO Set FileName="%%i"
-%FileName% /S
-if exist "%LocalAppData%\Authy\Authy Desktop.exe" (
-	echo Installation Authy complete.
-) else (
+"%FILENAME%" /S
+
+:: Check Installation Process
+if not exist "%LocalAppData%\Authy\Authy Desktop.exe" (
 	echo Installation Authy failed.
 	echo Please try Run as Administrator.
+	timeout /t 5 /nobreak >nul
+    exit
+) else (
+	echo Installation Authy complete.
 )
 
-:: Clean up
-del "Authy*.exe"
-timeout /t 5
+:: License
+::copy /y "%~dp0\banquyenneuco" "vaoday"
+
+:: Clean Up
+del "%FILENAME%"
+echo The script will automatically close in 5 seconds.
+timeout /t 5 /nobreak >nul
 popd
