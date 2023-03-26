@@ -41,7 +41,7 @@ if %ARCH%==x64 (
 echo Installing qBittorrent...
 FOR %%i IN ("qBittorrent*.exe") DO Set FileName="%%i"
 %FileName% /S
-if exist "%ProgramFiles%\qBittorrent\" (
+if exist "%ProgramFiles%\qBittorrent\qbittorrent.exe" (
 	echo Installation qBittorrent complete.
 ) else (
 	echo Installation qBittorrent failed.
