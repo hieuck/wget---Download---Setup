@@ -19,7 +19,7 @@ pushd "%~dp0"
 :: Terminate the tenphanmem process
 tasklist | find /i "tenkill.exe" > nul
 if %errorlevel% equ 0 (
-    taskkill /im tenkill.exe /f
+    taskkill /im "tenkill.exe" /f
 )
 
 :: Detect Windows architecture
