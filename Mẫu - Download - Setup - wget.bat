@@ -30,7 +30,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 ::Check Install File
-if exist "tentep*.exe" (
+if exist "tentep*HieuckIT.exe" (
 	goto Install
 )
 
@@ -42,7 +42,6 @@ if %ARCH%==x64 (
     wget --no-check-certificate -q --show-progress -O "tentep-HieuckIT.exe" "link32"
 )
 
-:: Install
 :Install
 echo Installing tenphanmem...
 FOR %%i IN ("tentep*.exe") DO Set FileName="%%i"
