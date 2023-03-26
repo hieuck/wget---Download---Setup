@@ -100,5 +100,8 @@ if not exist "%LocalAppData%\Programs\Bitwarden\Bitwarden.exe" (
 :: Clean Up
 del "%FILENAME%"
 echo The script will automatically close in 5 seconds.
-timeout /t 5 /nobreak >nul
+for /l %%i in (5,-1,1) do (
+	echo Closing in %%i seconds...
+	timeout /t 1 /nobreak >nul
+)
 popd
