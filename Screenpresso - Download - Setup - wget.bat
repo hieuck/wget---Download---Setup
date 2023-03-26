@@ -93,8 +93,7 @@ echo Please exit Screenpresso when the 'Operation succeeded' command below appea
 "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
 netsh advfirewall firewall show rule name="Block Screenpresso" > nul
 if %errorlevel% neq 0 (
-	netsh advfirewall firewall add rule name="Block S
-	creenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
+    netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
 )
 :: Clean Up
 del "%FILENAME%"
