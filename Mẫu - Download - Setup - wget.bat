@@ -122,6 +122,7 @@ echo Cr4cking TenPhanMem...
 ::copy /y "%~dp0\banquyenneuco" "vaoday"
 
 :: Clean Up
+del"%FILENAME%"
 echo The script will automatically close in 5 seconds.
 for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
