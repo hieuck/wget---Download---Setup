@@ -58,9 +58,10 @@ echo Installing TenPhanMem...
 if not exist "%ProgramFiles%\path\" (
 	echo Installation TenPhanMem failed.
 	echo Please try Run as Administrator.
+	timeout /t 5 /nobreak >nul
+    exit
 ) else (
 	echo Installation TenPhanMem complete.
-
 )
 
 :: License
