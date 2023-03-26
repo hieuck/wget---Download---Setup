@@ -1,7 +1,7 @@
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -52,7 +52,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -87,7 +87,7 @@ if not exist "%FILENAME%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -125,7 +125,7 @@ echo Cr4cking TenPhanMem...
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
