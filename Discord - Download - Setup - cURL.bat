@@ -51,7 +51,7 @@ echo Installing Discord...
 :: Check Installation Process
 if not exist "%LocalAppData%\Discord\app.ico" (
 	echo Installation Discord failed.
-	echo Please try Run as Administrator.
+	echo Please try Run as Administrator. Exiting in 5 seconds...
 	timeout /t 5 /nobreak >nul
     exit
 ) else (
