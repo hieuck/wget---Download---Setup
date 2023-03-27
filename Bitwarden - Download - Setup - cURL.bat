@@ -88,13 +88,11 @@ echo Installing Bitwarden...
 "%FILENAME%" /S
 
 :: Check Installation Process
-if not exist "%LocalAppData%\Programs\Bitwarden\Bitwarden.exe" (
-	echo Installation Bitwarden failed.
-	echo Please try Run as Administrator. Exiting in 5 seconds...
-	timeout /t 5 /nobreak >nul
-    exit
-) else (
+if exist "%LocalAppData%\Programs\Bitwarden\Bitwarden.exe" (
 	echo Installation Bitwarden complete.
+) else (
+	echo Installation Bitwarden failed.
+	echo Please try Run as Administrator.
 )
 
 :: Clean Up
@@ -103,5 +101,8 @@ echo The script will automatically close in 5 seconds.
 for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
+	if exist "%FILENAME%" (
+	del "%FILENAME%"
+	)
 )
 popd
