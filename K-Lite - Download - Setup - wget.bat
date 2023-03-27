@@ -27,12 +27,7 @@ if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
 	echo Command Prompt is not running as Administrator.
-	echo Please Run as Administrator. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
+	echo Please Run as Administrator.
 )
 
 :: Terminate the K-Lite Codec Pack Mega Process
@@ -105,16 +100,11 @@ echo Installing K-Lite Codec Pack Mega...
 "%FILENAME%" /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-
 
 :: Check Installation Process
-if not exist "%ProgramFiles(x86)%\K-Lite Codec Pack\MPC-HC64\mpc-hc64.exe" (
-	echo Installation K-Lite Codec Pack Mega failed.
-	echo Please try Run as Administrator. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
-) else (
+if exist "%ProgramFiles(x86)%\K-Lite Codec Pack\MPC-HC64\mpc-hc64.exe" (
 	echo Installation K-Lite Codec Pack Mega complete.
+) else (
+	echo Installation K-Lite Codec Pack Mega failed.
+	echo Please try Run as Administrator.
 )
 
 :: Clean Up
@@ -123,5 +113,8 @@ echo The script will automatically close in 5 seconds.
 for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
+	if exist "%FILENAME%" (
+	del "%FILENAME%"
+	)
 )
 popd
