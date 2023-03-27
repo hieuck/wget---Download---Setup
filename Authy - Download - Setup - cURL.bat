@@ -27,12 +27,6 @@ if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
 	echo Command Prompt is not running as Administrator.
-	echo Please Run as Administrator. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
 )
 
 :: Terminate the Authy Process
@@ -105,11 +99,11 @@ echo Installing Authy...
 "%FILENAME%" /S
 
 :: Check Installation Process
-if not exist "%LocalAppData%\Authy\Authy Desktop.exe" (
+if exist "%LocalAppData%\Authy\Authy Desktop.exe" (
+	echo Installation Authy complete.
+) else (
 	echo Installation Authy failed.
 	echo Please try Run as Administrator.
-) else (
-	echo Installation Authy complete.
 )
 
 :: Clean Up
@@ -118,5 +112,8 @@ echo The script will automatically close in 5 seconds.
 for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
+	if exist "%FILENAME%" (
+	del "%FILENAME%"
+	)
 )
 popd
