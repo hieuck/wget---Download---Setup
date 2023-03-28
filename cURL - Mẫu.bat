@@ -76,9 +76,9 @@ echo.
 pushd "%~dp0"
 echo Downloading TenPhanMem...
 if %ARCH%==x64 (
-	curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%"
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%" --insecure
 ) else (
-	curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%"
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%" --insecure
 )
 
 if not exist "%FILENAME%" (
