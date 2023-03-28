@@ -76,9 +76,9 @@ echo.
 pushd "%~dp0"
 echo Downloading TenPhanMem...
 if %ARCH%==x64 (
-	wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK64%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK64%"
 ) else (
-	wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK32%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK32%"
 )
 
 if not exist "%FILENAME%" (
