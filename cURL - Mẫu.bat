@@ -36,6 +36,10 @@ if %errorlevel% == 0 (
 		exit
 	) else (
 		echo Warning: This program may not function correctly without administrator privileges.
+		for /l %%i in (5,-1,1) do (
+			echo Starting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
 	)
 )
 
