@@ -54,9 +54,9 @@ echo.
 pushd "%~dp0"
 echo Downloading Bitwarden...
 if %ARCH%==x64 (
-    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%"
+	curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%"
 ) else (
-    curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%"
+	curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%"
 )
 
 if not exist "%FILENAME%" (
