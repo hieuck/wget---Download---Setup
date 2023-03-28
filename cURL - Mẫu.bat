@@ -28,15 +28,15 @@ if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
 	if "%Admin%"=="Yes" (
-		echo Please Run as Administrator. Exiting in 5 seconds...
-		for /l %%i in (5,-1,1) do (
+		echo Please Run as Administrator. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
 			echo Exiting in %%i seconds...
 			timeout /t 1 /nobreak >nul
 		)
 		exit
 	) else (
 		echo Warning: This program may not function correctly without administrator privileges.
-		for /l %%i in (5,-1,1) do (
+		for /l %%i in (3,-1,1) do (
 			echo Starting in %%i seconds...
 			timeout /t 1 /nobreak >nul
 		)
