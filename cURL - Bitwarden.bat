@@ -17,8 +17,8 @@ echo.
 pushd "%~dp0"
 :: Set File Name Link User Agent
 set "FILENAME=Bitwarden-HieuckIT.exe"
-set "LINK64=https://vault.bitwarden.com/download/?app=desktop&platform=windows"
-set "LINK32=link"
+set "LINK64=https://github.com/bitwarden/clients/releases/download/desktop-v2023.3.0/Bitwarden-Installer-2023.3.0.exe"
+set "LINK32=https://vault.bitwarden.com/download/?app=desktop&platform=windows"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Terminate the Bitwarden Process
