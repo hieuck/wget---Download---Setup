@@ -167,7 +167,10 @@ for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 	if exist "%FILENAME%" (
-	taskkill /im "%FILENAME%" /f
+		tasklist | find /i "%FILENAME%" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "%FILENAME%" /f
+		)
 	del "%FILENAME%"
 	)
 )
