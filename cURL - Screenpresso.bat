@@ -20,19 +20,27 @@ set "FILENAME=Screenpresso-HieuckIT.exe"
 set "LINK64=https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe"
 set "LINK32=link"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+set "Admin="
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
-	echo Command Prompt is not running as Administrator.
-	echo Please Run as Administrator. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
+	if "%Admin%"=="Yes" (
+		echo Please Run as Administrator. Exiting in 5 seconds...
+		for /l %%i in (5,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
+	) else (
+		echo Warning: This program may not function correctly without administrator privileges.
+		for /l %%i in (5,-1,1) do (
+			echo Starting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
 	)
-	exit
 )
 
 :: Terminate the Screenpresso Process
