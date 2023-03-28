@@ -137,6 +137,11 @@ netsh advfirewall firewall show rule name="Block Screenpresso" > nul
 if %errorlevel% neq 0 (
     netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
 )
+tasklist | find /i "Screenpresso.exe" > nul
+if %errorlevel% equ 0 (
+	echo Cr4ck Screenpresso failed.
+	echo Please try Run as Administrator.
+)
 
 :: Clean Up
 @ECHO OFF
@@ -161,5 +166,9 @@ echo The script will automatically close in 5 seconds.
 for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
+	if exist "%FILENAME%" (
+	taskkill /im "%FILENAME%" /f
+	del "%FILENAME%"
+	)
 )
 popd
