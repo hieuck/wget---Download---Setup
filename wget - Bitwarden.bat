@@ -114,10 +114,10 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Installing %SOFTNAME%...
-"%FILENAME%" %QuietMode%
+"%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%SoftLocation%" (
+if exist "%SOFTLOCATION%" (
 	echo Installation %SOFTNAME% complete.
 ) else (
 	echo Installation %SOFTNAME% failed.
