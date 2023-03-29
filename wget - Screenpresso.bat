@@ -12,37 +12,45 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Screenpresso. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
+:: Set File Name Link User Agent
+set "SOFTNAME=Screenpresso"
+set "FILENAME=Screenpresso-HieuckIT.exe"
+set "PROCESS=Screenpresso.exe"&set "PROCESS=ScreenpressoRpc.exe"
+set "LINK64=https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe"
+set "LINK32=danvaoday"
+set "QUIETMODE=deploy --install --programfiles --quiet"
+set "Admin=Yes"
+set "SOFTLOCATION=%PROGRAMFILES%\Learnpulse\Screenpresso\Screenpresso.exe"
+set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
-	echo Command Prompt is not running as Administrator.
-	echo Please Run as Administrator. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
+	if "%Admin%"=="Yes" (
+		echo Please Run as Administrator. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
+	) else (
+		echo Warning: This program may not function correctly without administrator privileges.
+		for /l %%i in (3,-1,1) do (
+			echo Starting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
 	)
-	exit
 )
 
-:: Set File Name Link User Agent
-set "FILENAME=Screenpresso-HieuckIT.exe"
-set "LINK64=https://www.screenpresso.com/binaries/releases/stable/dotnet47/Screenpresso.exe"
-set "LINK32=link"
-set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-
-:: Terminate the Screenpresso Process
-tasklist | find /i "Screenpresso.exe" > nul
+:: Terminate the %SOFTNAME% Process
+tasklist | find /i "%PROCESS%" > nul
 if %errorlevel% equ 0 (
-	taskkill /im "
-	Screenpresso.exe" /f
-)
-tasklist | find /i "ScreenpressoRpc.exe" > nul
-if %errorlevel% equ 0 (
-	taskkill /im "ScreenpressoRpc.exe" /f
+	taskkill /im "%PROCESS%" /f
 )
 
 :: Detect Windows Architecture
@@ -53,17 +61,34 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Download
-echo Downloading Screenpresso...
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo off
+pushd "%~dp0"
+echo Downloading %SOFTNAME%...
 if %ARCH%==x64 (
-	wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK64%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK64%"
 ) else (
-	wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK32%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK32%"
 )
 
 if not exist "%FILENAME%" (
-	echo Download Screenpresso failed.
-	echo Please check your network connection. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
+	echo Download %SOFTNAME% failed.
+	echo Please check your network connection. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
@@ -71,24 +96,35 @@ if not exist "%FILENAME%" (
 )
 
 :: Install
-echo Installing Screenpresso...
-"%FILENAME%" deploy --install --programfiles --quiet
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo off
+pushd "%~dp0"
+echo Installing %SOFTNAME%...
+"%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if not exist "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" (
-	echo Installation Screenpresso failed.
-	echo Please try Run as Administrator. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
+if exist "%SOFTLOCATION%" (
+	echo Installation %SOFTNAME% complete.
 ) else (
-	echo Installation Screenpresso complete.
+	echo Installation %SOFTNAME% failed.
+	echo Please try Run as Administrator.
 )
 
 :: License
-echo.
 echo Please exit Screenpresso when the 'Operation succeeded' command below appears
 "%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
 netsh advfirewall firewall show rule name="Block Screenpresso" > nul
@@ -97,9 +133,16 @@ if %errorlevel% neq 0 (
 )
 :: Clean Up
 del "%FILENAME%"
-echo The script will automatically close in 5 seconds.
-for /l %%i in (5,-1,1) do (
+echo The script will automatically close in 3 seconds.
+for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
+	if exist "%FILENAME%" (
+		tasklist | find /i "%FILENAME%" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "%FILENAME%" /f
+		)
+	del "%FILENAME%"
+	)
 )
 popd
