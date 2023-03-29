@@ -125,8 +125,25 @@ if exist "%SOFTLOCATION%" (
 )
 
 :: License
-echo Cr4cking %SOFTNAME%...
-::copy /y "%~dp0\banquyenneuco" "vaoday"
+set "License="
+set "CR4CKFILE=danvaoday"
+set "CR4CKLINK=danvaoday"
+set "SOFTPATH=danvaoday"
+if "%License%"=="Yes" (
+	echo Cracking %SOFTNAME%...
+	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
+	if exist "%CR4CKFILE%" (
+		move /y "%CR4CKFILE%" "%SOFTPATH%"
+	) else (
+		echo Please try running the script as Administrator.
+	)
+	if exist "%SOFTPATH%\%CR4CKFILE%" (
+		echo Successfully Cr4cked %SOFTNAME%.
+	) else (
+		echo Cr4cking %SOFTNAME% failed.
+		echo Please try running the script as Administrator.
+	)
+)
 
 :: Clean Up
 del "%FILENAME%"
