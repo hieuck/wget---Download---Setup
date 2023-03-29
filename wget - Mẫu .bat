@@ -117,7 +117,7 @@ echo Installing %SOFTNAME%...
 "%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%SoftLocation%" (
+if exist "%SOFTLOCATION%" (
 	echo Installation %SOFTNAME% complete.
 ) else (
 	echo Installation %SOFTNAME% failed.
