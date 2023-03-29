@@ -129,20 +129,23 @@ set "License=Yes"
 set "CR4CKFILE=revouninstallerpro5.lic"
 set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/RevoUninstallerCr4ck/revouninstallerpro5.lic"
 set "SOFTPATH=%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro"
-if "%License%"=="Yes" (
-	echo Cracking %SOFTNAME%...
-	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
-	if exist "%CR4CKFILE%" (
-		move /y "%CR4CKFILE%" "%SOFTPATH%"
-	) else (
-		echo Please try running the script as Administrator.
-	)
-	if exist "%SOFTPATH%\%CR4CKFILE%" (
-		echo Successfully Cr4cked %SOFTNAME%.
-	) else (
-		echo Cr4cking %SOFTNAME% failed.
-		echo Please try running the script as Administrator.
-	)
+if "%License%"=="No" (
+	echo This software does not require a license.
+	exit /b 1
+)
+
+echo Cracking %SOFTNAME%...
+wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
+if exist "%CR4CKFILE%" (
+	move /y "%CR4CKFILE%" "%SOFTPATH%"
+) else (
+	echo Please try running the script as Administrator.
+)
+if exist "%SOFTPATH%\%CR4CKFILE%" (
+	echo Successfully Cr4cked %SOFTNAME%.
+) else (
+	echo Cr4cking %SOFTNAME% failed.
+	echo Please try running the script as Administrator.
 )
 
 :: Clean Up
