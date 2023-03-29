@@ -125,7 +125,7 @@ if exist "%SoftLocation%" (
 )
 
 :: License
-set "License="
+set "License=Yes"
 set "CR4CKFILE=revouninstallerpro5.lic"
 set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/RevoUninstallerCr4ck/revouninstallerpro5.lic"
 set "SOFTPATH=%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro"
