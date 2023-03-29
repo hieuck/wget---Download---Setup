@@ -130,7 +130,7 @@ set "CR4CKFILE=TVTools_AlterID.exe"
 set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TeamViewerCr4ck/TVTools_AlterID.exe"
 set "SOFTPATH=%PROGRAMFILES%\TeamViewer\"
 if "%License%"=="Yes" (
-	echo Cracking %SOFTNAME%...
+	echo Download Reset ID %SOFTNAME%...
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		move /y "%CR4CKFILE%" "%SOFTPATH%"
@@ -138,9 +138,9 @@ if "%License%"=="Yes" (
 		echo Please try running the script as Administrator.
 	)
 	if exist "%SOFTPATH%\%CR4CKFILE%" (
-		echo Successfully Cr4cked %SOFTNAME%.
+		echo Successfully Downloaded Reset ID %SOFTNAME%.
 	) else (
-		echo Cr4cking %SOFTNAME% failed.
+		echo Downloading Reset ID %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
 	)
 )
@@ -150,11 +150,11 @@ if exist "%SOFTPATH%\%CR4CKFILE%" (
 	set "TargetFile=%SOFTPATH%\%CR4CKFILE%"
 )
 
-set "ShortcutName=TeamViewer Reset ID.lnk"
-set "ShortcutPath=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%ShortcutName%"
+set "SHORTCUTNAME=TeamViewer Reset ID.lnk"
+set "SHORTCUTPATH=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
-echo sLinkFile = "%ShortcutPath%" >> CreateShortcut.vbs
+echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
 echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
 echo oLink.TargetPath = "%TargetFile%" >> CreateShortcut.vbs
 echo oLink.Save >> CreateShortcut.vbs
