@@ -128,12 +128,12 @@ if exist "%SoftLocation%" (
 echo Cr4cking %SOFTNAME%...
 del "%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro\revouninstallerpro5.lic"
 if exist "%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro\revouninstallerpro5.lic" (
-	echo Cr4cking Revo Uninstaller failed.
+	echo Cr4cking %SOFTNAME% failed.
 	echo Please try Run as Administrator.
 ) else (
 	copy /y "%~dp0\Revo Uninstaller Cr4ck\revouninstallerpro5.lic" "%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro\"
 	if exist "%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro\" (
-		echo Successfully Cr4cked Revo Uninstaller.
+		echo Successfully Cr4cked %SOFTNAME%.
 	)
 )
 
