@@ -23,7 +23,7 @@ set "LINK64=https://www.rarlab.com/rar/winrar-x64-621.exe"
 set "LINK32=https://www.rarlab.com/rar/winrar-x32-621.exe"
 set "QUIETMODE=/S"
 set "Admin="
-set "SOFTLOCATION=%ProgramFiles%\WinRAR\WinRAR.exe"
+set "SOFTLOCATION=%PROGRAMFILES%\WinRAR\WinRAR.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Check if Command Prompt is running with administrator privileges
@@ -126,8 +126,8 @@ if exist "%SOFTLOCATION%" (
 
 :: License
 echo Cr4cking %SOFTNAME%...
-copy /y "%~dp0\WinRAR Cr4ck\rarreg.key" "%ProgramFiles%\WinRAR"
-if exist "%ProgramFiles%\WinRAR\rarreg.key" (
+copy /y "%~dp0\WinRAR Cr4ck\rarreg.key" "%PROGRAMFILES%\WinRAR"
+if exist "%PROGRAMFILES%\WinRAR\rarreg.key" (
 	echo Successfully Cr4cked %SOFTNAME%.
 ) else (
 	echo Cr4cking %SOFTNAME% failed.
