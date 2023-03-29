@@ -23,7 +23,7 @@ set "LINK64=https://downloads.jam-software.de/treesize/TreeSize-x64-Demo.exe"
 set "LINK32=danvaoday"
 set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 set "Admin="
-set "SOFTLOCATION=%ProgramFiles%\JAM Software\TreeSize\TreeSize.exe"
+set "SOFTLOCATION=%PROGRAMFILES%\JAM Software\TreeSize\TreeSize.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Check if Command Prompt is running with administrator privileges
@@ -128,7 +128,7 @@ if exist "%SOFTLOCATION%" (
 set "License=Yes"
 set "CR4CKFILE=TreeSize.exe"
 set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TreeSizeProfessionalCr4ck/TreeSize.exe"
-set "SOFTPATH=%ProgramFiles%\JAM Software\TreeSize"
+set "SOFTPATH=%PROGRAMFILES%\JAM Software\TreeSize"
 if "%License%"=="Yes" (
 	echo Cracking %SOFTNAME%...
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
