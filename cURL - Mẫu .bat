@@ -18,7 +18,7 @@ pushd "%~dp0"
 :: Set File Name Link User Agent
 set "SOFTNAME=danvaoday"
 set "FILENAME=danvaoday-HieuckIT.exe"
-set "PROCESS=danvaoday"
+set "PROCESS=danvaoday.exe"
 set "LINK64=danvaoday"
 set "LINK32=danvaoday"
 set "QUIETMODE=danvaoday"
@@ -114,10 +114,10 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Installing %SOFTNAME%...
-"%FILENAME%" %QuietMode%
+"%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%SoftLocation%" (
+if exist "%SOFTLOCATION%" (
 	echo Installation %SOFTNAME% complete.
 ) else (
 	echo Installation %SOFTNAME% failed.
