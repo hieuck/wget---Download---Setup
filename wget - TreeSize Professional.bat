@@ -127,7 +127,7 @@ if exist "%SOFTLOCATION%" (
 :: License
 set "License=Yes"
 set "CR4CKFILE=TreeSize.exe"
-set "LINKCR4CK=https://github.com/hieuck/curl-uri-wget-download-setup/blob/main/TreeSize%20Professional%20Cr4ck/TreeSize.exe"
+set "LINKCR4CK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TreeSize%20Professional%20Cr4ck/TreeSize.exe"
 set "SOFTPATH=%ProgramFiles%\JAM Software\TreeSize"
 if "%License%"=="Yes" (
 	echo Cracking %SOFTNAME%...
