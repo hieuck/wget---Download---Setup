@@ -114,7 +114,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Installing %SOFTNAME%...
-"%FILENAME%" %QuietMode%
+"%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
 if exist "%SoftLocation%" (
