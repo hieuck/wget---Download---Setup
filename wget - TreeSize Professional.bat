@@ -138,7 +138,7 @@ if "%License%"=="Yes" (
 		echo Please try running the script as Administrator.
 	)
 	if exist "%SOFTPATH%\%CR4CKFILE%" (
-		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y -o+ "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
+		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
 		echo Successfully Cr4cked %SOFTNAME%.
 		del "%SOFTPATH%\%CR4CKFILE%"
 	) else (
