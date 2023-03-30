@@ -22,7 +22,7 @@ set "PROCESS=TreeSize.exe"
 set "LINK64=https://downloads.jam-software.de/treesize/TreeSize-x64-Demo.exe"
 set "LINK32=danvaoday"
 set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
-set "Admin="
+set "Admin=Yes"
 set "SOFTLOCATION=%PROGRAMFILES%\JAM Software\TreeSize\TreeSize.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -126,8 +126,8 @@ if exist "%SOFTLOCATION%" (
 
 :: License
 set "License=Yes"
-set "CR4CKFILE=TreeSize.exe"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TreeSizeProfessionalCr4ck/TreeSize.exe"
+set "CR4CKFILE=TreeSize.rar"
+set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TreeSizeProfessionalCr4ck/TreeSize.rar"
 set "SOFTPATH=%PROGRAMFILES%\JAM Software\TreeSize"
 if "%License%"=="Yes" (
 	echo Cracking %SOFTNAME%...
@@ -138,7 +138,9 @@ if "%License%"=="Yes" (
 		echo Please try running the script as Administrator.
 	)
 	if exist "%SOFTPATH%\%CR4CKFILE%" (
+		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y -o+ "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
 		echo Successfully Cr4cked %SOFTNAME%.
+		del "%SOFTPATH%\%CR4CKFILE%"
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
