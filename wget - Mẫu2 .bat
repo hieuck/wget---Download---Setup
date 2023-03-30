@@ -130,7 +130,7 @@ set "CR4CKFILE=danvaoday"
 set "CR4CKLINK=danvaoday"
 set "SOFTPATH=danvaoday"
 if "%License%"=="No" (
-	echo License not accepted. Exiting script.
+	echo This software does not require a license.
 	exit /b 1
 )
 
