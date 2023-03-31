@@ -22,7 +22,7 @@ set "PROCESS=WinRAR.exe"
 set "LINK64=https://www.rarlab.com/rar/winrar-x64-621.exe"
 set "LINK32=https://www.rarlab.com/rar/winrar-x32-621.exe"
 set "QUIETMODE=/S"
-set "Admin="
+set "Admin=Yes"
 set "SOFTLOCATION=%PROGRAMFILES%\WinRAR\WinRAR.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
