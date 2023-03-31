@@ -131,7 +131,7 @@ set "CR4CKLINK=danvaoday"
 set "SOFTPATH=danvaoday"
 if "%License%"=="Yes" (
 	echo Cracking %SOFTNAME%...
-	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
 		move /y "%CR4CKFILE%" "%SOFTPATH%"
 	) else (
