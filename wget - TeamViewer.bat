@@ -148,12 +148,12 @@ if "%License%"=="Yes" (
 :: Shortcut
 if exist "%SOFTPATH%\%CR4CKFILE%" (
 	set "TARGETFILE=%SOFTPATH%\%CR4CKFILE%"
-	set "SHORTCUTNAME=TeamViewer Reset ID.lnk"
-	set "SHORTCUTPATH=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
 ) else (
 	echo The file "%CR4CKFILE%" does not exist in directory "%SOFTPATH%". Exiting script.
 	exit /b 1
 )
+set "SHORTCUTNAME=TeamViewer Reset ID.lnk"
+set "SHORTCUTPATH=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
