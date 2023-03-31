@@ -131,7 +131,7 @@ set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/W
 set "SOFTPATH=%PROGRAMFILES%\WinRAR\"
 if "%License%"=="Yes" (
 	echo Cracking %SOFTNAME%...
-	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
 		move /y "%CR4CKFILE%" "%SOFTPATH%"
 	) else (
