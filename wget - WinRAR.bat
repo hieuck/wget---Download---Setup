@@ -126,23 +126,23 @@ if exist "%SOFTLOCATION%" (
 
 :: License
 set "License=Yes"
-set "CR4CKPATH=WinRARCr4ck.rar"
+set "CR4CKFILE=WinRARCr4ck.rar"
 set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/WinRARCr4ck/WinRARCr4ck.rar"
 set "SOFTPATH=%PROGRAMFILES%\WinRAR\"
 if "%License%"=="Yes" (
 	echo Cracking %SOFTNAME%...
-	wget --no-check-certificate --show-progress -q -O "%CR4CKPATH%" "%CR4CKLINK%"
-	if exist "%CR4CKPATH%" (
-		move /y "%CR4CKPATH%" "%SOFTPATH%"
+	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
+	if exist "%CR4CKFILE%" (
+		move /y "%CR4CKFILE%" "%SOFTPATH%"
 	) else (
 		echo Please try running the script as Administrator.
 	)
-	if exist "%SOFTPATH%\%CR4CKPATH%" (
+	if exist "%SOFTPATH%\%CR4CKFILE%" (
 		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
 		echo Successfully Cr4cked %SOFTNAME%.
 		del "%SOFTPATH%\%CR4CKFILE%"
 	) else (
-		echo Cracking %SOFTNAME% failed.
+		echo Cr4cking %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
 	)
 )
