@@ -40,6 +40,7 @@ if %ARCH%==x64 (
 ) else (
 	set "SOFTPATH=%PROGRAMFILES%\Foxit Software\Foxit PDF Editor"
 )
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
