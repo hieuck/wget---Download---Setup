@@ -27,25 +27,20 @@ set "Admin="
 set "License="
 set "SOFTNAME=Foxit PDF Reader"
 set "FILENAME=Foxit PDF Reader-HieuckIT.exe"
+set "LINK=https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
+set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 set "PROCESS=FoxitPDFReader.exe"
+set "CR4CKFILE=danvaoday"
+set "CR4CKLINK=danvaoday"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
-	set "LINK=https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
-	set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
-	set "SOFTLOCATION=%PROGRAMFILES(X86)%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
+	set "SOFTPATH=%PROGRAMFILES(X86)%\Foxit Software\Foxit PDF Reader"
 ) else (
-	set "LINK=https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
-	set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
-	set "SOFTLOCATION=%PROGRAMFILES%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
+	set "SOFTPATH=%PROGRAMFILES%\Foxit Software\Foxit PDF Reader"
 )
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
