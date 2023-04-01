@@ -27,8 +27,8 @@ set "Admin="
 set "License="
 set "SOFTNAME=AnyDesk"
 set "FILENAME=AnyDesk-HieuckIT.exe"
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
 set "PROCESS=AnyDesk.exe"
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
