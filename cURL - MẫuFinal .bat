@@ -35,14 +35,14 @@ if %ARCH%==x64 (
 	set "LINK=danvaoday"
 	set "QUIETMODE=danvaoday"
 	set "SOFTLOCATION=danvaoday"
-	set "CR4CKFILE=danvaoday"
+	set "CR4CKFILE=danvaoday.rar"
 	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=danvaoday"
 ) else (
 	set "LINK=danvaoday"
 	set "QUIETMODE=danvaoday"
 	set "SOFTLOCATION=danvaoday"
-	set "CR4CKFILE=danvaoday"
+	set "CR4CKFILE=danvaoday.rar"
 	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=danvaoday"
 )
