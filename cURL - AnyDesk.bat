@@ -29,18 +29,16 @@ set "SOFTNAME=AnyDesk"
 set "FILENAME=AnyDesk-HieuckIT.exe"
 set "PROCESS=AnyDesk.exe"
 set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
+set "CR4CKFILE=danvaoday"
+set "CR4CKLINK=danvaoday"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
 	set "QUIETMODE=--install --start-with-win --create-shortcuts --create-desktop-icon --silent"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=%PROGRAMFILES(X86)%\AnyDesk"
 ) else (
 	set "QUIETMODE=--install --start-with-win --create-shortcuts --create-desktop-icon --silent"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=%PROGRAMFILES%\AnyDesk"
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
