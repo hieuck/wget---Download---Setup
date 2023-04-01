@@ -22,7 +22,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set Admin Soft File Process Name User Agent
+:: Set Admin License Soft File Process Name User Agent
 set "Admin="
 set "License="
 set "SOFTNAME=Coc Coc"
