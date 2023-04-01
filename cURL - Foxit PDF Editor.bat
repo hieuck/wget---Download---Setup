@@ -28,10 +28,6 @@ set "License=Yes"
 set "SOFTNAME=Foxit PDF Editor"
 set "FILENAME=Foxit PDF Editor-HieuckIT.exe"
 set "PROCESS=FoxitPDFEditor.exe"
-set "LINK=https://cdn01.foxitsoftware.com/product/phantomPDF/desktop/win/12.1.1/FoxitPDFEditor1211_L10N_Setup_Website.exe"
-set "QUIETMODE=/q /norestart"
-set "CR4CKFILE=FoxitPDFEditorCr4ck.rar"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/FoxitPDFEditorCr4ck/FoxitPDFEditorCr4ck.rar"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
@@ -40,6 +36,10 @@ if %ARCH%==x64 (
 ) else (
 	set "SOFTPATH=%PROGRAMFILES%\Foxit Software\Foxit PDF Editor"
 )
+set "LINK=https://cdn01.foxitsoftware.com/product/phantomPDF/desktop/win/12.1.1/FoxitPDFEditor1211_L10N_Setup_Website.exe"
+set "QUIETMODE=/q /norestart"
+set "CR4CKFILE=FoxitPDFEditorCr4ck.rar"
+set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/FoxitPDFEditorCr4ck/FoxitPDFEditorCr4ck.rar"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
