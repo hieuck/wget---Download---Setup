@@ -46,6 +46,7 @@ if %ARCH%==x64 (
 	set "SOFTPATH=danvaoday"
 	set "SOFTLOCATION=danvaoday"
 )
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
