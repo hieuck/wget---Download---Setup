@@ -32,19 +32,19 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
-	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"			REM Link Download (x64)
-	set "QUIETMODE=--install "%PROGRAMFILES(x86)%\AnyDesk" --start-with-win --create-shortcuts --create-desktop-icon --silent"		REM Quiet Mode (x64)
-	set "SOFTLOCATION=%PROGRAMFILES(x86)%\AnyDesk\AnyDesk.exe"	REM Software Installation Location (x64)
-	set "CR4CKFILE=danvaoday"		REM Cr4cked File Name (x64)
-	set "CR4CKLINK=danvaoday"		REM Cr4cked File Download Link (x64)
-	set "SOFTPATH=danvaoday"		REM Software Installation Path (x64)
+	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
+	set "QUIETMODE=--install "%PROGRAMFILES(X86)%\AnyDesk" --start-with-win --create-shortcuts --create-desktop-icon --silent"
+	set "SOFTLOCATION=%PROGRAMFILES(X86)%\AnyDesk\AnyDesk.exe"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKLINK=danvaoday"
+	set "SOFTPATH=danvaoday"
 ) else (
-	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"			REM Link Download (x86)
-	set "QUIETMODE=--install "%PROGRAMFILES%\AnyDesk" --start-with-win --create-shortcuts --create-desktop-icon --silent"		REM Quiet Mode (x86)
-	set "SOFTLOCATION=%PROGRAMFILES%\AnyDesk\AnyDesk.exe"	REM Software Installation Location (x86)
-	set "CR4CKFILE=danvaoday"		REM Cr4cked File Name (x86)
-	set "CR4CKLINK=danvaoday"		REM Cr4cked File Download Link (x86)
-	set "SOFTPATH=danvaoday"		REM Software Installation Path (x86)
+	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
+	set "QUIETMODE=--install "%PROGRAMFILES%\AnyDesk" --start-with-win --create-shortcuts --create-desktop-icon --silent"
+	set "SOFTLOCATION=%PROGRAMFILES%\AnyDesk\AnyDesk.exe"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKLINK=danvaoday"
+	set "SOFTPATH=danvaoday"
 )
 
 :: Check if Command Prompt is running with administrator privileges
