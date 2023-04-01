@@ -15,16 +15,37 @@ echo.
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-:: Set File Name Link User Agent
+:: Detect Windows Architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+	set "ARCH=x64"
+) else (
+	set "ARCH=x86"
+)
+
+:: Set Admin Soft File Process Name User Agent
+set "Admin="
+set "License="
 set "SOFTNAME=Foxit PDF Reader"
 set "FILENAME=Foxit PDF Reader-HieuckIT.exe"
 set "PROCESS=FoxitPDFReader.exe"
-set "LINK64=https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
-set "LINK32=https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
-set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
-set "Admin="
-set "SOFTLOCATION=%PROGRAMFILES(x86)%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Set code based on Windows Architecture
+if %ARCH%==x64 (
+	set "LINK=https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
+	set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
+	set "SOFTLOCATION=%PROGRAMFILES(X86)%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKLINK=danvaoday"
+	set "SOFTPATH=danvaoday"
+) else (
+	set "LINK=https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
+	set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
+	set "SOFTLOCATION=%PROGRAMFILES%\Foxit Software\Foxit PDF Reader\FoxitPDFReader.exe"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKLINK=danvaoday"
+	set "SOFTPATH=danvaoday"
+)
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -53,13 +74,6 @@ if %errorlevel% equ 0 (
 	taskkill /im "%PROCESS%" /f
 )
 
-:: Detect Windows Architecture
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
-)
-
 :: Download
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
@@ -79,11 +93,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
-if %ARCH%==x64 (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%" --insecure
-) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%" --insecure
-)
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -125,10 +135,6 @@ if exist "%SOFTLOCATION%" (
 )
 
 :: License
-set "License="
-set "CR4CKFILE=danvaoday"
-set "CR4CKLINK=danvaoday"
-set "SOFTPATH=danvaoday"
 if "%License%"=="Yes" (
 	echo Cracking %SOFTNAME%...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
