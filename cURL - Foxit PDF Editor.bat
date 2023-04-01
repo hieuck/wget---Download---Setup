@@ -131,7 +131,7 @@ if exist "%SOFTLOCATION%" (
 
 :: License
 if "%License%"=="Yes" (
-	echo Cracking %SOFTNAME%...
+	echo Cr4cking %SOFTNAME%...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
 		move /y "%CR4CKFILE%" "%SOFTPATH%"
