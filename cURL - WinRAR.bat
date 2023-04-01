@@ -15,16 +15,32 @@ echo.
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-:: Set File Name Link User Agent
+:: Detect Windows Architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+	set "ARCH=x64"
+) else (
+	set "ARCH=x86"
+)
+
+:: Set Admin License Soft File Process Name User Agent
+set "Admin=Yes"
+set "License=Yes"
 set "SOFTNAME=WinRAR"
 set "FILENAME=WinRAR-HieuckIT.exe"
 set "PROCESS=WinRAR.exe"
-set "LINK64=https://www.rarlab.com/rar/winrar-x64-621.exe"
-set "LINK32=https://www.rarlab.com/rar/winrar-x32-621.exe"
-set "QUIETMODE=/S"
-set "Admin=Yes"
-set "SOFTLOCATION=%PROGRAMFILES%\WinRAR\WinRAR.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Set code based on Windows Architecture
+if %ARCH%==x64 (
+	set "LINK=https://www.rarlab.com/rar/winrar-x64-621.exe"
+) else (
+	set "LINK=https://www.rarlab.com/rar/winrar-x32-621.exe"
+)
+set "QUIETMODE=/S"
+set "CR4CKFILE=WinRARCr4ck.rar"
+set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/WinRARCr4ck/WinRARCr4ck.rar"
+set "SOFTPATH=%PROGRAMFILES%\WinRAR"
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -53,13 +69,6 @@ if %errorlevel% equ 0 (
 	taskkill /im "%PROCESS%" /f
 )
 
-:: Detect Windows Architecture
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
-)
-
 :: Download
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
@@ -79,11 +88,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
-if %ARCH%==x64 (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%" --insecure
-) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%" --insecure
-)
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -125,12 +130,8 @@ if exist "%SOFTLOCATION%" (
 )
 
 :: License
-set "License=Yes"
-set "CR4CKFILE=WinRARCr4ck.rar"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/WinRARCr4ck/WinRARCr4ck.rar"
-set "SOFTPATH=%PROGRAMFILES%\WinRAR\"
 if "%License%"=="Yes" (
-	echo Cracking %SOFTNAME%...
+	echo Cr4cking %SOFTNAME%...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
 		move /y "%CR4CKFILE%" "%SOFTPATH%"
