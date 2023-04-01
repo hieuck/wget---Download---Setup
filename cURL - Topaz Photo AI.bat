@@ -147,7 +147,7 @@ if "%License%"=="Yes" (
 		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
 		regedit.exe /s "%SOFTPATH%\token.reg"
 		echo Successfully Cr4cked %SOFTNAME%.
-		del "%SOFTPATH%\%CR4CKFILE%"						  
+		del "%SOFTPATH%\%CR4CKFILE%"
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
