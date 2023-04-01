@@ -33,10 +33,10 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 set "LINK=https://download.revouninstaller.com/download/RevoUninProSetup.exe"
 set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
-set "SOFTLOCATION=%PROGRAMFILES%\VS Revo Group\Revo Uninstaller Pro\RevoUninPro.exe"
 set "CR4CKFILE=RevoUninstallerCr4ck.rar"
 set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/RevoUninstallerCr4ck/RevoUninstallerCr4ck.rar"
 set "SOFTPATH=%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro"
+set "SOFTLOCATION=%PROGRAMFILES%\VS Revo Group\Revo Uninstaller Pro\RevoUninPro.exe"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
