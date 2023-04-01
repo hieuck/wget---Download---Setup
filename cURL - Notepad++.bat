@@ -22,7 +22,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set Admin Soft File Process Name User Agent
+:: Set Admin License Soft File Process Name User Agent
 set "Admin="
 set "License="
 set "SOFTNAME=Notepad++"
@@ -33,19 +33,14 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
 	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.1/npp.8.5.1.Installer.x64.exe"
-	set "QUIETMODE=/S"
-	set "SOFTLOCATION=%PROGRAMFILES%\Notepad++\Notepad++.exe"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
 ) else (
 	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.1/npp.8.5.1.Installer.exe"
-	set "QUIETMODE=/S"
-	set "SOFTLOCATION=%PROGRAMFILES%\Notepad++\Notepad++.exe"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
 )
+set "QUIETMODE=/S"
+set "CR4CKFILE=danvaoday.rar"
+set "CR4CKLINK=danvaoday"
+set "SOFTPATH=%PROGRAMFILES%\Notepad++"
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
