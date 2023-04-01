@@ -12,34 +12,61 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Authy. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-:: Set File Name Link User Agent
+:: Detect Windows Architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+	set "ARCH=x64"
+) else (
+	set "ARCH=x86"
+)
+
+:: Set Admin License Soft File Process Name User Agent
+set "Admin="
+set "License="
+set "SOFTNAME=Authy"
 set "FILENAME=Authy-HieuckIT.exe"
-set "LINK64=https://electron.authy.com/download?channel=stable&arch=x64&platform=win32&version=latest&product=authy"
-set "LINK32=https://electron.authy.com/download?channel=stable&arch=x32&platform=win32&version=latest&product=authy"
+set "PROCESS=Authy Desktop.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Set code based on Windows Architecture
+if %ARCH%==x64 (
+	set "LINK=https://electron.authy.com/download?channel=stable&arch=x64&platform=win32&version=latest&product=authy"
+) else (
+	set "LINK=https://electron.authy.com/download?channel=stable&arch=x32&platform=win32&version=latest&product=authy"
+)
+set "QUIETMODE=/S"
+set "CR4CKFILE=danvaoday.rar"
+set "CR4CKLINK=danvaoday"
+set "SOFTPATH=%LOCALAPPDATA%\Authy"
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
-	echo Command Prompt is not running as Administrator.
+	if "%Admin%"=="Yes" (
+		echo Please Run as Administrator. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
+	) else (
+		echo Warning: This program may not function correctly without administrator privileges.
+		for /l %%i in (3,-1,1) do (
+			echo Starting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+	)
 )
 
-:: Terminate the Authy Process
-tasklist | find /i "Authy Desktop.exe" > nul
+:: Terminate the %SOFTNAME% Process
+tasklist | find /i "%PROCESS%" > nul
 if %errorlevel% equ 0 (
-	taskkill /im "Authy Desktop.exe" /f
-)
-
-:: Detect Windows Architecture
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
+	taskkill /im "%PROCESS%" /f
 )
 
 :: Download
@@ -57,20 +84,16 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Authy. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-echo Downloading Authy...
-if %ARCH%==x64 (
-	curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%"
-) else (
-	curl --insecure -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%"
-)
+echo Downloading %SOFTNAME%...
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
 
 if not exist "%FILENAME%" (
-	echo Download Authy failed.
-	echo Please check your network connection. Exiting in 5 seconds...
-	for /l %%i in (5,-1,1) do (
+	echo Download %SOFTNAME% failed.
+	echo Please check your network connection. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
@@ -92,24 +115,43 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Authy. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-echo Installing Authy...
-"%FILENAME%" /S
+echo Installing %SOFTNAME%...
+"%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%LocalAppData%\Authy\Authy Desktop.exe" (
-	echo Installation Authy complete.
+if exist "%SOFTLOCATION%" (
+	echo Installation %SOFTNAME% complete.
 ) else (
-	echo Installation Authy failed.
+	echo Installation %SOFTNAME% failed.
 	echo Please try Run as Administrator.
+)
+
+:: License
+if "%License%"=="Yes" (
+	echo Cr4cking %SOFTNAME%...
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
+	if exist "%CR4CKFILE%" (
+		move /y "%CR4CKFILE%" "%SOFTPATH%"
+	) else (
+		echo Please try running the script as Administrator.
+	)
+	if exist "%SOFTPATH%\%CR4CKFILE%" (
+		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
+		echo Successfully Cr4cked %SOFTNAME%.
+		del "%SOFTPATH%\%CR4CKFILE%"						  
+	) else (
+		echo Cr4cking %SOFTNAME% failed.
+		echo Please try running the script as Administrator.
+	)
 )
 
 :: Clean Up
 del "%FILENAME%"
-echo The script will automatically close in 5 seconds.
-for /l %%i in (5,-1,1) do (
+echo The script will automatically close in 3 seconds.
+for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 	if exist "%FILENAME%" (
