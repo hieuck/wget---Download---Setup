@@ -40,7 +40,6 @@ if %ARCH%==x64 (
 ) else (
 	set "SOFTPATH=%PROGRAMFILES%\Foxit Software\Foxit PDF Editor"
 )
-set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -122,7 +121,7 @@ echo Installing %SOFTNAME%...
 "%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%SOFTLOCATION%" (
+if exist "%SOFTPATH%" (
 	echo Installation %SOFTNAME% complete.
 ) else (
 	echo Installation %SOFTNAME% failed.
