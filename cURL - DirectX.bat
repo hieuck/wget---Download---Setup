@@ -31,21 +31,11 @@ set "PROCESS=danvaoday.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-if %ARCH%==x64 (
-	set "LINK=https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe"
-	set "QUIETMODE=/Q"
-	set "SOFTLOCATION=danvaoday"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
-) else (
-	set "LINK=https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe"
-	set "QUIETMODE=/Q"
-	set "SOFTLOCATION=danvaoday"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
-)
+set "LINK=https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe"
+set "QUIETMODE=/Q"
+set "CR4CKFILE=danvaoday"
+set "CR4CKLINK=danvaoday"
+set "SOFTPATH=danvaoday"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
