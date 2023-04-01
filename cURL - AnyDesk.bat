@@ -38,7 +38,7 @@ if %ARCH%==x64 (
 )
 set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
 set "QUIETMODE=--install --start-with-win --create-shortcuts --create-desktop-icon --silent"
-set "CR4CKFILE=danvaoday"
+set "CR4CKFILE=danvaoday.rar"
 set "CR4CKLINK=danvaoday"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
@@ -131,7 +131,7 @@ if exist "%SOFTLOCATION%" (
 
 :: License
 if "%License%"=="Yes" (
-	echo Cracking %SOFTNAME%...
+	echo Cr4king %SOFTNAME%...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
 		move /y "%CR4CKFILE%" "%SOFTPATH%"
