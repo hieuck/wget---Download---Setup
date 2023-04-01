@@ -27,8 +27,10 @@ set "Admin="
 set "License="
 set "SOFTNAME=Coc Coc"
 set "FILENAME=Coc Coc-HieuckIT.exe"
-set "QUIETMODE=/install"
 set "PROCESS=browser.exe"
+set "QUIETMODE=/install"
+set "CR4CKFILE=danvaoday"
+set "CR4CKLINK=danvaoday"
 set "SOFTPATH=%PROGRAMFILES%\CocCoc\Browser\Application"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -38,6 +40,7 @@ if %ARCH%==x64 (
 ) else (
 	set "LINK=https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
 )
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -119,7 +122,7 @@ echo Installing %SOFTNAME%...
 "%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%SOFTPATH%" (
+if exist "%SOFTLOCATION%" (
 	echo Installation %SOFTNAME% complete.
 ) else (
 	echo Installation %SOFTNAME% failed.
