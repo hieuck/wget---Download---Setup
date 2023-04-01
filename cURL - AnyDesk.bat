@@ -32,13 +32,12 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
-	set "QUIETMODE=--install --start-with-win --create-shortcuts --create-desktop-icon --silent"
 	set "SOFTPATH=%PROGRAMFILES(X86)%\AnyDesk"
 ) else (
-	set "QUIETMODE=--install --start-with-win --create-shortcuts --create-desktop-icon --silent"
 	set "SOFTPATH=%PROGRAMFILES%\AnyDesk"
 )
 set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
+set "QUIETMODE=--install --start-with-win --create-shortcuts --create-desktop-icon --silent"
 set "CR4CKFILE=danvaoday"
 set "CR4CKLINK=danvaoday"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
