@@ -131,7 +131,7 @@ if exist "%SOFTLOCATION%" (
 
 :: License
 if "%License%"=="Yes" (
-	echo Downloading Reset ID %SOFTNAME%...
+	echo Downloading %SOFTNAME% ID Reset...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
 		move /y "%CR4CKFILE%" "%SOFTPATH%"
@@ -140,10 +140,10 @@ if "%License%"=="Yes" (
 	)
 	if exist "%SOFTPATH%\%CR4CKFILE%" (
 		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
-		echo Successfully Downloaded Reset ID %SOFTNAME%.
+		echo Successfully Downloaded %SOFTNAME% ID Reset.
 		del "%SOFTPATH%\%CR4CKFILE%"						  
 	) else (
-		echo Downloading Reset ID %SOFTNAME% failed.
+		echo Downloading %SOFTNAME% ID Reset failed.
 		echo Please try running the script as Administrator.
 	)
 )
