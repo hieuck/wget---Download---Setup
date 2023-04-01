@@ -32,15 +32,15 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
-	set "SOFTLOCATION=%PROGRAMFILES(X86)%\K-Lite Codec Pack\MPC-HC64\mpc-hc64.exe"
+	set "SOFTPATH=%PROGRAMFILES(X86)%\K-Lite Codec Pack\MPC-HC64"
 ) else (
-	set "SOFTLOCATION=%PROGRAMFILES%\K-Lite Codec Pack\MPC-HC64\mpc-hc64.exe"
+	set "SOFTPATH=%PROGRAMFILES%\K-Lite Codec Pack\MPC-HC64"
 )
 set "LINK=https://files3.codecguide.com/K-Lite_Codec_Pack_1750_Mega.exe"
 set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 set "CR4CKFILE=danvaoday"
 set "CR4CKLINK=danvaoday"
-set "SOFTPATH=danvaoday"
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
