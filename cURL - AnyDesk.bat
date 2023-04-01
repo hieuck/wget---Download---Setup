@@ -33,12 +33,12 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
-	set "QUIETMODE=--install "%PROGRAMFILES(X86)%\AnyDesk" --start-with-win --create-shortcuts --create-desktop-icon --silent"
+	set "QUIETMODE=--install --start-with-win --create-shortcuts --create-desktop-icon --silent"
 	set "CR4CKFILE=danvaoday"
 	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=%PROGRAMFILES(X86)%\AnyDesk"
 ) else (
-	set "QUIETMODE=--install "%PROGRAMFILES%\AnyDesk" --start-with-win --create-shortcuts --create-desktop-icon --silent"
+	set "QUIETMODE=--install --start-with-win --create-shortcuts --create-desktop-icon --silent"
 	set "CR4CKFILE=danvaoday"
 	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=%PROGRAMFILES%\AnyDesk"
