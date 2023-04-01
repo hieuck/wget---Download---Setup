@@ -15,16 +15,37 @@ echo.
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-:: Set File Name Link User Agent
+:: Detect Windows Architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+	set "ARCH=x64"
+) else (
+	set "ARCH=x86"
+)
+
+:: Set Admin License Soft File Process Name User Agent
+set "Admin=Yes"
+set "License=Yes"
 set "SOFTNAME=TreeSize Professional"
 set "FILENAME=TreeSize Professional-HieuckIT.exe"
 set "PROCESS=TreeSize.exe"
-set "LINK64=https://downloads.jam-software.de/treesize/TreeSize-x64-Demo.exe"
-set "LINK32=danvaoday"
-set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
-set "Admin=Yes"
-set "SOFTLOCATION=%PROGRAMFILES%\JAM Software\TreeSize\TreeSize.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Set code based on Windows Architecture
+if %ARCH%==x64 (
+	set "LINK=https://downloads.jam-software.de/treesize/TreeSize-x64-Demo.exe"
+	set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
+	set "CR4CKFILE=TreeSizeProfessionalCr4ck.rar"
+	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TreeSizeProfessionalCr4ck/TreeSizeProfessionalCr4ck.rar"
+	set "SOFTPATH=%PROGRAMFILES%\JAM Software\TreeSize"
+	set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
+) else (
+	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+		)
+	exit
+)
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -53,13 +74,6 @@ if %errorlevel% equ 0 (
 	taskkill /im "%PROCESS%" /f
 )
 
-:: Detect Windows Architecture
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
-)
-
 :: Download
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
@@ -79,11 +93,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
-if %ARCH%==x64 (
-	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK64%"
-) else (
-	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK32%"
-)
+wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK%"
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -125,12 +135,8 @@ if exist "%SOFTLOCATION%" (
 )
 
 :: License
-set "License=Yes"
-set "CR4CKFILE=TreeSizeProfessionalCr4ck.rar"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TreeSizeProfessionalCr4ck/TreeSizeProfessionalCr4ck.rar"
-set "SOFTPATH=%PROGRAMFILES%\JAM Software\TreeSize"
 if "%License%"=="Yes" (
-	echo Cracking %SOFTNAME%...
+	echo Cr4cking %SOFTNAME%...
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		move /y "%CR4CKFILE%" "%SOFTPATH%"
