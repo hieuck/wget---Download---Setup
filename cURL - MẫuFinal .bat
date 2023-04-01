@@ -32,19 +32,19 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
-	set "LINK=danvaoday"			REM Link Download (x64)
-	set "QUIETMODE=danvaoday"		REM Quiet Mode (x64)
-	set "SOFTLOCATION=danvaoday"	REM Software Installation Location (x64)
-	set "CR4CKFILE=danvaoday"		REM Cr4cked File Name (x64)
-	set "CR4CKLINK=danvaoday"		REM Cr4cked File Download Link (x64)
-	set "SOFTPATH=danvaoday"		REM Software Installation Path (x64)
+	set "LINK=danvaoday"
+	set "QUIETMODE=danvaoday"
+	set "SOFTLOCATION=danvaoday"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKLINK=danvaoday"
+	set "SOFTPATH=danvaoday"
 ) else (
-	set "LINK=danvaoday"			REM Link Download (x86)
-	set "QUIETMODE=danvaoday"		REM Quiet Mode (x86)
-	set "SOFTLOCATION=danvaoday"	REM Software Installation Location (x86)
-	set "CR4CKFILE=danvaoday"		REM Cr4cked File Name (x86)
-	set "CR4CKLINK=danvaoday"		REM Cr4cked File Download Link (x86)
-	set "SOFTPATH=danvaoday"		REM Software Installation Path (x86)
+	set "LINK=danvaoday"
+	set "QUIETMODE=danvaoday"
+	set "SOFTLOCATION=danvaoday"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKLINK=danvaoday"
+	set "SOFTPATH=danvaoday"
 )
 
 :: Check if Command Prompt is running with administrator privileges
