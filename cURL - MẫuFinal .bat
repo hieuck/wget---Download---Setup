@@ -45,6 +45,13 @@ if %ARCH%==x64 (
 	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=danvaoday"
 	set "SOFTLOCATION=danvaoday"
+) else (
+	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+		)
+	exit
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
