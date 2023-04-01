@@ -39,12 +39,12 @@ if %ARCH%==x64 (
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TopazPhotoAICr4ck/TopazPhotoAICr4ck.rar"
 	set "SOFTPATH=%PROGRAMFILES%\Topaz Labs LLC\Topaz Photo AI"
 ) else (
-	set "LINK=danvaoday"
-	set "QUIETMODE=danvaoday"
-	set "SOFTLOCATION=danvaoday"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
+	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+		)
+	exit
 )
 
 :: Check if Command Prompt is running with administrator privileges
