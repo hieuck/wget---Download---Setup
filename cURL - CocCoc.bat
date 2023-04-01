@@ -28,10 +28,6 @@ set "License="
 set "SOFTNAME=Coc Coc"
 set "FILENAME=Coc Coc-HieuckIT.exe"
 set "PROCESS=browser.exe"
-set "QUIETMODE=/install"
-set "CR4CKFILE=danvaoday"
-set "CR4CKLINK=danvaoday"
-set "SOFTPATH=%PROGRAMFILES%\CocCoc\Browser\Application"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
@@ -40,6 +36,10 @@ if %ARCH%==x64 (
 ) else (
 	set "LINK=https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
 )
+set "QUIETMODE=/install"
+set "CR4CKFILE=danvaoday"
+set "CR4CKLINK=danvaoday"
+set "SOFTPATH=%PROGRAMFILES%\CocCoc\Browser\Application"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
