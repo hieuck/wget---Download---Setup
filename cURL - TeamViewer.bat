@@ -15,16 +15,32 @@ echo.
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-:: Set File Name Link User Agent
+:: Detect Windows Architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+	set "ARCH=x64"
+) else (
+	set "ARCH=x86"
+)
+
+:: Set Admin License Soft File Process Name User Agent
+set "Admin=Yes"
+set "License=Yes"
 set "SOFTNAME=TeamViewer"
 set "FILENAME=TeamViewer-HieuckIT.exe"
 set "PROCESS=TeamViewer.exe"
-set "LINK64=https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
-set "LINK32=https://download.teamviewer.com/download/TeamViewer_Setup.exe"
-set "QUIETMODE=/S"
-set "Admin=Yes"
-set "SOFTLOCATION=%PROGRAMFILES%\TeamViewer\TeamViewer.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Set code based on Windows Architecture
+if %ARCH%==x64 (
+	set "LINK=https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
+) else (
+	set "LINK=https://download.teamviewer.com/download/TeamViewer_Setup.exe"
+)
+set "QUIETMODE=/S"
+set "CR4CKFILE=TeamViewerCr4ck.rar"
+set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TeamViewerCr4ck/TeamViewerCr4ck.rar"
+set "SOFTPATH=%PROGRAMFILES%\TeamViewer"
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -53,13 +69,6 @@ if %errorlevel% equ 0 (
 	taskkill /im "%PROCESS%" /f
 )
 
-:: Detect Windows Architecture
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
-)
-
 :: Download
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
@@ -79,11 +88,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
-if %ARCH%==x64 (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK64%" --insecure
-) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK32%" --insecure
-)
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -125,10 +130,6 @@ if exist "%SOFTLOCATION%" (
 )
 
 :: License
-set "License=Yes"
-set "CR4CKFILE=TVTools_AlterID.exe"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TeamViewerCr4ck/TVTools_AlterID.exe"
-set "SOFTPATH=%PROGRAMFILES%\TeamViewer\"
 if "%License%"=="Yes" (
 	echo Download Reset ID %SOFTNAME%...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
@@ -138,7 +139,9 @@ if "%License%"=="Yes" (
 		echo Please try running the script as Administrator.
 	)
 	if exist "%SOFTPATH%\%CR4CKFILE%" (
+		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
 		echo Successfully Downloaded Reset ID %SOFTNAME%.
+		del "%SOFTPATH%\%CR4CKFILE%"						  
 	) else (
 		echo Downloading Reset ID %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
