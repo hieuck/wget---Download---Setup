@@ -27,25 +27,23 @@ set "Admin="
 set "License="
 set "SOFTNAME=AnyDesk"
 set "FILENAME=AnyDesk-HieuckIT.exe"
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
 set "PROCESS=AnyDesk.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
-	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
 	set "QUIETMODE=--install "%PROGRAMFILES(X86)%\AnyDesk" --start-with-win --create-shortcuts --create-desktop-icon --silent"
-	set "SOFTLOCATION=%PROGRAMFILES(X86)%\AnyDesk\AnyDesk.exe"
 	set "CR4CKFILE=danvaoday"
 	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
+	set "SOFTPATH=%PROGRAMFILES(X86)%\AnyDesk"
 ) else (
-	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AnyDesk/AnyDesk.6.1.0.exe"
 	set "QUIETMODE=--install "%PROGRAMFILES%\AnyDesk" --start-with-win --create-shortcuts --create-desktop-icon --silent"
-	set "SOFTLOCATION=%PROGRAMFILES%\AnyDesk\AnyDesk.exe"
 	set "CR4CKFILE=danvaoday"
 	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=danvaoday"
+	set "SOFTPATH=%PROGRAMFILES%\AnyDesk"
 )
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
