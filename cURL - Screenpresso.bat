@@ -115,7 +115,7 @@ echo.
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-echo Installing %SOFTNAME%...
+echo Installing %SOFTNAME%...Please 'Delete the key' if 'The license key is invalid.'
 "%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
