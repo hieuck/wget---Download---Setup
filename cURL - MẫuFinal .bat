@@ -34,12 +34,14 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 if %ARCH%==x64 (
 	set "LINK=danvaoday"
 	set "QUIETMODE=danvaoday"
+	set "SOFTLOCATION=danvaoday"
 	set "CR4CKFILE=danvaoday.rar"
 	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=danvaoday"
 ) else (
 	set "LINK=danvaoday"
 	set "QUIETMODE=danvaoday"
+	set "SOFTLOCATION=danvaoday"
 	set "CR4CKFILE=danvaoday.rar"
 	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=danvaoday"
@@ -125,7 +127,7 @@ echo Installing %SOFTNAME%...
 "%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%SOFTPATH%" (
+if exist "%SOFTLOCATION%" (
 	echo Installation %SOFTNAME% complete.
 ) else (
 	echo Installation %SOFTNAME% failed.
