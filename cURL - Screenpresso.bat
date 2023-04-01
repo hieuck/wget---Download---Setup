@@ -23,7 +23,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set Admin License Soft File Process Name User Agent
-set "Admin="
+set "Admin=Yes"
 set "License="
 set "SOFTNAME=Screenpresso"
 set "FILENAME=Screenpresso-HieuckIT.exe"
@@ -37,10 +37,7 @@ if %ARCH%==x64 (
 	set "LINK=https://www.screenpresso.com/download/old-versions/Screenpresso-1.7.8.0-32-bit.exe"
 )
 set "QUIETMODE=deploy --install --programfiles --quiet"
-set "CR4CKFILE=danvaoday.rar"
-set "CR4CKLINK=danvaoday"
-set "SOFTPATH=%PROGRAMFILES%\Learnpulse\Screenpresso"
-set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
+set "SOFTLOCATION=%PROGRAMFILES%\Learnpulse\Screenpresso\Screenpresso.exe"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -131,7 +128,7 @@ if exist "%SOFTLOCATION%" (
 
 :: License
 echo Please exit Screenpresso when the 'Operation succeeded' command below appears
-"%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
+"%SOFTLOCATION%" license --activate [3]-[screenpressopro]-[1314]-[Meffi/tPORt]-[11/10/2022]-[CCmBVJV+jaQzzj6K1OypBEp0a4JLoGunMBnIZRsEKNau6wDIOaYGz6pG81MT6JJSeOS/OIdBsMBMzCBHrDBHgQ==] --quiet
 netsh advfirewall firewall show rule name="Block Screenpresso" > nul
 if %errorlevel% neq 0 (
     netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
