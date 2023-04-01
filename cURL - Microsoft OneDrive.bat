@@ -32,7 +32,7 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 set "LINK=https://oneclient.sfx.ms/Win/Prod/22.131.0619.0001/amd64/OneDriveSetup.exe"
-set "QUIETMODE=danvaoday"
+set "QUIETMODE="
 set "CR4CKFILE=danvaoday.rar"
 set "CR4CKLINK=danvaoday"
 set "SOFTPATH=%PROGRAMFILES%\Microsoft OneDrive"
