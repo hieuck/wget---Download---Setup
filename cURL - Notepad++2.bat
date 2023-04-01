@@ -32,19 +32,19 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 if %ARCH%==x64 (
-	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.1/npp.8.5.1.Installer.x64.exe"			REM Link Download (x64)
-	set "QUIETMODE=/S"		REM Quiet Mode (x64)
-	set "SOFTLOCATION=%PROGRAMFILES%\Notepad++\Notepad++.exe"	REM Software Installation Location (x64)
-	set "CR4CKFILE=danvaoday"		REM Cr4cked File Name (x64)
-	set "CR4CKLINK=danvaoday"		REM Cr4cked File Download Link (x64)
-	set "SOFTPATH=danvaoday"		REM Software Installation Path (x64)
+	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.1/npp.8.5.1.Installer.x64.exe"
+	set "QUIETMODE=/S"
+	set "SOFTLOCATION=%PROGRAMFILES%\Notepad++\Notepad++.exe"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKLINK=danvaoday"
+	set "SOFTPATH=danvaoday"
 ) else (
-	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.1/npp.8.5.1.Installer.exe"			REM Link Download (x86)
-	set "QUIETMODE=/S"		REM Quiet Mode (x86)
-	set "SOFTLOCATION=%PROGRAMFILES%\Notepad++\Notepad++.exe"	REM Software Installation Location (x86)
-	set "CR4CKFILE=danvaoday"		REM Cr4cked File Name (x86)
-	set "CR4CKLINK=danvaoday"		REM Cr4cked File Download Link (x86)
-	set "SOFTPATH=danvaoday"		REM Software Installation Path (x86)
+	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.1/npp.8.5.1.Installer.exe"
+	set "QUIETMODE=/S"
+	set "SOFTLOCATION=%PROGRAMFILES%\Notepad++\Notepad++.exe"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKLINK=danvaoday"
+	set "SOFTPATH=danvaoday"
 )
 
 :: Check if Command Prompt is running with administrator privileges
