@@ -26,7 +26,7 @@ if "%PROCESSOR_ARCHITECTURE%"=="x86" (
 )
 
 set "ShortcutName=EVKey.lnk"
-set "ShortcutPath=%USERPROFILE%\Desktop\%ShortcutName%"
+set "ShortcutPath=%PUBLIC%\Desktop\%ShortcutName%"
 
 REM Shortcut
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
