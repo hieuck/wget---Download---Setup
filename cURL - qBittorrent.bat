@@ -31,14 +31,7 @@ set "PROCESS=qBittorrent.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-if %ARCH%==x64 (
-	set "LINK=https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_4.5.2_lt20_qt6_x64_setup.exe"
-	set "QUIETMODE=/S"
-	set "CR4CKFILE=danvaoday.rar"
-	set "CR4CKLINK=danvaoday"
-	set "SOFTPATH=%PROGRAMFILES%\qBittorrent"
-	set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
-) else (
+if %ARCH%==x86 (
 	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
@@ -46,6 +39,12 @@ if %ARCH%==x64 (
 		)
 	exit
 )
+set "LINK=https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_4.5.2_lt20_qt6_x64_setup.exe"
+set "QUIETMODE=/S"
+set "CR4CKFILE=danvaoday.rar"
+set "CR4CKLINK=danvaoday"
+set "SOFTPATH=%PROGRAMFILES%\qBittorrent"
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
