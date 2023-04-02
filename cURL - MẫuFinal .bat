@@ -53,6 +53,12 @@ if %ARCH%==x64 (
 		)
 	exit
 )
+set "LINK=danvaoday"
+set "QUIETMODE=danvaoday"
+set "CR4CKFILE=danvaoday.rar"
+set "CR4CKLINK=danvaoday"
+set "SOFTPATH=danvaoday"
+set "SOFTLOCATION=danvaoday"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
