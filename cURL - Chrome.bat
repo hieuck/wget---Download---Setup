@@ -36,7 +36,7 @@ if %ARCH%==x86 (
 ) else (
 	set "LINK=https://dl.google.com/dl/chrome/install/googlechromestandaloneenterprise64.msi"
 )
-set "QUIETMODE="
+set "QUIETMODE=/quiet"
 set "CR4CKFILE=danvaoday.rar"
 set "CR4CKLINK=danvaoday"
 set "SOFTPATH=%PROGRAMFILES%\Google\Chrome\Application"
