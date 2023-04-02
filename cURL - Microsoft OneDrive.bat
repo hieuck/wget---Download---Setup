@@ -31,6 +31,14 @@ set "PROCESS=OneDrive.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
+if %ARCH%==X86 (
+	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+		)
+	exit
+)
 set "LINK=https://oneclient.sfx.ms/Win/Prod/22.131.0619.0001/amd64/OneDriveSetup.exe"
 set "QUIETMODE="
 set "CR4CKFILE=danvaoday.rar"
