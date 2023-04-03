@@ -12,13 +12,18 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Bitwarden. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
 :: Set File Name Link User Agent
+set "SOFTNAME=Bitwarden"
 set "FILENAME=Bitwarden-HieuckIT.exe"
-set "LINK64=https://vault.bitwarden.com/download/?app=desktop&platform=windows"
-set "LINK32=link"
+set "PROCESS=Bitwarden.exe"
+set "LINK64=https://github.com/bitwarden/clients/releases/latest/download/Bitwarden-Installer-2023.3.1.exe"
+set "LINK32=https://vault.bitwarden.com/download/?app=desktop&platform=windows"
+set "QUIETMODE=/S"
+set "Admin="
+set "SOFTLOCATION=%LocalAppData%\Programs\Bitwarden\Bitwarden.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Check if Command Prompt is running with administrator privileges
@@ -26,20 +31,33 @@ net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
-	echo Command Prompt is not running as Administrator.
+	if "%Admin%"=="Yes" (
+		echo Please Run as Administrator. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
+	) else (
+		echo Warning: This program may not function correctly without administrator privileges.
+		for /l %%i in (3,-1,1) do (
+			echo Starting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+	)
 )
 
-:: Terminate the Bitwarden Process
-tasklist | find /i "Bitwarden.exe" > nul
+:: Terminate the %SOFTNAME% Process
+tasklist | find /i "%PROCESS%" > nul
 if %errorlevel% equ 0 (
-    taskkill /im "Bitwarden.exe" /f
+	taskkill /im "%PROCESS%" /f
 )
 
 :: Detect Windows Architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
-    set "ARCH=x64"
+	set "ARCH=x64"
 ) else (
-    set "ARCH=x86"
+	set "ARCH=x86"
 )
 
 :: Download
@@ -57,21 +75,24 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Bitwarden. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-echo Downloading Bitwarden...
+echo Downloading %SOFTNAME%...
 if %ARCH%==x64 (
-    wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK64%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK64%"
 ) else (
-    wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK32%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK32%"
 )
 
 if not exist "%FILENAME%" (
-    echo Download Bitwarden failed.
-    echo Please check your network connection. Exiting in 5 seconds...
-    timeout /t 5 /nobreak >nul
-    exit
+	echo Download %SOFTNAME% failed.
+	echo Please check your network connection. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
 )
 
 :: Install
@@ -89,27 +110,31 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Bitwarden. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-echo Installing Bitwarden...
-"%FILENAME%" /S
+echo Installing %SOFTNAME%...
+"%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%LocalAppData%\Programs\Bitwarden\Bitwarden.exe" (
-	echo Installation Bitwarden complete.
+if exist "%SOFTLOCATION%" (
+	echo Installation %SOFTNAME% complete.
 ) else (
-	echo Installation Bitwarden failed.
+	echo Installation %SOFTNAME% failed.
 	echo Please try Run as Administrator.
 )
 
 :: Clean Up
 del "%FILENAME%"
-echo The script will automatically close in 5 seconds.
-for /l %%i in (5,-1,1) do (
+echo The script will automatically close in 3 seconds.
+for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 	if exist "%FILENAME%" (
+		tasklist | find /i "%FILENAME%" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "%FILENAME%" /f
+		)
 	del "%FILENAME%"
 	)
 )

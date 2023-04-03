@@ -12,13 +12,18 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Authy. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
 :: Set File Name Link User Agent
+set "SOFTNAME=Authy"
 set "FILENAME=Authy-HieuckIT.exe"
+set "PROCESS=Authy Desktop.exe"
 set "LINK64=https://electron.authy.com/download?channel=stable&arch=x64&platform=win32&version=latest&product=authy"
 set "LINK32=https://electron.authy.com/download?channel=stable&arch=x32&platform=win32&version=latest&product=authy"
+set "QUIETMODE=/S"
+set "Admin="
+set "SOFTLOCATION=%LOCALAPPDATA%\Authy\Authy Desktop.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Check if Command Prompt is running with administrator privileges
@@ -26,13 +31,26 @@ net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
-	echo Command Prompt is not running as Administrator.
+	if "%Admin%"=="Yes" (
+		echo Please Run as Administrator. Exiting in 5 seconds...
+		for /l %%i in (5,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
+	) else (
+		echo Warning: This program may not function correctly without administrator privileges.
+		for /l %%i in (3,-1,1) do (
+			echo Starting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+	)
 )
 
-:: Terminate the Authy Process
-tasklist | find /i "Authy Desktop.exe" > nul
+:: Terminate the %SOFTNAME% Process
+tasklist | find /i "%PROCESS%" > nul
 if %errorlevel% equ 0 (
-	taskkill /im "Authy Desktop.exe" /f
+	taskkill /im "%PROCESS%" /f
 )
 
 :: Detect Windows Architecture
@@ -57,18 +75,18 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Authy. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-echo Downloading Authy...
+echo Downloading %SOFTNAME%...
 if %ARCH%==x64 (
-	wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK64%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK64%"
 ) else (
-	wget --no-check-certificate -q --show-progress -O "%FILENAME%" "%LINK32%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK32%"
 )
 
 if not exist "%FILENAME%" (
-	echo Download Authy failed.
+	echo Download %SOFTNAME% failed.
 	echo Please check your network connection. Exiting in 5 seconds...
 	for /l %%i in (5,-1,1) do (
 		echo Exiting in %%i seconds...
@@ -92,17 +110,17 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Authy. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-echo Installing Authy...
-"%FILENAME%" /S
+echo Installing %SOFTNAME%...
+"%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-if exist "%LocalAppData%\Authy\Authy Desktop.exe" (
-	echo Installation Authy complete.
+if exist "%SOFTLOCATION%" (
+	echo Installation %SOFTNAME% complete.
 ) else (
-	echo Installation Authy failed.
+	echo Installation %SOFTNAME% failed.
 	echo Please try Run as Administrator.
 )
 
@@ -113,6 +131,10 @@ for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 	if exist "%FILENAME%" (
+		tasklist | find /i "%FILENAME%" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "%FILENAME%" /f
+		)
 	del "%FILENAME%"
 	)
 )

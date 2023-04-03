@@ -12,45 +12,130 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat Sideloadly. Vui Long Cho
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
-
 pushd "%~dp0"
-:: Terminate the Sideloadly process
-tasklist | find /i "Sideloadly.exe" > nul
-if %errorlevel% equ 0 (
-    taskkill /im Sideloadly.exe /f
+:: Set File Name Link User Agent
+set "SOFTNAME=Sideloadly"
+set "FILENAME=Sideloadly-HieuckIT.exe"
+set "PROCESS=Sideloadly.exe"
+set "LINK64=https://sideloadly.io/SideloadlySetup64.exe"
+set "LINK32=https://sideloadly.io/SideloadlySetup32.exe"
+set "QUIETMODE=/S"
+set "Admin="
+set "SOFTLOCATION=%LOCALAPPDATA%\Sideloadly\sideloadly.exe"
+set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Check if Command Prompt is running with administrator privileges
+net session >nul 2>&1
+if %errorlevel% == 0 (
+	echo Command Prompt is running as Administrator.
+) else (
+	if "%Admin%"=="Yes" (
+		echo Please Run as Administrator. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
+	) else (
+		echo Warning: This program may not function correctly without administrator privileges.
+		for /l %%i in (3,-1,1) do (
+			echo Starting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+	)
 )
 
-:: Detect Windows architecture
+:: Terminate the %SOFTNAME% Process
+tasklist | find /i "%PROCESS%" > nul
+if %errorlevel% equ 0 (
+	taskkill /im "%PROCESS%" /f
+)
+
+:: Detect Windows Architecture
 if exist "%SYSTEMROOT%\SysWOW64" (
-    set "ARCH=x64"
+	set "ARCH=x64"
 ) else (
-    set "ARCH=x86"
+	set "ARCH=x86"
 )
 
 :: Download
-echo Downloading Sideloadly...
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo off
+pushd "%~dp0"
+echo Downloading %SOFTNAME%...
 if %ARCH%==x64 (
-    wget --no-check-certificate -q --show-progress -O "Sideloadly-HieuckIT.exe" "https://sideloadly.io/SideloadlySetup64.exe"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK64%"
 ) else (
-    wget --no-check-certificate -q --show-progress -O "Sideloadly-HieuckIT.exe" "https://sideloadly.io/SideloadlySetup32.exe"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK32%"
+)
+
+if not exist "%FILENAME%" (
+	echo Download %SOFTNAME% failed.
+	echo Please check your network connection. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
 )
 
 :: Install
-echo Installing Sideloadly...
-FOR %%i IN ("Sideloadly*.exe") DO Set FileName="%%i"
-%FileName% /S
-if exist "%LocalAppData%\Sideloadly\" (
-	echo Installation Sideloadly complete.
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo off
+pushd "%~dp0"
+echo Installing %SOFTNAME%...
+"%FILENAME%" %QUIETMODE%
+
+:: Check Installation Process
+if exist "%SOFTLOCATION%" (
+	echo Installation %SOFTNAME% complete.
 ) else (
-	echo Installation Sideloadly failed.
+	echo Installation %SOFTNAME% failed.
 	echo Please try Run as Administrator.
 )
-::License
-::copy /y "%~dp0\banquyenneuco" "vaoday"
 
-:: Clean up
-del "Sideloadly*.exe"
-timeout /t 5
+:: Clean Up
+del "%FILENAME%"
+echo The script will automatically close in 3 seconds.
+for /l %%i in (3,-1,1) do (
+	echo Closing in %%i seconds...
+	timeout /t 1 /nobreak >nul
+	if exist "%FILENAME%" (
+		tasklist | find /i "%FILENAME%" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "%FILENAME%" /f
+		)
+	del "%FILENAME%"
+	)
+)
 popd
