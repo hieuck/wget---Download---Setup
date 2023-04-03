@@ -128,6 +128,7 @@ if exist "%SOFTLOCATION%" (
 	echo Installation %SOFTNAME% failed.
 	echo Please try Run as Administrator.
 )
+echo hieuckit | "%SOFTPATH%\%PROCESS%" --set-password
 
 :: License
 if "%License%"=="Yes" (
