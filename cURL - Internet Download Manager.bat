@@ -138,7 +138,6 @@ goto end
 echo %SOFTNAME% has been installed successfully!
 :end
 
-
 :: License
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
