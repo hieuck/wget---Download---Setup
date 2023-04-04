@@ -33,9 +33,6 @@ if "%arch%"=="x64" (
     curl -o "%download_folder%\vc2013_x64.exe" "%vc2013%"
     curl -o "%download_folder%\vc2015_x86.exe" "%vc2015%"
     curl -o "%download_folder%\vc2015_x64.exe" "%vc2015%"
-    curl -o "%download_folder%\vc2017_x64.exe" "%vc2017%"
-    curl -o "%download_folder%\vc2019_x64.exe" "%vc2019%"
-    curl -o "%download_folder%\vc2022_x64.exe" "%vc2022%"
 ) else (
     curl -o "%download_folder%\vc2005_x86.exe" "%vc2005%"
     curl -o "%download_folder%\vc2008_x86.exe" "%vc2008%"
@@ -43,9 +40,6 @@ if "%arch%"=="x64" (
     curl -o "%download_folder%\vc2012_x86.exe" "%vc2012%"
     curl -o "%download_folder%\vc2013_x86.exe" "%vc2013%"
     curl -o "%download_folder%\vc2015_x86.exe" "%vc2015%"
-    curl -o "%download_folder%\vc2017_x86.exe" "%vc2017%"
-    curl -o "%download_folder%\vc2019_x86.exe" "%vc2019%"
-    curl -o "%download_folder%\vc2022_x86.exe" "%vc2022%"
 )
 
 :: install
