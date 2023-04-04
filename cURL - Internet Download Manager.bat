@@ -122,19 +122,21 @@ echo Installing %SOFTNAME%...
 "%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
-echo Waiting for %SOFTNAME% installation to complete...
+echo Checking if %SOFTNAME% installation is complete...
 setlocal EnableDelayedExpansion
 set count=0
-
-timeout /t 30 /nobreak > nul
-
-if exist "%SOFTLOCATION%" (
-	echo Installation %SOFTNAME% complete.
-) else (
-	echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
-	echo Installation %SOFTNAME% failed.
-	echo Please try Run as Administrator.
-)
+:waitloop
+timeout /t 1 /nobreak > nul
+set /a count+=1
+if exist "%SOFTLOCATION%" goto installed
+if !count! equ 30 goto timeout
+goto waitloop
+:timeout
+echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
+goto end
+:installed
+echo %SOFTNAME% has been installed successfully!
+:end
 
 :: License
 if "%License%"=="Yes" (
