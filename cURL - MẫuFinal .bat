@@ -140,6 +140,13 @@ echo Installing %SOFTNAME%...
 "%FILENAME%" %QUIETMODE%
 
 :: Check Installation Process
+if exist "%SOFTLOCATION%" (
+	echo Installation %SOFTNAME% complete.
+) else (
+	echo Installation %SOFTNAME% failed.
+	echo Please try Run as Administrator.
+)
+:: Check Installation Process
 echo Checking if %SOFTNAME% installation is complete...
 setlocal EnableDelayedExpansion
 set count=0
@@ -156,7 +163,7 @@ goto end
 echo %SOFTNAME% has been installed successfully!
 :end
 )
-
+:: Check Installation Process
 echo Waiting for %SOFTNAME% installation to complete...
 setlocal EnableDelayedExpansion
 set count=0
