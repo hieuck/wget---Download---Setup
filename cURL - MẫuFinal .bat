@@ -162,7 +162,6 @@ goto end
 :installed
 echo %SOFTNAME% has been installed successfully!
 :end
-
 :: Check Installation Process
 echo Waiting for %SOFTNAME% installation to complete...
 setlocal EnableDelayedExpansion
