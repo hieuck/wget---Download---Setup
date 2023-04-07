@@ -157,6 +157,20 @@ echo %SOFTNAME% has been installed successfully!
 :end
 )
 
+echo Waiting for %SOFTNAME% installation to complete...
+setlocal EnableDelayedExpansion
+set count=0
+
+timeout /t 30 /nobreak > nul
+
+if exist "%SOFTLOCATION%" (
+	echo Installation %SOFTNAME% complete.
+) else (
+	echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
+	echo Installation %SOFTNAME% failed.
+	echo Please try Run as Administrator.
+)
+
 :: License
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
