@@ -25,6 +25,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set Admin License Soft File Process Name User Agent
 set "Admin="
 set "License="
+set "Shortcut=No"
 set "SOFTNAME=danvaoday"
 set "FILENAME=danvaoday-HieuckIT.exe"
 set "PROCESS=danvaoday.exe"
@@ -196,7 +197,39 @@ if "%License%"=="Yes" (
 	)
 )
 
+:: Shortcut
+if /i "%Shortcut%"=="no" (
+    echo Creating shortcut is skipped.
+    goto CleanUp
+)
+
+if exist "%SOFTLOCATION%" (
+	set "TARGETFILE=%SOFTLOCATION%"
+) else (
+	echo %SOFTNAME% does not exist in directory "%SOFTPATH%". Exiting script.
+	exit /b 1
+)
+
+set "SHORTCUTNAME=%SOFTNAME%.lnk"
+set "SHORTCUTPATH=%PUBLIC%\Desktop\%SHORTCUTNAME%"
+
+echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
+echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
+echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
+echo oLink.TargetPath = "%TARGETFILE%" >> CreateShortcut.vbs
+echo oLink.WorkingDirectory = "%SOFTPATH%" >> CreateShortcut.vbs
+echo oLink.Save >> CreateShortcut.vbs
+cscript CreateShortcut.vbs
+del CreateShortcut.vbs
+
+if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
+	echo Creating shortcut complete.
+) else (
+	echo Creating shortcut failed.
+)
+
 :: Clean Up
+:CleanUp
 del "%FILENAME%"
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
