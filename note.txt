@@ -1,9 +1,17 @@
 "%PROGRAMFILES%\
 "%PROGRAMFILES(X86)%\
 "%PROGRAMDATA%\
-"%PUBLIC%\
+"%PUBLIC%\Desktop
 "%LOCALAPPDATA%\
 "%APPDATA%\
 "%TEMP%\
-"%USERPROFILE%\
+"%USERPROFILE%\Desktop
 "%SYSTEMROOT%\
+
+$securePassword = ConvertTo-SecureString "123" -AsPlainText -Force
+Expand-Archive -Path "%FILENAME%" -DestinationPath "%SOFTPATH%" -Password $securePassword
+
+$securePassword = ConvertTo-SecureString "123" -AsPlainText -Force
+Expand-Archive -Path $env:FILENAME -DestinationPath $env:SOFTPATH -Password $securePassword
+
+@7z.exe x -p123 "%FILENAME%" -o"%SOFTPATH%" -aoa -y
