@@ -218,6 +218,7 @@ echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
 echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
 echo oLink.TargetPath = "%TARGETFILE%" >> CreateShortcut.vbs
 echo oLink.WorkingDirectory = "%SOFTPATH%" >> CreateShortcut.vbs
+echo oLink.Description = "Shortcut to %SOFTNAME%" >> CreateShortcut.vbs
 echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
