@@ -25,6 +25,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set Admin License Soft File Process Name User Agent
 set "Admin=Yes"
 set "License="
+set "Shortcut=Yes"
 set "SOFTNAME=dnSpy"
 set "FILENAME=dnSpy-HieuckIT.zip"
 set "PROCESS=dnSpy.exe"
@@ -151,6 +152,11 @@ if "%License%"=="Yes" (
 )
 
 :: Shortcut
+if /i "%Shortcut%"=="no" (
+    echo Creating shortcut is skipped.
+    goto CleanUp
+)
+
 if exist "%SOFTLOCATION%" (
 	set "TARGETFILE=%SOFTLOCATION%"
 ) else (
@@ -177,6 +183,7 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 )
 
 :: Clean Up
+:CleanUp
 del "%FILENAME%"
 del "7z.dll"
 del "7z.exe"
