@@ -32,8 +32,8 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 set "LINK=https://github.com/qarmin/czkawka/releases/download/5.1.0/windows_czkawka_gui.zip"
-set "LINKFFMPEG=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n6.0-latest-win64-gpl-6.0.zip"
 set "NAMEFFMPEG=ffmpeg-n6.0-latest-win64-gpl-6.0"
+set "LINKFFMPEG=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/%NAMEFFMPEG%.zip"
 
 if "%License%"=="Yes" (
 	set "Admin=Yes"
