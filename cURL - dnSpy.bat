@@ -23,25 +23,39 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set Admin License Soft File Process Name User Agent
-set "Admin=Yes"
 set "License="
-set "Shortcut=Yes"
+set "Extract7z=Yes"
 set "SOFTNAME=dnSpy"
-set "FILENAME=dnSpy-HieuckIT.zip"
+set "FILENAME=dnSpy"
 set "PROCESS=dnSpy.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
+if "%License%"=="Yes" (
+	set "Admin=Yes"
+) else if "%Extract7z%"=="Yes" (
+	set "Admin=Yes"
+)
+
 if %ARCH%==x86 (
 	set "LINK=https://github.com/dnSpy/dnSpy/releases/download/v6.1.8/dnSpy-net-win32.zip"
 ) else (
 	set "LINK=https://github.com/dnSpy/dnSpy/releases/download/v6.1.8/dnSpy-net-win64.zip"
 )
-set "SOFTPATH=%PROGRAMFILES%\dnSpy"
-set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
-set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+::Extract with 7z
+if "%Extract7z%"=="Yes" (
+	set "FILENAME=%FILENAME%-HieuckIT.zip"
+	set "Shortcut=Yes"	
+	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
+) else (
+	set "Shortcut=No"
+	set "CR4CKFILE=danvaoday.rar"
+	set "CR4CKLINK=danvaoday"
+)
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -172,6 +186,7 @@ echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
 echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
 echo oLink.TargetPath = "%TARGETFILE%" >> CreateShortcut.vbs
 echo oLink.WorkingDirectory = "%SOFTPATH%" >> CreateShortcut.vbs
+echo oLink.Description = "Shortcut to %SOFTNAME%" >> CreateShortcut.vbs
 echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
@@ -184,9 +199,10 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
+del 7z.dll
+del 7z.exe
 del "%FILENAME%"
-del "7z.dll"
-del "7z.exe"
+
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
