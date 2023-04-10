@@ -31,15 +31,15 @@ set "PROCESS=czkawka_gui.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-set "LINK=https://github.com/qarmin/czkawka/releases/download/5.1.0/windows_czkawka_gui.zip"
-set "NAMEFFMPEG=ffmpeg-n6.0-latest-win64-gpl-6.0"
-set "LINKFFMPEG=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/%NAMEFFMPEG%.zip"
-
 if "%License%"=="Yes" (
 	set "Admin=Yes"
 ) else if "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 )
+
+set "LINK=https://github.com/qarmin/czkawka/releases/download/5.1.0/windows_czkawka_gui.zip"
+set "NAMEFFMPEG=ffmpeg-n6.0-latest-win64-gpl-6.0"
+set "LINKFFMPEG=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/%NAMEFFMPEG%.zip"
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
@@ -49,10 +49,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
 ) else (
-	set "FILENAME=%FILENAME%-HieuckIT.exe"
 	set "Shortcut=No"
-	set "QUIETMODE="
-	set "SOFTPATH="
 	set "CR4CKFILE=danvaoday.rar"
 	set "CR4CKLINK=danvaoday"
 )
@@ -104,14 +101,10 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
-if "%Extract7z%"=="Yes" (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%NAMEFFMPEG%.zip" "%LINKFFMPEG%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
-) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
-)
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "%NAMEFFMPEG%.zip" "%LINKFFMPEG%" --insecure
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -142,30 +135,17 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Installing %SOFTNAME%...
-if "%Extract7z%"=="Yes" (
-	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
-	@7z.exe x "%NAMEFFMPEG%.zip" -o"%SOFTPATH%" -aoa -y %NAMEFFMPEG%\bin\ff*.exe
-	move /y "%SOFTPATH%\%NAMEFFMPEG%\bin\ff*.exe" "%SOFTPATH%"
-) else (
-	"%FILENAME%" %QUIETMODE%
-)
+@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
+@7z.exe x "%NAMEFFMPEG%.zip" -o"%SOFTPATH%" -aoa -y %NAMEFFMPEG%\bin\ff*.exe
+move /y "%SOFTPATH%\%NAMEFFMPEG%\bin\ff*.exe" "%SOFTPATH%"
 
 :: Check Installation Process
-echo Checking if %SOFTNAME% installation is complete...
-setlocal EnableDelayedExpansion
-set count=0
-:waitloop
-timeout /t 1 /nobreak > nul
-set /a count+=1
-if exist "%SOFTLOCATION%" goto installed
-if !count! equ 30 goto timeout
-goto waitloop
-:timeout
-echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
-goto end
-:installed
-echo %SOFTNAME% has been installed successfully!
-:end
+if exist "%SOFTLOCATION%" (
+	echo Installation %SOFTNAME% complete.
+) else (
+	echo Installation %SOFTNAME% failed.
+	echo Please try Run as Administrator.
+)
 
 :: License
 if "%License%"=="Yes" (
@@ -220,13 +200,12 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
-if "%Extract7z%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
-	del "%NAMEFFMPEG%.zip"
-	rmdir /s /q "%SOFTPATH%\%NAMEFFMPEG%\"
-)
+del 7z.dll
+del 7z.exe
+del "%NAMEFFMPEG%.zip"
+rmdir /s /q "%SOFTPATH%\%NAMEFFMPEG%\"
 del "%FILENAME%"
+
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
