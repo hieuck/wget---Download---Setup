@@ -143,7 +143,9 @@ pushd "%~dp0"
 echo Installing %SOFTNAME%...
 if "%Extract7z%"=="Yes" (
 	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
-	@7z.exe x "FFmpeg.zip" -o"%SOFTPATH%" -aoa -y ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffmpeg.exe ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffplay.exe ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffprobe.exe
+	@7z.exe x "FFmpeg.zip" -o"%SOFTPATH%" -aoa -y ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffmpeg.exe
+	@7z.exe x "FFmpeg.zip" -o"%SOFTPATH%" -aoa -y ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffplay.exe
+	@7z.exe x "FFmpeg.zip" -o"%SOFTPATH%" -aoa -y ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffprobe.exe
 	move /y "%SOFTPATH%\ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffmpeg.exe" "%SOFTPATH%"
 	move /y "%SOFTPATH%\ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffplay.exe" "%SOFTPATH%"
 	move /y "%SOFTPATH%\ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffprobe.exe" "%SOFTPATH%"
