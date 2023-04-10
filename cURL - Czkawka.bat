@@ -33,6 +33,7 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 set "LINK=https://github.com/qarmin/czkawka/releases/download/5.1.0/windows_czkawka_gui.zip"
 set "LINKFFMPEG=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n6.0-latest-win64-gpl-6.0.zip"
+set "NAMEFFMPEG=ffmpeg-n6.0-latest-win64-gpl-6.0"
 
 if "%License%"=="Yes" (
 	set "Admin=Yes"
@@ -105,7 +106,7 @@ pushd "%~dp0"
 echo Downloading %SOFTNAME%...
 if "%Extract7z%"=="Yes" (
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "FFmpeg.zip" "%LINKFFMPEG%" --insecure
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%NAMEFFMPEG%.zip" "%LINKFFMPEG%" --insecure
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
 ) else (
@@ -143,10 +144,8 @@ pushd "%~dp0"
 echo Installing %SOFTNAME%...
 if "%Extract7z%"=="Yes" (
 	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
-	@7z.exe x "FFmpeg.zip" -o"%SOFTPATH%" -aoa -y ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffmpeg.exe ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffplay.exe ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffprobe.exe
-	move /y "%SOFTPATH%\ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffmpeg.exe" "%SOFTPATH%"
-	move /y "%SOFTPATH%\ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffplay.exe" "%SOFTPATH%"
-	move /y "%SOFTPATH%\ffmpeg-n6.0-latest-win64-gpl-6.0\bin\ffprobe.exe" "%SOFTPATH%"
+	@7z.exe x "%NAMEFFMPEG%.zip" -o"%SOFTPATH%" -aoa -y %NAMEFFMPEG%\bin\ff*.exe
+	move /y "%SOFTPATH%\%NAMEFFMPEG%\bin\ff*.exe" "%SOFTPATH%"
 ) else (
 	"%FILENAME%" %QUIETMODE%
 )
@@ -224,8 +223,8 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 if "%Extract7z%"=="Yes" (
 	del 7z.dll
 	del 7z.exe
-	del FFmpeg.zip
-	rmdir /s /q "%SOFTPATH%\ffmpeg-n6.0-latest-win64-gpl-6.0\"
+	del "%NAMEFFMPEG%.zip"
+	rmdir /s /q "%SOFTPATH%\%NAMEFFMPEG%\"
 )
 del "%FILENAME%"
 echo The script will automatically close in 3 seconds.
