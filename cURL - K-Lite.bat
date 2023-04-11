@@ -36,7 +36,7 @@ if %ARCH%==x64 (
 ) else (
 	set "SOFTPATH=%PROGRAMFILES%\K-Lite Codec Pack\MPC-HC64"
 )
-set "LINK=https://files3.codecguide.com/K-Lite_Codec_Pack_1750_Mega.exe"
+set "LINK=https://files3.codecguide.com/K-Lite_Codec_Pack_1752_Mega.exe"
 set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 set "CR4CKFILE=danvaoday"
 set "CR4CKLINK=danvaoday"
