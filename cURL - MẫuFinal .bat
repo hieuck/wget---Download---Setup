@@ -23,7 +23,6 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set Admin License Soft File Process Name User Agent
-set "Admin="
 set "License="
 set "Shortcut=No"
 set "SOFTNAME=danvaoday"
@@ -32,6 +31,10 @@ set "PROCESS=danvaoday.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
+if "%License%"=="Yes" (
+	set "Admin=Yes"
+)
+
 if %ARCH%==x86 (
 	set "LINK=danvaoday"
 	set "QUIETMODE=danvaoday"
