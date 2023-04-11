@@ -36,7 +36,7 @@ if %ARCH%==x64 (
 ) else (
 	set "SOFTPATH=%PROGRAMFILES%\Internet Download Manager"
 )
-set "LINK=https://mirror2.internetdownloadmanager.com/idman641build10.exe"
+set "LINK=https://mirror2.internetdownloadmanager.com/idman641build11.exe"
 set "QUIETMODE=/skipdlgs"
 set "CR4CKFILE=IDMCr4ck.rar"
 set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/IDMCr4ck/IDMCr4ck.rar"
