@@ -23,10 +23,10 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set Admin License Soft File Process Name User Agent
-set "License=Yes"
+set "License="
 set "Extract7z=Yes"
 set "SOFTNAME=Hard Disk Sentinel"
-set "FILENAME=Hard Disk Sentinel-HieuckIT.zip"
+set "FILENAME=Hard Disk Sentinel"
 set "PROCESS=HDSentinel.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -39,14 +39,14 @@ if "%License%"=="Yes" (
 
 if %ARCH%==x86 (
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
+) else (
+	set "SOFTPATH=%PROGRAMFILES(X86)%\%SOFTNAME%"
 )
-set "LINK=https://www.harddisksentinel.com/hdsentinel_pro_portable.zip"
-set "CR4CKFILE=HardDiskSentinelCr4ck.rar"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/HardDiskSentinelCr4ck/HardDiskSentinelCr4ck.rar"
-set "SOFTPATH=%PROGRAMFILES(X86)%\%SOFTNAME%"
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/HardDiskSentinelCr4ck/hdsentinel_pro_portableCr4ck.rar"
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
+	set "FILENAME=%FILENAME%-HieuckIT.zip"
 	set "Shortcut=Yes"	
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
@@ -137,7 +137,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Installing %SOFTNAME%...
-@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
+@7z.exe x -p123 "%FILENAME%" -o"%SOFTPATH%" -aoa -y
 
 :: Check Installation Process
 if exist "%SOFTLOCATION%" (
