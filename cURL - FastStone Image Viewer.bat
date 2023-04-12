@@ -42,8 +42,9 @@ if %ARCH%==x86 (
 )
 set "LINK=https://www.faststone.org/DN/FSViewerSetup77.exe"
 set "QUIETMODE=/S"
-set "CR4CKFILE=danvaoday.rar"
-set "CR4CKLINK=danvaoday"
+set "CR4CKFILE=FastStoneImageViewerCr4ck.rar"
+set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/FastStoneImageViewerCr4ck/FastStoneImageViewerCr4ck.rar"
+set "CR4CKPATH=%LOCALAPPDATA%\FastStone"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
@@ -145,18 +146,17 @@ if %ARCH%==x86 (
 	
 :: License
 if "%License%"=="Yes" (
-	set "SOFTPATH=%LOCALAPPDATA%\FastStone"
 	echo Cr4cking %SOFTNAME%...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
-		move /y "%CR4CKFILE%" "%SOFTPATH%"
+		move /y "%CR4CKFILE%" "%CR4CKPATH%"
 	) else (
 		echo Please try running the script as Administrator.
 	)
-	if exist "%SOFTPATH%\%CR4CKFILE%" (
-		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
+	if exist "%CR4CKPATH%\%CR4CKFILE%" (
+		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%CR4CKPATH%\%CR4CKFILE%" "%CR4CKPATH%"
 		echo Successfully Cr4cked %SOFTNAME%.
-		del "%SOFTPATH%\%CR4CKFILE%"
+		del "%CR4CKPATH%\%CR4CKFILE%"
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
