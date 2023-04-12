@@ -61,7 +61,7 @@ set "LINK=danvaoday"
 set "QUIETMODE=danvaoday"
 set "CR4CKFILE=danvaoday.rar"
 set "CR4CKLINK=danvaoday"
-set "SOFTPATH=danvaoday"
+set "CR4CKPATH=danvaoday"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
@@ -186,14 +186,14 @@ if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
-		move /y "%CR4CKFILE%" "%SOFTPATH%"
+		move /y "%CR4CKFILE%" "%CR4CKPATH%"
 	) else (
 		echo Please try running the script as Administrator.
 	)
-	if exist "%SOFTPATH%\%CR4CKFILE%" (
-		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%SOFTPATH%\%CR4CKFILE%" "%SOFTPATH%"
+	if exist "%CR4CKPATH%\%CR4CKFILE%" (
+		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%CR4CKPATH%\%CR4CKFILE%" "%CR4CKPATH%"
 		echo Successfully Cr4cked %SOFTNAME%.
-		del "%SOFTPATH%\%CR4CKFILE%"
+		del "%CR4CKPATH%\%CR4CKFILE%"
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
