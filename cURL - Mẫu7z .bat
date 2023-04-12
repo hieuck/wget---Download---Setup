@@ -125,8 +125,6 @@ echo.
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
 curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
-curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -137,6 +135,9 @@ if not exist "%FILENAME%" (
 	)
 	exit
 )
+
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
+curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
 
 :: Install
 @ECHO OFF
