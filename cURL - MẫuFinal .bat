@@ -37,18 +37,10 @@ if "%License%"=="Yes" (
 
 if %ARCH%==x86 (
 	set "LINK=danvaoday"
-	set "QUIETMODE=danvaoday"
-	set "CR4CKFILE=danvaoday.rar"
-	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=danvaoday"
-	set "SOFTLOCATION=danvaoday"
 ) else (
 	set "LINK=danvaoday"
-	set "QUIETMODE=danvaoday"
-	set "CR4CKFILE=danvaoday.rar"
-	set "CR4CKLINK=danvaoday"
 	set "SOFTPATH=danvaoday"
-	set "SOFTLOCATION=danvaoday"
 ) else (
 	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
@@ -59,10 +51,11 @@ if %ARCH%==x86 (
 )
 set "LINK=danvaoday"
 set "QUIETMODE=danvaoday"
+set "SOFTPATH=danvaoday"
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 set "CR4CKFILE=danvaoday.rar"
 set "CR4CKLINK=danvaoday"
 set "CR4CKPATH=danvaoday"
-set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
