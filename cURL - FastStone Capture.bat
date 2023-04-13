@@ -45,7 +45,7 @@ set "QUIETMODE=/S"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 set "CR4CKFILE=FastStoneCaptureCr4ck.rar"
 set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/FastStoneCr4ck/FastStoneCaptureCr4ck.rar"
-set "CR4CKPATH=%LOCALAPPDATA%\FastStone"
+set "CR4CKPATH=%LOCALAPPDATA%\FastStone\FSC"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
