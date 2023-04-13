@@ -119,6 +119,24 @@ if not exist "%FILENAME%" (
 	exit
 )
 
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo off
+pushd "%~dp0"
+echo Downloading 7z...
 if "%License%"=="Yes" (
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
