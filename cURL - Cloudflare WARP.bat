@@ -61,7 +61,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
-	set "Shortcut=No"
+	set "Shortcut=Yes"
 	set "FILENAME=%SOFTNAME%-HieuckIT.msi"
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
