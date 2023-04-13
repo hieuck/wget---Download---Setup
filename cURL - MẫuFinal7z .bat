@@ -45,7 +45,7 @@ if %ARCH%==x86 (
 	exit
 )
 set "LINK=danvaoday"
-set "QUIETMODE=danvaoday"
+set "QUIETMODE=/S"
 set "SOFTPATH=danvaoday"
 
 :: Set up information related to software cr4cking
@@ -53,7 +53,7 @@ if "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "CR4CKFILE=danvaoday.rar"
 	set "CR4CKLINK=danvaoday"
-	set "CR4CKPATH=danvaoday"
+	set "CR4CKPATH=%SOFTPATH%"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 )
