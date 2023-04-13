@@ -246,12 +246,19 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
-if "%License%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
-) else if "%Extract7z%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
+if exist "7z.dll" (
+		tasklist | find /i "7z.dll" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "7z.dll" /f
+		)
+	del "7z.dll"
+)
+if exist "7z.exe" (
+		tasklist | find /i "7z.exe" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "7z.exe" /f
+		)
+	del "7z.exe"
 )
 del "%FILENAME%"
 
