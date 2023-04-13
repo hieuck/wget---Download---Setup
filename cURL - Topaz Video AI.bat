@@ -36,7 +36,7 @@ if %ARCH%==x64 (
 	set "QUIETMODE=/quiet /norestart"
 	set "SOFTLOCATION=%PROGRAMFILES%\Topaz Labs LLC\Topaz Video AI\Topaz Video AI.exe"
 	set "CR4CKFILE=TopazVideoAICr4ck.rar"
-	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TopazVideoAICr4ck/TopazVideoAICr4ck.rar"
+	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TopazCr4ck/TopazVideoAICr4ck.rar"
 	set "SOFTPATH=%PROGRAMFILES%\Topaz Labs LLC\Topaz Video AI"
 ) else (
 	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
