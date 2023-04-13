@@ -37,7 +37,7 @@ set "SOFTPATH=%PROGRAMFILES%\AirCluster"
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=AirClusterProCr4ck"
+	set "CR4CKFILE=AirClusterProCr4ck.rar"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/AirClusterProCr4ck.rar"
 	set "CR4CKPATH=%SOFTPATH%"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
