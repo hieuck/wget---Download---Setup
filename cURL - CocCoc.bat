@@ -34,13 +34,6 @@ if %ARCH%==x86 (
 	set "LINK=https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
 ) else (
 	set "LINK=https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe"
-) else (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-		)
-	exit
 )
 set "QUIETMODE=/install"
 set "SOFTPATH=%PROGRAMFILES%\CocCoc\Browser\Application"
