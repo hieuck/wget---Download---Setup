@@ -24,17 +24,13 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 
 :: Set Admin License Soft File Process Name User Agent
 set "License=Yes"
-set "Shortcut=No"
+set "Extract7z="
 set "SOFTNAME=FastStone Image Viewer"
-set "FILENAME=FastStone Image Viewer-HieuckIT.exe"
+set "FILENAME=%SOFTNAME%-HieuckIT.exe"
 set "PROCESS=FSViewer.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-if "%License%"=="Yes" (
-	set "Admin=Yes"
-)
-
 if %ARCH%==x86 (
 	set "SOFTPATH=%PROGRAMFILES%\FastStone Image Viewer"
 ) else (
@@ -42,9 +38,27 @@ if %ARCH%==x86 (
 )
 set "LINK=https://www.faststone.org/DN/FSViewerSetup77.exe"
 set "QUIETMODE=/S"
-set "CR4CKFILE=FastStoneImageViewerCr4ck.rar"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/FastStoneCr4ck/FastStoneImageViewerCr4ck.rar"
-set "CR4CKPATH=%LOCALAPPDATA%\FastStone\FSIV"
+
+:: Set up information related to software cr4cking
+if "%License%"=="Yes" (
+	set "Admin=Yes"
+	set "CR4CKFILE=FastStoneImageViewerCr4ck.rar"
+	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/FastStoneCr4ck/FastStoneImageViewerCr4ck.rar"
+	set "CR4CKPATH=%LOCALAPPDATA%\FastStone\FSIV"
+	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+)
+
+::Extract with 7z
+if "%Extract7z%"=="Yes" (
+	set "Admin=Yes"
+	set "Shortcut=Yes"
+	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
+	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+) else (
+	set "Shortcut=No"
+)
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
@@ -105,6 +119,14 @@ if not exist "%FILENAME%" (
 	exit
 )
 
+if "%License%"=="Yes" (
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+) else if "%Extract7z%"=="Yes" (
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+)
+
 :: Install
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
@@ -124,29 +146,37 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Installing %SOFTNAME%...
-"%FILENAME%" %QUIETMODE%
+if "%Extract7z%"=="Yes" (
+	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
+) else (
+	"%FILENAME%" %QUIETMODE%
+)
 
 :: Check Installation Process
-if exist "%SOFTLOCATION%" (
-	echo Installation %SOFTNAME% complete.
-) else (
-	echo Installation %SOFTNAME% failed.
-	echo Please try Run as Administrator.
-)
-	
+echo Checking if %SOFTNAME% installation is complete...
+setlocal EnableDelayedExpansion
+set count=0
+:waitloop
+timeout /t 1 /nobreak > nul
+set /a count+=1
+if exist "%SOFTLOCATION%" goto installed
+if !count! equ 30 goto timeout
+goto waitloop
+:timeout
+echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
+goto end
+:installed
+echo %SOFTNAME% has been installed successfully!
+:end
+
 :: License
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
-		move /y "%CR4CKFILE%" "%CR4CKPATH%"
-	) else (
-		echo Please try running the script as Administrator.
-	)
-	if exist "%CR4CKPATH%\%CR4CKFILE%" (
-		"%PROGRAMFILES%\WinRAR\UnRAR.exe" e -p123 /y "%CR4CKPATH%\%CR4CKFILE%" "%CR4CKPATH%"
+		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
 		echo Successfully Cr4cked %SOFTNAME%.
-		del "%CR4CKPATH%\%CR4CKFILE%"
+		del "%CR4CKFILE%"
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
@@ -187,7 +217,10 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
+del 7z.dll
+del 7z.exe
 del "%FILENAME%"
+
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
