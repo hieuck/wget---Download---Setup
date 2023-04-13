@@ -26,7 +26,6 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 set "License="
 set "Extract7z="
 set "SOFTNAME=danvaoday"
-set "FILENAME=%SOFTNAME%-HieuckIT.exe"
 set "PROCESS=danvaoday.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -61,6 +60,7 @@ if "%License%"=="Yes" (
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
+	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
 	set "Admin=Yes"
 	set "Shortcut=Yes"
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
@@ -68,6 +68,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
 	set "Shortcut=No"
+	set "FILENAME=%SOFTNAME%-HieuckIT.exe"
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
