@@ -43,8 +43,8 @@ if %ARCH%==x86 (
 set "LINK=https://www.faststone.org/DN/FSViewerSetup77.exe"
 set "QUIETMODE=/S"
 set "CR4CKFILE=FastStoneImageViewerCr4ck.rar"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/FastStoneImageViewerCr4ck/FastStoneImageViewerCr4ck.rar"
-set "CR4CKPATH=%LOCALAPPDATA%\FastStone"
+set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/FastStoneCr4ck/FastStoneImageViewerCr4ck.rar"
+set "CR4CKPATH=%LOCALAPPDATA%\FastStone\FSIV"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 :: Check if Command Prompt is running with administrator privileges
@@ -132,16 +132,6 @@ if exist "%SOFTLOCATION%" (
 ) else (
 	echo Installation %SOFTNAME% failed.
 	echo Please try Run as Administrator.
-)
-echo Add Browse with FastStone context Menu
-if %ARCH%==x86 (
-	Reg.exe add "HKCR\Directory\Shell\Browse with FastStone" /ve /d "Browse with FastStone" /f
-	Reg.exe add "HKCR\Directory\Shell\Browse with FastStone" /v "Icon" /d "C:\Program Files\FastStone Image Viewer\FSViewer.exe,0" /f
-	Reg.exe add "HKCR\Directory\Shell\Browse with FastStone\command" /ve /d "\"C:\Program Files\FastStone Image Viewer\FSViewer.exe\" \"%V\"" /f
-) else (
-	Reg.exe add "HKCR\Directory\Shell\Browse with FastStone" /ve /d "Browse with FastStone" /f
-	Reg.exe add "HKCR\Directory\Shell\Browse with FastStone" /v "Icon" /d "C:\Program Files (x86)\FastStone Image Viewer\FSViewer.exe,0" /f
-	Reg.exe add "HKCR\Directory\Shell\Browse with FastStone\command" /ve /d "\"C:\Program Files (x86)\FastStone Image Viewer\FSViewer.exe\" \"%V\"" /f
 )
 	
 :: License
