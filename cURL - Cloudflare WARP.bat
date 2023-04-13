@@ -26,7 +26,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 set "License="
 set "Extract7z="
 set "SOFTNAME=Cloudflare WARP"
-set "PROCESS=danvaoday.exe"
+set "PROCESS=Cloudflare WARP.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
@@ -39,8 +39,8 @@ if %ARCH%==x86 (
 	exit
 )
 set "LINK=https://1111-releases.cloudflareclient.com/windows/Cloudflare_WARP_Release-x64.msi"
-set "QUIETMODE=/S"
-set "SOFTPATH=danvaoday"
+set "QUIETMODE=/quiet /qn /norestart"
+set "SOFTPATH=%PROGRAMFILES%\Cloudflare\Cloudflare WARP"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
