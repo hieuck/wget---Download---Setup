@@ -30,7 +30,7 @@ set "PROCESS=AirCluster.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AirClusterProCr4ck/AirCluster-Installer.exe"
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/AirCluster-Installer.exe"
 set "QUIETMODE=/S"
 set "SOFTPATH=%PROGRAMFILES%\AirCluster"
 
