@@ -146,7 +146,7 @@ echo.
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
 @echo off
 pushd "%~dp0"
-echo Downloading 7z...
+echo Downloading 7-Zip...
 if "%License%"=="Yes" (
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
