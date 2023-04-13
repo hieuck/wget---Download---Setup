@@ -232,26 +232,28 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
-if exist "7z.dll" (
-		tasklist | find /i "7z.dll" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.dll" /f
-		)
-	del "7z.dll"
-)
-if exist "7z.exe" (
-		tasklist | find /i "7z.exe" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.exe" /f
-		)
-	del "7z.exe"
-)
+del 7z.dll
+del 7z.exe
 del "%FILENAME%"
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
+	if exist "7z.dll" (
+		tasklist | find /i "7z.dll" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "7z.dll" /f
+		)
+	del "7z.dll"
+	)
+	if exist "7z.exe" (
+		tasklist | find /i "7z.exe" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "7z.exe" /f
+		)
+	del "7z.exe"
+	)
 	if exist "%FILENAME%" (
 		tasklist | find /i "%FILENAME%" > nul
 		if %errorlevel% equ 0 (
