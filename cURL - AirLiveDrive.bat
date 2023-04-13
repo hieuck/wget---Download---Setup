@@ -30,7 +30,7 @@ set "PROCESS=AirLiveDrive.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AirLiveDriveProCr4ck/AirLiveDrive-OfflineInstaller.exe"
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/AirLiveDrive-OfflineInstaller.exe"
 set "QUIETMODE=/S"
 set "SOFTPATH=%PROGRAMFILES%\AirLiveDrive"
 
@@ -38,7 +38,7 @@ set "SOFTPATH=%PROGRAMFILES%\AirLiveDrive"
 if "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "CR4CKFILE=AirLiveDriveProCr4ck.rar"
-	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/AirLiveDriveProCr4ck/AirLiveDriveProCr4ck.rar"
+	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/%CR4CKFILE%.rar"
 	set "CR4CKPATH=%SOFTPATH%"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
