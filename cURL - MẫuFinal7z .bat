@@ -246,9 +246,14 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
-del 7z.dll
-del 7z.exe
 del "%FILENAME%"
+if "%License%"=="Yes" (
+	del 7z.dll
+	del 7z.exe
+) else if "%Extract7z%"=="Yes" (
+	del 7z.dll
+	del 7z.exe
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
