@@ -23,7 +23,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set Admin License Soft File Process Name User Agent
-set "License="
+set "License=Yes"
 set "Extract7z="
 set "SOFTNAME=AIDA64 Extreme"
 set "PROCESS=aida64.exe"
@@ -41,8 +41,8 @@ set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday.rar"
-	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/ danvaoday.rar"
+	set "CR4CKFILE=AIDA64ExtremeCr4ck.rar"
+	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/AIDA64ExtremeCr4ck.rar"
 	set "CR4CKPATH=%SOFTPATH%"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
