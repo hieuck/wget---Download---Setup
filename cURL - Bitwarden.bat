@@ -38,7 +38,7 @@ if %ARCH%==x86 (
 		)
 	exit
 )
-set "LINK=https://github.com/bitwarden/clients/releases/download/desktop-v2023.3.1/Bitwarden-Installer-2023.3.1.exe"
+set "LINK=https://github.com/bitwarden/clients/releases/download/desktop-v2023.3.2/Bitwarden-Installer-2023.3.2.exe"
 set "QUIETMODE=/S"
 set "SOFTPATH=%LOCALAPPDATA%\Programs\Bitwarden"
 
