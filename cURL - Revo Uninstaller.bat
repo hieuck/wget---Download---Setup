@@ -26,7 +26,6 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 set "License=Yes"
 set "Extract7z="
 set "SOFTNAME=Revo Uninstaller"
-set "FILENAME=%SOFTNAME%-HieuckIT.exe"
 set "PROCESS=RevoUninPro.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -39,7 +38,7 @@ set "SOFTPATH=%PROGRAMFILES%\VS Revo Group\Revo Uninstaller Pro"
 if "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "CR4CKFILE=RevoUninstallerCr4ck.rar"
-	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/RevoUninstallerCr4ck/RevoUninstallerCr4ck.rar"
+	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/RevoUninstallerCr4ck.rar"
 	set "CR4CKPATH=%PROGRAMDATA%\VS Revo Group\Revo Uninstaller Pro"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
@@ -47,6 +46,7 @@ if "%License%"=="Yes" (
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
+	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
 	set "Admin=Yes"
 	set "Shortcut=Yes"
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
@@ -54,6 +54,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
 	set "Shortcut=No"
+	set "FILENAME=%SOFTNAME%-HieuckIT.exe"
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
@@ -115,6 +116,24 @@ if not exist "%FILENAME%" (
 	exit
 )
 
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo off
+pushd "%~dp0"
+echo Downloading 7-Zip...
 if "%License%"=="Yes" (
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
@@ -213,14 +232,33 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
-del 7z.dll
-del 7z.exe
 del "%FILENAME%"
+if "%License%"=="Yes" (
+	del 7z.dll
+	del 7z.exe
+) else if "%Extract7z%"=="Yes" (
+	del 7z.dll
+	del 7z.exe
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
+	if exist "7z.dll" (
+		tasklist | find /i "7z.dll" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "7z.dll" /f
+		)
+	del "7z.dll"
+	)
+	if exist "7z.exe" (
+		tasklist | find /i "7z.exe" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "7z.exe" /f
+		)
+	del "7z.exe"
+	)
 	if exist "%FILENAME%" (
 		tasklist | find /i "%FILENAME%" > nul
 		if %errorlevel% equ 0 (
