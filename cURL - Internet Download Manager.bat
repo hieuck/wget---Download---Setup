@@ -194,7 +194,6 @@ if "%License%"=="Yes" (
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
-		"%CR4CKPATH%\IAS_0.7_CRC32_58F0EACC.cmd" /act /s
 		echo Successfully Cr4cked %SOFTNAME%.
 		del "%CR4CKFILE%"
 	) else (
@@ -272,4 +271,5 @@ for /l %%i in (3,-1,1) do (
 	del "%FILENAME%"
 	)
 )
+"%CR4CKPATH%\IAS_0.7_CRC32_58F0EACC.cmd" /act /s
 popd
