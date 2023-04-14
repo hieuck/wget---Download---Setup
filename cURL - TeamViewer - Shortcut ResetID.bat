@@ -38,7 +38,7 @@ if %ARCH%==x64 (
 )
 set "QUIETMODE=/S"
 set "CR4CKFILE=TeamViewerCr4ck.rar"
-set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/TeamViewerCr4ck/TeamViewerCr4ck.rar"
+set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/TeamViewerCr4ck.rar"
 set "SOFTPATH=%PROGRAMFILES%\TeamViewer"
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
