@@ -25,18 +25,12 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set Admin License Soft File Process Name User Agent
 set "License="
 set "Extract7z="
-set "SOFTNAME=danvaoday"
-set "PROCESS=danvaoday.exe"
+set "SOFTNAME=CapCut"
+set "PROCESS=CapCut.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 if %ARCH%==x86 (
-	set "LINK=danvaoday"
-	set "SOFTPATH=danvaoday"
-) else (
-	set "LINK=danvaoday"
-	set "SOFTPATH=danvaoday"
-) else (
 	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
@@ -46,7 +40,7 @@ if %ARCH%==x86 (
 )
 set "LINK=https://lf16-capcut.faceulv.com/obj/capcutpc-packages-us/packages/CapCut_2_0_0_357_capcutpc_0.exe"
 set "QUIETMODE=/S"
-set "SOFTPATH=danvaoday"
+set "SOFTPATH=%LOCALAPPDATA%\CapCut\Apps"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
