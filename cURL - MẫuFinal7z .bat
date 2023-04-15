@@ -51,9 +51,9 @@ set "SOFTPATH=danvaoday"
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday.rar"
-	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/ danvaoday.rar"
+	set "CR4CKFILE=danvaoday"
 	set "CR4CKPATH=%SOFTPATH%"
+	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 )
