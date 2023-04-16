@@ -1,7 +1,7 @@
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -24,23 +24,15 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 
 :: Set License Extract7z Soft Process Name User Agent
 set "License="
-set "Extract7z="
-set "SOFTNAME=CapCut"
-set "PROCESS=CapCut.exe"
+set "Extract7z=Yes"
+set "SOFTNAME=Czkawka"
+set "PROCESS=czkawka_gui.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-if %ARCH%==x86 (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-		)
-	exit
-)
-set "LINK=https://lf16-capcut.faceulv.com/obj/capcutpc-packages-us/packages/CapCut_2_0_0_357_capcutpc_0.exe"
-set "QUIETMODE=/S"
-set "SOFTPATH=%LOCALAPPDATA%\CapCut\Apps"
+set "LINK=https://github.com/qarmin/czkawka/releases/download/5.1.0/windows_czkawka_gui.zip"
+set "NAMEFFMPEG=ffmpeg-n6.0-latest-win64-gpl-6.0"
+set "LINKFFMPEG=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/%NAMEFFMPEG%.zip"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
@@ -97,7 +89,7 @@ if %errorlevel% equ 0 (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -112,7 +104,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
-curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
+wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK%"
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -124,10 +116,12 @@ if not exist "%FILENAME%" (
 	exit
 )
 
+wget --no-check-certificate --show-progress -q -O "%NAMEFFMPEG%.zip" "%LINKFFMPEG%"
+
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -143,15 +137,15 @@ echo.
 pushd "%~dp0"
 echo Downloading 7-Zip...
 if "%Extract7z%"=="Yes" (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
+	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
 )
 
 :: Install
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -168,6 +162,8 @@ pushd "%~dp0"
 echo Installing %SOFTNAME%...
 if "%Extract7z%"=="Yes" (
 	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
+	@7z.exe x "%NAMEFFMPEG%.zip" -o"%SOFTPATH%" -aoa -y %NAMEFFMPEG%\bin\ff*.exe
+	move /y "%SOFTPATH%\%NAMEFFMPEG%\bin\ff*.exe" "%SOFTPATH%"
 ) else (
 	"%FILENAME%" %QUIETMODE%
 )
@@ -209,9 +205,9 @@ echo.
 pushd "%~dp0"
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
+	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
+	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
+	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
 		echo Successfully Cr4cked %SOFTNAME%.
@@ -261,6 +257,8 @@ if "%License%"=="Yes" (
 	del 7z.dll
 	del 7z.exe
 ) else if "%Extract7z%"=="Yes" (
+	del "%NAMEFFMPEG%.zip"
+	rmdir /s /q "%SOFTPATH%\%NAMEFFMPEG%\"
 	del 7z.dll
 	del 7z.exe
 )
