@@ -1,7 +1,7 @@
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -24,18 +24,19 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 
 :: Set License Extract7z Soft Process Name User Agent
 set "License="
-set "Extract7z=Yes"
-set "SOFTNAME=Hard Disk Sentinel"
-set "PROCESS=HDSentinel.exe"
+set "Extract7z="
+set "SOFTNAME=JDownloader 2"
+set "PROCESS=JDownloader2.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 if %ARCH%==x86 (
-	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
+	set "LINK=http://installer.jdownloader.org/JD2SilentSetup_x86.exe"
 ) else (
-	set "SOFTPATH=%PROGRAMFILES(X86)%\%SOFTNAME%"
+	set "LINK=http://installer.jdownloader.org/JD2SilentSetup_x64.exe"
 )
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/hdsentinel_pro_portable.rar"
+set "QUIETMODE=-q"
+set "SOFTPATH=%PROGRAMFILES%\JDownloader"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
@@ -52,6 +53,7 @@ if "%Extract7z%"=="Yes" (
 	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
 	set "Admin=Yes"
 	set "Shortcut=Yes"
+	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
@@ -91,7 +93,7 @@ if %errorlevel% equ 0 (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -106,7 +108,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
-curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
+wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK%"
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -121,7 +123,7 @@ if not exist "%FILENAME%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -137,15 +139,15 @@ echo.
 pushd "%~dp0"
 echo Downloading 7-Zip...
 if "%Extract7z%"=="Yes" (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
+	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
 )
 
 :: Install
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -161,7 +163,7 @@ echo.
 pushd "%~dp0"
 echo Installing %SOFTNAME%...
 if "%Extract7z%"=="Yes" (
-	@7z.exe x -p123 "%FILENAME%" -o"%SOFTPATH%" -aoa -y
+	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
 ) else (
 	"%FILENAME%" %QUIETMODE%
 )
@@ -187,7 +189,7 @@ echo %SOFTNAME% has been installed successfully!
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -203,9 +205,9 @@ echo.
 pushd "%~dp0"
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
+	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
+	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
+	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
 		echo Successfully Cr4cked %SOFTNAME%.
