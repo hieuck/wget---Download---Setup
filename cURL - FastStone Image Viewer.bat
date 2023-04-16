@@ -22,7 +22,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set Admin License Soft File Process Name User Agent
+:: Set License Extract7z Soft Process Name User Agent
 set "License=Yes"
 set "Extract7z="
 set "SOFTNAME=FastStone Image Viewer"

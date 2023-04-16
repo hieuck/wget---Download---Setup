@@ -1,7 +1,7 @@
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -23,22 +23,26 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name User Agent
-set "License="
+set "License=Yes"
 set "Extract7z="
-set "SOFTNAME=Zalo"
-set "PROCESS=Zalo.exe"
+set "SOFTNAME=FastStone Capture"
+set "PROCESS=FSCapture.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-set "LINK=https://zalo.me/download/zalo-pc?utm=90000"
+if %ARCH%==x86 (
+	set "SOFTPATH=%PROGRAMFILES%\FastStone Capture"
+) else (
+	set "SOFTPATH=%PROGRAMFILES(X86)%\FastStone Capture"
+)
+set "LINK=https://www.faststone.org/DN/FSCaptureSetup99.exe"
 set "QUIETMODE=/S"
-set "SOFTPATH=%LOCALAPPDATA%\Programs\Zalo"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKPATH=%SOFTPATH%"
+	set "CR4CKFILE=FastStoneCaptureCr4ck"
+	set "CR4CKPATH=%LOCALAPPDATA%\FastStone\FSC"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
@@ -89,7 +93,7 @@ if %errorlevel% equ 0 (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -104,7 +108,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
-curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
+wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK%"
 
 if not exist "%FILENAME%" (
 	echo Download %SOFTNAME% failed.
@@ -119,7 +123,7 @@ if not exist "%FILENAME%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -135,15 +139,15 @@ echo.
 pushd "%~dp0"
 echo Downloading 7-Zip...
 if "%Extract7z%"=="Yes" (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
+	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
 )
 
 :: Install
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -185,7 +189,7 @@ echo %SOFTNAME% has been installed successfully!
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=100 lines=15
 @cls
 echo.
 echo.
@@ -201,9 +205,9 @@ echo.
 pushd "%~dp0"
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
+	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
+	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
+	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
 		echo Successfully Cr4cked %SOFTNAME%.
