@@ -213,7 +213,9 @@ if "%License%"=="Yes" (
 		echo Please enter the license key manually if the software reports a fake license.
 		set /p Key_AIDA64=<"%CR4CKPATH%\Key_AIDA64.txt"
 		echo Activating AIDA64 with !Key_AIDA64!...
-		echo Please copy key and close.>> "%CR4CKPATH%\Key_AIDA64.txt"
+		echo Please copy the following key and close the text file.>> "%CR4CKPATH%\Key_AIDA64.txt"
+		echo Waiting for AIDA64 to open...>> "%CR4CKPATH%\Key_AIDA64.txt"
+		echo go to Help - Enter Product Key... to enter the key.>> "%CR4CKPATH%\Key_AIDA64.txt"
 		"%CR4CKPATH%\Key_AIDA64.txt" & "%SOFTLOCATION%" /silent
 		echo Successfully Cr4cked %SOFTNAME%.
 		del "%CR4CKPATH%\Key_AIDA64.txt"
