@@ -40,7 +40,7 @@ if %ARCH%==x86 (
 )
 set "LINK=https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi"
 set "QUIETMODE=/quiet /norestart"
-set "SOFTPATH=%PROGRAMFILES(X86)%\Epic Games\Launcher\Portal\Binaries\Win64"
+set "SOFTPATH=%PROGRAMFILES(X86)%\Epic Games\Launcher\Portal\Binaries\Win64" &set "SOFTPATH=%PROGRAMFILES(X86)%\Epic Games\Launcher\Portal\Binaries\Win32"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
