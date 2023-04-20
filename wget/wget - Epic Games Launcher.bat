@@ -25,8 +25,8 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set License Extract7z Soft Process Name User Agent
 set "License="
 set "Extract7z="
-set "SOFTNAME=Steam"
-set "PROCESS=Steam.exe"
+set "SOFTNAME=Epic Games Launcher"
+set "PROCESS=EpicGamesLauncher.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
@@ -38,9 +38,9 @@ if %ARCH%==x86 (
 		)
 	exit
 )
-set "LINK=https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
-set "QUIETMODE=/S"
-set "SOFTPATH=%PROGRAMFILES(X86)%\Steam"
+set "LINK=https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherInstaller.msi"
+set "QUIETMODE=/quiet /norestart"
+set "SOFTPATH=%PROGRAMFILES(X86)%\Epic Games\Launcher\Portal\Binaries\Win64"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
@@ -62,7 +62,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
 	set "Shortcut=No"
-	set "FILENAME=%SOFTNAME%-HieuckIT.exe"
+	set "FILENAME=%SOFTNAME%-HieuckIT.msi"
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
