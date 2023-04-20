@@ -212,13 +212,13 @@ if "%License%"=="Yes" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
 		echo Please enter the license key manually if the software reports a fake license.
 		set /p Key_AIDA64=<"%CR4CKPATH%\Key_AIDA64.txt"
-		echo Activating AIDA64 with !Key_AIDA64!...
-		echo Please copy the following key and close the text file.
-		echo Waiting for AIDA64 to open...
-		echo go to Help - Enter Product Key... to enter the key.
+		echo Please copy the following key and close the text file:
+		echo !Key_AIDA64!
+		echo Waiting for AIDA64 to open "Enter Product Key" window...
+		ping -n 5 127.0.0.1 > nul
+		echo Please open AIDA64 and go to Help - Enter Product Key... to enter the key.
+		"%SOFTLOCATION%" /activate
 		echo AIDA64 has been successfully activated. Please close AIDA64 now.
-		"%CR4CKPATH%\Key_AIDA64.txt" & "%SOFTLOCATION%" /silent
-		echo Successfully Cr4cked %SOFTNAME%.
 		del "%CR4CKPATH%\Key_AIDA64.txt"
 		del "%CR4CKFILE%"
 	) else (
@@ -226,6 +226,7 @@ if "%License%"=="Yes" (
 		echo Please try running the script as Administrator.
 	)
 )
+
 
 :: Shortcut
 if /i "%Shortcut%"=="no" (
