@@ -218,6 +218,7 @@ if "%License%"=="Yes" (
 		echo Activating AIDA64 with !Key_AIDA64!...
 		"%Temp%\Key_AIDA64.txt" & "%SOFTLOCATION%" /silent
 		echo Successfully Cr4cked %SOFTNAME%.
+		del %Temp%\Key_AIDA64.txt
 		del "%CR4CKFILE%"
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
