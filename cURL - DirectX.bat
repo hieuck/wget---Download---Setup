@@ -132,6 +132,7 @@ if "%directx_version%" geq "4.09.00.0904" (
 ) else (
     echo DirectX End-User Runtime is not up to date.
 )
+timeout /t 3
 
 :: License
 if "%License%"=="Yes" (

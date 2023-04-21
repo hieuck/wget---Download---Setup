@@ -179,6 +179,7 @@ echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
 goto end
 :installed
 echo %SOFTNAME% has been installed successfully!
+timeout /t 3
 :end
 
 :: License
