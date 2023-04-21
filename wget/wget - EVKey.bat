@@ -31,8 +31,7 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 :: Set code based on Windows Architecture
 set "LINK=https://github.com/lamquangminh/EVKey/releases/download/Release/EVKey.zip"
-set "QUIETMODE=/S"
-set "SOFTPATH=danvaoday"
+set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
@@ -56,7 +55,12 @@ if "%Extract7z%"=="Yes" (
 	set "Shortcut=No"
 	set "FILENAME=%SOFTNAME%-HieuckIT.exe"
 )
-set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
+
+if %ARCH%==x86 (
+	set "SOFTLOCATION=%SOFTPATH%\EVKey32.exe"
+) else (
+	set "SOFTLOCATION=%SOFTPATH%\EVKey64.exe"
+)
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -201,16 +205,18 @@ echo.
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
-	echo Cr4cking %SOFTNAME%...
-	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
-	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
+	echo Setting up %SOFTNAME%...
+	if not exist "7z.dll" if not exist "7z.exe" (
+		wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
+		wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
+	)
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
-		echo Successfully Cr4cked %SOFTNAME%.
+		echo Successfully Setting up %SOFTNAME%.
 		del "%CR4CKFILE%"
 	) else (
-		echo Cr4cking %SOFTNAME% failed.
+		echo Setting up %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
 	)
 )
