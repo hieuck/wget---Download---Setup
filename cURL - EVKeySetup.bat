@@ -23,7 +23,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name User Agent
-set "License="
+set "License=Yes"
 set "Extract7z="
 set "SOFTNAME=EVKey"
 set "PROCESS=EVKey32.exe" &set "PROCESS=EVKey64.exe"
