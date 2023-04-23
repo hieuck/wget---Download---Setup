@@ -286,4 +286,5 @@ for /l %%i in (3,-1,1) do (
 	del "%FILENAME%"
 	)
 )
+echo Please close the script manually if automatically close fails.
 popd

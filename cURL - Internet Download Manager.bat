@@ -289,4 +289,5 @@ for /l %%i in (3,-1,1) do (
 	)
 )
 "%CR4CKPATH%\IAS_0.7_CRC32_58F0EACC.cmd" /act /s
+echo Please close the script manually if automatically close fails.
 popd

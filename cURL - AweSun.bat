@@ -54,4 +54,5 @@ if exist "%ProgramFiles%\Aweray\AweSun\AweSun.exe" (
 :: Clean up
 del "AweSun*.exe"
 timeout /t 5
+echo Please close the script manually if automatically close fails.
 popd
