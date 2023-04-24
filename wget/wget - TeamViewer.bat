@@ -26,7 +26,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 set "License=Yes"
 set "Extract7z="
 set "SOFTNAME=TeamViewer"
-set "PROCESS=TeamViewer.exe"
+set "PROCESS=Teamviewer.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
