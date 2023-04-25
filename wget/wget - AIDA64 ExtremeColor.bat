@@ -222,6 +222,7 @@ if "%License%"=="Yes" (
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
+		echo.
 		echo Please enter the license key manually if the software reports a fake license.
 		set /p Key_AIDA64=<"%CR4CKPATH%\Key_AIDA64.txt"
 		echo Activating AIDA64 with !Key_AIDA64!...
