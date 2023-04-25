@@ -139,7 +139,7 @@ if not exist "%FILENAME%" (
 )
 
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application Downloading...
+title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=100 lines=17
 @cls
