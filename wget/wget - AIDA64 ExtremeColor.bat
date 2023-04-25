@@ -30,35 +30,25 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name User Agent
-set "License="
+set "License=Yes"
 set "Extract7z="
-set "SOFTNAME=danvaoday"
-set "PROCESS=danvaoday.exe"
+set "SOFTNAME=AIDA64 Extreme"
+set "PROCESS=aida64.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 if %ARCH%==x86 (
-	set "LINK=danvaoday"
-	set "SOFTPATH=danvaoday"
+	set "SOFTPATH=%PROGRAMFILES%\FinalWire\AIDA64 Extreme"
 ) else (
-	set "LINK=danvaoday"
-	set "SOFTPATH=danvaoday"
-) else (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-		)
-	exit
+	set "SOFTPATH=%PROGRAMFILES(X86)%\FinalWire\AIDA64 Extreme"
 )
-set "LINK=danvaoday"
-set "QUIETMODE=/S"
-set "SOFTPATH=danvaoday"
+set "LINK=https://download.aida64.com/aida64extreme688.exe"
+set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday"
+	set "CR4CKFILE=AIDA64ExtremeCr4ck"
 	set "CR4CKPATH=%SOFTPATH%"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
@@ -232,7 +222,16 @@ if "%License%"=="Yes" (
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
+		echo Please enter the license key manually if the software reports a fake license.
+		set /p Key_AIDA64=<"%CR4CKPATH%\Key_AIDA64.txt"
+		echo Activating AIDA64 with !Key_AIDA64!...
+		echo Please copy the following key and close the text file.
+		echo Waiting for AIDA64 to open...
+		echo go to Help - Enter Product Key... to enter the key.
+		echo AIDA64 has been successfully activated. Please close AIDA64 now.
+		"%CR4CKPATH%\Key_AIDA64.txt" & "%SOFTLOCATION%" /silent
 		echo %c_Gre_Blak%Successfully Cr4cked %SOFTNAME%.%c_reset%
+		del "%CR4CKPATH%\Key_AIDA64.txt"
 		del "%CR4CKFILE%"
 	) else (
 		echo %c_Red_Blak%Cr4cking %SOFTNAME% failed.%c_reset%
