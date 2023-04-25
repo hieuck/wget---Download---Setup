@@ -113,7 +113,7 @@ echo.
 pushd "%~dp0"
 echo %c_Gre_Blak%Downloading %SOFTNAME%...%c_reset%
 if exist "wget.exe" (
-	wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK%"
+	wget --no-check-certificate --show-progress -q -O "%FILENAME%" -U "%USERAGENT%" "%LINK%"
 ) else (
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
 )
@@ -149,8 +149,8 @@ pushd "%~dp0"
 echo %c_Gre_Blak%Downloading 7-Zip...%c_reset%
 if "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
+		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
+		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
 	) else (
 		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
 		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
@@ -223,9 +223,9 @@ pushd "%~dp0"
 if "%License%"=="Yes" (
 	echo %c_Gre_Blak%Cr4cking %SOFTNAME%...%c_reset%
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
-		wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
+		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
+		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" -U "%USERAGENT%" "%CR4CKLINK%"
 	) else (
 		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
 		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure

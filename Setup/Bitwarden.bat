@@ -32,18 +32,22 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set License Extract7z Soft Process Name User Agent
 set "License="
 set "Extract7z="
-set "SOFTNAME=7-Zip"
-set "PROCESS=7zFM.exe"
+set "SOFTNAME=Bitwarden"
+set "PROCESS=Bitwarden.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 if %ARCH%==x86 (
-	set "LINK=https://www.7-zip.org/a/7z2201.exe"
-) else (
-	set "LINK=https://www.7-zip.org/a/7z2201-x64.exe"
+	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+		)
+	exit
 )
+set "LINK=https://github.com/bitwarden/clients/releases/latest/download/Bitwarden-Installer-2023.3.2.exe"
 set "QUIETMODE=/S"
-set "SOFTPATH=%PROGRAMFILES%\7-Zip"
+set "SOFTPATH=%LOCALAPPDATA%\Programs\Bitwarden"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (

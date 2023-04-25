@@ -32,18 +32,18 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set License Extract7z Soft Process Name User Agent
 set "License="
 set "Extract7z="
-set "SOFTNAME=7-Zip"
-set "PROCESS=7zFM.exe"
+set "SOFTNAME=Notepad++"
+set "PROCESS=Notepad++.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 if %ARCH%==x86 (
-	set "LINK=https://www.7-zip.org/a/7z2201.exe"
+	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest/download/npp.8.5.2.Installer.exe"
 ) else (
-	set "LINK=https://www.7-zip.org/a/7z2201-x64.exe"
+	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest/download/npp.8.5.2.Installer.x64.exe"
 )
 set "QUIETMODE=/S"
-set "SOFTPATH=%PROGRAMFILES%\7-Zip"
+set "SOFTPATH=%PROGRAMFILES%\Notepad++"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
