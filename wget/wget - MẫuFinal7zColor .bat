@@ -232,7 +232,7 @@ if "%License%"=="Yes" (
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
-		echo Successfully Cr4cked %SOFTNAME%.%c_reset%
+		echo Successfully Cr4cked %SOFTNAME%.
 		del "%CR4CKFILE%"
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
