@@ -1,5 +1,11 @@
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+SET liveincolor=1 & SET "c_underline=[4m" & SET "c_reset=[0m" & SET "c_Red_Blak=[91;40m" & SET "c_Gre_Blak=[92;40m" & SET "c_Yel_Blak=[93;40m" & SET "c_Blu_Blak=[94;40m" & SET "c_Mag_Blak=[95;40m" & SET "c_Cya_Blak=[96;40m" & SET "c_Whi_Blak=[97;40m"
+
+:: Run As Administrator
+>nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
+>nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
+
+title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -12,7 +18,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
+@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
 @echo off
 pushd "%~dp0"
 :: Detect Windows Architecture
@@ -75,19 +81,19 @@ set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
-	echo Command Prompt is running as Administrator.
+	echo %c_Yel_Blak%Command Prompt is running as Administrator.%c_reset%
 ) else (
 	if "%Admin%"=="Yes" (
-		echo Please Run as Administrator. Exiting in 3 seconds...
+		echo %c_Red_Blak%Please Run as Administrator. Exiting in 3 seconds...%c_reset%
 		for /l %%i in (3,-1,1) do (
-			echo Exiting in %%i seconds...
+			echo %c_Whi_Blak%Exiting in %%i seconds...%c_reset%
 			timeout /t 1 /nobreak >nul
 		)
 		exit
 	) else (
-		echo Warning: This program may not function correctly without administrator privileges.
+		echo %c_Blu_Blak%Warning: This program may not function correctly without administrator privileges.%c_reset%
 		for /l %%i in (3,-1,1) do (
-			echo Starting in %%i seconds...
+			echo %c_Whi_Blak%Starting in %%i seconds...%c_reset%
 			timeout /t 1 /nobreak >nul
 		)
 	)
@@ -101,7 +107,7 @@ if %errorlevel% equ 0 (
 
 :: Download
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -114,24 +120,24 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
+@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
 @echo off
 pushd "%~dp0"
-echo Downloading %SOFTNAME%...
+echo %c_Gre_Blak%Downloading %SOFTNAME%...%c_reset%
 wget --no-check-certificate --show-progress -q -O "%FILENAME%" "%LINK%"
 
 if not exist "%FILENAME%" (
-	echo Download %SOFTNAME% failed.
-	echo Please check your network connection. Exiting in 3 seconds...
+	echo %c_Red_Blak%Download %SOFTNAME% failed.%c_reset%
+	echo %c_Red_Blak%Please check your network connection. Exiting in 3 seconds...%c_reset%
 	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
+		echo %c_Whi_Blak%Exiting in %%i seconds...%c_reset%
 		timeout /t 1 /nobreak >nul
 	)
 	exit
 )
 
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -144,10 +150,10 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
+@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
 @echo off
 pushd "%~dp0"
-echo Downloading 7-Zip...
+echo %c_Gre_Blak%Downloading 7-Zip...%c_reset%
 if "%Extract7z%"=="Yes" (
 	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
 	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
@@ -155,7 +161,7 @@ if "%Extract7z%"=="Yes" (
 
 :: Install
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Installing...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -168,10 +174,10 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
+@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
 @echo off
 pushd "%~dp0"
-echo Installing %SOFTNAME%...
+echo %c_Gre_Blak%Installing %SOFTNAME%...%c_reset%
 if "%Extract7z%"=="Yes" (
 	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
 ) else (
@@ -179,7 +185,7 @@ if "%Extract7z%"=="Yes" (
 )
 
 :: Check Installation Process
-echo Checking if %SOFTNAME% installation is complete...
+echo %c_Yel_Blak%Checking if %SOFTNAME% installation is complete...%c_reset%
 setlocal EnableDelayedExpansion
 set count=0
 :waitloop
@@ -189,16 +195,16 @@ if exist "%SOFTLOCATION%" goto installed
 if !count! equ 30 goto timeout
 goto waitloop
 :timeout
-echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
+echo %c_Red_Blak%Timeout: %SOFTNAME% installation has not completed in 30 seconds.%c_reset%
 goto end
 :installed
-echo %SOFTNAME% has been installed successfully.
+echo %c_Gre_Blak%%SOFTNAME% has been installed successfully.%c_reset%
 timeout /t 3
 :end
 
 :: License
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -211,34 +217,34 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
+@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
-	echo Cr4cking %SOFTNAME%...
+	echo %c_Gre_Blak%Cr4cking %SOFTNAME%...%c_reset%
 	wget --no-check-certificate --show-progress -q -O "7z.dll" "%LINK7zdll%"
 	wget --no-check-certificate --show-progress -q -O "7z.exe" "%LINK7zexe%"
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
-		echo Successfully Cr4cked %SOFTNAME%.
+		echo %c_Gre_Blak%Successfully Cr4cked %SOFTNAME%.%c_reset%
 		del "%CR4CKFILE%"
 	) else (
-		echo Cr4cking %SOFTNAME% failed.
-		echo Please try running the script as Administrator.
+		echo %c_Red_Blak%Cr4cking %SOFTNAME% failed.%c_reset%
+		echo %c_Red_Blak%Please try running the script as Administrator.%c_reset%
 	)
 )
 
 :: Shortcut
 if /i "%Shortcut%"=="no" (
-    echo Creating shortcut is skipped.
+    echo %c_Yel_Blak%Creating shortcut is skipped.%c_reset%
     goto CleanUp
 )
 
 if exist "%SOFTLOCATION%" (
 	set "TARGETFILE=%SOFTLOCATION%"
 ) else (
-	echo %SOFTNAME% does not exist in directory "%SOFTPATH%". Exiting script.
+	echo %c_Red_Blak%%SOFTNAME% does not exist in directory "%SOFTPATH%". Exiting script.%c_reset%
 	exit /b 1
 )
 
@@ -256,9 +262,9 @@ cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
 if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
-	echo Creating shortcut complete.
+	echo %c_Gre_Blak%Creating shortcut complete.%c_reset%
 ) else (
-	echo Creating shortcut failed.
+	echo %c_Red_Blak%Creating shortcut failed.%c_reset%
 )
 
 :: Clean Up
@@ -272,9 +278,9 @@ if "%License%"=="Yes" (
 	del 7z.exe
 )
 
-echo The script will automatically close in 3 seconds.
+echo %c_Gre_Blak%The script will automatically close in 3 seconds.%c_reset%
 for /l %%i in (3,-1,1) do (
-	echo Closing in %%i seconds...
+	echo %c_Whi_Blak%Closing in %%i seconds...%c_reset%
 	timeout /t 1 /nobreak >nul
 	if exist "7z.dll" (
 		tasklist | find /i "7z.dll" > nul
@@ -298,5 +304,5 @@ for /l %%i in (3,-1,1) do (
 	del "%FILENAME%"
 	)
 )
-echo Please close the script manually if automatically close fails.
+echo %c_Red_Blak%Please close the script manually if automatically close fails.%c_reset%
 popd

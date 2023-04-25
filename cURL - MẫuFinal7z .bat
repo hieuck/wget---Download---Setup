@@ -12,7 +12,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
 @echo off
 pushd "%~dp0"
 :: Detect Windows Architecture
@@ -114,7 +114,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
@@ -144,7 +144,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
 @echo off
 pushd "%~dp0"
 echo Downloading 7-Zip...
@@ -168,7 +168,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
 @echo off
 pushd "%~dp0"
 echo Installing %SOFTNAME%...
@@ -192,7 +192,7 @@ goto waitloop
 echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
 goto end
 :installed
-echo %SOFTNAME% has been installed successfully!
+echo %SOFTNAME% has been installed successfully.
 timeout /t 3
 :end
 
@@ -211,7 +211,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho
+@echo     Dang Cai Dat %SOFTNAME%. Vui Long Cho... The current date and time are: %date% %time%
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
