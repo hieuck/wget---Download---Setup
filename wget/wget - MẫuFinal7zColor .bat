@@ -7,7 +7,7 @@ SET liveincolor=1 & SET "c_underline=[4m" & SET "c_reset=[0m" & SET "c_Red_Bla
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -110,7 +110,7 @@ if %errorlevel% equ 0 (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -141,7 +141,7 @@ if not exist "%FILENAME%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -166,7 +166,7 @@ if "%Extract7z%"=="Yes" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -210,7 +210,7 @@ timeout /t 3
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.

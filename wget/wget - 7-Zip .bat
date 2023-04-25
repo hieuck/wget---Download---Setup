@@ -7,7 +7,7 @@ SET liveincolor=1 & SET "c_underline=[4m" & SET "c_reset=[0m" & SET "c_Red_Bla
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -17,8 +17,9 @@ echo.
 @echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
-@echo.  
-@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo.
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
 :: Detect Windows Architecture
@@ -99,7 +100,7 @@ if %errorlevel% equ 0 (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -109,8 +110,9 @@ echo.
 @echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
-@echo.  
-@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo.
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
 echo %c_Gre_Blak%Downloading %SOFTNAME%...%c_reset%
@@ -129,7 +131,7 @@ if not exist "%FILENAME%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -139,8 +141,9 @@ echo.
 @echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
-@echo.  
-@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo.
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
 echo %c_Gre_Blak%Downloading 7-Zip...%c_reset%
@@ -153,7 +156,7 @@ if "%Extract7z%"=="Yes" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -163,8 +166,9 @@ echo.
 @echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
-@echo.  
-@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo.
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
 echo %c_Gre_Blak%Installing %SOFTNAME%...%c_reset%
@@ -196,7 +200,7 @@ timeout /t 3
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
-mode con:cols=100 lines=15
+mode con:cols=100 lines=17
 @cls
 echo.
 echo.
@@ -206,8 +210,9 @@ echo.
 @echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
-@echo.  
-@echo     %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho... The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo.
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
@@ -217,11 +222,11 @@ if "%License%"=="Yes" (
 	wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" "%CR4CKLINK%"
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
-		echo %c_Gre_Blak%Successfully Cr4cked %SOFTNAME%.%c_reset%
+		echo Successfully Cr4cked %SOFTNAME%.%c_reset%
 		del "%CR4CKFILE%"
 	) else (
-		echo %c_Red_Blak%Cr4cking %SOFTNAME% failed.%c_reset%
-		echo %c_Red_Blak%Please try running the script as Administrator.%c_reset%
+		echo Cr4cking %SOFTNAME% failed.
+		echo Please try running the script as Administrator.
 	)
 )
 
