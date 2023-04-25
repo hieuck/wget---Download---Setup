@@ -230,12 +230,12 @@ if "%License%"=="Yes" (
 		echo go to Help - Enter Product Key... to enter the key.
 		echo AIDA64 has been successfully activated. Please close AIDA64 now.
 		"%CR4CKPATH%\Key_AIDA64.txt" & "%SOFTLOCATION%" /silent
-		echo %c_Gre_Blak%Successfully Cr4cked %SOFTNAME%.%c_reset%
+		echo Successfully Cr4cked %SOFTNAME%.%c_reset%
 		del "%CR4CKPATH%\Key_AIDA64.txt"
 		del "%CR4CKFILE%"
 	) else (
-		echo %c_Red_Blak%Cr4cking %SOFTNAME% failed.%c_reset%
-		echo %c_Red_Blak%Please try running the script as Administrator.%c_reset%
+		echo Cr4cking %SOFTNAME% failed.
+		echo Please try running the script as Administrator.
 	)
 )
 
