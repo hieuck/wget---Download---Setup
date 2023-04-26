@@ -41,8 +41,8 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 set "OSVersion="
 set "License="
 set "Extract7z="
-set "SOFTNAME=danvaoday"
-set "PROCESS=danvaoday.exe"
+set "SOFTNAME=VMware Workstation 17 Pro"
+set "PROCESS=vmware.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 ::Check Windows OS Version
@@ -67,12 +67,6 @@ if "%OSVersion%"=="Yes" (
 :: Source link: 
 
 if %ARCH%==x86 (
-	set "LINK=danvaoday"
-	set "SOFTPATH=danvaoday"
-) else (
-	set "LINK=danvaoday"
-	set "SOFTPATH=danvaoday"
-) else (
 	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
@@ -80,9 +74,9 @@ if %ARCH%==x86 (
 		)
 	exit
 )
-set "LINK=danvaoday"
-set "QUIETMODE=/S"
-set "SOFTPATH=danvaoday"
+set "LINK=https://www.vmware.com/go/getworkstation-win"
+set "QUIETMODE=/s /v"/qn EULAS_AGREED=1 SERIALNUMBER="MC60H-DWHD5-H80U9-6V85M-8280D" ADDLOCAL=ALL REBOOT=ReallySuppress""
+set "SOFTPATH=%PROGRAMFILES(X86)%\VMware\VMware Workstation"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
