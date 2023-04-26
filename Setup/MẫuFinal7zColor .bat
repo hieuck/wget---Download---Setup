@@ -1,9 +1,9 @@
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::																								::
-::						https://linktr.ee/hieuckit												::
-:: Github:				https://github.com/hieuck/curl-uri-wget-download-setup					::
-:: Facebook:			https://www.facebook.com/ZzhieuhuhongzZ/								::
-:: Donate to me:		Vietcombank - 9966595263 - LE TRUNG HIEU								::
+::							https://linktr.ee/hieuckit											::
+::		Github:				https://github.com/hieuck/curl-uri-wget-download-setup				::
+::		Facebook:			https://www.facebook.com/ZzhieuhuhongzZ/							::
+::		Donate to me:		Vietcombank - 9966595263 - LE TRUNG HIEU							::
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
@@ -47,14 +47,20 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 ::Check Windows OS Version
 if "%OSVersion%"=="Yes" (
-    if "%OSVERSION:~0,1%"=="5" (
-        echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
-        for /l %%i in (3,-1,1) do (
-            echo Exiting in %%i seconds...
-            timeout /t 1 /nobreak >nul
-            )
-        exit
-    )
+	setlocal EnableDelayedExpansion
+	for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+		set "version=%%i"
+	)
+
+	if !version! geq 6.1 (
+		echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
+	)
+	endlocal
 )
 
 :: Set code based on Windows Architecture
