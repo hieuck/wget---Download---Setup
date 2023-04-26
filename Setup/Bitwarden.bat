@@ -64,7 +64,7 @@ if "%OSVersion%"=="Yes" (
 )
 
 :: Set code based on Windows Architecture
-:: Source link: 
+:: Source link: https://github.com/bitwarden/clients/releases/latest/
 
 if %ARCH%==x86 (
 	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
@@ -90,7 +90,7 @@ if "%License%"=="Yes" (
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
-	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
+	set "FILENAME=%SOFTNAME%-HieuckIT.zip "
 	set "Admin=Yes"
 	set "Shortcut=Yes"
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
@@ -98,7 +98,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
 	set "Shortcut=No"
-	set "FILENAME=%SOFTNAME%-HieuckIT.exe"
+	set "FILENAME=%SOFTNAME%-HieuckIT.exe "
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
