@@ -1,11 +1,3 @@
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::																								::
-::						https://linktr.ee/hieuckit												::
-:: Github:				https://github.com/hieuck/curl-uri-wget-download-setup					::
-:: Facebook:			https://www.facebook.com/ZzhieuhuhongzZ/								::
-:: Donate to me:		Vietcombank - 9966595263 - LE TRUNG HIEU								::
-::																								::
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
 SET liveincolor=1 & SET "c_underline=[4m" & SET "c_reset=[0m" & SET "c_Red_Blak=[91;40m" & SET "c_Gre_Blak=[92;40m" & SET "c_Yel_Blak=[93;40m" & SET "c_Blu_Blak=[94;40m" & SET "c_Mag_Blak=[95;40m" & SET "c_Cya_Blak=[96;40m" & SET "c_Whi_Blak=[97;40m"
 
@@ -37,51 +29,26 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set CheckOSVersion License Extract7z Soft Process Name User Agent
-set "CheckOSVersion="
-set "License="
+:: Set License Extract7z Soft Process Name User Agent
+set "License=Yes"
 set "Extract7z="
-set "SOFTNAME=danvaoday"
-set "PROCESS=danvaoday.exe"
+set "SOFTNAME=AIDA64 Extreme"
+set "PROCESS=aida64.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-::Check Windows OS Version
-if "%CheckOSVersion%"=="Yes" (
-    if "%OSVERSION:~0,1%"=="5" (
-        echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
-        for /l %%i in (3,-1,1) do (
-            echo Exiting in %%i seconds...
-            timeout /t 1 /nobreak >nul
-            )
-        exit
-    )
-)
-
 :: Set code based on Windows Architecture
-:: Source link: 
-
 if %ARCH%==x86 (
-	set "LINK=danvaoday"
-	set "SOFTPATH=danvaoday"
+	set "SOFTPATH=%PROGRAMFILES%\FinalWire\AIDA64 Extreme"
 ) else (
-	set "LINK=danvaoday"
-	set "SOFTPATH=danvaoday"
-) else (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-		)
-	exit
+	set "SOFTPATH=%PROGRAMFILES(X86)%\FinalWire\AIDA64 Extreme"
 )
-set "LINK=danvaoday"
-set "QUIETMODE=/S"
-set "SOFTPATH=danvaoday"
+set "LINK=https://download.aida64.com/aida64extreme688.exe"
+set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday"
+	set "CR4CKFILE=AIDA64ExtremeCr4ck"
 	set "CR4CKPATH=%SOFTPATH%"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
@@ -270,7 +237,17 @@ if "%License%"=="Yes" (
 	)
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
+		echo.
+		echo Please enter the license key manually if the software reports a fake license.
+		set /p Key_AIDA64=<"%CR4CKPATH%\Key_AIDA64.txt"
+		echo Activating AIDA64 with !Key_AIDA64!...
+		echo Please copy the following key and close the text file.
+		echo Waiting for AIDA64 to open...
+		echo go to Help - Enter Product Key... to enter the key.
+		echo AIDA64 has been successfully activated. Please close AIDA64 now.
+		"%CR4CKPATH%\Key_AIDA64.txt" & "%SOFTLOCATION%" /silent
 		echo Successfully Cr4cked %SOFTNAME%.
+		del "%CR4CKPATH%\Key_AIDA64.txt"
 		del "%CR4CKFILE%"
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
