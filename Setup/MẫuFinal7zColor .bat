@@ -37,8 +37,8 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set CheckOSVersion License Extract7z Soft Process Name User Agent
-set "CheckOSVersion="
+:: Set OSVersion License Extract7z Soft Process Name User Agent
+set "OSVersion="
 set "License="
 set "Extract7z="
 set "SOFTNAME=danvaoday"
@@ -46,7 +46,7 @@ set "PROCESS=danvaoday.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 ::Check Windows OS Version
-if "%CheckOSVersion%"=="Yes" (
+if "%OSVersion%"=="Yes" (
     if "%OSVERSION:~0,1%"=="5" (
         echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
         for /l %%i in (3,-1,1) do (
