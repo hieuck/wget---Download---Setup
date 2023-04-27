@@ -25,7 +25,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -164,7 +164,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -173,7 +173,7 @@ if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FILENAME%" -U "%USERAGENT%" "%LINK%"
 ) else (
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure || (
-		del "%temp%\download_error.txt"
+		if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
 		echo.
 		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
 		echo. >> %temp%\download_error.txt
@@ -209,7 +209,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -239,7 +239,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -283,7 +283,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"

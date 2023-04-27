@@ -26,7 +26,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date%%time%%c_reset%
 @echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
@@ -165,7 +165,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date%%time%%c_reset%
 @echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
@@ -210,7 +210,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date%%time%%c_reset%
 @echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
@@ -240,7 +240,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date%%time%%c_reset%
 @echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
@@ -284,7 +284,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
+@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date%%time%%c_reset%
 @echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
 @echo off
 pushd "%~dp0"
