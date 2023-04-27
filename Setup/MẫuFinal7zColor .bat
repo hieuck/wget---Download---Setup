@@ -47,7 +47,7 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 ::Check Windows OS Version
 if /i "%CheckOSVersion%"=="no" (
-	goto BypassCheckOSVersion
+	goto SkipCheckOSVersion
 )
 
 setlocal EnableDelayedExpansion
