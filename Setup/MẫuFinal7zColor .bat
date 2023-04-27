@@ -37,8 +37,8 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set SkipOSVersion License Extract7z Soft Process Name User Agent
-set "SkipOSVersion="
+:: Set CheckOSVersion License Extract7z Soft Process Name User Agent
+set "CheckOSVersion="
 set "License="
 set "Extract7z="
 set "SOFTNAME=danvaoday"
@@ -46,7 +46,7 @@ set "PROCESS=danvaoday.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 ::Check Windows OS Version
-if /i "%SkipOSVersion%"=="no" (
+if /i "%CheckOSVersion%"=="no" (
 	goto BypassCheckOSVersion
 )
 
