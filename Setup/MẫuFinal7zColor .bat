@@ -345,8 +345,8 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 :CleanUp
 if exist "%FILENAME%" del "%FILENAME%"
 if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
-if exist "7z.dll" del 7z.dll
-if exist "7z.exe" del 7z.exe
+if exist "7z.dll" del "7z.dll"
+if exist "7z.exe" del "7z.exe"
 
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
