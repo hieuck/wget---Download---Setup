@@ -37,8 +37,8 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set OSVersion License Extract7z Soft Process Name User Agent
-set "OSVersion="
+:: Set SkipOSVersion License Extract7z Soft Process Name User Agent
+set "SkipOSVersion="
 set "License="
 set "Extract7z="
 set "SOFTNAME=danvaoday"
@@ -46,23 +46,31 @@ set "PROCESS=danvaoday.exe"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 ::Check Windows OS Version
-if "%OSVersion%"=="Yes" (
-	setlocal EnableDelayedExpansion
-	for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-		set "version=%%i"
-	)
-
-	if !version! geq 6.1 (
-		echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
-		for /l %%i in (3,-1,1) do (
-			echo Exiting in %%i seconds...
-			timeout /t 1 /nobreak >nul
-		)
-		exit
-	)
-	endlocal
+if /i "%SkipOSVersion%"=="no" (
+	goto BypassCheckOSVersion
 )
 
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" (
+	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
+)
+endlocal
+
+:SkipCheckOSVersion
 :: Set code based on Windows Architecture
 :: Source link: 
 
