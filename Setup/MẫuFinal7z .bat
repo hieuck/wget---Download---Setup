@@ -344,8 +344,8 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 :CleanUp
 if exist "%FILENAME%" del "%FILENAME%"
 if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
-if exist "7z.dll" del 7z.dll
-if exist "7z.exe" del 7z.exe
+if exist "7z.dll" del "7z.dll"
+if exist "7z.exe" del "7z.exe"
 
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
@@ -361,24 +361,20 @@ for /l %%i in (3,-1,1) do (
 	timeout /t 1 /nobreak >nul
 	if exist "7z.dll" (
 		tasklist | find /i "7z.dll" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.dll" /f
-		)
-	del "7z.dll"
+		if %errorlevel% equ 0 taskkill /im "7z.dll" /f
+		del "7z.dll"
 	)
+
 	if exist "7z.exe" (
 		tasklist | find /i "7z.exe" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.exe" /f
-		)
-	del "7z.exe"
+		if %errorlevel% equ 0 taskkill /im "7z.exe" /f
+		del "7z.exe"
 	)
+
 	if exist "%FILENAME%" (
 		tasklist | find /i "%FILENAME%" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "%FILENAME%" /f
-		)
-	del "%FILENAME%"
+		if %errorlevel% equ 0 taskkill /im "%FILENAME%" /f
+		del "%FILENAME%"
 	)
 )
 echo Please close the script manually if automatically close fails.
