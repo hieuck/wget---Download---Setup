@@ -37,40 +37,15 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set CheckOSVersion License Extract7z Soft Process Name User Agent
-set "CheckOSVersion="
+:: Set License Extract7z Soft Process Name CheckOSVersion Only64bit User Agent
 set "License="
 set "Extract7z="
 set "SOFTNAME=danvaoday"
 set "PROCESS=danvaoday.exe"
+set "CheckOSVersion=No"
+set "Only64bit=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-::Check Windows OS Version
-if /i "%CheckOSVersion%"=="no" (
-	goto SkipCheckOSVersion
-)
-
-setlocal EnableDelayedExpansion
-for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-	set "version1=%%i"
-)
-
-for /f "tokens=5 delims=[.] " %%i in ('ver') do (
-	set "version2=%%i"
-)
-set "version=%version1%.%version2%"
-
-if "%version%"=="6.1" (
-	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
-)
-endlocal
-
-:SkipCheckOSVersion
 :: Set code based on Windows Architecture
 :: Source link: 
 
@@ -80,13 +55,6 @@ if %ARCH%==x86 (
 ) else (
 	set "LINK=danvaoday"
 	set "SOFTPATH=danvaoday"
-) else (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-		)
-	exit
 )
 set "LINK=danvaoday"
 set "QUIETMODE=/S"
@@ -116,6 +84,42 @@ if "%Extract7z%"=="Yes" (
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
+::Check Windows OS Version
+if /i "%CheckOSVersion%"=="no" (
+	goto SkipCheckOSVersion
+)
+
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" (
+	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
+)
+endlocal
+
+:SkipCheckOSVersion
+:: Check compatibility with Windows 64-bit
+if /i "%Only64bit%"=="yes" (
+	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
+)
+
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
@@ -143,6 +147,9 @@ if %errorlevel% equ 0 (
 	taskkill /im "%PROCESS%" /f
 )
 
+:: Save the value of the %time% variable before running the batch script
+set start_time=%time%
+
 :: Download
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
@@ -166,7 +173,17 @@ echo %c_Gre_Blak%Downloading %SOFTNAME%...%c_reset%
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FILENAME%" -U "%USERAGENT%" "%LINK%"
 ) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure || (
+		del "%temp%\download_error.txt"
+		echo.
+		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
+		echo. >> %temp%\download_error.txt
+		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget/wget.exe >> %temp%\download_error.txt
+		echo wget: https://eternallybored.org/misc/wget/ >> %temp%\download_error.txt
+		echo curl: https://curl.se/download.html >> %temp%\download_error.txt
+		type "%temp%\download_error.txt"
+		start "" "%temp%\download_error.txt"
+	)
 )
 
 if not exist "%FILENAME%" (
@@ -326,14 +343,18 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
-del "%FILENAME%"
-if "%License%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
-) else if "%Extract7z%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
-)
+if exist "%FILENAME%" del "%FILENAME%"
+if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
+if exist "7z.dll" del 7z.dll
+if exist "7z.exe" del 7z.exe
+
+:: Save the value of the %time% variable after the batch script finishes
+set end_time=%time%
+
+:: Calculate the difference between the two %start_time% and %end_time% values
+set /a elapsed_time=(%end_time:~0,2%*3600 + %end_time:~3,2%*60 + %end_time:~6,2%) - (%start_time:~0,2%*3600 + %start_time:~3,2%*60 + %start_time:~6,2%)
+
+echo Time elapsed: %elapsed_time% seconds.
 
 echo %c_Gre_Blak%The script will automatically close in 3 seconds.%c_reset%
 for /l %%i in (3,-1,1) do (
@@ -341,24 +362,20 @@ for /l %%i in (3,-1,1) do (
 	timeout /t 1 /nobreak >nul
 	if exist "7z.dll" (
 		tasklist | find /i "7z.dll" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.dll" /f
-		)
-	del "7z.dll"
+		if %errorlevel% equ 0 taskkill /im "7z.dll" /f
+		del "7z.dll"
 	)
+
 	if exist "7z.exe" (
 		tasklist | find /i "7z.exe" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.exe" /f
-		)
-	del "7z.exe"
+		if %errorlevel% equ 0 taskkill /im "7z.exe" /f
+		del "7z.exe"
 	)
+
 	if exist "%FILENAME%" (
 		tasklist | find /i "%FILENAME%" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "%FILENAME%" /f
-		)
-	del "%FILENAME%"
+		if %errorlevel% equ 0 taskkill /im "%FILENAME%" /f
+		del "%FILENAME%"
 	)
 )
 echo %c_Red_Blak%Please close the script manually if automatically close fails.%c_reset%
