@@ -1,5 +1,5 @@
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -61,7 +61,7 @@ if "%License%"=="Yes" (
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
-	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
+	set "FILENAME=%SOFTNAME%-HieuckIT.zip "
 	set "Admin=Yes"
 	set "Shortcut=Yes"
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
@@ -69,7 +69,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
 	set "Shortcut=No"
-	set "FILENAME=%SOFTNAME%-HieuckIT.exe"
+	set "FILENAME=%SOFTNAME%-HieuckIT.exe "
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
@@ -102,7 +102,7 @@ if %errorlevel% equ 0 (
 
 :: Download
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -133,7 +133,7 @@ if not exist "%FILENAME%" (
 )
 
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -158,7 +158,7 @@ if "%Extract7z%"=="Yes" (
 
 :: Install
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Installing...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -202,7 +202,7 @@ timeout /t 3
 
 :: License
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application
+title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
 mode con:cols=100 lines=15
 @cls
