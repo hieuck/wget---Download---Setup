@@ -53,7 +53,7 @@ if %ARCH%==x86 (
 	set "SOFTPATH=%PROGRAMFILES(X86)%\K-Lite Codec Pack\MPC-HC64"
 )
 
-set "LINK=https://files3.codecguide.com/K-Lite_Codec_Pack_1752_Mega.exe"
+set "LINK=https://files3.codecguide.com/K-Lite_Codec_Pack_1755_Mega.exe"
 set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
 :: Set up information related to software cr4cking
