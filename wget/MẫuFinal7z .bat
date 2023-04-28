@@ -26,7 +26,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 :: Detect Windows Architecture
@@ -78,7 +78,7 @@ if "%License%"=="Yes" (
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
-	set "FILENAME=%SOFTNAME%-HieuckIT.zip "
+	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
 	set "Admin=Yes"
 	set "Shortcut=Yes"
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
@@ -163,7 +163,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Tai %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
@@ -208,7 +208,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 echo Downloading 7-Zip...
@@ -282,7 +282,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
