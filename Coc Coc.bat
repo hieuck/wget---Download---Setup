@@ -39,7 +39,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
 set "License="
 set "Extract7z="
-set "SOFTNAME=Coc Coc""
+set "SOFTNAME=Coc Coc"
 set "PROCESS=browser.exe"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
