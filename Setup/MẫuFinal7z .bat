@@ -36,13 +36,12 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set License Extract7z Soft Process Name CheckOSVersion Only64bit User Agent
+:: Set License Extract7z Soft Process Name CheckOSVersion User Agent
 set "License="
 set "Extract7z="
 set "SOFTNAME=danvaoday"
 set "PROCESS=danvaoday.exe"
 set "CheckOSVersion=No"
-set "Only64bit=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
@@ -54,7 +53,15 @@ if %ARCH%==x86 (
 ) else (
 	set "LINK=danvaoday"
 	set "SOFTPATH=danvaoday"
+) else (
+	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
 )
+
 set "LINK=danvaoday"
 set "QUIETMODE=/S"
 set "SOFTPATH=danvaoday"
@@ -109,15 +116,6 @@ if "%version%"=="6.1" (
 endlocal
 
 :SkipCheckOSVersion
-:: Check compatibility with Windows 64-bit
-if /i "%Only64bit%"=="yes" (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
-)
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1

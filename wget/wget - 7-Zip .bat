@@ -57,7 +57,7 @@ if "%License%"=="Yes" (
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
-	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
+	set "FILENAME=%SOFTNAME%-HieuckIT.zip "
 	set "Admin=Yes"
 	set "Shortcut=Yes"
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
@@ -65,7 +65,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
 	set "Shortcut=No"
-	set "FILENAME=%SOFTNAME%-HieuckIT.exe"
+	set "FILENAME=%SOFTNAME%-HieuckIT.exe "
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 

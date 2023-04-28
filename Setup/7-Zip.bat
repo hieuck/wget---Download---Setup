@@ -25,7 +25,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -36,13 +36,12 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set License Extract7z Soft Process Name CheckOSVersion Only64bit User Agent
+:: Set License Extract7z Soft Process Name CheckOSVersion User Agent
 set "License="
 set "Extract7z="
 set "SOFTNAME=7-Zip"
 set "PROCESS=7zFM.exe"
 set "CheckOSVersion=No"
-set "Only64bit=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
@@ -106,15 +105,6 @@ if "%version%"=="6.1" (
 endlocal
 
 :SkipCheckOSVersion
-:: Check compatibility with Windows 64-bit
-if /i "%Only64bit%"=="yes" (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
-)
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -161,7 +151,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -169,7 +159,17 @@ echo Downloading %SOFTNAME%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FILENAME%" -U "%USERAGENT%" "%LINK%"
 ) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure || (
+		if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
+		echo.
+		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
+		echo. >> %temp%\download_error.txt
+		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget/wget.exe >> %temp%\download_error.txt
+		echo wget: https://eternallybored.org/misc/wget/ >> %temp%\download_error.txt
+		echo curl: https://curl.se/download.html >> %temp%\download_error.txt
+		type "%temp%\download_error.txt"
+		start "" "%temp%\download_error.txt"
+	)
 )
 
 if not exist "%FILENAME%" (
@@ -196,7 +196,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -226,7 +226,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -270,7 +270,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date% %time%
+@echo                 The current date and time are: %date%%time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -329,14 +329,10 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
-del "%FILENAME%"
-if "%License%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
-) else if "%Extract7z%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
-)
+if exist "%FILENAME%" del "%FILENAME%"
+if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
+if exist "7z.dll" del "7z.dll"
+if exist "7z.exe" del "7z.exe"
 
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
@@ -352,24 +348,20 @@ for /l %%i in (3,-1,1) do (
 	timeout /t 1 /nobreak >nul
 	if exist "7z.dll" (
 		tasklist | find /i "7z.dll" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.dll" /f
-		)
-	del "7z.dll"
+		if %errorlevel% equ 0 taskkill /im "7z.dll" /f
+		del "7z.dll"
 	)
+
 	if exist "7z.exe" (
 		tasklist | find /i "7z.exe" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.exe" /f
-		)
-	del "7z.exe"
+		if %errorlevel% equ 0 taskkill /im "7z.exe" /f
+		del "7z.exe"
 	)
+
 	if exist "%FILENAME%" (
 		tasklist | find /i "%FILENAME%" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "%FILENAME%" /f
-		)
-	del "%FILENAME%"
+		if %errorlevel% equ 0 taskkill /im "%FILENAME%" /f
+		del "%FILENAME%"
 	)
 )
 echo Please close the script manually if automatically close fails.
