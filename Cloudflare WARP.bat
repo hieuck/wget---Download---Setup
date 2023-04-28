@@ -7,7 +7,6 @@
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
-SET liveincolor=1 & SET "c_underline=[4m" & SET "c_reset=[0m" & SET "c_Red_Blak=[91;40m" & SET "c_Gre_Blak=[92;40m" & SET "c_Yel_Blak=[93;40m" & SET "c_Blu_Blak=[94;40m" & SET "c_Mag_Blak=[95;40m" & SET "c_Cya_Blak=[96;40m" & SET "c_Whi_Blak=[97;40m"
 
 :: Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
@@ -26,8 +25,8 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
-@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
+@echo                 The current date and time are: %date%%time%
+@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 :: Detect Windows Architecture
@@ -37,40 +36,14 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set CheckOSVersion License Extract7z Soft Process Name User Agent
-set "CheckOSVersion=Yes"
+:: Set License Extract7z Soft Process Name CheckOSVersion User Agent
 set "License="
 set "Extract7z="
 set "SOFTNAME=Cloudflare WARP"
 set "PROCESS=Cloudflare WARP.exe"
+set "CheckOSVersion=Yes"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-::Check Windows OS Version
-if /i "%CheckOSVersion%"=="no" (
-	goto SkipCheckOSVersion
-)
-
-setlocal EnableDelayedExpansion
-for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-	set "version1=%%i"
-)
-
-for /f "tokens=5 delims=[.] " %%i in ('ver') do (
-	set "version2=%%i"
-)
-set "version=%version1%.%version2%"
-
-if "%version%"=="6.1" (
-	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
-)
-endlocal
-
-:SkipCheckOSVersion
 :: Set code based on Windows Architecture
 :: Source link: 
 
@@ -79,9 +52,10 @@ if %ARCH%==x86 (
 	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
 		timeout /t 1 /nobreak >nul
-		)
+	)
 	exit
 )
+
 set "LINK=https://1111-releases.cloudflareclient.com/windows/Cloudflare_WARP_Release-x64.msi"
 set "QUIETMODE=/quiet /qn /norestart"
 set "SOFTPATH=%PROGRAMFILES%\Cloudflare\Cloudflare WARP"
@@ -110,22 +84,49 @@ if "%Extract7z%"=="Yes" (
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
+::Check Windows OS Version
+if /i "%CheckOSVersion%"=="no" (
+	goto SkipCheckOSVersion
+)
+
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" (
+	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
+)
+endlocal
+
+:SkipCheckOSVersion
+
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
-	echo %c_Yel_Blak%Command Prompt is running as Administrator.%c_reset%
+	echo Command Prompt is running as Administrator.
 ) else (
 	if "%Admin%"=="Yes" (
-		echo %c_Red_Blak%Please Run as Administrator. Exiting in 3 seconds...%c_reset%
+		echo Please Run as Administrator. Exiting in 3 seconds...
 		for /l %%i in (3,-1,1) do (
-			echo %c_Whi_Blak%Exiting in %%i seconds...%c_reset%
+			echo Exiting in %%i seconds...
 			timeout /t 1 /nobreak >nul
 		)
 		exit
 	) else (
-		echo %c_Blu_Blak%Warning: This program may not function correctly without administrator privileges.%c_reset%
+		echo Warning: This program may not function correctly without administrator privileges.
 		for /l %%i in (3,-1,1) do (
-			echo %c_Whi_Blak%Starting in %%i seconds...%c_reset%
+			echo Starting in %%i seconds...
 			timeout /t 1 /nobreak >nul
 		)
 	)
@@ -136,6 +137,9 @@ tasklist | find /i "%PROCESS%" > nul
 if %errorlevel% equ 0 (
 	taskkill /im "%PROCESS%" /f
 )
+
+:: Save the value of the %time% variable before running the batch script
+set start_time=%time%
 
 :: Download
 @ECHO OFF
@@ -152,22 +156,32 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
-@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
+@echo                 The current date and time are: %date%%time%
+@echo                 Dang Tai %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-echo %c_Gre_Blak%Downloading %SOFTNAME%...%c_reset%
+echo Downloading %SOFTNAME%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FILENAME%" -U "%USERAGENT%" "%LINK%"
 ) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure || (
+		if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
+		echo.
+		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
+		echo. >> %temp%\download_error.txt
+		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget/wget.exe >> %temp%\download_error.txt
+		echo wget: https://eternallybored.org/misc/wget/ >> %temp%\download_error.txt
+		echo curl: https://curl.se/download.html >> %temp%\download_error.txt
+		type "%temp%\download_error.txt"
+		start "" "%temp%\download_error.txt"
+	)
 )
 
 if not exist "%FILENAME%" (
-	echo %c_Red_Blak%Download %SOFTNAME% failed.%c_reset%
-	echo %c_Red_Blak%Please check your network connection. Exiting in 3 seconds...%c_reset%
+	echo Download %SOFTNAME% failed.
+	echo Please check your network connection. Exiting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
-		echo %c_Whi_Blak%Exiting in %%i seconds...%c_reset%
+		echo Exiting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
 	exit
@@ -187,11 +201,11 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
-@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
+@echo                 The current date and time are: %date%%time%
+@echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-echo %c_Gre_Blak%Downloading 7-Zip...%c_reset%
+echo Downloading 7-Zip...
 if "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
 		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
@@ -217,11 +231,11 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
-@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
+@echo                 The current date and time are: %date%%time%
+@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-echo %c_Gre_Blak%Installing %SOFTNAME%...%c_reset%
+echo Installing %SOFTNAME%...
 if "%Extract7z%"=="Yes" (
 	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
 ) else (
@@ -229,7 +243,7 @@ if "%Extract7z%"=="Yes" (
 )
 
 :: Check Installation Process
-echo %c_Yel_Blak%Checking if %SOFTNAME% installation is complete...%c_reset%
+echo Checking if %SOFTNAME% installation is complete...
 setlocal EnableDelayedExpansion
 set count=0
 :waitloop
@@ -239,10 +253,10 @@ if exist "%SOFTLOCATION%" goto installed
 if !count! equ 30 goto timeout
 goto waitloop
 :timeout
-echo %c_Red_Blak%Timeout: %SOFTNAME% installation has not completed in 30 seconds.%c_reset%
+echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
 goto end
 :installed
-echo %c_Gre_Blak%%SOFTNAME% has been installed successfully.%c_reset%
+echo %SOFTNAME% has been installed successfully.
 timeout /t 3
 :end
 
@@ -261,12 +275,12 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 %c_Yel_Blak%The current date and time are: %c_Whi_Blak%%date% %time%%c_reset%
-@echo                 %c_Mag_Blak%Dang Cai Dat %c_Blu_Blak%%SOFTNAME%%c_Mag_Blak%. Vui Long Cho...%c_reset%
+@echo                 The current date and time are: %date%%time%
+@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
-	echo %c_Gre_Blak%Cr4cking %SOFTNAME%...%c_reset%
+	echo Cr4cking %SOFTNAME%...
 	if exist "wget.exe" (
 		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
 		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
@@ -288,14 +302,14 @@ if "%License%"=="Yes" (
 
 :: Shortcut
 if /i "%Shortcut%"=="no" (
-    echo %c_Yel_Blak%Creating shortcut is skipped.%c_reset%
+    echo Creating shortcut is skipped.
     goto CleanUp
 )
 
 if exist "%SOFTLOCATION%" (
 	set "TARGETFILE=%SOFTLOCATION%"
 ) else (
-	echo %c_Red_Blak%%SOFTNAME% does not exist in directory "%SOFTPATH%". Exiting script.%c_reset%
+	echo %SOFTNAME% does not exist in directory "%SOFTPATH%". Exiting script.
 	exit /b 1
 )
 
@@ -313,47 +327,47 @@ cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
 if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
-	echo %c_Gre_Blak%Creating shortcut complete.%c_reset%
+	echo Creating shortcut complete.
 ) else (
-	echo %c_Red_Blak%Creating shortcut failed.%c_reset%
+	echo Creating shortcut failed.
 )
 
 :: Clean Up
 :CleanUp
-del "%FILENAME%"
-if "%License%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
-) else if "%Extract7z%"=="Yes" (
-	del 7z.dll
-	del 7z.exe
-)
+if exist "%FILENAME%" del "%FILENAME%"
+if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
+if exist "7z.dll" del "7z.dll"
+if exist "7z.exe" del "7z.exe"
 
-echo %c_Gre_Blak%The script will automatically close in 3 seconds.%c_reset%
+:: Save the value of the %time% variable after the batch script finishes
+set end_time=%time%
+
+:: Calculate the difference between the two %start_time% and %end_time% values
+set /a elapsed_time=(%end_time:~0,2%*3600 + %end_time:~3,2%*60 + %end_time:~6,2%) - (%start_time:~0,2%*3600 + %start_time:~3,2%*60 + %start_time:~6,2%)
+
+echo Time elapsed: %elapsed_time% seconds.
+
+echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
-	echo %c_Whi_Blak%Closing in %%i seconds...%c_reset%
+	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 	if exist "7z.dll" (
 		tasklist | find /i "7z.dll" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.dll" /f
-		)
-	del "7z.dll"
+		if %errorlevel% equ 0 taskkill /im "7z.dll" /f
+		del "7z.dll"
 	)
+
 	if exist "7z.exe" (
 		tasklist | find /i "7z.exe" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "7z.exe" /f
-		)
-	del "7z.exe"
+		if %errorlevel% equ 0 taskkill /im "7z.exe" /f
+		del "7z.exe"
 	)
+
 	if exist "%FILENAME%" (
 		tasklist | find /i "%FILENAME%" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "%FILENAME%" /f
-		)
-	del "%FILENAME%"
+		if %errorlevel% equ 0 taskkill /im "%FILENAME%" /f
+		del "%FILENAME%"
 	)
 )
-echo %c_Red_Blak%Please close the script manually if automatically close fails.%c_reset%
+echo Please close the script manually if automatically close fails.
 popd

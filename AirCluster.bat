@@ -26,7 +26,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 :: Detect Windows Architecture
@@ -148,7 +148,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Tai %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
@@ -193,7 +193,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 echo Downloading 7-Zip...
@@ -267,7 +267,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
