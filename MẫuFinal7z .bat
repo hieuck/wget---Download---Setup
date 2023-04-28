@@ -78,7 +78,7 @@ if "%License%"=="Yes" (
 
 ::Extract with 7z
 if "%Extract7z%"=="Yes" (
-	set "FILENAME=%SOFTNAME%-HieuckIT.zip "
+	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
 	set "Admin=Yes"
 	set "Shortcut=Yes"
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
