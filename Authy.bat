@@ -39,26 +39,22 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
 set "License="
 set "Extract7z="
-set "SOFTNAME=Bitwarden"
-set "PROCESS=Bitwarden.exe"
+set "SOFTNAME=Authy"
+set "PROCESS=Authy Desktop.exe"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: https://github.com/bitwarden/clients/releases/latest/
+:: Source link: 
 
 if %ARCH%==x86 (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
+	set "LINK=https://electron.authy.com/download?channel=stable&arch=x32&platform=win32&version=latest&product=authy"
+) else (
+	set "LINK=https://electron.authy.com/download?channel=stable&arch=x64&platform=win32&version=latest&product=authy"
 )
 
-set "LINK=https://github.com/bitwarden/clients/releases/latest/download/Bitwarden-Installer-2023.3.2.exe"
 set "QUIETMODE=/S"
-set "SOFTPATH=%LOCALAPPDATA%\Programs\Bitwarden"
+set "SOFTPATH=%LOCALAPPDATA%\Authy"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
