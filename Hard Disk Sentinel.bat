@@ -45,7 +45,7 @@ set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: 
+:: Source link: https://www.harddisksentinel.com/hdsentinel_pro_portable.zip
 
 if %ARCH%==x86 (
 	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
