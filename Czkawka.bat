@@ -26,7 +26,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 :: Detect Windows Architecture
@@ -45,7 +45,7 @@ set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: 
+:: Source link: https://github.com/qarmin/czkawka/releases/latest https://github.com/BtbN/FFmpeg-Builds/releases/latest
 
 set "LINK=https://github.com/qarmin/czkawka/releases/download/5.1.0/windows_czkawka_gui.zip"
 set "NAMEFFMPEG=ffmpeg-n6.0-latest-win64-gpl-6.0"
@@ -148,7 +148,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Tai %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 echo Downloading %SOFTNAME%...
@@ -195,7 +195,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 echo Downloading 7-Zip...
@@ -271,7 +271,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date%%time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
