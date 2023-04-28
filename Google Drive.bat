@@ -41,7 +41,7 @@ set "License="
 set "Extract7z="
 set "SOFTNAME=Google Drive"
 set "PROCESS=launch.bat"
-set "CheckOSVersion=No"
+set "CheckOSVersion=Yes"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
