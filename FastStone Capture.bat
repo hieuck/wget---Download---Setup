@@ -37,7 +37,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
-set "License="
+set "License=Yes"
 set "Extract7z="
 set "SOFTNAME=FastStone Capture"
 set "PROCESS=FSCapture.exe"
