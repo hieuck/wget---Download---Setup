@@ -49,9 +49,9 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source link: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest/
 
 if %ARCH%==x86 (
-	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest/download/npp.8.5.2.Installer.exe"
+	set "LINK=http://download.notepad-plus-plus.org/repository/MISC/nppShell.TEST20/npp.8.5.2.Installer.exe"
 ) else (
-	set "LINK=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest/download/npp.8.5.2.Installer.x64.exe"
+	set "LINK=http://download.notepad-plus-plus.org/repository/MISC/nppShell.TEST20/npp.8.5.2.Installer.x64.exe"
 )
 set "QUIETMODE=/S"
 set "SOFTPATH=%PROGRAMFILES%\Notepad++"
