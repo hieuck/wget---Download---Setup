@@ -45,19 +45,15 @@ set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: https://www.google.com/intl/vi_ALL/earth/versions/download-thank-you/?usagestats=1
+:: Source link: https://support.google.com/earth/answer/168344?hl=en
 
 if %ARCH%==x86 (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
+	set "LINK=https://dl.google.com/dl/earth/client/advanced/current/googleearthprowin-7.3.6.exe"
+) else (
+	set "LINK=https://dl.google.com/dl/earth/client/advanced/current/googleearthprowin-7.3.6-x64.exe"
 )
 
-set "LINK=https://dl.google.com/dl/earth/client/advanced/current/googleearthprowin-7.3.4-x64.exe"
-set "QUIETMODE=/S"
+set "QUIETMODE=OMAHA=1"
 set "SOFTPATH=%PROGRAMFILES%\Google\Google Earth Pro\client"
 
 :: Set up information related to software cr4cking
