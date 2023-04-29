@@ -45,7 +45,7 @@ set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: https://support.google.com/earth/answer/168344?hl=en
+:: Source link: https://support.google.com/earth/answer/168344?hl=vi
 
 if %ARCH%==x86 (
 	set "LINK=https://dl.google.com/dl/earth/client/advanced/current/googleearthprowin-7.3.6.exe"
