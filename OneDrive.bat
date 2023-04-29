@@ -45,7 +45,7 @@ set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: 
+:: Source link: https://www.microsoft.com/vi-vn/microsoft-365/onedrive/download
 
 if %ARCH%==x86 (
 	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
@@ -56,7 +56,7 @@ if %ARCH%==x86 (
 	exit
 )
 
-set "LINK=https://oneclient.sfx.ms/Win/Prod/22.131.0619.0001/amd64/OneDriveSetup.exe"
+set "LINK=https://go.microsoft.com/fwlink/p/?LinkID=2182910&clcid=0x42a&culture=vi-vn&country=VN"
 set "QUIETMODE=/S"
 set "SOFTPATH=%PROGRAMFILES%\Microsoft OneDrive"
 
