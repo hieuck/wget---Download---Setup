@@ -53,8 +53,8 @@ if %ARCH%==x86 (
 	set "LINK=http://installer.jdownloader.org/JD2SilentSetup_x64.exe"
 )
 
-set "QUIETMODE=-q"
-set "SOFTPATH=%PROGRAMFILES%\JDownloader"
+set "SOFTPATH=%LOCALAPPDATA%\JDownloader 2.0"
+set "QUIETMODE=-q -dir "%SOFTPATH%""
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
