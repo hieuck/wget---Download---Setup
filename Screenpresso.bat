@@ -297,6 +297,7 @@ if "%License%"=="Yes" (
 )
 
 echo Please exit Screenpresso when the 'Operation succeeded' command below appears
+echo Once Screenpresso is launched, please exit the application.
 netsh advfirewall firewall show rule name="Block Screenpresso" > nul
 if %errorlevel% neq 0 (
     netsh advfirewall firewall add rule name="Block Screenpresso" dir=out action=block program="%ProgramFiles%\Learnpulse\Screenpresso\Screenpresso.exe" enable=yes
