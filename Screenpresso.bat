@@ -231,7 +231,7 @@ echo.
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-echo Installing %SOFTNAME%...Please 'Delete the key' if 'The license key is invalid.'
+echo Installing %SOFTNAME%... Please 'Delete the key' if 'The license key is invalid.'
 if "%Extract7z%"=="Yes" (
 	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
 ) else (
