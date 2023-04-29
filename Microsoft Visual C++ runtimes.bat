@@ -308,34 +308,20 @@ if "%Extract7z%"=="Yes" (
 
 setlocal EnableDelayedExpansion
 if %ARCH%==X86 (
-	:: Check Visual C++ Runtimes version
+	:: Check Visual C++ Runtimes installed
 	reg query "HKLM\Software\Microsoft\VisualStudio\14.0\VC\Runtimes\X86" /v Version > nul 2>&1
 	if %errorlevel% equ 0 (
-		for /f "tokens=3" %%i in ('reg query "HKLM\Software\Microsoft\VisualStudio\14.0\VC\Runtimes\X86" /v Version') do (
-			set Visual_version=%%i
-		)
-	)
-
-	:: Compare Visual C++ version with maximum supported version
-	if "!Visual_version!" geq "14.34.31931.00" (
-		echo Visual C++ Runtimes X86 is up to date.
+		echo Visual C++ Runtimes X86 is installed.
 	) else (
-		echo Visual C++ Runtimes X86 is not up to date.
+		echo Visual C++ Runtimes X86 is not installed.
 	)
 ) else (
-	:: Check Visual C++ Runtimes version
+	:: Check Visual C++ Runtimes installed
 	reg query "HKLM\Software\Microsoft\VisualStudio\14.0\VC\Runtimes\X64" /v Version > nul 2>&1
 	if %errorlevel% equ 0 (
-		for /f "tokens=3" %%i in ('reg query "HKLM\Software\Microsoft\VisualStudio\14.0\VC\Runtimes\X64" /v Version') do (
-			set Visual_version=%%i
-		)
-	)
-
-	:: Compare Visual C++ version with maximum supported version
-	if "!Visual_version!" geq "14.34.31931.00" (
-		echo Visual C++ Runtimes X64 is up to date.
+		echo Visual C++ Runtimes X64 is installed.
 	) else (
-		echo Visual C++ Runtimes X64 is not up to date.
+		echo Visual C++ Runtimes X64 is not installed.
 	)
 )
 endlocal
