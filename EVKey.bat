@@ -40,12 +40,18 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 set "License=Yes"
 set "Extract7z=Yes"
 set "SOFTNAME=EVKey"
-set "PROCESS=EVKey32.exe" &set "PROCESS=EVKey64.exe"
+set "PROCESS="
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 :: Source link: 
+
+if %ARCH%==x86 (
+	set "PROCESS=EVKey32.exe"
+) else (
+	set "PROCESS=EVKey64.exe"
+)
 
 set "LINK=https://github.com/lamquangminh/EVKey/releases/download/Release/EVKey.zip"
 set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
@@ -72,11 +78,8 @@ if "%Extract7z%"=="Yes" (
 	set "Shortcut=No"
 	set "FILENAME=%SOFTNAME%-HieuckIT.exe "
 )
-if %ARCH%==x86 (
-	set "SOFTLOCATION=%SOFTPATH%\EVKey32.exe"
-) else (
-	set "SOFTLOCATION=%SOFTPATH%\EVKey64.exe"
-)
+set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
+
 ::Check Windows OS Version
 if /i "%CheckOSVersion%"=="no" (
 	goto SkipCheckOSVersion
