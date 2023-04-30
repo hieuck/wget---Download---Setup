@@ -53,7 +53,7 @@ if %ARCH%==x86 (
 	set "LINK=https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe"
 )
 
-set "QUIETMODE=/install"
+set "QUIETMODE=/silent /forcedcmdline "do-not-launch- chrome --force-add-firewall-rules" /install"
 set "SOFTPATH=%PROGRAMFILES%\CocCoc\Browser\Application"
 
 :: Set up information related to software cr4cking
