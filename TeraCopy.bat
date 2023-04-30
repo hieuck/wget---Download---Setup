@@ -160,7 +160,7 @@ if exist "wget.exe" (
 		echo.
 		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
 		echo. >> %temp%\download_error.txt
-		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget/wget.exe >> %temp%\download_error.txt
+		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %temp%\download_error.txt
 		echo wget: https://eternallybored.org/misc/wget/ >> %temp%\download_error.txt
 		echo curl: https://curl.se/download.html >> %temp%\download_error.txt
 		type "%temp%\download_error.txt"
