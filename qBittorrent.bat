@@ -41,7 +41,7 @@ set "License="
 set "Extract7z="
 set "SOFTNAME=qBittorrent"
 set "PROCESS=qBittorrent.exe"
-set "CheckOSVersion=No"
+set "CheckOSVersion=Yes"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
@@ -56,7 +56,7 @@ if %ARCH%==x86 (
 	exit
 )
 
-set "LINK=https://sourceforge.net/projects/qbittorrent/files/qbittorrent-win32/qbittorrent-4.5.2/qbittorrent_4.5.2_lt20_qt6_x64_setup.exe/download"
+set "LINK=https://udomain.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-4.5.2/qbittorrent_4.5.2_lt20_qt6_x64_setup.exe"
 set "QUIETMODE=/S"
 set "SOFTPATH=%PROGRAMFILES%\qBittorrent"
 
@@ -100,14 +100,15 @@ for /f "tokens=5 delims=[.] " %%i in ('ver') do (
 set "version=%version1%.%version2%"
 
 if "%version%"=="6.1" (
-	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
+	echo Sorry, this software is not compatible with Windows 7. Starting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
+		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
-	exit
 )
 endlocal
+
+set "LINK=https://udomain.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-4.5.2/qbittorrent_4.5.2_lt20_qt5_x64_setup.exe"
 
 :SkipCheckOSVersion
 

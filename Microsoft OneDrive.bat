@@ -48,17 +48,13 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source link: https://www.microsoft.com/vi-vn/microsoft-365/onedrive/download
 
 if %ARCH%==x86 (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
+	set "LINK=https://go.microsoft.com/fwlink/?linkid=2188442"
+) else (
+	set "LINK=https://go.microsoft.com/fwlink/p/?LinkID=2182910&clcid=0x42a&culture=vi-vn&country=VN"
 )
 
-set "LINK=https://go.microsoft.com/fwlink/p/?LinkID=2182910&clcid=0x42a&culture=vi-vn&country=VN"
 set "QUIETMODE=/S"
-set "SOFTPATH=%PROGRAMFILES%\Microsoft OneDrive"
+set "SOFTPATH=%LOCALAPPDATA%\Microsoft\OneDrive"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
@@ -100,14 +96,15 @@ for /f "tokens=5 delims=[.] " %%i in ('ver') do (
 set "version=%version1%.%version2%"
 
 if "%version%"=="6.1" (
-	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
+	echo Sorry, this software is not compatible with Windows 7. Starting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
+		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
-	exit
 )
 endlocal
+
+set "LINK=https://go.microsoft.com/fwlink/?linkid=2188322"
 
 :SkipCheckOSVersion
 
@@ -282,12 +279,16 @@ pushd "%~dp0"
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		if not exist "7z.dll" if not exist "7z.exe" (
+			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
+			wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		)
 		wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" -U "%USERAGENT%" "%CR4CKLINK%"
 	) else (
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		if not exist "7z.dll" if not exist "7z.exe" (
+			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
+			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		)
 		curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	)
 	if exist "%CR4CKFILE%" (
