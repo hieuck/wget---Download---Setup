@@ -37,10 +37,10 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
-set "License="
+set "License=Yes"
 set "Extract7z="
-set "SOFTNAME=VMware Workstation 17 Pro"
-set "PROCESS=vmware.exe"
+set "SOFTNAME=TeamViewer"
+set "PROCESS=TeamViewer.exe"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -48,22 +48,18 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source link: 
 
 if %ARCH%==x86 (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
+	set "LINK=https://download.teamviewer.com/download/TeamViewer_Setup.exe"
+) else (
+	set "LINK=https://download.teamviewer.com/download/TeamViewer_Setup_x64.exe"
 )
 
-set "LINK=https://www.vmware.com/go/getworkstation-win"
-set "QUIETMODE=/s /v"/qn EULAS_AGREED=1 SERIALNUMBER="MC60H-DWHD5-H80U9-6V85M-8280D" ADDLOCAL=ALL REBOOT=ReallySuppress""
-set "SOFTPATH=%PROGRAMFILES(X86)%\VMware\VMware Workstation"
+set "QUIETMODE=/S"
+set "SOFTPATH=%PROGRAMFILES%\TeamViewer"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday"
+	set "CR4CKFILE=TeamViewerCr4ck"
 	set "CR4CKPATH=%SOFTPATH%"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
@@ -79,7 +75,7 @@ if "%Extract7z%"=="Yes" (
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
-	set "Shortcut=No"
+	set "Shortcut=Yes"
 	set "FILENAME=%SOFTNAME%-HieuckIT.exe "
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
@@ -280,7 +276,7 @@ echo.
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
-	echo Cr4cking %SOFTNAME%...
+	echo Downloading %SOFTNAME% ID Reset...
 	if exist "wget.exe" (
 		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
 		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
@@ -292,10 +288,10 @@ if "%License%"=="Yes" (
 	)
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
-		echo Successfully Cr4cked %SOFTNAME%.
+		echo Successfully Downloaded %SOFTNAME% ID Reset.
 		del "%CR4CKFILE%"
 	) else (
-		echo Cr4cking %SOFTNAME% failed.
+		echo Downloading %SOFTNAME% ID Reset failed.
 		echo Please try running the script as Administrator.
 	)
 )
@@ -306,27 +302,27 @@ if /i "%Shortcut%"=="no" (
     goto CleanUp
 )
 
-if exist "%SOFTLOCATION%" (
-	set "TARGETFILE=%SOFTLOCATION%"
+if exist "%SOFTPATH%\TVTools_AlterID.exe" (
+	set "TARGETFILE=%SOFTPATH%\TVTools_AlterID.exe"
 ) else (
-	echo %SOFTNAME% does not exist in directory "%SOFTPATH%". Exiting script.
+	echo %SOFTNAME% ID Reset does not exist in directory "%SOFTPATH%". Exiting script.
 	exit /b 1
 )
 
-set "SHORTCUTNAME=%SOFTNAME%.lnk"
-set "SHORTCUTPATH=%PUBLIC%\Desktop\%SHORTCUTNAME%"
+set "SHORTCUTNAME=%SOFTNAME% ID Reset.lnk"
+set "SHORTCUTPATH=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
 echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
 echo oLink.TargetPath = "%TARGETFILE%" >> CreateShortcut.vbs
 echo oLink.WorkingDirectory = "%SOFTPATH%" >> CreateShortcut.vbs
-echo oLink.Description = "Shortcut to %SOFTNAME%" >> CreateShortcut.vbs
+echo oLink.Description = "Shortcut to %SOFTNAME% ID Reset" >> CreateShortcut.vbs
 echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
-if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
+if exist "%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
 	echo Creating shortcut complete.
 ) else (
 	echo Creating shortcut failed.

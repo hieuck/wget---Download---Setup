@@ -37,10 +37,10 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
-set "License="
+set "License=Yes"
 set "Extract7z="
-set "SOFTNAME=VMware Workstation 17 Pro"
-set "PROCESS=vmware.exe"
+set "SOFTNAME=TreeSize Professional"
+set "PROCESS=TreeSize.exe"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -56,14 +56,14 @@ if %ARCH%==x86 (
 	exit
 )
 
-set "LINK=https://www.vmware.com/go/getworkstation-win"
-set "QUIETMODE=/s /v"/qn EULAS_AGREED=1 SERIALNUMBER="MC60H-DWHD5-H80U9-6V85M-8280D" ADDLOCAL=ALL REBOOT=ReallySuppress""
-set "SOFTPATH=%PROGRAMFILES(X86)%\VMware\VMware Workstation"
+set "LINK=https://downloads.jam-software.de/treesize/TreeSize-x64-Demo.exe"
+set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
+set "SOFTPATH=%PROGRAMFILES%\JAM Software\TreeSize"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday"
+	set "CR4CKFILE=TreeSizeProfessionalCr4ck"
 	set "CR4CKPATH=%SOFTPATH%"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"

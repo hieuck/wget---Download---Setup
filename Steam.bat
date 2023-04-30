@@ -39,8 +39,8 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
 set "License="
 set "Extract7z="
-set "SOFTNAME=VMware Workstation 17 Pro"
-set "PROCESS=vmware.exe"
+set "SOFTNAME=Steam"
+set "PROCESS=Steam.exe"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -56,9 +56,9 @@ if %ARCH%==x86 (
 	exit
 )
 
-set "LINK=https://www.vmware.com/go/getworkstation-win"
-set "QUIETMODE=/s /v"/qn EULAS_AGREED=1 SERIALNUMBER="MC60H-DWHD5-H80U9-6V85M-8280D" ADDLOCAL=ALL REBOOT=ReallySuppress""
-set "SOFTPATH=%PROGRAMFILES(X86)%\VMware\VMware Workstation"
+set "LINK=https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe"
+set "QUIETMODE=/S"
+set "SOFTPATH=%PROGRAMFILES(X86)%\Steam"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (

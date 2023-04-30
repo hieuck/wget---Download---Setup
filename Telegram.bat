@@ -39,8 +39,8 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
 set "License="
 set "Extract7z="
-set "SOFTNAME=VMware Workstation 17 Pro"
-set "PROCESS=vmware.exe"
+set "SOFTNAME=Telegram"
+set "PROCESS=Telegram.exe"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -48,17 +48,13 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source link: 
 
 if %ARCH%==x86 (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
+	set "LINK=https://telegram.org/dl/desktop/win"
+) else (
+	set "LINK=https://telegram.org/dl/desktop/win64"
 )
 
-set "LINK=https://www.vmware.com/go/getworkstation-win"
-set "QUIETMODE=/s /v"/qn EULAS_AGREED=1 SERIALNUMBER="MC60H-DWHD5-H80U9-6V85M-8280D" ADDLOCAL=ALL REBOOT=ReallySuppress""
-set "SOFTPATH=%PROGRAMFILES(X86)%\VMware\VMware Workstation"
+set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
+set "SOFTPATH=%APPDATA%\Telegram Desktop"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
