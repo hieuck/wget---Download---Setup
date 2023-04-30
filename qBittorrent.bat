@@ -25,7 +25,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date%%time%
+@echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -45,7 +45,7 @@ set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: 
+:: Source link: https://sourceforge.net/projects/qbittorrent/files/qbittorrent-win32
 
 if %ARCH%==x86 (
 	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
@@ -56,7 +56,7 @@ if %ARCH%==x86 (
 	exit
 )
 
-set "LINK=danvaoday"
+set "LINK=https://sourceforge.net/projects/qbittorrent/files/qbittorrent-win32/qbittorrent-4.5.2/qbittorrent_4.5.2_lt20_qt6_x64_setup.exe/download"
 set "QUIETMODE=/S"
 set "SOFTPATH=%PROGRAMFILES%\qBittorrent"
 
@@ -156,7 +156,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date%%time%
+@echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -201,7 +201,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date%%time%
+@echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -231,7 +231,7 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date%%time%
+@echo                 The current date and time are: %date% %time%
 @echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
@@ -275,19 +275,23 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
-@echo                 The current date and time are: %date%%time%
+@echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		if not exist "7z.dll" if not exist "7z.exe" (
+			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
+			wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		)
 		wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" -U "%USERAGENT%" "%CR4CKLINK%"
 	) else (
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		if not exist "7z.dll" if not exist "7z.exe" (
+			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
+			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		)
 		curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	)
 	if exist "%CR4CKFILE%" (
