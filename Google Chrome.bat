@@ -54,7 +54,7 @@ if %ARCH%==x86 (
 )
 
 set "QUIETMODE="
-set "SOFTPATH=danvaoday"
+set "SOFTPATH=%PROGRAMFILES%\Google\Chrome\Application"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
