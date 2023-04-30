@@ -48,12 +48,12 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source link: 
 
 if %ARCH%==x86 (
-	set "LINK=https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BE228F419-DCE7-51FD-3BC3-5E0960BEC364%7D%26lang%3Dvi%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dstable-arch_x86-statsdef_1%26installdataindex%3Dempty/update2/installers/ChromeSetup.exe"
+	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetup32.exe"
 ) else (
-	set "LINK=https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7BE228F419-DCE7-51FD-3BC3-5E0960BEC364%7D%26lang%3Dvi%26browser%3D4%26usagestats%3D1%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Dempty/update2/installers/ChromeSetup.exe"
+	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetup64.exe"
 )
 
-set "QUIETMODE=/S"
+set "QUIETMODE="
 set "SOFTPATH=danvaoday"
 
 :: Set up information related to software cr4cking
