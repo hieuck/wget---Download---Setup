@@ -288,12 +288,16 @@ pushd "%~dp0"
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		if not exist "7z.dll" if not exist "7z.exe" (
+			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
+			wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		)
 		wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" -U "%USERAGENT%" "%CR4CKLINK%"
 	) else (
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		if not exist "7z.dll" if not exist "7z.exe" (
+			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
+			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		)
 		curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	)
 	if exist "%CR4CKFILE%" (
