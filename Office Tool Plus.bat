@@ -37,11 +37,11 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
-set "License="
+set "License=Yes"
 set "Extract7z=Yes"
 set "SOFTNAME=Office Tool Plus"
 set "PROCESS=Office Tool Plus.exe"
-set "CheckOSVersion=No"
+set "CheckOSVersion=Yes"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
@@ -56,8 +56,8 @@ if %ARCH%==x86 (
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKPATH=%SOFTPATH%"
+	set "CR4CKFILE=MAS_AIO"
+	set "CR4CKPATH=%PROGRAMFILES%\%SOFTNAME%\Office Tool"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
@@ -75,7 +75,7 @@ if "%Extract7z%"=="Yes" (
 	set "Shortcut=No"
 	set "FILENAME=%SOFTNAME%-HieuckIT.exe "
 )
-set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
+set "SOFTLOCATION=%SOFTPATH%\Office Tool\%PROCESS%"
 
 ::Check Windows OS Version
 if /i "%CheckOSVersion%"=="no" (
@@ -253,6 +253,14 @@ echo %SOFTNAME% has been installed successfully.
 timeout /t 3
 :end
 
+::Install Office
+cd "%SOFTPATH%\Office Tool"
+if %ARCH%==x86 (
+	.\"Office Tool Plus.Console" deploy /addProduct ProPlus2021Volume_en-us_Teams /clientEdition 32 /channel PerpetualVL2021 /acceptEULA /createShortcuts
+) else (
+	.\"Office Tool Plus.Console" deploy /addProduct ProPlus2021Volume_en-us_Teams /clientEdition 64 /channel PerpetualVL2021 /acceptEULA /createShortcuts
+)
+
 :: License
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
@@ -289,6 +297,7 @@ if "%License%"=="Yes" (
 	)
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
+		"%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office
 		echo Successfully Cr4cked %SOFTNAME%.
 		del "%CR4CKFILE%"
 	) else (
