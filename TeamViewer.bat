@@ -310,7 +310,7 @@ if exist "%SOFTPATH%\TVTools_AlterID.exe" (
 )
 
 set "SHORTCUTNAME=%SOFTNAME% ID Reset.lnk"
-set "SHORTCUTPATH=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
+set "SHORTCUTPATH=%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
@@ -322,7 +322,7 @@ echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
-if exist "%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
+if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
 	echo Creating shortcut complete.
 ) else (
 	echo Creating shortcut failed.

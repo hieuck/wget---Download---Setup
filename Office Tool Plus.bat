@@ -320,7 +320,7 @@ if exist "%SOFTLOCATION%" (
 )
 
 set "SHORTCUTNAME=%SOFTNAME%.lnk"
-set "SHORTCUTPATH=%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
+set "SHORTCUTPATH=%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
@@ -332,7 +332,11 @@ echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
-if exist "%APPDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
+if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
+	copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" "%PUBLIC%\Desktop"
+	copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%PUBLIC%\Desktop"
+	copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%PUBLIC%\Desktop"
+	copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%PUBLIC%\Desktop"
 	echo Creating shortcut complete.
 ) else (
 	echo Creating shortcut failed.
