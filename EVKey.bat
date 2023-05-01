@@ -54,7 +54,6 @@ if %ARCH%==x86 (
 )
 
 set "LINK=https://github.com/lamquangminh/EVKey/releases/download/Release/EVKey.zip"
-set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
