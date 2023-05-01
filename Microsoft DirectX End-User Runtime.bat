@@ -247,6 +247,23 @@ if "%directx_version%" geq "4.09.00.0904" (
 ) else (
     echo DirectX End-User Runtime is not up to date.
 )
+
+:: Check if .NET Framework 3.5 is already enabled
+reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5" /v Install >nul 2>&1
+
+:: If .NET Framework 3.5 is not enabled, enable it using DISM
+if %errorlevel% neq 0 (
+    echo .NET Framework 3.5 is not enabled on this system
+    echo Enabling .NET Framework 3.5...
+    DISM /Online /Enable-Feature /FeatureName:NetFx3 /All
+    if %errorlevel% equ 0 (
+        echo .NET Framework 3.5 has been successfully enabled
+    ) else (
+        echo An error occurred while enabling .NET Framework 3.5
+    )
+) else (
+    echo .NET Framework 3.5 is already enabled on this system
+)
 endlocal
 
 timeout /t 3
