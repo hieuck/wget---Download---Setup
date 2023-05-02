@@ -256,9 +256,9 @@ timeout /t 3
 ::Install Office
 cd "%SOFTPATH%\Office Tool"
 if %ARCH%==x86 (
-	.\"Office Tool Plus.Console" deploy /addProduct ProPlus2021Volume_en-us_Teams /clientEdition 32 /channel PerpetualVL2021 /acceptEULA /createShortcuts
+	.\"Office Tool Plus.Console" deploy /addProduct ProPlus2021Volume_en-us_Teams /clientEdition 32 /channel PerpetualVL2021 /acceptEULA
 ) else (
-	.\"Office Tool Plus.Console" deploy /addProduct ProPlus2021Volume_en-us_Teams /clientEdition 64 /channel PerpetualVL2021 /acceptEULA /createShortcuts
+	.\"Office Tool Plus.Console" deploy /addProduct ProPlus2021Volume_en-us_Teams /clientEdition 64 /channel PerpetualVL2021 /acceptEULA
 )
 
 :: License
