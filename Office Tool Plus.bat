@@ -297,7 +297,6 @@ if "%License%"=="Yes" (
 	)
 	if exist "%CR4CKFILE%" (
 		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
-		"%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office
 		echo Successfully Cr4cked %SOFTNAME%.
 		del "%CR4CKFILE%"
 	) else (
@@ -379,5 +378,6 @@ for /l %%i in (3,-1,1) do (
 		del "%FILENAME%"
 	)
 )
+"%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office
 echo Please close the script manually if automatically close fails.
 popd
