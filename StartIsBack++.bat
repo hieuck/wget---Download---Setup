@@ -40,7 +40,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 set "License="
 set "Extract7z="
 set "SOFTNAME=StartIsBack++"
-set "PROCESS=StartAllBackCfg.exe"
+set "PROCESS=StartIsBackCfg.exe"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -254,6 +254,9 @@ goto end
 :installed
 echo %SOFTNAME% has been installed successfully.
 timeout /t 3
+tasklist | find /i "explorer.exe" > nul
+if %errorlevel% equ 1 start explorer.exe
+
 :end
 
 :: License
