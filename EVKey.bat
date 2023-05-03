@@ -37,7 +37,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
-set "License=Yes"
+set "License="
 set "Extract7z=Yes"
 set "SOFTNAME=EVKey"
 set "PROCESS="
@@ -53,7 +53,7 @@ if %ARCH%==x86 (
 	set "PROCESS=EVKey64.exe"
 )
 
-set "LINK=https://github.com/lamquangminh/EVKey/releases/download/Release/EVKey.zip"
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/EVKey.zip"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
