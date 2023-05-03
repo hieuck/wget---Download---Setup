@@ -37,7 +37,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
-set "License="
+set "License=Yes"
 set "Extract7z=Yes"
 set "SOFTNAME=EVKey"
 set "PROCESS="
@@ -45,7 +45,7 @@ set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: https://github.com/lamquangminh/EVKey/releases/download/Release/EVKey.zip
+:: Source link: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/EVKey.zip
 
 if %ARCH%==x86 (
 	set "PROCESS=EVKey32.exe"
@@ -53,13 +53,13 @@ if %ARCH%==x86 (
 	set "PROCESS=EVKey64.exe"
 )
 
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/EVKey.zip"
+set "LINK=https://github.com/lamquangminh/EVKey/releases/download/Release/EVKey.zip"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "CR4CKFILE=EVKeyCr4ck"
-	set "CR4CKPATH=%SOFTPATH%"
+	set "CR4CKPATH=%PROGRAMFILES%\%SOFTNAME%"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
