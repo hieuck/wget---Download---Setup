@@ -282,12 +282,16 @@ pushd "%~dp0"
 if "%License%"=="Yes" (
 	echo Cr4cking %SOFTNAME%...
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		if not exist "7z.dll" if not exist "7z.exe" (
+			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
+			wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		)
 		wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" -U "%USERAGENT%" "%CR4CKLINK%"
 	) else (
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		if not exist "7z.dll" if not exist "7z.exe" (
+			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
+			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		)
 		curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
 	)
 	if exist "%CR4CKFILE%" (
@@ -343,8 +347,12 @@ if exist "7z.exe" del "7z.exe"
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
 
-:: Calculate the difference between the two %start_time% and %end_time% values
-set /a elapsed_time=(%end_time:~0,2%*3600 + %end_time:~3,2%*60 + %end_time:~6,2%) - (%start_time:~0,2%*3600 + %start_time:~3,2%*60 + %start_time:~6,2%)
+:: Convert the start and end times to seconds
+for /f "tokens=1-3 delims=:." %%a in ("%start_time%") do set /a "start_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
+for /f "tokens=1-3 delims=:." %%a in ("%end_time%") do set /a "end_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
+
+:: Calculate the elapsed time in seconds
+set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
 
