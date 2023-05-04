@@ -305,7 +305,7 @@ if "%License%"=="Yes" (
 		goto CleanUp
 	)
 )
-
+::Close Setup
 tasklist | find /i "OfficeC2RClient.exe" > nul
 if %errorlevel% equ 0 taskkill /im "OfficeC2RClient.exe" /f
 
