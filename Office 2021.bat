@@ -344,6 +344,7 @@ if exist "%FILENAME%" del "%FILENAME%"
 if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
 if exist "7z.dll" del "7z.dll"
 if exist "7z.exe" del "7z.exe"
+if exist "Configuration.xml" del "Configuration.xml"
 
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
