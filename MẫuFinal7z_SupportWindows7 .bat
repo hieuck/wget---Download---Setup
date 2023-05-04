@@ -36,14 +36,14 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set License Extract7z Soft Process Name SupportOldWindows Support32Bit User Agent
+:: Set License Extract7z Soft Process Name OldWindows 32Bit Support User Agent
 set "License="
 set "Extract7z="
 set "SoftName=danvaoday"
 set "Process=danvaoday.exe"
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
-set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
 :: Source link: 
@@ -52,13 +52,13 @@ set "Link="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-
 set "LinkForNewWindows32bit="
 set "LinkForNewWindows64bit="
 
 set "SoftPath="
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
+
 set "QuietMode=/S"
 
 :: Set up information related to software cr4cking
@@ -71,19 +71,19 @@ if "%License%"=="Yes" (
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 )
 
-::Extract with 7z
+:: Extract with 7z
 if "%Extract7z%"=="Yes" (
 	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Admin=Yes"
 	set "Shortcut=Yes"
-	set "SoftPath=%PROGRAMFILES%\%SoftName%"
+	set "SoftPath=%ProgramFiles%\%SoftName%"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
 	set "Shortcut=No"
 	set "FileName=%SoftName%-HieuckIT.exe "
 )
-set "SOFTLOCATION=%SoftPath%\%Process%"
+set "SoftLocation=%SoftPath%\%Process%"
 
 :: Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="no" (
@@ -120,10 +120,10 @@ if /i "%SupportOldWindows%"=="no" (
 	exit
 ) else (
 	if "%ARCH%"=="x86" (
-		if not "%LinkForOldWindows32bit%"=="" set "LINK=%LinkForOldWindows32bit%"
+		if not "%LinkForOldWindows32bit%"=="" set "Link=%LinkForOldWindows32bit%"
 		if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
 	) else (
-		if not "%LinkForOldWindows64bit%"=="" set "LINK=%LinkForOldWindows64bit%"
+		if not "%LinkForOldWindows64bit%"=="" set "Link=%LinkForOldWindows64bit%"
 		if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
 	)
 )
@@ -131,10 +131,10 @@ goto NextStepForCheckOSVersion
 
 :ForWindows10
 if "%ARCH%"=="x86" (
-	if not "%LinkForNewWindows32bit%"=="" set "LINK=%LinkForNewWindows32bit%"
+	if not "%LinkForNewWindows32bit%"=="" set "Link=%LinkForNewWindows32bit%"
 	if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
 ) else (
-	if not "%LinkForNewWindows64bit%"=="" set "LINK=%LinkForNewWindows64bit%"
+	if not "%LinkForNewWindows64bit%"=="" set "Link=%LinkForNewWindows64bit%"
 	if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
 )
 
@@ -190,9 +190,9 @@ echo.
 pushd "%~dp0"
 echo Downloading %SoftName%...
 if exist "wget.exe" (
-	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%USERAGENT%" "%LINK%"
+	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 ) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FileName%" "%LINK%" --insecure || (
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
 		if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
 		echo.
 		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
@@ -236,11 +236,11 @@ pushd "%~dp0"
 echo Downloading 7-Zip...
 if "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%Link7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%Link7zexe%"
+		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
+		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
 	) else (
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%Link7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%Link7zexe%" --insecure
+		curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.dll" "%Link7zdll%" --insecure
+		curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.exe" "%Link7zexe%" --insecure
 	)
 )
 
@@ -277,7 +277,7 @@ set count=0
 :waitloop
 timeout /t 1 /nobreak > nul
 set /a count+=1
-if exist "%SOFTLOCATION%" goto installed
+if exist "%SoftLocation%" goto installed
 if !count! equ 30 goto timeout
 goto waitloop
 :timeout
@@ -311,21 +311,21 @@ if "%License%"=="Yes" (
 	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
 		if not exist "7z.dll" if not exist "7z.exe" (
-			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%Link7zdll%"
-			wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%Link7zexe%"
+			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
+			wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
 		)
-		wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" -U "%USERAGENT%" "%CR4CKLINK%"
+		wget --no-check-certificate --show-progress -q -O "%Cr4ckFile%" -U "%UserAgent%" "%Cr4ckLink%"
 	) else (
 		if not exist "7z.dll" if not exist "7z.exe" (
-			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%Link7zdll%" --insecure
-			curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%Link7zexe%" --insecure
+			curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.dll" "%Link7zdll%" --insecure
+			curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.exe" "%Link7zexe%" --insecure
 		)
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
+		curl -L --max-redirs 20 -A "%UserAgent%" -o "%Cr4ckFile%" "%Cr4ckLink%" --insecure
 	)
-	if exist "%CR4CKFILE%" (
-		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
+	if exist "%Cr4ckFile%" (
+		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
 		echo Successfully Cr4cked %SoftName%.
-		del "%CR4CKFILE%"
+		del "%Cr4ckFile%"
 	) else (
 		echo Cr4cking %SoftName% failed.
 		echo Please try running the script as Administrator.
@@ -339,8 +339,8 @@ if /i "%Shortcut%"=="no" (
     goto CleanUp
 )
 
-if exist "%SOFTLOCATION%" (
-	set "TargetFile=%SOFTLOCATION%"
+if exist "%SoftLocation%" (
+	set "TargetFile=%SoftLocation%"
 ) else (
 	echo %SoftName% does not exist in directory "%SoftPath%". Exiting script.
 	exit /b 1
