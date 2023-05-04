@@ -119,6 +119,7 @@ exit
 goto NextStepForCheckOSVersion
 
 :ForWindows10
+
 :NextStepForCheckOSVersion
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
