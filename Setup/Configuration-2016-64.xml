@@ -6,5 +6,5 @@
   </Add>
   <Display AcceptEULA="True" />
   <Updates Enabled="false" />
-  <Extend DownloadFirst="true" Module="1" CreateShortcuts="true" />
+  <Extend DownloadFirst="true" CreateShortcuts="true" />
 </Configuration>
