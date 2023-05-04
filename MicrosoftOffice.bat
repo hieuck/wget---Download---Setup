@@ -101,14 +101,15 @@ if "%version%"=="6.1" (
 		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
-	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
-	if %ARCH%==x86 (
-		set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
-	) else (
-		set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
-	)
 )
 endlocal
+
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
+if %ARCH%==x86 (
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
+) else (
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
+)
 
 :SkipCheckOSVersion
 
@@ -335,11 +336,12 @@ if "%version%"=="6.1" (
 		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
-	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
-	timeout /t 3
-	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
 )
 endlocal
+
+call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
+timeout /t 3
+call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
 
 :SkipCheckOSVersion2
 call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
