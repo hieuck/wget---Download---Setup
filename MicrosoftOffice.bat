@@ -111,6 +111,7 @@ if "%version%"=="6.1" (
 endlocal
 
 :SkipCheckOSVersion
+
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
