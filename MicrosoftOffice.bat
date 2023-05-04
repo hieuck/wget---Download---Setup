@@ -335,14 +335,14 @@ if "%version%"=="6.1" (
 		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
-	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask
+	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
 	timeout /t 3
-	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office
+	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
 )
 endlocal
 
 :SkipCheckOSVersion2
-call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office
+call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
 
 :: Shortcut
 if /i "%Shortcut%"=="no" (
@@ -436,5 +436,7 @@ for /l %%i in (3,-1,1) do (
 		del "%FILENAME%"
 	)
 )
+tasklist | find /i "OfficeC2RClient.exe" > nul
+if %errorlevel% equ 0 taskkill /im "OfficeC2RClient.exe" /f
 echo Please close the script manually if automatically close fails.
 popd
