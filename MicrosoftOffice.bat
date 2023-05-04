@@ -339,9 +339,8 @@ if "%version%"=="6.1" (
 )
 endlocal
 
-call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
-timeout /t 3
 call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
+timeout /t 3
 
 :SkipCheckOSVersion2
 call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
