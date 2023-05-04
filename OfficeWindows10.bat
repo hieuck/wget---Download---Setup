@@ -39,7 +39,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
 set "License=Yes"
 set "Extract7z="
-set "SOFTNAME=Office 2021"
+set "SOFTNAME=Office Windows 10"
 set "PROCESS=OfficeClickToRun.exe"
 set "CheckOSVersion=Yes"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -47,7 +47,7 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source link: 
 
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetup.exe"
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows10.exe"
 if %ARCH%==x86 (
 	set "CONFIG2021=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-32.xml"
 ) else (
