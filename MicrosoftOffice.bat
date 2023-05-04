@@ -101,17 +101,16 @@ if "%version%"=="6.1" (
 		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
+	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
+	if %ARCH%==x86 (
+		set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
+	) else (
+		set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
+	)
 )
 endlocal
 
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
-if %ARCH%==x86 (
-	set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
-) else (
-	set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
-)
 :SkipCheckOSVersion
-
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
@@ -335,14 +334,13 @@ if "%version%"=="6.1" (
 		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
+	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
+	timeout /t 3
+	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office
 )
 endlocal
-call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
-timeout /t 3
-call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office
 
 :SkipCheckOSVersion2
-
 call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
 
 :: Shortcut
@@ -379,6 +377,24 @@ if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application Cr4cking...
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Don Dep %SOFTNAME%. Vui Long Cho...
+@echo off
+pushd "%~dp0"
 if exist "%FILENAME%" del "%FILENAME%"
 if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
 if exist "7z.dll" del "7z.dll"

@@ -100,15 +100,14 @@ for /f "tokens=5 delims=[.] " %%i in ('ver') do (
 set "version=%version1%.%version2%"
 
 if "%version%"=="6.1" (
-	echo Sorry, this software is not compatible with Windows 7. Starting in 3 seconds...
+	echo This software is not compatible with Windows 7. Starting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
 		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
+	set "LINK=https://udomain.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-4.5.2/qbittorrent_4.5.2_lt20_qt5_x64_setup.exe"
 )
 endlocal
-
-set "LINK=https://udomain.dl.sourceforge.net/project/qbittorrent/qbittorrent-win32/qbittorrent-4.5.2/qbittorrent_4.5.2_lt20_qt5_x64_setup.exe"
 
 :SkipCheckOSVersion
 
