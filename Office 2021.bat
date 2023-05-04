@@ -47,7 +47,7 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source link: 
 
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Microsoft%20Office%20Setup.exe"
+set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetup.exe"
 if %ARCH%==x86 (
 	set "CONFIG2021=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-32.xml"
 ) else (
@@ -257,14 +257,6 @@ goto end
 echo %SOFTNAME% has been installed successfully.
 timeout /t 3
 :end
-
-::Install Office
-cd "%SOFTPATH%\Office Tool\files"
-if %ARCH%==x86 (
-	setup.exe /configure
-) else (
-	.\"Office Tool Plus.Console" deploy /addProduct ProPlus2021Volume_en-us_Teams /clientEdition 64 /channel PerpetualVL2021 /acceptEULA
-)
 
 :: License
 @ECHO OFF
