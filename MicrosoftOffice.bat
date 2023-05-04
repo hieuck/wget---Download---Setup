@@ -334,14 +334,14 @@ if "%version%"=="6.1" (
 		echo Starting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
-	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
+	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask
 	timeout /t 3
 	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office
 )
 endlocal
 
 :SkipCheckOSVersion2
-call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
+call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office
 
 :: Shortcut
 if /i "%Shortcut%"=="no" (
