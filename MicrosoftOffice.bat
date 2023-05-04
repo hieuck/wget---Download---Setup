@@ -54,7 +54,7 @@ if %ARCH%==x86 (
 	set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-64.xml"
 )
 SET "QUIETMODE=/configure Configuration.xml"
-set "SOFTPATH=%PROGRAMFILES%\Common Files\microsoft shared\ClickToRun"
+set "SOFTPATH=%PROGRAMFILES%\Common Files\Microsoft Shared\ClickToRun"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
@@ -307,6 +307,42 @@ if "%License%"=="Yes" (
 	)
 )
 
+::Check Windows OS Version
+if /i "%CheckOSVersion%"=="no" (
+	goto SkipCheckOSVersion2
+)
+
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" (
+	echo Sorry, this software is not compatible with Windows 7. Starting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Starting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+)
+endlocal
+"%CR4CKPATH%\MAS_AIO.cmd" /KMS-ActAndRenewalTask /KMS-Office
+"%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office
+
+:SkipCheckOSVersion2
+
+"%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office
+
+:: Create Shortcut
+if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" "%PUBLIC%\Desktop"
+if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%PUBLIC%\Desktop"
+if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%PUBLIC%\Desktop"
+if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%PUBLIC%\Desktop"
+
 :: Shortcut
 if /i "%Shortcut%"=="no" (
     echo Creating shortcut is skipped.
@@ -334,10 +370,6 @@ cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
 if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
-	copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" "%PUBLIC%\Desktop"
-	copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%PUBLIC%\Desktop"
-	copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%PUBLIC%\Desktop"
-	copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%PUBLIC%\Desktop"
 	echo Creating shortcut complete.
 ) else (
 	echo Creating shortcut failed.
@@ -385,6 +417,5 @@ for /l %%i in (3,-1,1) do (
 		del "%FILENAME%"
 	)
 )
-"%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office
 echo Please close the script manually if automatically close fails.
 popd
