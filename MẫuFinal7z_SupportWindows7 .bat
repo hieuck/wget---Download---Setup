@@ -46,14 +46,14 @@ set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source link: 
+:: Source Link: 
 
 set "Link="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "LinkForNewWindows32bit="
-set "LinkForNewWindows64bit="
+set "LinkForAllWindows32bit="
+set "LinkForAllWindows64bit="
 
 set "SoftPath="
 set "SoftPathFor32bit="
@@ -131,10 +131,10 @@ goto NextStepForCheckOSVersion
 
 :ForWindows10
 if "%ARCH%"=="x86" (
-	if not "%LinkForNewWindows32bit%"=="" set "Link=%LinkForNewWindows32bit%"
+	if not "%LinkForAllWindows32bit%"=="" set "Link=%LinkForAllWindows32bit%"
 	if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
 ) else (
-	if not "%LinkForNewWindows64bit%"=="" set "Link=%LinkForNewWindows64bit%"
+	if not "%LinkForAllWindows64bit%"=="" set "Link=%LinkForAllWindows64bit%"
 	if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
 )
 
