@@ -345,6 +345,7 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
+@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
 mode con:cols=100 lines=17
