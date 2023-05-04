@@ -1,12 +1,12 @@
-%PROGRAMFILES%\
-%PROGRAMFILES(X86)%\
-%PROGRAMDATA%\
-%PUBLIC%\Desktop
-%LOCALAPPDATA%\
-%APPDATA%\
-%TEMP%\
-%USERPROFILE%\Desktop
-%SYSTEMROOT%\
+%ProgramFiles%\
+%ProgramFiles(x86)%\
+%ProgramData%\
+%Public%\Desktop
+%LocalAppData%\
+%Appdata%\
+%Temp%\
+%UserProfile%\Desktop
+%SystemRoot%\
 
 $securePassword = ConvertTo-SecureString "123" -AsPlainText -Force
 Expand-Archive -Path "%FILENAME%" -DestinationPath "%SOFTPATH%" -Password $securePassword
