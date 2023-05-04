@@ -75,7 +75,7 @@ set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
 ::Check Windows OS Version
 if /i "%CheckOSVersion%"=="no" (
-	goto SkipCheckOSVersion
+	goto NextStepForCheckOSVersion
 )
 
 setlocal EnableDelayedExpansion
@@ -88,9 +88,8 @@ for /f "tokens=5 delims=[.] " %%i in ('ver') do (
 )
 set "version=%version1%.%version2%"
 
-if "%version%"=="6.1" (
-	goto ForWindows7
-) else goto ForWindows10
+if "%version%"=="6.1" goto ForWindows7
+goto ForWindows10
 endlocal
 :ForWindows7
 set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
@@ -99,7 +98,7 @@ if %ARCH%==x86 (
 ) else (
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
 )
-goto SkipCheckOSVersion
+goto NextStepForCheckOSVersion
 :ForWindows10
 set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows10.exe"
 if %ARCH%==x86 (
@@ -107,7 +106,7 @@ if %ARCH%==x86 (
 ) else (
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-64.xml"
 )
-:SkipCheckOSVersion
+:NextStepForCheckOSVersion
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1

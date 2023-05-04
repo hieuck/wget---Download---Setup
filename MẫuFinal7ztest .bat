@@ -44,32 +44,6 @@ set "PROCESS=danvaoday.exe"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-::Check Windows OS Version
-if /i "%CheckOSVersion%"=="no" (
-	goto NextStepForCheckOSVersion
-)
-
-setlocal EnableDelayedExpansion
-for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-	set "version1=%%i"
-)
-
-for /f "tokens=5 delims=[.] " %%i in ('ver') do (
-	set "version2=%%i"
-)
-set "version=%version1%.%version2%"
-
-if "%version%"=="6.1" (
-	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
-)
-endlocal
-:ForWindows7
-:ForWindows10
 :: Set code based on Windows Architecture
 :: Source link: 
 
@@ -116,8 +90,36 @@ if "%Extract7z%"=="Yes" (
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
-:NextStepForCheckOSVersion
+::Check Windows OS Version
+if /i "%CheckOSVersion%"=="no" (
+	goto NextStepForCheckOSVersion
+)
 
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" goto ForWindows7
+goto ForWindows10
+endlocal
+
+:ForWindows7
+echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
+for /l %%i in (3,-1,1) do (
+	echo Exiting in %%i seconds...
+	timeout /t 1 /nobreak >nul
+)
+exit
+goto NextStepForCheckOSVersion
+
+:ForWindows10
+:NextStepForCheckOSVersion
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
