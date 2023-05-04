@@ -37,23 +37,66 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 :: Set License Extract7z Soft Process Name CheckOSVersion User Agent
-set "License=Yes"
+set "License="
 set "Extract7z="
-set "SOFTNAME=Microsoft Office"
-set "PROCESS=OfficeClickToRun.exe"
-set "CheckOSVersion=Yes"
+set "SOFTNAME=danvaoday"
+set "PROCESS=danvaoday.exe"
+set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
+::Check Windows OS Version
+if /i "%CheckOSVersion%"=="no" (
+	goto NextStepForCheckOSVersion
+)
+
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" (
+	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
+)
+endlocal
+:ForWindows7
+:ForWindows10
 :: Set code based on Windows Architecture
 :: Source link: 
-SET "QUIETMODE=/configure Configuration.xml"
-set "SOFTPATH=%PROGRAMFILES%\Common Files\Microsoft Shared\ClickToRun"
+
+if %ARCH%==x86 (
+	set "LINK=danvaoday"
+	set "SOFTPATH=danvaoday"
+) else (
+	set "LINK=danvaoday"
+	set "SOFTPATH=danvaoday"
+) else (
+	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Exiting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+	exit
+)
+
+set "LINK=danvaoday"
+set "QUIETMODE=/S"
+set "SOFTPATH=danvaoday"
 
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "CR4CKFILE=MAS_AIO"
-	set "CR4CKPATH=C:\Z_Hieuck.IT_Z"
+	set "CR4CKFILE=danvaoday"
+	set "CR4CKPATH=%SOFTPATH%"
 	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
 	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
@@ -73,41 +116,7 @@ if "%Extract7z%"=="Yes" (
 )
 set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
 
-::Check Windows OS Version
-if /i "%CheckOSVersion%"=="no" (
-	goto SkipCheckOSVersion
-)
-
-setlocal EnableDelayedExpansion
-for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-	set "version1=%%i"
-)
-
-for /f "tokens=5 delims=[.] " %%i in ('ver') do (
-	set "version2=%%i"
-)
-set "version=%version1%.%version2%"
-
-if "%version%"=="6.1" (
-	goto ForWindows7
-) else goto ForWindows10
-endlocal
-:ForWindows7
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
-if %ARCH%==x86 (
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
-) else (
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
-)
-goto SkipCheckOSVersion
-:ForWindows10
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows10.exe"
-if %ARCH%==x86 (
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-32.xml"
-) else (
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-64.xml"
-)
-:SkipCheckOSVersion
+:NextStepForCheckOSVersion
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -161,10 +170,8 @@ pushd "%~dp0"
 echo Downloading %SOFTNAME%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FILENAME%" -U "%USERAGENT%" "%LINK%"
-	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%USERAGENT%" "%OfficeConfiguration%"
 ) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "Configuration.xml" "%OfficeConfiguration%" --insecure || (
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure || (
 		if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
 		echo.
 		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
@@ -305,44 +312,6 @@ if "%License%"=="Yes" (
 	)
 )
 
-tasklist | find /i "OfficeC2RClient.exe" > nul
-if %errorlevel% equ 0 taskkill /im "OfficeC2RClient.exe" /f
-
-:: Create Shortcut
-if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" "%PUBLIC%\Desktop"
-if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%PUBLIC%\Desktop"
-if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%PUBLIC%\Desktop"
-if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%PUBLIC%\Desktop"
-
-::Check Windows OS Version
-if /i "%CheckOSVersion%"=="no" (
-	goto SkipCheckOSVersion2
-)
-
-setlocal EnableDelayedExpansion
-for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-	set "version1=%%i"
-)
-
-for /f "tokens=5 delims=[.] " %%i in ('ver') do (
-	set "version2=%%i"
-)
-set "version=%version1%.%version2%"
-
-if "%version%"=="6.1" (
-	goto Cr4ckForWindows7
-) else goto Cr4ckForWindows10
-endlocal
-:Cr4ckForWindows7
-call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
-timeout /t 3
-call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-ActAndRenewalTask /KMS-Office /S
-goto SkipCheckOSVersion2
-:Cr4ckForWindows10
-call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
-
-:SkipCheckOSVersion2
-
 :: Shortcut
 if /i "%Shortcut%"=="no" (
     echo Creating shortcut is skipped.
@@ -357,7 +326,7 @@ if exist "%SOFTLOCATION%" (
 )
 
 set "SHORTCUTNAME=%SOFTNAME%.lnk"
-set "SHORTCUTPATH=%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%"
+set "SHORTCUTPATH=%PUBLIC%\Desktop\%SHORTCUTNAME%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
@@ -369,7 +338,7 @@ echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
-if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
+if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 	echo Creating shortcut complete.
 ) else (
 	echo Creating shortcut failed.
@@ -399,7 +368,6 @@ if exist "%FILENAME%" del "%FILENAME%"
 if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
 if exist "7z.dll" del "7z.dll"
 if exist "7z.exe" del "7z.exe"
-if exist "Configuration.xml" del "Configuration.xml"
 
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
