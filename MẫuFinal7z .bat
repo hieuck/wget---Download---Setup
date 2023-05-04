@@ -307,6 +307,7 @@ if "%License%"=="Yes" (
 	) else (
 		echo Cr4cking %SOFTNAME% failed.
 		echo Please try running the script as Administrator.
+		goto CleanUp
 	)
 )
 
