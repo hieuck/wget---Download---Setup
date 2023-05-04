@@ -36,7 +36,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-:: Set License Extract7z Soft Process Name OldWindows 32Bit Support User Agent
+:: Set License Extract7z Soft Process Name OldWindows 32-bit Support User Agent
 set "License="
 set "Extract7z="
 set "SoftName=danvaoday"
@@ -120,10 +120,18 @@ if /i "%SupportOldWindows%"=="no" (
 	exit
 ) else (
 	if "%ARCH%"=="x86" (
-		if not "%LinkForOldWindows32bit%"=="" set "Link=%LinkForOldWindows32bit%"
+		if not "%LinkForOldWindows32bit%"=="" (
+			set "Link=%LinkForOldWindows32bit%"
+		) else (
+			set "Link=%LinkForAllWindows32bit%"
+		)
 		if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
 	) else (
-		if not "%LinkForOldWindows64bit%"=="" set "Link=%LinkForOldWindows64bit%"
+		if not "%LinkForOldWindows64bit%"=="" (
+			set "Link=%LinkForOldWindows64bit%"
+		) else (
+		set "Link=%LinkForAllWindows64bit%"
+		)
 		if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
 	)
 )
@@ -347,7 +355,7 @@ if exist "%SoftLocation%" (
 )
 
 set "ShortcutName=%SoftName%.lnk"
-set "ShortcutPath=%PUBLIC%\Desktop\%ShortcutName%"
+set "ShortcutPath=%Public%\Desktop\%ShortcutName%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "%ShortcutPath%" >> CreateShortcut.vbs
@@ -359,7 +367,7 @@ echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
-if exist "%PUBLIC%\Desktop\%ShortcutName%" (
+if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut complete.
 ) else (
 	echo Creating Shortcut failed.
