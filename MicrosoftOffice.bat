@@ -378,7 +378,7 @@ if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\%SHORTCUTNAME%" (
 :: Clean Up
 :CleanUp
 @ECHO OFF
-title _Hieuck.IT_'s Windows Application Cr4cking...
+title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
 mode con:cols=100 lines=17
 @cls
