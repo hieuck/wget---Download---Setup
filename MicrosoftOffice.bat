@@ -316,10 +316,6 @@ if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" co
 if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%PUBLIC%\Desktop"
 
 ::Check Windows OS Version
-if /i "%CheckOSVersion%"=="no" (
-	goto SkipCheckOSVersion2
-)
-
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
@@ -330,20 +326,20 @@ for /f "tokens=5 delims=[.] " %%i in ('ver') do (
 )
 set "version=%version1%.%version2%"
 
-if "%version%"=="6.1" (
-	goto Cr4ckForWindows7
-) else goto Cr4ckForWindows10
+if "%version%"=="6.1" goto Cr4ckForWindows7
+goto Cr4ckForWindows10
 endlocal
+
 :Cr4ckForWindows7
 call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
 timeout /t 3
 call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-ActAndRenewalTask /KMS-Office /S
-goto SkipCheckOSVersion2
+goto NextStepAfterCr4ckForCheckOSVersion
+
 :Cr4ckForWindows10
 call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
 
-:SkipCheckOSVersion2
-
+:NextStepAfterCr4ckForCheckOSVersion
 :: Shortcut
 if /i "%Shortcut%"=="no" (
     echo Creating shortcut is skipped.
