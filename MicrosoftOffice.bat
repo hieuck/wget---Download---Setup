@@ -314,6 +314,37 @@ if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" copy 
 if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%PUBLIC%\Desktop"
 if exist "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%PROGRAMDATA%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%PUBLIC%\Desktop"
 
+::Check Windows OS Version
+if /i "%CheckOSVersion%"=="no" (
+	goto SkipCheckOSVersion2
+)
+
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" (
+	echo This software is not compatible with Windows 7. Starting in 3 seconds...
+	for /l %%i in (3,-1,1) do (
+		echo Starting in %%i seconds...
+		timeout /t 1 /nobreak >nul
+	)
+)
+endlocal
+call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
+timeout /t 3
+call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office
+
+:SkipCheckOSVersion2
+
+call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
+
 :: Shortcut
 if /i "%Shortcut%"=="no" (
     echo Creating shortcut is skipped.
@@ -388,37 +419,5 @@ for /l %%i in (3,-1,1) do (
 		del "%FILENAME%"
 	)
 )
-
-::Check Windows OS Version
-if /i "%CheckOSVersion%"=="no" (
-	goto SkipCheckOSVersion2
-)
-
-setlocal EnableDelayedExpansion
-for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-	set "version1=%%i"
-)
-
-for /f "tokens=5 delims=[.] " %%i in ('ver') do (
-	set "version2=%%i"
-)
-set "version=%version1%.%version2%"
-
-if "%version%"=="6.1" (
-	echo This software is not compatible with Windows 7. Starting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Starting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-)
-endlocal
-"%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /KMS-ActAndRenewalTask /S
-timeout /t 3
-"%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
-
-:SkipCheckOSVersion2
-
-"%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
-
 echo Please close the script manually if automatically close fails.
 popd
