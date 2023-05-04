@@ -345,6 +345,23 @@ if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
 
 :: Clean Up
 :CleanUp
+title _Hieuck.IT_'s Windows Application Cleaning Up...
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Don Dep %SOFTNAME%. Vui Long Cho...
+@echo off
+pushd "%~dp0"
 if exist "%FILENAME%" del "%FILENAME%"
 if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
 if exist "7z.dll" del "7z.dll"
