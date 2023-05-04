@@ -96,20 +96,14 @@ for /f "tokens=5 delims=[.] " %%i in ('ver') do (
 set "version=%version1%.%version2%"
 
 if "%version%"=="6.1" (
-	echo This software is not compatible with Windows 7. Starting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Starting in %%i seconds...
-		timeout /t 1 /nobreak >nul
+	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
+	if %ARCH%==x86 (
+		set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
+	) else (
+		set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
 	)
 )
 endlocal
-
-set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
-if %ARCH%==x86 (
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
-) else (
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
-)
 
 :SkipCheckOSVersion
 
@@ -331,16 +325,10 @@ for /f "tokens=5 delims=[.] " %%i in ('ver') do (
 set "version=%version1%.%version2%"
 
 if "%version%"=="6.1" (
-	echo This software is not compatible with Windows 7. Starting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Starting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
+	call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
+	timeout /t 3
 )
 endlocal
-
-call "%CR4CKPATH%\MAS_AIO.cmd" /KMS-Office /S
-timeout /t 3
 
 :SkipCheckOSVersion2
 call "%CR4CKPATH%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
