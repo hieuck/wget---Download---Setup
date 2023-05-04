@@ -201,15 +201,15 @@ if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
-		if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
+		if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
 		echo.
-		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
-		echo. >> %temp%\download_error.txt
-		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %temp%\download_error.txt
-		echo wget: https://eternallybored.org/misc/wget/ >> %temp%\download_error.txt
-		echo curl: https://curl.se/download.html >> %temp%\download_error.txt
-		type "%temp%\download_error.txt"
-		start "" "%temp%\download_error.txt"
+		echo wget.exe or curl.exe not found to download, please download at: >> %Temp%\download_error.txt
+		echo. >> %Temp%\download_error.txt
+		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %Temp%\download_error.txt
+		echo wget: https://eternallybored.org/misc/wget/ >> %Temp%\download_error.txt
+		echo curl: https://curl.se/download.html >> %Temp%\download_error.txt
+		type "%Temp%\download_error.txt"
+		start "" "%Temp%\download_error.txt"
 	)
 )
 
@@ -394,7 +394,7 @@ echo.
 @echo off
 pushd "%~dp0"
 if exist "%FileName%" del "%FileName%"
-if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
+if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
 if exist "7z.dll" del "7z.dll"
 if exist "7z.exe" del "7z.exe"
 
