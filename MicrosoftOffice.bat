@@ -49,9 +49,9 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows10.exe"
 if %ARCH%==x86 (
-	set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-32.xml"
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-32.xml"
 ) else (
-	set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-64.xml"
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2021-64.xml"
 )
 SET "QUIETMODE=/configure Configuration.xml"
 set "SOFTPATH=%PROGRAMFILES%\Common Files\Microsoft Shared\ClickToRun"
@@ -103,9 +103,9 @@ if "%version%"=="6.1" (
 	)
 	set "LINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MicrosoftOfficeSetupWindows7.exe"
 	if %ARCH%==x86 (
-		set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
+		set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
 	) else (
-		set "CONFIGOFFICE=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
+		set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
 	)
 )
 endlocal
@@ -163,10 +163,10 @@ pushd "%~dp0"
 echo Downloading %SOFTNAME%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FILENAME%" -U "%USERAGENT%" "%LINK%"
-	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%USERAGENT%" "%CONFIGOFFICE%"
+	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%USERAGENT%" "%OfficeConfiguration%"
 ) else (
 	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "Configuration.xml" "%CONFIGOFFICE%" --insecure || (
+	curl -L --max-redirs 20 -A "%USERAGENT%" -o "Configuration.xml" "%OfficeConfiguration%" --insecure || (
 		if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
 		echo.
 		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
