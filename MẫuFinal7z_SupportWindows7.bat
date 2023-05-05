@@ -165,7 +165,11 @@ if "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-if not "%Cr4ckPath%"=="" set "Cr4ckPath=%SoftPath%"
+if not "%Cr4ckPath%"=="" (
+	set "Cr4ckPath=%Cr4ckPath%"
+) else (
+	set "Cr4ckPath=%SoftPath%"
+)
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
