@@ -165,9 +165,7 @@ if "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-
 if not "%Cr4ckPath%"=="" set "Cr4ckPath=%SoftPath%"
-set "SoftLocation=%SoftPath%\%Process%"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -307,7 +305,7 @@ set count=0
 :waitloop
 timeout /t 1 /nobreak > nul
 set /a count+=1
-if exist "%SoftLocation%" goto installed
+if exist "%SoftPath%\%Process%" goto installed
 if !count! equ 30 goto timeout
 goto waitloop
 :timeout
@@ -369,8 +367,8 @@ if /i "%Shortcut%"=="no" (
     goto CleanUp
 )
 
-if exist "%SoftLocation%" (
-	set "TargetFile=%SoftLocation%"
+if exist "%SoftPath%\%Process%" (
+	set "TargetFile=%SoftPath%\%Process%"
 ) else (
 	echo %SoftName% does not exist in directory "%SoftPath%". Exiting script.
 	exit /b 1
