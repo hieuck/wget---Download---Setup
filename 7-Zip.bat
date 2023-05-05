@@ -55,11 +55,12 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/S"
 
+set "Cr4ckFile="
+set "Cr4ckPath="
+
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "Cr4ckFile=danvaoday"
-	set "Cr4ckPath=%SoftPath%"
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
@@ -70,14 +71,13 @@ if "%Extract7z%"=="Yes" (
 	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Admin=Yes"
 	set "Shortcut=Yes"
-	set "SoftPath=%ProgramFiles%\%SoftName%"
+	if not "%SoftPath%"=="" set "SoftPath=%ProgramFiles%\%SoftName%"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
 	set "Shortcut=No"
 	set "FileName=%SoftName%-HieuckIT.exe "
 )
-set "SoftLocation=%SoftPath%\%Process%"
 
 :: Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
@@ -165,6 +165,8 @@ if "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
+if not "%Cr4ckPath%"=="" set "Cr4ckPath=%SoftPath%"
+
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
@@ -293,7 +295,7 @@ echo Installing %SoftName%...
 if "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-	"%FileName%" %QUIETMODE%
+	"%FileName%" %QuietMode%
 )
 
 :: Check Installation Process
@@ -303,7 +305,7 @@ set count=0
 :waitloop
 timeout /t 1 /nobreak > nul
 set /a count+=1
-if exist "%SoftLocation%" goto installed
+if exist "%SoftPath%\%Process%" goto installed
 if !count! equ 30 goto timeout
 goto waitloop
 :timeout
@@ -365,8 +367,8 @@ if /i "%Shortcut%"=="no" (
     goto CleanUp
 )
 
-if exist "%SoftLocation%" (
-	set "TargetFile=%SoftLocation%"
+if exist "%SoftPath%\%Process%" (
+	set "TargetFile=%SoftPath%\%Process%"
 ) else (
 	echo %SoftName% does not exist in directory "%SoftPath%". Exiting script.
 	exit /b 1
