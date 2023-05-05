@@ -70,7 +70,7 @@ if "%Extract7z%"=="Yes" (
 	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Admin=Yes"
 	set "Shortcut=Yes"
-	set "SoftPath=%ProgramFiles%\%SoftName%"
+	if not "%SoftPath%"=="" set "SoftPath=%ProgramFiles%\%SoftName%"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 ) else (
