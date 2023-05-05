@@ -31,9 +31,9 @@ echo.
 pushd "%~dp0"
 :: Set License Extract7z Soft Process Name OldWindows 32-bit Support User Agent
 set "License="
-set "Extract7z="
-set "SoftName=danvaoday"
-set "Process=danvaoday.exe"
+set "Extract7z=Yes"
+set "SoftName=Core Temp"
+set "Process=Core Temp.exe"
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -45,8 +45,8 @@ set "Link="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "LinkForAllWindows32bit="
-set "LinkForAllWindows64bit="
+set "LinkForAllWindows32bit=https://www.alcpu.com/CoreTemp/CoreTemp32.zip"
+set "LinkForAllWindows64bit=https://www.alcpu.com/CoreTemp/CoreTemp64.zip"
 
 set "SoftPath="
 set "SoftPathFor32bit="
