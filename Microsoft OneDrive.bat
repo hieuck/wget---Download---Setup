@@ -214,7 +214,7 @@ echo.
 @echo                 Dang Tai %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-echo Downloading %SoftName%..."%Link%"
+echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 ) else (
