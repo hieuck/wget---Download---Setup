@@ -175,6 +175,7 @@ if "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
+
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
@@ -229,7 +230,7 @@ if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%UserAgent%" "%OfficeConfiguration%"
 ) else (
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "Configuration.xml" "%OfficeConfiguration%" --insecure || (
 		if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
 		echo.
