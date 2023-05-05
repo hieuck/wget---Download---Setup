@@ -86,12 +86,14 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 if /i "%Support32Bit%"=="no" (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
+	if "%ARCH%"=="x86" (
+		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
 	)
-	exit
 )
 
 ::Check Windows OS Version and Check Support Old Windows
