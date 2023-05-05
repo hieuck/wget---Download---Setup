@@ -123,14 +123,22 @@ if /i "%SupportOldWindows%"=="no" (
 		if not "%LinkForOldWindows32bit%"=="" (
 			set "Link=%LinkForOldWindows32bit%"
 		) else (
-			set "Link=%LinkForAllWindows32bit%"
+			if not "%LinkForAllWindows32bit%"=="" (
+				set "Link=%LinkForAllWindows32bit%"
+			) else (
+				set "Link="%Link%"
+			)
 		)
 		if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
 	) else (
 		if not "%LinkForOldWindows64bit%"=="" (
 			set "Link=%LinkForOldWindows64bit%"
 		) else (
-		set "Link=%LinkForAllWindows64bit%"
+			if not "%LinkForAllWindows64bit%"=="" (
+				set "Link=%LinkForAllWindows64bit%"
+			) else (
+				set "Link=%Link%"
+			)
 		)
 		if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
 	)
@@ -393,6 +401,7 @@ echo.
 @echo                 Dang Don Dep %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
+echo Cleaning up temporary files...
 if exist "%FileName%" del "%FileName%"
 if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
 if exist "7z.dll" del "7z.dll"
