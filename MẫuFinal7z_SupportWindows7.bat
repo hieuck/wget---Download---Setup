@@ -55,11 +55,12 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/S"
 
+set "Cr4ckFile="
+set "Cr4ckPath="
+
 :: Set up information related to software cr4cking
 if "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "Cr4ckFile=danvaoday"
-	set "Cr4ckPath=%SoftPath%"
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
@@ -77,7 +78,6 @@ if "%Extract7z%"=="Yes" (
 	set "Shortcut=No"
 	set "FileName=%SoftName%-HieuckIT.exe "
 )
-set "SoftLocation=%SoftPath%\%Process%"
 
 :: Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
@@ -165,6 +165,10 @@ if "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
+
+if not "%Cr4ckPath%"=="" set "Cr4ckPath=%SoftPath%"
+set "SoftLocation=%SoftPath%\%Process%"
+
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
