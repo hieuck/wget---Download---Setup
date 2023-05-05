@@ -41,10 +41,11 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: https://www.7-zip.org/download.html
 
-set "Link="
+set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
+set "Link="
 set "LinkForAllWindows32bit=https://www.7-zip.org/a/7z2201.exe"
 set "LinkForAllWindows64bit=https://www.7-zip.org/a/7z2201-x64.exe"
 
@@ -86,12 +87,14 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 if /i "%Support32Bit%"=="no" (
-	echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
+	if "%ARCH%"=="x86" (
+		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
 	)
-	exit
 )
 
 ::Check Windows OS Version and Check Support Old Windows
@@ -122,10 +125,14 @@ if /i "%SupportOldWindows%"=="no" (
 		if not "%LinkForOldWindows32bit%"=="" (
 			set "Link=%LinkForOldWindows32bit%"
 		) else (
-			if not "%LinkForAllWindows32bit%"=="" (
-				set "Link=%LinkForAllWindows32bit%"
+			if not "%LinkForOldWindows%"=="" (
+				set "Link=%LinkForOldWindows%"
 			) else (
-				set "Link="%Link%"
+				if not "%LinkForAllWindows32bit%"=="" (
+					set "Link="%LinkForAllWindows32bit%"
+				) else (
+					set "Link=%Link%"
+				)
 			)
 		)
 		if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
@@ -133,10 +140,14 @@ if /i "%SupportOldWindows%"=="no" (
 		if not "%LinkForOldWindows64bit%"=="" (
 			set "Link=%LinkForOldWindows64bit%"
 		) else (
-			if not "%LinkForAllWindows64bit%"=="" (
-				set "Link=%LinkForAllWindows64bit%"
+			if not "%LinkForOldWindows%"=="" (
+				set "Link=%LinkForOldWindows%"
 			) else (
-				set "Link=%Link%"
+				if not "%LinkForAllWindows64bit%"=="" (
+					set "Link=%LinkForAllWindows64bit%"
+				) else (
+					set "Link=%Link%"
+				)
 			)
 		)
 		if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
