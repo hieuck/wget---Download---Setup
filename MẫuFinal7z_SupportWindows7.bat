@@ -293,7 +293,7 @@ echo Installing %SoftName%...
 if "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-	"%FileName%" %QUIETMODE%
+	"%FileName%" %QuietMode%
 )
 
 :: Check Installation Process
