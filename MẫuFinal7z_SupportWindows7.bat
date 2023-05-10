@@ -64,19 +64,28 @@ if "%License%"=="Yes" (
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%Cr4ckPath%"=="" (
+		set "Cr4ckPath=%Cr4ckPath%"
+	) else (
+		set "Cr4ckPath=%SoftPath%"
+	)
 )
 
 :: Extract with 7z
 if "%Extract7z%"=="Yes" (
-	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Admin=Yes"
+	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Shortcut=Yes"
-	if not "%SoftPath%"=="" set "SoftPath=%ProgramFiles%\%SoftName%"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%SoftPath%"=="" (
+		set "SoftPath=%SoftPath%"
+	) else (
+		set "SoftPath=%ProgramFiles%\%SoftName%"
+	)
 ) else (
-	set "Shortcut=No"
 	set "FileName=%SoftName%-HieuckIT.exe "
+	set "Shortcut=No"
 )
 
 :: Detect Windows Architecture and Check Compatibility for 32-bit
@@ -165,11 +174,14 @@ if "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-if not "%Cr4ckPath%"=="" (
-	set "Cr4ckPath=%Cr4ckPath%"
-) else (
-	set "Cr4ckPath=%SoftPath%"
-)
+
+echo Link: %Link%> %Temp%\hieuckitlog.txt
+echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
+echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
+echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
+echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
+echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
+start "" "%Temp%\hieuckitlog.txt"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -225,9 +237,8 @@ if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
-		if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
 		echo.
-		echo wget.exe or curl.exe not found to download, please download at: >> %Temp%\download_error.txt
+		echo wget.exe or curl.exe not found to download, please download at: > %Temp%\download_error.txt
 		echo. >> %Temp%\download_error.txt
 		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %Temp%\download_error.txt
 		echo wget: https://eternallybored.org/misc/wget/ >> %Temp%\download_error.txt
@@ -419,7 +430,6 @@ echo.
 pushd "%~dp0"
 echo Cleaning up temporary files...
 if exist "%FileName%" del "%FileName%"
-if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
 if exist "7z.dll" del "7z.dll"
 if exist "7z.exe" del "7z.exe"
 
