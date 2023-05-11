@@ -192,7 +192,8 @@ echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
 echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
-start "" "%Temp%\hieuckitlog.txt"
+type "%Temp%\hieuckitlog.txt"
+timeout /t 3
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
