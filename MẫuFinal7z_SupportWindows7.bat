@@ -68,7 +68,7 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 )
 
 if /i "%Support32Bit%"=="No" (
-	if "%ARCH%"=="x86" (
+	if /i "%ARCH%"=="x86" (
 		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
 		for /l %%i in (3,-1,1) do (
 			echo Exiting in %%i seconds...
@@ -102,7 +102,7 @@ if /i "%SupportOldWindows%"=="No" (
 	)
 	exit
 ) else (
-	if "%ARCH%"=="x86" (
+	if /i "%ARCH%"=="x86" (
 		if not "%LinkForOldWindows32bit%"=="" (
 			set "Link=%LinkForOldWindows32bit%"
 		) else (
@@ -137,7 +137,7 @@ if /i "%SupportOldWindows%"=="No" (
 goto NextStepForCheckOSVersion
 
 :ForNewWindows
-if "%ARCH%"=="x86" (
+if /i "%ARCH%"=="x86" (
 	if not "%LinkForAllWindows32bit%"=="" set "Link=%LinkForAllWindows32bit%"
 	if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
 ) else (
@@ -146,9 +146,8 @@ if "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-
 :: Set up information related to software cr4cking
-if "%License%"=="Yes" (
+if /i "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
@@ -161,7 +160,7 @@ if "%License%"=="Yes" (
 )
 
 :: Extract with 7z
-if "%Extract7z%"=="Yes" (
+if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
@@ -185,7 +184,7 @@ if "%Extract7z%"=="Yes" (
 	)
 )
 
-echo Information for %SoftName%:> %Temp%\hieuckitlog.txt
+echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo Link: %Link%>> %Temp%\hieuckitlog.txt
 echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
 echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
@@ -199,7 +198,7 @@ net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
-	if "%Admin%"=="Yes" (
+	if /i "%Admin%"=="Yes" (
 		echo Please Run as Administrator. Exiting in 3 seconds...
 		for /l %%i in (3,-1,1) do (
 			echo Exiting in %%i seconds...
@@ -318,7 +317,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Installing %SoftName%...
-if "%Extract7z%"=="Yes" (
+if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
 	"%FileName%" %QuietMode%
@@ -361,7 +360,7 @@ echo.
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-if "%License%"=="Yes" (
+if /i "%License%"=="Yes" (
 	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
 		if not exist "7z.dll" if not exist "7z.exe" (
