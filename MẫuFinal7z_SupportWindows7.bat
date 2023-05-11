@@ -185,6 +185,7 @@ if /i "%Extract7z%"=="Yes" (
 )
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
+echo.>> %Temp%\hieuckitlog.txt
 echo Link: %Link%>> %Temp%\hieuckitlog.txt
 echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
 echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
