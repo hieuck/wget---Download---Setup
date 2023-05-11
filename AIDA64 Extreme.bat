@@ -288,7 +288,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading 7-Zip...
-if "%Extract7z%"=="Yes" (
+if /i "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
 		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
 		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
@@ -388,7 +388,6 @@ if /i "%License%"=="Yes" (
 		echo AIDA64 has been successfully activated. Please close AIDA64 now.
 		"%Cr4ckPath%\Key_AIDA64.txt" & "%SoftPath%\%Process%" /silent
 		echo Successfully Cr4cked %SoftName%.
-		del "%Cr4ckPath%\Key_AIDA64.txt"
 		del "%Cr4ckFile%"
 	) else (
 		echo Cr4cking %SoftName% failed.
