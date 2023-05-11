@@ -58,26 +58,7 @@ set "QuietMode=/S"
 set "Cr4ckFile="
 set "Cr4ckPath="
 
-:: Set up information related to software cr4cking
-if "%License%"=="Yes" (
-	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-)
-
-:: Extract with 7z
-if "%Extract7z%"=="Yes" (
-	set "FileName=%SoftName%-HieuckIT.zip"
-	set "Admin=Yes"
-	set "Shortcut=Yes"
-	if not "%SoftPath%"=="" set "SoftPath=%ProgramFiles%\%SoftName%"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-) else (
-	set "Shortcut=No"
-	set "FileName=%SoftName%-HieuckIT.exe "
-)
+set "Shortcut="
 
 :: Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
@@ -86,8 +67,8 @@ if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x86"
 )
 
-if /i "%Support32Bit%"=="no" (
-	if "%ARCH%"=="x86" (
+if /i "%Support32Bit%"=="No" (
+	if /i "%ARCH%"=="x86" (
 		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
 		for /l %%i in (3,-1,1) do (
 			echo Exiting in %%i seconds...
@@ -113,7 +94,7 @@ goto ForNewWindows
 endlocal
 
 :ForOldWindows
-if /i "%SupportOldWindows%"=="no" (
+if /i "%SupportOldWindows%"=="No" (
 	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
@@ -121,7 +102,7 @@ if /i "%SupportOldWindows%"=="no" (
 	)
 	exit
 ) else (
-	if "%ARCH%"=="x86" (
+	if /i "%ARCH%"=="x86" (
 		if not "%LinkForOldWindows32bit%"=="" (
 			set "Link=%LinkForOldWindows32bit%"
 		) else (
@@ -156,7 +137,7 @@ if /i "%SupportOldWindows%"=="no" (
 goto NextStepForCheckOSVersion
 
 :ForNewWindows
-if "%ARCH%"=="x86" (
+if /i "%ARCH%"=="x86" (
 	if not "%LinkForAllWindows32bit%"=="" set "Link=%LinkForAllWindows32bit%"
 	if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
 ) else (
@@ -165,14 +146,60 @@ if "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-if not "%Cr4ckPath%"=="" set "Cr4ckPath=%SoftPath%"
+:: Set up information related to software cr4cking
+if /i "%License%"=="Yes" (
+	set "Admin=Yes"
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%Cr4ckPath%"=="" (
+		set "Cr4ckPath=%Cr4ckPath%"
+	) else (
+		set "Cr4ckPath=%SoftPath%"
+	)
+)
+
+:: Extract with 7z
+if /i "%Extract7z%"=="Yes" (
+	set "Admin=Yes"
+	set "FileName=%SoftName%-HieuckIT.zip"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%SoftPath%"=="" (
+		set "SoftPath=%SoftPath%"
+	) else (
+		set "SoftPath=%ProgramFiles%\%SoftName%"
+	)
+	if not "%Shortcut%"=="" (
+		set "Shortcut=%Shortcut%"
+	) else (
+		set "Shortcut=Yes"
+	)
+) else (
+	set "FileName=%SoftName%-HieuckIT.exe "
+	if not "%Shortcut%"=="" (
+		set "Shortcut=%Shortcut%"
+	) else (
+		set "Shortcut=No"
+	)
+)
+
+echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
+echo.>> %Temp%\hieuckitlog.txt
+echo Link: %Link%>> %Temp%\hieuckitlog.txt
+echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
+echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
+echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
+echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
+echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
+start "" "%Temp%\hieuckitlog.txt"
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
-	if "%Admin%"=="Yes" (
+	if /i "%Admin%"=="Yes" (
 		echo Please Run as Administrator. Exiting in 3 seconds...
 		for /l %%i in (3,-1,1) do (
 			echo Exiting in %%i seconds...
@@ -221,9 +248,8 @@ if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
-		if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
 		echo.
-		echo wget.exe or curl.exe not found to download, please download at: >> %Temp%\download_error.txt
+		echo wget.exe or curl.exe not found to download, please download at: > %Temp%\download_error.txt
 		echo. >> %Temp%\download_error.txt
 		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %Temp%\download_error.txt
 		echo wget: https://eternallybored.org/misc/wget/ >> %Temp%\download_error.txt
@@ -262,7 +288,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading 7-Zip...
-if "%Extract7z%"=="Yes" (
+if /i "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
 		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
 		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
@@ -292,7 +318,7 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Installing %SoftName%...
-if "%Extract7z%"=="Yes" (
+if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
 	"%FileName%" %QuietMode%
@@ -335,7 +361,7 @@ echo.
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-if "%License%"=="Yes" (
+if /i "%License%"=="Yes" (
 	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
 		if not exist "7z.dll" if not exist "7z.exe" (
@@ -362,7 +388,7 @@ if "%License%"=="Yes" (
 )
 
 :: Shortcut
-if /i "%Shortcut%"=="no" (
+if /i "%Shortcut%"=="No" (
     echo Creating Shortcut is skipped.
     goto CleanUp
 )
