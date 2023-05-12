@@ -384,7 +384,6 @@ if /i "%License%"=="Yes" (
 	) else (
 		echo Cr4cking %SoftName% failed.
 		echo Please try running the script as Administrator.
-		goto CleanUp
 	)
 )
 
@@ -443,6 +442,7 @@ pushd "%~dp0"
 echo Cleaning up temporary files...
 if exist "%FileName%" del "%FileName%"
 if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
+if exist "%Temp%\hieuckitlog.txt" del "%Temp%\hieuckitlog.txt"
 if exist "7z.dll" del "7z.dll"
 if exist "7z.exe" del "7z.exe"
 

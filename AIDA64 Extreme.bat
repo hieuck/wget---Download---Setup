@@ -192,7 +192,8 @@ echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
 echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
-start "" "%Temp%\hieuckitlog.txt"
+type "%Temp%\hieuckitlog.txt"
+timeout /t 3
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -392,7 +393,6 @@ if /i "%License%"=="Yes" (
 	) else (
 		echo Cr4cking %SoftName% failed.
 		echo Please try running the script as Administrator.
-		goto CleanUp
 	)
 )
 
@@ -451,6 +451,7 @@ pushd "%~dp0"
 echo Cleaning up temporary files...
 if exist "%FileName%" del "%FileName%"
 if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
+if exist "%Temp%\hieuckitlog.txt" del "%Temp%\hieuckitlog.txt"
 if exist "7z.dll" del "7z.dll"
 if exist "7z.exe" del "7z.exe"
 
