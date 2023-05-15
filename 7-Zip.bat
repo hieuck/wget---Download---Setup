@@ -46,8 +46,8 @@ set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
 set "Link="
-set "LinkForAllWindows32bit=https://www.7-zip.org/a/7z2201.exe"
-set "LinkForAllWindows64bit=https://www.7-zip.org/a/7z2201-x64.exe"
+set "LinkForAllWindows32bit=https://www.7-zip.org/a/7z2300.exe"
+set "LinkForAllWindows64bit=https://www.7-zip.org/a/7z2300-x64.exe"
 
 set "SoftPath=%ProgramFiles%\7-Zip"
 set "SoftPathFor32bit="
@@ -189,9 +189,9 @@ echo.>> %Temp%\hieuckitlog.txt
 echo Link: %Link%>> %Temp%\hieuckitlog.txt
 echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
 echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
-echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
-echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
-echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
+if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
+if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
+if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
 timeout /t 3
 
