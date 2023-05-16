@@ -453,8 +453,7 @@ if not exist "%FileName%" (
 	echo The %SoftName% installer has been deleted.
 	echo.>> %Temp%\hieuckitlog.txt
 	echo The %SoftName% installer has been deleted.>> %Temp%\hieuckitlog.txt
-)
-goto endcheck
+) & goto endcheck
 if !count! equ 30 goto timeoutcheck
 goto waitloopcheck
 :timeoutcheck
