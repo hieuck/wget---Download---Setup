@@ -340,6 +340,8 @@ echo Timeout: %SoftName% installation has not completed in 30 seconds.
 goto end
 :installed
 echo %SoftName% has been installed successfully.
+echo.>> %Temp%\hieuckitlog.txt
+echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
 timeout /t 3
 :end
 
@@ -380,6 +382,8 @@ if /i "%License%"=="Yes" (
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
 		echo Successfully Cr4cked %SoftName%.
+		echo.>> %Temp%\hieuckitlog.txt
+		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
 		del "%Cr4ckFile%"
 	) else (
 		echo Cr4cking %SoftName% failed.
