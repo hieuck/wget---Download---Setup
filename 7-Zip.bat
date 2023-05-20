@@ -447,17 +447,23 @@ echo Cleaning up temporary files...
 echo.>> %Temp%\hieuckitlog.txt
 setlocal EnableDelayedExpansion
 set count=0
+set deleteSuccess=0
 :waitloopcheck
 if exist "7z.dll" del "7z.dll">> %Temp%\hieuckitlog.txt 2>&1
 if exist "7z.exe" del "7z.exe">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%FileName%" del "%FileName%">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%FileName%" (
+	del "%FileName%">> %Temp%\hieuckitlog.txt 2>&1
+	if not exist "%FileName%" set deleteSuccess=1
+)
 timeout /t 1 /nobreak > nul
 set /a count+=1
-if not exist "%FileName%" (
+if !deleteSuccess! equ 1 (
 	echo The %SoftName% installer has been deleted.
-	echo.>> %Temp%\hieuckitlog.txt
 	echo The %SoftName% installer has been deleted.>> %Temp%\hieuckitlog.txt
-) & goto endcheck
+	goto endcheck
+) else (
+	echo.>> %Temp%\hieuckitlog.txt
+)
 if !count! equ 30 goto timeoutcheck
 goto waitloopcheck
 :timeoutcheck
