@@ -3,17 +3,17 @@
 %ProgramData%\
 %Public%\Desktop
 %LocalAppData%\
-%Appdata%\
+%AppData%\
 %Temp%\
 %UserProfile%\Desktop
 %SystemRoot%\
 
 $securePassword = ConvertTo-SecureString "123" -AsPlainText -Force
-Expand-Archive -Path "%FILENAME%" -DestinationPath "%SOFTPATH%" -Password $securePassword
+Expand-Archive -Path "%FileName%" -DestinationPath "%SoftPath%" -Password $securePassword
 
 $securePassword = ConvertTo-SecureString "123" -AsPlainText -Force
-Expand-Archive -Path $env:FILENAME -DestinationPath $env:SOFTPATH -Password $securePassword
+Expand-Archive -Path $env:FileName -DestinationPath $env:SoftPath -Password $securePassword
 
-@7z.exe x -p123 "%FILENAME%" -o"%SOFTPATH%" -aoa -y
+@7z.exe x -p123 "%FileName%" -o"%SoftPath%" -aoa -y
 
 aida64.exe /register "UR55D-QFID6-NJDJZ-ADMA1-GTWDD"
