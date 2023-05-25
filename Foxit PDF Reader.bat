@@ -263,7 +263,7 @@ if exist "wget.exe" (
 
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
-    echo File download failed. File size is 0KB.
+	echo File download failed. File size is 0KB.
 	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
 )
 
