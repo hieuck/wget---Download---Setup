@@ -30,7 +30,7 @@ echo.
 @echo off
 pushd "%~dp0"
 :: Set License Extract7z Soft Process Name OldWindows 32-bit Support User Agent
-set "License="
+set "License=Yes"
 set "Extract7z="
 set "SoftName=Foxit PDF Editor Suite Pro Individuals"
 set "Process=FoxitPDFEditor.exe"
