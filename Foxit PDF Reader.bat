@@ -45,7 +45,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://www.foxit.com/downloads/latest.html?product=Foxit-Reader"
+set "Link=https://cdn01.foxitsoftware.com/product/reader/desktop/win/12.1.2/FoxitPDFReader1212_L10N_Setup_Prom.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -259,6 +259,12 @@ if exist "wget.exe" (
 		type "%Temp%\hieuckitlog.txt"
 		start "" "%Temp%\hieuckitlog.txt"
 	)
+)
+
+for %%F in ("%FileName%") do set "size=%%~zF"
+if %size% equ 0 (
+	echo %SoftName% download failed. File size is 0KB.
+	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
 )
 
 if not exist "%FileName%" (
