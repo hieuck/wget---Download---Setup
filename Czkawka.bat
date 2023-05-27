@@ -485,6 +485,7 @@ if !count! equ 30 goto timeoutcheck
 goto waitloopcheck
 :timeoutcheck
 echo Timeout: Deletion failed. Please delete the file manually.
+echo Timeout: Deletion failed. Please delete the file manually.>> %Temp%\hieuckitlog.txt
 :endcheck
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
