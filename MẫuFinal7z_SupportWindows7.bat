@@ -195,7 +195,7 @@ if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
 echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
-timeout /t 1
+timeout /t 2
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -427,6 +427,7 @@ del CreateShortcut.vbs
 
 if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut complete.
+	echo Creating Shortcut complete.>> %Temp%\hieuckitlog.txt
 ) else (
 	echo Creating Shortcut failed.
 )
