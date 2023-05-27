@@ -195,7 +195,7 @@ if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
 echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
-timeout /t 3
+timeout /t 1
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -350,7 +350,7 @@ goto end
 echo %SoftName% has been installed successfully.
 echo.>> %Temp%\hieuckitlog.txt
 echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
-timeout /t 3
+timeout /t 2
 :end
 
 :: License
