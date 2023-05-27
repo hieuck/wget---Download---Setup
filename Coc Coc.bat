@@ -53,7 +53,7 @@ set "SoftPath=%ProgramFiles%\CocCoc\Browser\Application"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/silent /forcedcmdline "do-not-launch- chrome --force-add-firewall-rules" /install"
+set "QuietMode=/silent /forcedcmdline "do-not-launch-chrome --force-add-firewall-rules" /install"
 
 set "Cr4ckFile="
 set "Cr4ckPath="
@@ -176,7 +176,13 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	set "FileName=%SoftName%-HieuckIT.exe "
+	for %%i in ("%Link%") do (
+		if /i "%%~xi"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi "
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe "
+		)
+	)
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (
@@ -188,10 +194,11 @@ echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
 echo Link: %Link:&=^&%>> %Temp%\hieuckitlog.txt
 echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
-echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
+if not "%SoftPath%"=="" echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
+echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
 timeout /t 3
 
@@ -258,6 +265,12 @@ if exist "wget.exe" (
 		type "%Temp%\hieuckitlog.txt"
 		start "" "%Temp%\hieuckitlog.txt"
 	)
+)
+
+for %%F in ("%FileName%") do set "size=%%~zF"
+if %size% equ 0 (
+	echo %SoftName% download failed. File size is 0KB.
+	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
 )
 
 if not exist "%FileName%" (

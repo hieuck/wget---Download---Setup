@@ -176,7 +176,13 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	set "FileName=%SoftName%-HieuckIT.exe "
+	for %%i in ("%Link%") do (
+		if /i "%%~xi"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi "
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe "
+		)
+	)
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (
@@ -259,6 +265,12 @@ if exist "wget.exe" (
 		type "%Temp%\hieuckitlog.txt"
 		start "" "%Temp%\hieuckitlog.txt"
 	)
+)
+
+for %%F in ("%FileName%") do set "size=%%~zF"
+if %size% equ 0 (
+	echo %SoftName% download failed. File size is 0KB.
+	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
 )
 
 if not exist "%FileName%" (

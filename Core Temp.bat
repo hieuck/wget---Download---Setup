@@ -176,7 +176,13 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	set "FileName=%SoftName%-HieuckIT.exe "
+	for %%i in ("%Link%") do (
+		if /i "%%~xi"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi "
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe "
+		)
+	)
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (
@@ -186,12 +192,13 @@ if /i "%Extract7z%"=="Yes" (
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
-echo Link: %Link%>> %Temp%\hieuckitlog.txt
+echo Link: %Link:&=^&%>> %Temp%\hieuckitlog.txt
 echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
-echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
+if not "%SoftPath%"=="" echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
+echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
 timeout /t 3
 
@@ -250,14 +257,20 @@ if exist "wget.exe" (
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
 		echo.
-		echo wget.exe or curl.exe not found to download, please download at: > %Temp%\download_error.txt
-		echo. >> %Temp%\download_error.txt
-		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %Temp%\download_error.txt
-		echo wget: https://eternallybored.org/misc/wget/ >> %Temp%\download_error.txt
-		echo curl: https://curl.se/download.html >> %Temp%\download_error.txt
-		type "%Temp%\download_error.txt"
-		start "" "%Temp%\download_error.txt"
+		echo wget.exe or curl.exe not found to download, please download at: > %Temp%\hieuckitlog.txt
+		echo. >> %Temp%\hieuckitlog.txt
+		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %Temp%\hieuckitlog.txt
+		echo wget: https://eternallybored.org/misc/wget/ >> %Temp%\hieuckitlog.txt
+		echo curl: https://curl.se/download.html >> %Temp%\hieuckitlog.txt
+		type "%Temp%\hieuckitlog.txt"
+		start "" "%Temp%\hieuckitlog.txt"
 	)
+)
+
+for %%F in ("%FileName%") do set "size=%%~zF"
+if %size% equ 0 (
+	echo %SoftName% download failed. File size is 0KB.
+	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
 )
 
 if not exist "%FileName%" (
@@ -340,6 +353,8 @@ echo Timeout: %SoftName% installation has not completed in 30 seconds.
 goto end
 :installed
 echo %SoftName% has been installed successfully.
+echo.>> %Temp%\hieuckitlog.txt
+echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
 timeout /t 3
 :end
 
@@ -380,6 +395,8 @@ if /i "%License%"=="Yes" (
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
 		echo Successfully Cr4cked %SoftName%.
+		echo.>> %Temp%\hieuckitlog.txt
+		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
 		del "%Cr4ckFile%"
 	) else (
 		echo Cr4cking %SoftName% failed.
@@ -440,12 +457,31 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Cleaning up temporary files...
-if exist "%FileName%" del "%FileName%"
-if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
-if exist "%Temp%\hieuckitlog.txt" del "%Temp%\hieuckitlog.txt"
-if exist "7z.dll" del "7z.dll"
-if exist "7z.exe" del "7z.exe"
-
+echo.>> %Temp%\hieuckitlog.txt
+setlocal EnableDelayedExpansion
+set count=0
+set deleteSuccess=0
+:waitloopcheck
+if exist "7z.dll" del "7z.dll">> %Temp%\hieuckitlog.txt 2>&1
+if exist "7z.exe" del "7z.exe">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%FileName%" (
+	del "%FileName%">> %Temp%\hieuckitlog.txt 2>&1
+	if not exist "%FileName%" set deleteSuccess=1
+)
+timeout /t 1 /nobreak > nul
+set /a count+=1
+if !deleteSuccess! equ 1 (
+	echo The %SoftName% installer has been deleted.
+	echo The %SoftName% installer has been deleted.>> %Temp%\hieuckitlog.txt
+	goto endcheck
+) else (
+	echo.>> %Temp%\hieuckitlog.txt
+)
+if !count! equ 30 goto timeoutcheck
+goto waitloopcheck
+:timeoutcheck
+echo Timeout: Deletion failed. Please delete the file manually.
+:endcheck
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
 
@@ -462,23 +498,6 @@ echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
-	if exist "7z.dll" (
-		tasklist | find /i "7z.dll" > nul
-		if %errorlevel% equ 0 taskkill /im "7z.dll" /f
-		del "7z.dll"
-	)
-
-	if exist "7z.exe" (
-		tasklist | find /i "7z.exe" > nul
-		if %errorlevel% equ 0 taskkill /im "7z.exe" /f
-		del "7z.exe"
-	)
-
-	if exist "%FileName%" (
-		tasklist | find /i "%FileName%" > nul
-		if %errorlevel% equ 0 taskkill /im "%FileName%" /f
-		del "%FileName%"
-	)
 )
 echo Please close the script manually if automatically close fails.
 popd
