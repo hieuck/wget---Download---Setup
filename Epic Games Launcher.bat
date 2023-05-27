@@ -49,7 +49,7 @@ set "Link=https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/i
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "SoftPath=%ProgramFiles(X86)%\Epic Games\Launcher\Portal\Binaries\Win64" & set set "SoftPath=%ProgramFiles(x86)%\Epic Games\Launcher\Portal\Binaries\Win32"
+set "SoftPath=%ProgramFiles(x86)%\Epic Games\Launcher\Portal\Binaries\Win64" & set set "SoftPath=%ProgramFiles(x86)%\Epic Games\Launcher\Portal\Binaries\Win32"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
@@ -176,13 +176,8 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	for %%i in ("%Link%") do (
-		if /i "%%~xi"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi "
-		) else (
-			set "FileName=%SoftName%-HieuckIT.exe "
-		)
-	)
+	set "FileName=%SoftName%-HieuckIT.exe "
+	if "%Link:~-4%"==".msi" set "FileName=%SoftName%-HieuckIT.msi "
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (

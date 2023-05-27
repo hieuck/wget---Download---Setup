@@ -39,7 +39,7 @@ set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source Link: https://github.com/qarmin/czkawka/releases/latest
+:: Source Link: https://github.com/qarmin/czkawka/releases/latest https://github.com/BtbN/FFmpeg-Builds/releases/latest
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -179,13 +179,8 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	for %%i in ("%Link%") do (
-		if /i "%%~xi"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi "
-		) else (
-			set "FileName=%SoftName%-HieuckIT.exe "
-		)
-	)
+	set "FileName=%SoftName%-HieuckIT.exe "
+	if "%Link:~-4%"==".msi" set "FileName=%SoftName%-HieuckIT.msi "
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (

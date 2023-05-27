@@ -176,13 +176,8 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	for %%i in ("%Link%") do (
-		if /i "%%~xi"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi "
-		) else (
-			set "FileName=%SoftName%-HieuckIT.exe "
-		)
-	)
+	set "FileName=%SoftName%-HieuckIT.exe "
+	if "%Link:~-4%"==".msi" set "FileName=%SoftName%-HieuckIT.msi "
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (
