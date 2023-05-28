@@ -32,8 +32,10 @@ pushd "%~dp0"
 :: Set License Extract7z Soft Process Name OldWindows 32-bit Support User Agent
 set "License="
 set "Extract7z=Yes"
+
 set "SoftName=Core Temp"
 set "Process=Core Temp.exe"
+
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -162,7 +164,6 @@ if /i "%License%"=="Yes" (
 :: Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
-	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 	if not "%SoftPath%"=="" (
@@ -176,14 +177,15 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	set "FileName=%SoftName%-HieuckIT.exe "
-	if "%Link:~-4%"==".msi" set "FileName=%SoftName%-HieuckIT.msi "
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (
 		set "Shortcut=No"
 	)
 )
+
+set "FileName=%SoftName%.HieuckIT"
+if "%Link:~-4%"==".msi" set "FileName=%SoftName%-HieuckIT.msi "
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
