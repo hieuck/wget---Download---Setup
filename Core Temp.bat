@@ -29,12 +29,15 @@ echo.
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-:: Set License Extract7z Soft Process Name OldWindows 32-bit Support User Agent
+:: Set License Extract7z Soft Process Name FileType OldWindows 32-bit Support User Agent
+
 set "License="
 set "Extract7z=Yes"
 
 set "SoftName=Core Temp"
 set "Process=Core Temp.exe"
+
+set "FileType="
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -184,8 +187,20 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-set "FileName=%SoftName%.HieuckIT"
-if "%Link:~-4%"==".msi" set "FileName=%SoftName%-HieuckIT.msi "
+:: Check File Type
+if not "%FileType%"=="" (
+	if /i "%FileType%"=="msi" (
+		set "FileName=%SoftName%-HieuckIT.msi "
+	) else if /i "%Link:~-4%"==".msi" (
+		set "FileName=%SoftName%-HieuckIT.msi "
+	) else (
+		set "FileName=%SoftName%.HieuckIT"
+	)
+) else if /i "%Link:~-4%"==".msi" (
+	set "FileName=%SoftName%-HieuckIT.msi "
+) else (
+	set "FileName=%SoftName%.HieuckIT"
+)
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
@@ -197,7 +212,7 @@ if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
 echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
-timeout /t 3
+timeout /t 2
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -352,7 +367,7 @@ goto end
 echo %SoftName% has been installed successfully.
 echo.>> %Temp%\hieuckitlog.txt
 echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
-timeout /t 3
+timeout /t 2
 :end
 
 :: License
@@ -403,8 +418,8 @@ if /i "%License%"=="Yes" (
 
 :: Shortcut
 if /i "%Shortcut%"=="No" (
-    echo Creating Shortcut is skipped.
-    goto CleanUp
+	echo Creating Shortcut is skipped.
+	goto CleanUp
 )
 
 if exist "%SoftPath%\%Process%" (
@@ -429,6 +444,7 @@ del CreateShortcut.vbs
 
 if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut complete.
+	echo Creating Shortcut complete.>> %Temp%\hieuckitlog.txt
 ) else (
 	echo Creating Shortcut failed.
 )
