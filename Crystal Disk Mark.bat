@@ -64,7 +64,7 @@ set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 set "Cr4ckFile="
 set "Cr4ckPath="
 
-set "Shortcut=Yes"
+set "Shortcut="
 
 :: Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
