@@ -26,65 +26,64 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-:: Detect Windows Architecture
+:: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
+
+set "Extract7z="
+set "License="
+
+set "SoftName=K-Lite Codec Pack Mega"
+set "Process=mpc-hc64.exe"
+
+set "FileType="
+
+set "SupportOldWindows=Yes"
+set "Support32Bit=Yes"
+set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+
+:: Set code based on Windows Architecture
+:: Source Link: http://www.codecguide.com/download_k-lite_codec_pack_mega.htm
+
+set "LinkForOldWindows="
+set "LinkForOldWindows32bit="
+set "LinkForOldWindows64bit="
+
+set "Link=https://files3.codecguide.com/K-Lite_Codec_Pack_1760_Mega.exe"
+set "LinkForAllWindows32bit="
+set "LinkForAllWindows64bit="
+
+set "SoftPath="
+set "SoftPathFor32bit=%ProgramFiles%\K-Lite Codec Pack\MPC-HC64"
+set "SoftPathFor64bit=%ProgramFiles(x86)%\K-Lite Codec Pack\MPC-HC64"
+
+set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
+
+set "Cr4ckFile="
+set "Cr4ckPath="
+
+set "Shortcut="
+
+:: Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x64"
 ) else (
 	set "ARCH=x86"
 )
 
-:: Set License Extract7z Soft Process Name CheckOSVersion User Agent
-set "License="
-set "Extract7z="
-set "SOFTNAME=K-Lite Codec Pack Mega"
-set "PROCESS=mpc-hc64.exe"
-set "CheckOSVersion=No"
-set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-
-:: Set code based on Windows Architecture
-:: Source link: http://www.codecguide.com/download_k-lite_codec_pack_mega.htm
-
-if %ARCH%==x86 (
-	set "SOFTPATH=%PROGRAMFILES%\K-Lite Codec Pack\MPC-HC64"
-) else (
-	set "SOFTPATH=%PROGRAMFILES(X86)%\K-Lite Codec Pack\MPC-HC64"
+if /i "%Support32Bit%"=="No" (
+	if /i "%ARCH%"=="x86" (
+		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
+		for /l %%i in (3,-1,1) do (
+			echo Exiting in %%i seconds...
+			timeout /t 1 /nobreak >nul
+		)
+		exit
+	)
 )
 
-set "LINK=https://files3.codecguide.com/K-Lite_Codec_Pack_1755_Mega.exe"
-set "QUIETMODE=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
-
-:: Set up information related to software cr4cking
-if "%License%"=="Yes" (
-	set "Admin=Yes"
-	set "CR4CKFILE=danvaoday"
-	set "CR4CKPATH=%SOFTPATH%"
-	set "CR4CKLINK=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!CR4CKFILE!.rar"
-	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-)
-
-::Extract with 7z
-if "%Extract7z%"=="Yes" (
-	set "FILENAME=%SOFTNAME%-HieuckIT.zip"
-	set "Admin=Yes"
-	set "Shortcut=Yes"
-	set "SOFTPATH=%PROGRAMFILES%\%SOFTNAME%"
-	set "LINK7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "LINK7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-) else (
-	set "Shortcut=No"
-	set "FILENAME=%SOFTNAME%-HieuckIT.exe "
-)
-set "SOFTLOCATION=%SOFTPATH%\%PROCESS%"
-
-::Check Windows OS Version
-if /i "%CheckOSVersion%"=="no" (
-	goto SkipCheckOSVersion
-)
-
+::Check Windows OS Version and Check Support Old Windows
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
@@ -95,24 +94,132 @@ for /f "tokens=5 delims=[.] " %%i in ('ver') do (
 )
 set "version=%version1%.%version2%"
 
-if "%version%"=="6.1" (
+if "%version%"=="6.1" goto ForOldWindows
+goto ForNewWindows
+endlocal
+
+:ForOldWindows
+if /i "%SupportOldWindows%"=="No" (
 	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
 		timeout /t 1 /nobreak >nul
 	)
 	exit
+) else (
+	if /i "%ARCH%"=="x86" (
+		if not "%LinkForOldWindows32bit%"=="" (
+			set "Link=%LinkForOldWindows32bit%"
+		) else (
+			if not "%LinkForOldWindows%"=="" (
+				set "Link=%LinkForOldWindows%"
+			) else (
+				if not "%LinkForAllWindows32bit%"=="" (
+					set "Link="%LinkForAllWindows32bit%"
+				) else (
+					set "Link=%Link%"
+				)
+			)
+		)
+		if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
+	) else (
+		if not "%LinkForOldWindows64bit%"=="" (
+			set "Link=%LinkForOldWindows64bit%"
+		) else (
+			if not "%LinkForOldWindows%"=="" (
+				set "Link=%LinkForOldWindows%"
+			) else (
+				if not "%LinkForAllWindows64bit%"=="" (
+					set "Link=%LinkForAllWindows64bit%"
+				) else (
+					set "Link=%Link%"
+				)
+			)
+		)
+		if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
+	)
 )
-endlocal
+goto NextStepForCheckOSVersion
 
-:SkipCheckOSVersion
+:ForNewWindows
+if /i "%ARCH%"=="x86" (
+	if not "%LinkForAllWindows32bit%"=="" set "Link=%LinkForAllWindows32bit%"
+	if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
+) else (
+	if not "%LinkForAllWindows64bit%"=="" set "Link=%LinkForAllWindows64bit%"
+	if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
+)
+
+:NextStepForCheckOSVersion
+:: Extract with 7z
+if /i "%Extract7z%"=="Yes" (
+	set "Admin=Yes"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%SoftPath%"=="" (
+		set "SoftPath=%SoftPath%"
+	) else (
+		set "SoftPath=%ProgramFiles%\%SoftName%"
+	)
+	if not "%Shortcut%"=="" (
+		set "Shortcut=%Shortcut%"
+	) else (
+		set "Shortcut=Yes"
+	)
+) else (
+	if not "%Shortcut%"=="" (
+		set "Shortcut=%Shortcut%"
+	) else (
+		set "Shortcut=No"
+	)
+)
+
+:: Set up information related to software cr4cking
+if /i "%License%"=="Yes" (
+	set "Admin=Yes"
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%Cr4ckPath%"=="" (
+		set "Cr4ckPath=%Cr4ckPath%"
+	) else (
+		set "Cr4ckPath=%SoftPath%"
+	)
+)
+
+:: Check File Type
+if not "%FileType%"=="" (
+	if /i "%FileType%"=="msi" (
+		set "FileName=%SoftName%-HIE.msi"
+	) else if /i "%Link:~-4%"==".msi" (
+		set "FileName=%SoftName%-HIE.msi"
+	) else (
+		set "FileName=%SoftName%.HIE"
+	)
+) else if /i "%Link:~-4%"==".msi" (
+	set "FileName=%SoftName%-HIE.msi"
+) else (
+	set "FileName=%SoftName%.HIE"
+)
+
+echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
+echo.>> %Temp%\hieuckitlog.txt
+echo Link: %Link:&=^&%>> %Temp%\hieuckitlog.txt
+echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
+if not "%SoftPath%"=="" echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
+if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
+if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
+if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
+echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
+type "%Temp%\hieuckitlog.txt"
+timeout /t 2
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
 ) else (
-	if "%Admin%"=="Yes" (
+	if /i "%Admin%"=="Yes" (
 		echo Please Run as Administrator. Exiting in 3 seconds...
 		for /l %%i in (3,-1,1) do (
 			echo Exiting in %%i seconds...
@@ -128,10 +235,10 @@ if %errorlevel% == 0 (
 	)
 )
 
-:: Terminate the %SOFTNAME% Process
-tasklist | find /i "%PROCESS%" > nul
+:: Terminate the %SoftName% Process
+tasklist | find /i "%Process%" > nul
 if %errorlevel% equ 0 (
-	taskkill /im "%PROCESS%" /f
+	taskkill /im "%Process%" /f
 )
 
 :: Save the value of the %time% variable before running the batch script
@@ -153,28 +260,33 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Tai %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Tai %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-echo Downloading %SOFTNAME%...
+echo Downloading %SoftName%...
 if exist "wget.exe" (
-	wget --no-check-certificate --show-progress -q -O "%FILENAME%" -U "%USERAGENT%" "%LINK%"
+	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 ) else (
-	curl -L --max-redirs 20 -A "%USERAGENT%" -o "%FILENAME%" "%LINK%" --insecure || (
-		if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
 		echo.
-		echo wget.exe or curl.exe not found to download, please download at: >> %temp%\download_error.txt
-		echo. >> %temp%\download_error.txt
-		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %temp%\download_error.txt
-		echo wget: https://eternallybored.org/misc/wget/ >> %temp%\download_error.txt
-		echo curl: https://curl.se/download.html >> %temp%\download_error.txt
-		type "%temp%\download_error.txt"
-		start "" "%temp%\download_error.txt"
+		echo wget.exe or curl.exe not found to download, please download at: > %Temp%\hieuckitlog.txt
+		echo. >> %Temp%\hieuckitlog.txt
+		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %Temp%\hieuckitlog.txt
+		echo wget: https://eternallybored.org/misc/wget/ >> %Temp%\hieuckitlog.txt
+		echo curl: https://curl.se/download.html >> %Temp%\hieuckitlog.txt
+		type "%Temp%\hieuckitlog.txt"
+		start "" "%Temp%\hieuckitlog.txt"
 	)
 )
 
-if not exist "%FILENAME%" (
-	echo Download %SOFTNAME% failed.
+for %%F in ("%FileName%") do set "size=%%~zF"
+if %size% equ 0 (
+	echo %SoftName% download failed. File size is 0KB.
+	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
+)
+
+if not exist "%FileName%" (
+	echo Download %SoftName% failed.
 	echo Please check your network connection. Exiting in 3 seconds...
 	for /l %%i in (3,-1,1) do (
 		echo Exiting in %%i seconds...
@@ -202,13 +314,13 @@ echo.
 @echo off
 pushd "%~dp0"
 echo Downloading 7-Zip...
-if "%Extract7z%"=="Yes" (
+if /i "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
+		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
+		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
 	) else (
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
+		curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.dll" "%Link7zdll%" --insecure
+		curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.exe" "%Link7zexe%" --insecure
 	)
 )
 
@@ -228,32 +340,34 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cai Dat %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-echo Installing %SOFTNAME%...
-if "%Extract7z%"=="Yes" (
-	@7z.exe x "%FILENAME%" -o"%SOFTPATH%" -aoa -y
+echo Installing %SoftName%...
+if /i "%Extract7z%"=="Yes" (
+	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-	"%FILENAME%" %QUIETMODE%
+	"%FileName%" %QuietMode%
 )
 
 :: Check Installation Process
-echo Checking if %SOFTNAME% installation is complete...
+echo Checking if %SoftName% installation is complete...
 setlocal EnableDelayedExpansion
 set count=0
 :waitloop
 timeout /t 1 /nobreak > nul
 set /a count+=1
-if exist "%SOFTLOCATION%" goto installed
+if exist "%SoftPath%\%Process%" goto installed
 if !count! equ 30 goto timeout
 goto waitloop
 :timeout
-echo Timeout: %SOFTNAME% installation has not completed in 30 seconds.
+echo Timeout: %SoftName% installation has not completed in 30 seconds.
 goto end
 :installed
-echo %SOFTNAME% has been installed successfully.
-timeout /t 3
+echo %SoftName% has been installed successfully.
+echo.>> %Temp%\hieuckitlog.txt
+echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
+timeout /t 2
 :end
 
 :: License
@@ -272,74 +386,125 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh %SOFTNAME%. Vui Long Cho...
+@echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-if "%License%"=="Yes" (
-	echo Cr4cking %SOFTNAME%...
+if /i "%License%"=="Yes" (
+	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%USERAGENT%" "%LINK7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%USERAGENT%" "%LINK7zexe%"
-		wget --no-check-certificate --show-progress -q -O "%CR4CKFILE%" -U "%USERAGENT%" "%CR4CKLINK%"
+		if not exist "7z.dll" if not exist "7z.exe" (
+			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
+			wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
+		)
+		wget --no-check-certificate --show-progress -q -O "%Cr4ckFile%" -U "%UserAgent%" "%Cr4ckLink%"
 	) else (
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.dll" "%LINK7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "7z.exe" "%LINK7zexe%" --insecure
-		curl -L --max-redirs 20 -A "%USERAGENT%" -o "%CR4CKFILE%" "%CR4CKLINK%" --insecure
+		if not exist "7z.dll" if not exist "7z.exe" (
+			curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.dll" "%Link7zdll%" --insecure
+			curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.exe" "%Link7zexe%" --insecure
+		)
+		curl -L --max-redirs 20 -A "%UserAgent%" -o "%Cr4ckFile%" "%Cr4ckLink%" --insecure
 	)
-	if exist "%CR4CKFILE%" (
-		@7z.exe x -p123 "%CR4CKFILE%" -o"%CR4CKPATH%" -aoa -y
-		echo Successfully Cr4cked %SOFTNAME%.
-		del "%CR4CKFILE%"
+	if exist "%Cr4ckFile%" (
+		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
+		echo Successfully Cr4cked %SoftName%.
+		echo.>> %Temp%\hieuckitlog.txt
+		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
+		del "%Cr4ckFile%"
 	) else (
-		echo Cr4cking %SOFTNAME% failed.
+		echo Cr4cking %SoftName% failed.
 		echo Please try running the script as Administrator.
 	)
 )
 
 :: Shortcut
-if /i "%Shortcut%"=="no" (
-    echo Creating shortcut is skipped.
-    goto CleanUp
+if /i "%Shortcut%"=="No" (
+	echo Creating Shortcut is skipped.
+	goto CleanUp
 )
 
-if exist "%SOFTLOCATION%" (
-	set "TARGETFILE=%SOFTLOCATION%"
+if exist "%SoftPath%\%Process%" (
+	set "TargetFile=%SoftPath%\%Process%"
 ) else (
-	echo %SOFTNAME% does not exist in directory "%SOFTPATH%". Exiting script.
+	echo %SoftName% does not exist in directory "%SoftPath%". Exiting script.
 	exit /b 1
 )
 
-set "SHORTCUTNAME=%SOFTNAME%.lnk"
-set "SHORTCUTPATH=%PUBLIC%\Desktop\%SHORTCUTNAME%"
+set "ShortcutName=%SoftName%.lnk"
+set "ShortcutPath=%Public%\Desktop\%ShortcutName%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
-echo sLinkFile = "%SHORTCUTPATH%" >> CreateShortcut.vbs
+echo sLinkFile = "%ShortcutPath%" >> CreateShortcut.vbs
 echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
-echo oLink.TargetPath = "%TARGETFILE%" >> CreateShortcut.vbs
-echo oLink.WorkingDirectory = "%SOFTPATH%" >> CreateShortcut.vbs
-echo oLink.Description = "Shortcut to %SOFTNAME%" >> CreateShortcut.vbs
+echo oLink.TargetPath = "%TargetFile%" >> CreateShortcut.vbs
+echo oLink.WorkingDirectory = "%SoftPath%" >> CreateShortcut.vbs
+echo oLink.Description = "Shortcut to %SoftName%" >> CreateShortcut.vbs
 echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
-if exist "%PUBLIC%\Desktop\%SHORTCUTNAME%" (
-	echo Creating shortcut complete.
+if exist "%Public%\Desktop\%ShortcutName%" (
+	echo Creating Shortcut complete.
+	echo Creating Shortcut complete.>> %Temp%\hieuckitlog.txt
 ) else (
-	echo Creating shortcut failed.
+	echo Creating Shortcut failed.
 )
 
 :: Clean Up
 :CleanUp
-if exist "%FILENAME%" del "%FILENAME%"
-if exist "%temp%\download_error.txt" del "%temp%\download_error.txt"
-if exist "7z.dll" del "7z.dll"
-if exist "7z.exe" del "7z.exe"
-
+@ECHO OFF
+title _Hieuck.IT_'s Windows Application Cleaning Up...
+color 0B
+mode con:cols=100 lines=17
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Don Dep %SoftName%. Vui Long Cho...
+@echo off
+pushd "%~dp0"
+echo Cleaning up temporary files...
+echo.>> %Temp%\hieuckitlog.txt
+setlocal EnableDelayedExpansion
+set count=0
+set deleteSuccess=0
+:waitloopcheck
+if exist "7z.dll" del "7z.dll">> %Temp%\hieuckitlog.txt 2>&1
+if exist "7z.exe" del "7z.exe">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%FileName%" (
+	del "%FileName%">> %Temp%\hieuckitlog.txt 2>&1
+	if not exist "%FileName%" set deleteSuccess=1
+)
+timeout /t 1 /nobreak > nul
+set /a count+=1
+if !deleteSuccess! equ 1 (
+	echo The %SoftName% installer has been deleted.
+	echo The %SoftName% installer has been deleted.>> %Temp%\hieuckitlog.txt
+	goto endcheck
+) else (
+	echo.>> %Temp%\hieuckitlog.txt
+)
+if !count! equ 30 goto timeoutcheck
+goto waitloopcheck
+:timeoutcheck
+echo Timeout: Deletion failed. Please delete the file manually.
+echo Timeout: Deletion failed. Please delete the file manually.>> %Temp%\hieuckitlog.txt
+:endcheck
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
 
-:: Calculate the difference between the two %start_time% and %end_time% values
-set /a elapsed_time=(%end_time:~0,2%*3600 + %end_time:~3,2%*60 + %end_time:~6,2%) - (%start_time:~0,2%*3600 + %start_time:~3,2%*60 + %start_time:~6,2%)
+:: Convert the start and end times to seconds
+for /f "tokens=1-3 delims=:." %%a in ("%start_time%") do set /a "start_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
+for /f "tokens=1-3 delims=:." %%a in ("%end_time%") do set /a "end_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
+
+:: Calculate the elapsed time in seconds
+set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
 
@@ -347,23 +512,6 @@ echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
-	if exist "7z.dll" (
-		tasklist | find /i "7z.dll" > nul
-		if %errorlevel% equ 0 taskkill /im "7z.dll" /f
-		del "7z.dll"
-	)
-
-	if exist "7z.exe" (
-		tasklist | find /i "7z.exe" > nul
-		if %errorlevel% equ 0 taskkill /im "7z.exe" /f
-		del "7z.exe"
-	)
-
-	if exist "%FILENAME%" (
-		tasklist | find /i "%FILENAME%" > nul
-		if %errorlevel% equ 0 taskkill /im "%FILENAME%" /f
-		del "%FILENAME%"
-	)
 )
 echo Please close the script manually if automatically close fails.
 popd

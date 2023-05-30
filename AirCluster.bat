@@ -29,10 +29,10 @@ echo.
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-:: Set License Extract7z Soft Process Name FileType OldWindows 32-bit Support User Agent
+:: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
 
-set "License=Yes"
 set "Extract7z="
+set "License=Yes"
 
 set "SoftName=AirCluster"
 set "Process=AirCluster.exe"
@@ -151,19 +151,6 @@ if /i "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-:: Set up information related to software cr4cking
-if /i "%License%"=="Yes" (
-	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-	if not "%Cr4ckPath%"=="" (
-		set "Cr4ckPath=%Cr4ckPath%"
-	) else (
-		set "Cr4ckPath=%SoftPath%"
-	)
-)
-
 :: Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
@@ -184,6 +171,19 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=%Shortcut%"
 	) else (
 		set "Shortcut=No"
+	)
+)
+
+:: Set up information related to software cr4cking
+if /i "%License%"=="Yes" (
+	set "Admin=Yes"
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%Cr4ckPath%"=="" (
+		set "Cr4ckPath=%Cr4ckPath%"
+	) else (
+		set "Cr4ckPath=%SoftPath%"
 	)
 )
 
