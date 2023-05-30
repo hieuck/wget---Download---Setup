@@ -14,7 +14,7 @@
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -29,10 +29,10 @@ echo.
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 pushd "%~dp0"
-:: Set License Extract7z Soft Process Name FileType OldWindows 32-bit Support User Agent
+:: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
 
-set "License="
 set "Extract7z="
+set "License="
 
 set "SoftName=Epic Games Launcher"
 set "Process=EpicGamesLauncher.exe"
@@ -151,19 +151,6 @@ if /i "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-:: Set up information related to software cr4cking
-if /i "%License%"=="Yes" (
-	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-	if not "%Cr4ckPath%"=="" (
-		set "Cr4ckPath=%Cr4ckPath%"
-	) else (
-		set "Cr4ckPath=%SoftPath%"
-	)
-)
-
 :: Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
@@ -187,17 +174,30 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
+:: Set up information related to software cr4cking
+if /i "%License%"=="Yes" (
+	set "Admin=Yes"
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%Cr4ckPath%"=="" (
+		set "Cr4ckPath=%Cr4ckPath%"
+	) else (
+		set "Cr4ckPath=%SoftPath%"
+	)
+)
+
 :: Check File Type
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
-		set "FileName=%SoftName%-HieuckIT.msi "
+		set "FileName=%SoftName%-HieuckIT.msi"
 	) else if /i "%Link:~-4%"==".msi" (
-		set "FileName=%SoftName%-HieuckIT.msi "
+		set "FileName=%SoftName%-HieuckIT.msi"
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
 ) else if /i "%Link:~-4%"==".msi" (
-	set "FileName=%SoftName%-HieuckIT.msi "
+	set "FileName=%SoftName%-HieuckIT.msi"
 ) else (
 	set "FileName=%SoftName%.HieuckIT"
 )
@@ -248,7 +248,7 @@ set start_time=%time%
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -298,7 +298,7 @@ if not exist "%FileName%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -328,7 +328,7 @@ if /i "%Extract7z%"=="Yes" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -374,7 +374,7 @@ timeout /t 2
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -454,7 +454,7 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.

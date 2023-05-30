@@ -14,7 +14,7 @@
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -190,16 +190,16 @@ if /i "%License%"=="Yes" (
 :: Check File Type
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
-		set "FileName=%SoftName%-HIE.msi"
+		set "FileName=%SoftName%-HieuckIT.msi"
 	) else if /i "%Link:~-4%"==".msi" (
-		set "FileName=%SoftName%-HIE.msi"
+		set "FileName=%SoftName%-HieuckIT.msi"
 	) else (
-		set "FileName=%SoftName%.HIE"
+		set "FileName=%SoftName%.HieuckIT"
 	)
 ) else if /i "%Link:~-4%"==".msi" (
-	set "FileName=%SoftName%-HIE.msi"
+	set "FileName=%SoftName%-HieuckIT.msi"
 ) else (
-	set "FileName=%SoftName%.HIE"
+	set "FileName=%SoftName%.HieuckIT"
 )
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
@@ -248,7 +248,7 @@ set start_time=%time%
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -298,7 +298,7 @@ if not exist "%FileName%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -328,7 +328,7 @@ if /i "%Extract7z%"=="Yes" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -374,7 +374,7 @@ timeout /t 2
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
@@ -454,7 +454,7 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 @ECHO OFF
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
 @cls
 echo.
 echo.
