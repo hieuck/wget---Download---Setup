@@ -14,8 +14,6 @@
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=120 lines=17
-::if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
