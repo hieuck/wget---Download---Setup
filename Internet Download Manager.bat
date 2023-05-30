@@ -14,6 +14,8 @@
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -244,7 +246,6 @@ if %errorlevel% equ 0 (
 set start_time=%time%
 
 :: Download
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
 mode con:cols=120 lines=17
@@ -295,7 +296,6 @@ if not exist "%FileName%" (
 	exit
 )
 
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=120 lines=17
@@ -326,7 +326,6 @@ if /i "%Extract7z%"=="Yes" (
 )
 
 :: Install
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
 mode con:cols=120 lines=17
@@ -373,7 +372,6 @@ timeout /t 2
 :end
 
 :: License
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
 mode con:cols=120 lines=17
@@ -454,7 +452,6 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 
 :: Clean Up
 :CleanUp
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
 mode con:cols=120 lines=17

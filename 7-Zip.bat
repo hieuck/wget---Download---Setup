@@ -7,6 +7,7 @@
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
+pushd "%~dp0"
 
 :: Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
@@ -14,7 +15,8 @@
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -28,7 +30,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 :: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
 
 set "Extract7z="
@@ -190,14 +191,14 @@ if /i "%License%"=="Yes" (
 :: Check File Type
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
-		set "FileName=%SoftName%-HieuckIT.msi "
+		set "FileName=%SoftName%-HieuckIT.msi"
 	) else if /i "%Link:~-4%"==".msi" (
-		set "FileName=%SoftName%-HieuckIT.msi "
+		set "FileName=%SoftName%-HieuckIT.msi"
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
 ) else if /i "%Link:~-4%"==".msi" (
-	set "FileName=%SoftName%-HieuckIT.msi "
+	set "FileName=%SoftName%-HieuckIT.msi"
 ) else (
 	set "FileName=%SoftName%.HieuckIT"
 )
@@ -245,10 +246,10 @@ if %errorlevel% equ 0 (
 set start_time=%time%
 
 :: Download
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -262,7 +263,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
@@ -295,10 +295,10 @@ if not exist "%FileName%" (
 	exit
 )
 
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -312,7 +312,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading 7-Zip...
 if /i "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
@@ -325,10 +324,10 @@ if /i "%Extract7z%"=="Yes" (
 )
 
 :: Install
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -371,10 +370,10 @@ timeout /t 2
 :end
 
 :: License
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -451,10 +450,10 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 
 :: Clean Up
 :CleanUp
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
