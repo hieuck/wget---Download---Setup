@@ -341,7 +341,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
@@ -387,7 +386,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 if /i "%License%"=="Yes" (
 	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
@@ -467,7 +465,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Don Dep %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Cleaning up temporary files...
 echo.>> %Temp%\hieuckitlog.txt
 setlocal EnableDelayedExpansion
