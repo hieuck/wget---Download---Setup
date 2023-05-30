@@ -190,16 +190,16 @@ if /i "%License%"=="Yes" (
 :: Check File Type
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
-		set "FileName=%SoftName%-HieuckIT.msi "
+		set "FileName=%SoftName%-HIE.msi"
 	) else if /i "%Link:~-4%"==".msi" (
-		set "FileName=%SoftName%-HieuckIT.msi "
+		set "FileName=%SoftName%-HIE.msi"
 	) else (
-		set "FileName=%SoftName%.HieuckIT"
+		set "FileName=%SoftName%.HIE"
 	)
 ) else if /i "%Link:~-4%"==".msi" (
-	set "FileName=%SoftName%-HieuckIT.msi "
+	set "FileName=%SoftName%-HIE.msi"
 ) else (
-	set "FileName=%SoftName%.HieuckIT"
+	set "FileName=%SoftName%.HIE"
 )
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
