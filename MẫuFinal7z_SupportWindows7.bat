@@ -192,13 +192,25 @@ if /i "%License%"=="Yes" (
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
 		set "FileName=%SoftName%-HieuckIT.msi"
+	) else if /i "%FileType%"=="exe" (
+		set "FileName=%SoftName%-HieuckIT.exe"
+	) else if /i "%FileType%"=="zip" (
+		set "FileName=%SoftName%-HieuckIT.zip"
 	) else if /i "%Link:~-4%"==".msi" (
 		set "FileName=%SoftName%-HieuckIT.msi"
+	) else if /i "%Link:~-4%"==".exe" (
+		set "FileName=%SoftName%-HieuckIT.exe"
+	) else if /i "%Link:~-4%"==".zip" (
+		set "FileName=%SoftName%-HieuckIT.zip"
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
 ) else if /i "%Link:~-4%"==".msi" (
 	set "FileName=%SoftName%-HieuckIT.msi"
+) else if /i "%Link:~-4%"==".exe" (
+	set "FileName=%SoftName%-HieuckIT.exe"
+) else if /i "%Link:~-4%"==".zip" (
+	set "FileName=%SoftName%-HieuckIT.zip"
 ) else (
 	set "FileName=%SoftName%.HieuckIT"
 )
