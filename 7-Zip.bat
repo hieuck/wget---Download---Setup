@@ -38,7 +38,7 @@ set "License="
 set "SoftName=7-Zip"
 set "Process=7zFM.exe"
 
-set "FileType=msi"
+set "FileType="
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -191,17 +191,35 @@ if /i "%License%"=="Yes" (
 :: Check File Type
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
-		set "FileName=%SoftName%-HieuckIT.msi"
-	) else if /i "%Link:~-4%"==".msi" (
-		set "FileName=%SoftName%-HieuckIT.msi"
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		)
 	) else if /i "%FileType%"=="exe" (
-		set "FileName=%SoftName%-HieuckIT.exe"
-	) else if /i "%Link:~-4%"==".exe" (
-		set "FileName=%SoftName%-HieuckIT.exe"
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		)
 	) else if /i "%FileType%"=="zip" (
-		set "FileName=%SoftName%-HieuckIT.zip"
-	) else if /i "%Link:~-4%"==".zip" (
-		set "FileName=%SoftName%-HieuckIT.zip"
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		)
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
