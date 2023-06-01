@@ -7,6 +7,7 @@
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
+pushd "%~dp0"
 
 :: Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
@@ -14,7 +15,8 @@
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -28,12 +30,16 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
-:: Set License Extract7z Soft Process Name OldWindows 32-bit Support User Agent
-set "License="
+:: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
+
 set "Extract7z="
+set "License="
+
 set "SoftName=Notepad++"
 set "Process=Notepad++.exe"
+
+set "FileType="
+
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -41,13 +47,15 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest/
 
+set "SoftNameVersion=8.5.3"
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
 set "Link="
-set "LinkForAllWindows32bit=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.3/npp.8.5.3.Installer.exe"
-set "LinkForAllWindows64bit=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.5.3/npp.8.5.3.Installer.x64.exe"
+set "LinkForAllWindows32bit=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v!SoftNameVersion!/npp.!SoftNameVersion!.Installer.exe"
+set "LinkForAllWindows64bit=https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v!SoftNameVersion!/npp.!SoftNameVersion!.Installer.x64.exe"
 
 set "SoftPath=%PROGRAMFILES%\Notepad++"
 set "SoftPathFor32bit="
@@ -146,23 +154,9 @@ if /i "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-:: Set up information related to software cr4cking
-if /i "%License%"=="Yes" (
-	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-	if not "%Cr4ckPath%"=="" (
-		set "Cr4ckPath=%Cr4ckPath%"
-	) else (
-		set "Cr4ckPath=%SoftPath%"
-	)
-)
-
 :: Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
-	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 	if not "%SoftPath%"=="" (
@@ -176,7 +170,6 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	set "FileName=%SoftName%-HieuckIT.exe "
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (
@@ -184,16 +177,75 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
+:: Set up information related to software cr4cking
+if /i "%License%"=="Yes" (
+	set "Admin=Yes"
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%Cr4ckPath%"=="" (
+		set "Cr4ckPath=%Cr4ckPath%"
+	) else (
+		set "Cr4ckPath=%SoftPath%"
+	)
+)
+
+:: Check File Type
+if not "%FileType%"=="" (
+	if /i "%FileType%"=="msi" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		)
+	) else if /i "%FileType%"=="exe" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		)
+	) else if /i "%FileType%"=="zip" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		)
+	) else (
+		set "FileName=%SoftName%.HieuckIT"
+	)
+) else if /i "%Link:~-4%"==".msi" (
+	set "FileName=%SoftName%-HieuckIT.msi"
+) else if /i "%Link:~-4%"==".exe" (
+	set "FileName=%SoftName%-HieuckIT.exe"
+) else if /i "%Link:~-4%"==".zip" (
+	set "FileName=%SoftName%-HieuckIT.zip"
+) else (
+	set "FileName=%SoftName%.HieuckIT"
+)
+
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
-echo Link: %Link%>> %Temp%\hieuckitlog.txt
+echo Link: %Link:&=^&%>> %Temp%\hieuckitlog.txt
 echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
-echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
+if not "%SoftPath%"=="" echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
+echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
-timeout /t 3
+timeout /t 2
 
 :: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -226,10 +278,10 @@ if %errorlevel% equ 0 (
 set start_time=%time%
 
 :: Download
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -243,21 +295,26 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
 		echo.
-		echo wget.exe or curl.exe not found to download, please download at: > %Temp%\download_error.txt
-		echo. >> %Temp%\download_error.txt
-		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %Temp%\download_error.txt
-		echo wget: https://eternallybored.org/misc/wget/ >> %Temp%\download_error.txt
-		echo curl: https://curl.se/download.html >> %Temp%\download_error.txt
-		type "%Temp%\download_error.txt"
-		start "" "%Temp%\download_error.txt"
+		echo wget.exe or curl.exe not found to download, please download at: > %Temp%\hieuckitlog.txt
+		echo. >> %Temp%\hieuckitlog.txt
+		echo wget: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/wget.exe >> %Temp%\hieuckitlog.txt
+		echo wget: https://eternallybored.org/misc/wget/ >> %Temp%\hieuckitlog.txt
+		echo curl: https://curl.se/download.html >> %Temp%\hieuckitlog.txt
+		type "%Temp%\hieuckitlog.txt"
+		start "" "%Temp%\hieuckitlog.txt"
 	)
+)
+
+for %%F in ("%FileName%") do set "size=%%~zF"
+if %size% equ 0 (
+	echo %SoftName% download failed. File size is 0KB.
+	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
 )
 
 if not exist "%FileName%" (
@@ -270,10 +327,10 @@ if not exist "%FileName%" (
 	exit
 )
 
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -287,7 +344,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading 7-Zip...
 if /i "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
@@ -300,10 +356,10 @@ if /i "%Extract7z%"=="Yes" (
 )
 
 :: Install
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -317,7 +373,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
@@ -340,14 +395,16 @@ echo Timeout: %SoftName% installation has not completed in 30 seconds.
 goto end
 :installed
 echo %SoftName% has been installed successfully.
-timeout /t 3
+echo.>> %Temp%\hieuckitlog.txt
+echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
+timeout /t 2
 :end
 
 :: License
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -361,7 +418,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 if /i "%License%"=="Yes" (
 	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
@@ -380,6 +436,8 @@ if /i "%License%"=="Yes" (
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
 		echo Successfully Cr4cked %SoftName%.
+		echo.>> %Temp%\hieuckitlog.txt
+		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
 		del "%Cr4ckFile%"
 	) else (
 		echo Cr4cking %SoftName% failed.
@@ -389,8 +447,8 @@ if /i "%License%"=="Yes" (
 
 :: Shortcut
 if /i "%Shortcut%"=="No" (
-    echo Creating Shortcut is skipped.
-    goto CleanUp
+	echo Creating Shortcut is skipped.
+	goto CleanUp
 )
 
 if exist "%SoftPath%\%Process%" (
@@ -415,16 +473,17 @@ del CreateShortcut.vbs
 
 if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut complete.
+	echo Creating Shortcut complete.>> %Temp%\hieuckitlog.txt
 ) else (
 	echo Creating Shortcut failed.
 )
 
 :: Clean Up
 :CleanUp
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -438,14 +497,33 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Don Dep %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Cleaning up temporary files...
-if exist "%FileName%" del "%FileName%"
-if exist "%Temp%\download_error.txt" del "%Temp%\download_error.txt"
-if exist "%Temp%\hieuckitlog.txt" del "%Temp%\hieuckitlog.txt"
-if exist "7z.dll" del "7z.dll"
-if exist "7z.exe" del "7z.exe"
-
+echo.>> %Temp%\hieuckitlog.txt
+setlocal EnableDelayedExpansion
+set count=0
+set deleteSuccess=0
+:waitloopcheck
+if exist "7z.dll" del "7z.dll">> %Temp%\hieuckitlog.txt 2>&1
+if exist "7z.exe" del "7z.exe">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%FileName%" (
+	del "%FileName%">> %Temp%\hieuckitlog.txt 2>&1
+	if not exist "%FileName%" set deleteSuccess=1
+)
+timeout /t 1 /nobreak > nul
+set /a count+=1
+if !deleteSuccess! equ 1 (
+	echo The %SoftName% installer has been deleted.
+	echo The %SoftName% installer has been deleted.>> %Temp%\hieuckitlog.txt
+	goto endcheck
+) else (
+	echo.>> %Temp%\hieuckitlog.txt
+)
+if !count! equ 30 goto timeoutcheck
+goto waitloopcheck
+:timeoutcheck
+echo Timeout: Deletion failed. Please delete the file manually.
+echo Timeout: Deletion failed. Please delete the file manually.>> %Temp%\hieuckitlog.txt
+:endcheck
 :: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
 
@@ -462,23 +540,6 @@ echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
-	if exist "7z.dll" (
-		tasklist | find /i "7z.dll" > nul
-		if %errorlevel% equ 0 taskkill /im "7z.dll" /f
-		del "7z.dll"
-	)
-
-	if exist "7z.exe" (
-		tasklist | find /i "7z.exe" > nul
-		if %errorlevel% equ 0 taskkill /im "7z.exe" /f
-		del "7z.exe"
-	)
-
-	if exist "%FileName%" (
-		tasklist | find /i "%FileName%" > nul
-		if %errorlevel% equ 0 taskkill /im "%FileName%" /f
-		del "%FileName%"
-	)
 )
 echo Please close the script manually if automatically close fails.
 popd
