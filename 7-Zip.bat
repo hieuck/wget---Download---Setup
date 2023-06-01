@@ -47,13 +47,15 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: https://www.7-zip.org/download.html
 
+set "SoftNameVersion=2300"
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
 set "Link="
-set "LinkForAllWindows32bit=https://www.7-zip.org/a/7z2300.exe"
-set "LinkForAllWindows64bit=https://www.7-zip.org/a/7z2300-x64.exe"
+set "LinkForAllWindows32bit=https://www.7-zip.org/a/7z!SoftNameVersion!.exe"
+set "LinkForAllWindows64bit=https://www.7-zip.org/a/7z!SoftNameVersion!-x64.exe"
 
 set "SoftPath=%ProgramFiles%\7-Zip"
 set "SoftPathFor32bit="

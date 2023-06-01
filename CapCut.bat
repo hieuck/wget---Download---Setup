@@ -47,11 +47,11 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: 
 
+set "SoftNameVersion=2_1_0_419"
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
-
-set "SoftNameVersion=2_1_0_419"
 
 set "Link=https://lf16-capcut.faceulv.com/obj/capcutpc-packages-us/packages/CapCut_!SoftNameVersion!_capcutpc_0.exe"
 set "LinkForAllWindows32bit="
