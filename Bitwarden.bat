@@ -7,6 +7,7 @@
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
+pushd "%~dp0"
 
 :: Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
@@ -14,7 +15,8 @@
 
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -28,11 +30,10 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
-:: Set License Extract7z Soft Process Name FileType OldWindows 32-bit Support User Agent
+:: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
 
-set "License="
 set "Extract7z="
+set "License="
 
 set "SoftName=Bitwarden"
 set "Process=Bitwarden.exe"
@@ -46,12 +47,13 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: https://github.com/bitwarden/clients/releases/latest/
 
+set "SoftNameVersion=2023.4.0"
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "BitwardenVersion=2023.4.0"
-set "Link=https://github.com/bitwarden/clients/releases/download/desktop-v%BitwardenVersion%/Bitwarden-Installer-%BitwardenVersion%.exe"
+set "Link=https://github.com/bitwarden/clients/releases/download/desktop-v%SoftNameVersion%/Bitwarden-Installer-%SoftNameVersion%.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -152,19 +154,6 @@ if /i "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-:: Set up information related to software cr4cking
-if /i "%License%"=="Yes" (
-	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-	if not "%Cr4ckPath%"=="" (
-		set "Cr4ckPath=%Cr4ckPath%"
-	) else (
-		set "Cr4ckPath=%SoftPath%"
-	)
-)
-
 :: Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
@@ -188,17 +177,60 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
+:: Set up information related to software cr4cking
+if /i "%License%"=="Yes" (
+	set "Admin=Yes"
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if not "%Cr4ckPath%"=="" (
+		set "Cr4ckPath=%Cr4ckPath%"
+	) else (
+		set "Cr4ckPath=%SoftPath%"
+	)
+)
+
 :: Check File Type
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
-		set "FileName=%SoftName%-HieuckIT.msi "
-	) else if /i "%Link:~-4%"==".msi" (
-		set "FileName=%SoftName%-HieuckIT.msi "
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		)
+	) else if /i "%FileType%"=="exe" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		)
+	) else if /i "%FileType%"=="zip" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		)
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
 ) else if /i "%Link:~-4%"==".msi" (
-	set "FileName=%SoftName%-HieuckIT.msi "
+	set "FileName=%SoftName%-HieuckIT.msi"
+) else if /i "%Link:~-4%"==".exe" (
+	set "FileName=%SoftName%-HieuckIT.exe"
+) else if /i "%Link:~-4%"==".zip" (
+	set "FileName=%SoftName%-HieuckIT.zip"
 ) else (
 	set "FileName=%SoftName%.HieuckIT"
 )
@@ -246,10 +278,10 @@ if %errorlevel% equ 0 (
 set start_time=%time%
 
 :: Download
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -263,7 +295,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
@@ -296,10 +327,10 @@ if not exist "%FileName%" (
 	exit
 )
 
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -326,10 +357,10 @@ if /i "%Extract7z%"=="Yes" (
 )
 
 :: Install
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -343,7 +374,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
@@ -372,10 +402,10 @@ timeout /t 2
 :end
 
 :: License
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -389,7 +419,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 if /i "%License%"=="Yes" (
 	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
@@ -452,10 +481,10 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 
 :: Clean Up
 :CleanUp
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -469,7 +498,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Don Dep %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Cleaning up temporary files...
 echo.>> %Temp%\hieuckitlog.txt
 setlocal EnableDelayedExpansion

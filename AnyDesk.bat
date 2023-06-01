@@ -47,6 +47,8 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: 
 
+set "SoftNameVersion="
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
@@ -191,14 +193,44 @@ if /i "%License%"=="Yes" (
 :: Check File Type
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
-		set "FileName=%SoftName%-HieuckIT.msi"
-	) else if /i "%Link:~-4%"==".msi" (
-		set "FileName=%SoftName%-HieuckIT.msi"
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		)
+	) else if /i "%FileType%"=="exe" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		)
+	) else if /i "%FileType%"=="zip" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		)
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
 ) else if /i "%Link:~-4%"==".msi" (
 	set "FileName=%SoftName%-HieuckIT.msi"
+) else if /i "%Link:~-4%"==".exe" (
+	set "FileName=%SoftName%-HieuckIT.exe"
+) else if /i "%Link:~-4%"==".zip" (
+	set "FileName=%SoftName%-HieuckIT.zip"
 ) else (
 	set "FileName=%SoftName%.HieuckIT"
 )
