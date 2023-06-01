@@ -543,5 +543,5 @@ for /l %%i in (3,-1,1) do (
 	timeout /t 1 /nobreak >nul
 )
 echo Please close the script manually if automatically close fails.
-call "%PUBLIC%\Desktop\%SHORTCUTNAME%"
+call "%Public%\Desktop\%ShortcutName%"
 popd
