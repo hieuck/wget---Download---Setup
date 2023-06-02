@@ -328,22 +328,17 @@ pushd "%UserProfile%\Downloads"
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
-for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
 
 :CheckExist
+for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
 if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul
 	goto CheckExist
-) else (
-	echo Download with browser complete. 
-	goto ExitDLwB
 )
 
-:ExitDLwB
-if exist "%FileNameDLwB%" (
-	ren "%FileNameDLwB%" "%FileName%"
-	move "%FileName%" "%~dp0"
-)
+ren "%FileNameDLwB%" "%FileName%"
+move "%FileName%" "%~dp0"
+
 pushd "%~dp0"
 
 if not exist "%FileName%" (
@@ -356,6 +351,7 @@ if not exist "%FileName%" (
 	exit
 )
 
+:ExitDLwB
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=120 lines=17
