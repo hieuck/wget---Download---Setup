@@ -317,7 +317,7 @@ if exist "wget.exe" (
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB.
-	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
+	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 )
 
 if not exist "%FileName%" (

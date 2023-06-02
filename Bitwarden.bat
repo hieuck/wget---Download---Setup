@@ -314,7 +314,7 @@ if exist "wget.exe" (
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB.
-	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
+	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 )
 
 if not exist "%FileName%" (
@@ -344,7 +344,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading 7-Zip...
 if /i "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (

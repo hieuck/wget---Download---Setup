@@ -313,19 +313,20 @@ if exist "wget.exe" (
 
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
-	echo %SoftName% download failed. File size is 0KB.
+	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
 	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 ) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB.
+	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
 	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 )
 pushd "%UserProfile%\Downloads"
+for /R %%i in ("qBittorrent*.exe") do set FileNameDL="%%i"
 :CheckExist
-if not exist "qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe" (
+if not exist "%FileNameDL%" (
 	timeout /t 1 /nobreak >nul
 	goto CheckExist
 )
-ren "qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe" "%FileName%"
+ren "%FileNameDL%" "%FileName%"
 move "%FileName%" "%~dp0"
 pushd "%~dp0"
 
