@@ -7,6 +7,7 @@
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
+pushd "%~dp0"
 
 :: Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
@@ -29,7 +30,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 :: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
 
 set "Extract7z="
@@ -47,11 +47,14 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: https://www.internetdownloadmanager.com/download.html
 
+set "SoftNameVersion=641build12"
+set "FileDLwB=danvaoday*.exe"
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://mirror2.internetdownloadmanager.com/idman641build11.exe"
+set "Link=https://mirror2.internetdownloadmanager.com/idman!SoftNameVersion!.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -191,14 +194,44 @@ if /i "%License%"=="Yes" (
 :: Check File Type
 if not "%FileType%"=="" (
 	if /i "%FileType%"=="msi" (
-		set "FileName=%SoftName%-HieuckIT.msi"
-	) else if /i "%Link:~-4%"==".msi" (
-		set "FileName=%SoftName%-HieuckIT.msi"
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		)
+	) else if /i "%FileType%"=="exe" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		)
+	) else if /i "%FileType%"=="zip" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		)
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
 ) else if /i "%Link:~-4%"==".msi" (
 	set "FileName=%SoftName%-HieuckIT.msi"
+) else if /i "%Link:~-4%"==".exe" (
+	set "FileName=%SoftName%-HieuckIT.exe"
+) else if /i "%Link:~-4%"==".zip" (
+	set "FileName=%SoftName%-HieuckIT.zip"
 ) else (
 	set "FileName=%SoftName%.HieuckIT"
 )
@@ -263,7 +296,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
@@ -282,9 +314,32 @@ if exist "wget.exe" (
 
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
-	echo %SoftName% download failed. File size is 0KB.
-	start "" "%Link%" /WAIT  /D "%~dp0" /B "%FileName%"
+	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
+	goto DLwB
+) else if %size% lss 1048576 (
+	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
+	goto DLwB
+) else (
+	goto ExitDLwB
 )
+
+:DLwB
+pushd "%UserProfile%\Downloads"
+
+start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
+
+:CheckExist
+for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
+if not exist "%FileNameDLwB%" (
+	timeout /t 1 /nobreak >nul
+	goto CheckExist
+)
+
+ren "%FileNameDLwB%" "%FileName%"
+move "%FileName%" "%~dp0"
+
+pushd "%~dp0"
 
 if not exist "%FileName%" (
 	echo Download %SoftName% failed.
@@ -296,6 +351,7 @@ if not exist "%FileName%" (
 	exit
 )
 
+:ExitDLwB
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=120 lines=17
@@ -313,7 +369,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading 7-Zip...
 if /i "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
@@ -343,7 +398,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
@@ -389,7 +443,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 if /i "%License%"=="Yes" (
 	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
@@ -469,7 +522,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Don Dep %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Cleaning up temporary files...
 echo.>> %Temp%\hieuckitlog.txt
 setlocal EnableDelayedExpansion
