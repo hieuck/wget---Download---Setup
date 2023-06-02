@@ -38,7 +38,7 @@ set "License=Yes"
 set "SoftName=Foxit PDF Editor Suite Pro Individuals"
 set "Process=FoxitPDFEditor.exe"
 
-set "FileType="
+set "FileType=exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
