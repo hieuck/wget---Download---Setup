@@ -48,6 +48,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source Link: https://www.fosshub.com/qBittorrent.html
 
 set "SoftNameVersion=4.5.3"
+set "FileDLwB=qbittorrent*setup.exe"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="

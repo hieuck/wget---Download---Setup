@@ -32,11 +32,11 @@ echo.
 @echo off
 :: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
 
-set "Extract7z=Yes"
+set "Extract7z="
 set "License="
 
-set "SoftName=Hard Disk Sentinel"
-set "Process=HDSentinel.exe"
+set "SoftName=CPU-Z"
+set "Process=cpuz.exe"
 
 set "FileType="
 
@@ -45,24 +45,24 @@ set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 :: Set code based on Windows Architecture
-:: Source Link: https://www.harddisksentinel.com/hdsentinel_pro_portable.zip
+:: Source Link: 
 
-set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "SoftNameVersion=2.06"
+set "FileDLwB=cpu-z*.exe"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/hdsentinel_pro_portable.rar"
+set "Link=https://download.cpuid.com/cpu-z/cpu-z_!SoftNameVersion!-en.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "SoftPath="
+set "SoftPath=%ProgramFiles%\CPUID\CPU-Z"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/S"
+set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
 set "Cr4ckFile="
 set "Cr4ckPath="
@@ -328,22 +328,17 @@ pushd "%UserProfile%\Downloads"
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
-for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
 
 :CheckExist
+for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
 if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul
 	goto CheckExist
-) else (
-	echo Download with browser complete. 
-	goto ExitDLwB
 )
 
-:ExitDLwB
-if exist "%FileNameDLwB%" (
-	ren "%FileNameDLwB%" "%FileName%"
-	move "%FileName%" "%~dp0"
-)
+ren "%FileNameDLwB%" "%FileName%"
+move "%FileName%" "%~dp0"
+
 pushd "%~dp0"
 
 if not exist "%FileName%" (
@@ -356,6 +351,7 @@ if not exist "%FileName%" (
 	exit
 )
 
+:ExitDLwB
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=120 lines=17
@@ -404,7 +400,7 @@ echo.
 @echo off
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
-	@7z.exe x -p123 "%FileName%" -o"%SoftPath%" -aoa -y
+	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
 	"%FileName%" %QuietMode%
 )

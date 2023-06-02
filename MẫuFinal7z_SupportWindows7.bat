@@ -48,6 +48,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source Link: 
 
 set "SoftNameVersion="
+set "FileDLwB=danvaoday*.exe"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -313,9 +314,32 @@ if exist "wget.exe" (
 
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
-	echo %SoftName% download failed. File size is 0KB.
-	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
+	goto DLwB
+) else if %size% lss 1048576 (
+	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
+	goto DLwB
+) else (
+	goto ExitDLwB
 )
+
+:DLwB
+pushd "%UserProfile%\Downloads"
+
+start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
+
+:CheckExist
+for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
+if not exist "%FileNameDLwB%" (
+	timeout /t 1 /nobreak >nul
+	goto CheckExist
+)
+
+ren "%FileNameDLwB%" "%FileName%"
+move "%FileName%" "%~dp0"
+
+pushd "%~dp0"
 
 if not exist "%FileName%" (
 	echo Download %SoftName% failed.
@@ -327,6 +351,7 @@ if not exist "%FileName%" (
 	exit
 )
 
+:ExitDLwB
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=120 lines=17
