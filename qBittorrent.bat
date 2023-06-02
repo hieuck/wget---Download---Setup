@@ -326,10 +326,11 @@ if %size% equ 0 (
 pushd "%UserProfile%\Downloads"
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
-for /R %%i in ("qbittorrent*setup.exe") do set FileNameDL="%%i"
+if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
+for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
 
 :CheckExist
-if not exist "%FileNameDL%" (
+if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul
 	goto CheckExist
 ) else (
@@ -338,8 +339,8 @@ if not exist "%FileNameDL%" (
 )
 
 :ExitDLwB
-if exist "%FileNameDL%" (
-	ren "%FileNameDL%" "%FileName%"
+if exist "%FileNameDLwB%" (
+	ren "%FileNameDLwB%" "%FileName%"
 	move "%FileName%" "%~dp0"
 )
 pushd "%~dp0"
