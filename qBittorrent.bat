@@ -66,7 +66,7 @@ set "QuietMode=/S"
 set "Cr4ckFile="
 set "Cr4ckPath="
 
-set "Shortcut="
+set "Shortcut=Yes"
 
 :: Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
@@ -314,20 +314,34 @@ if exist "wget.exe" (
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
-	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+	goto DLwB
 ) else if %size% lss 1048576 (
 	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
-	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+	goto DLwB
+) else (
+	goto ExitDLwB
 )
+
+:DLwB
 pushd "%UserProfile%\Downloads"
-for /R %%i in ("qBittorrent*.exe") do set FileNameDL="%%i"
+
+start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+for /R %%i in ("qbittorrent*setup.exe") do set FileNameDL="%%i"
+
 :CheckExist
 if not exist "%FileNameDL%" (
 	timeout /t 1 /nobreak >nul
 	goto CheckExist
+) else (
+	echo Download with browser complete. 
+	goto ExitDLwB
 )
-ren "%FileNameDL%" "%FileName%"
-move "%FileName%" "%~dp0"
+
+:ExitDLwB
+if exist "%FileNameDL%" (
+	ren "%FileNameDL%" "%FileName%"
+	move "%FileName%" "%~dp0"
+)
 pushd "%~dp0"
 
 if not exist "%FileName%" (

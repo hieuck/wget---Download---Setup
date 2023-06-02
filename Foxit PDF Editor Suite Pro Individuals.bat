@@ -313,20 +313,35 @@ if exist "wget.exe" (
 
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
-	echo %SoftName% download failed. File size is 0KB.
-	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
+	goto DLwB
 ) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB.
-	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
+	goto DLwB
+) else (
+	goto ExitDLwB
 )
+
+:DLwB
 pushd "%UserProfile%\Downloads"
+
+start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+for /R %%i in ("FoxitPDFEditor*Setup.exe") do set FileNameDL="%%i"
+
 :CheckExist
-if not exist "FoxitPDFEditor*Setup*.exe" (
+if not exist "%FileNameDL%" (
 	timeout /t 1 /nobreak >nul
 	goto CheckExist
+) else (
+	echo Download with browser complete. 
+	goto ExitDLwB
 )
-ren "FoxitPDFEditor*Setup*.exe" "%FileName%"
-move "%FileName%" "%~dp0"
+
+:ExitDLwB
+if exist "%FileNameDL%" (
+	ren "%FileNameDL%" "%FileName%"
+	move "%FileName%" "%~dp0"
+)
 pushd "%~dp0"
 
 if not exist "%FileName%" (
