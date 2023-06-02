@@ -48,6 +48,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source Link: https://geeks3d.com/dl/show/717
 
 set "SoftNameVersion=1.34.0.0"
+set "FileDLwB=FurMark*Setup.exe"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -326,10 +327,11 @@ if %size% equ 0 (
 pushd "%UserProfile%\Downloads"
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
-for /R %%i in ("FurMark*Setup.exe") do set FileNameDL="%%i"
+if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
+for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
 
 :CheckExist
-if not exist "%FileNameDL%" (
+if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul
 	goto CheckExist
 ) else (
@@ -338,8 +340,8 @@ if not exist "%FileNameDL%" (
 )
 
 :ExitDLwB
-if exist "%FileNameDL%" (
-	ren "%FileNameDL%" "%FileName%"
+if exist "%FileNameDLwB%" (
+	ren "%FileNameDLwB%" "%FileName%"
 	move "%FileName%" "%~dp0"
 )
 pushd "%~dp0"

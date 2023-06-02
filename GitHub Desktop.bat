@@ -38,7 +38,7 @@ set "License="
 set "SoftName=GitHub Desktop"
 set "Process=GitHubDesktop.exe"
 
-set "FileType="
+set "FileType=exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
