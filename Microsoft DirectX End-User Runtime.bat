@@ -36,7 +36,7 @@ set "Extract7z="
 set "License="
 
 set "SoftName=DirectX End-User Runtime"
-set "Process=dxwsetup.exe"
+set "Process="
 
 set "FileType="
 
