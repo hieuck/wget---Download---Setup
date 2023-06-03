@@ -30,15 +30,15 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-:: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
+:: Set Extract7z License Soft Process File Name OldWindows 32-bit Support User Agent
 
 set "Extract7z="
 set "License="
 
 set "SoftName=DirectX End-User Runtime"
-set "Process="
+set "Process=dxwsetup.exe"
 
-set "FileType="
+set "FileName=dxwebsetup.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -48,6 +48,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source Link: https://www.microsoft.com/en-us/download/confirmation.aspx?id=35
 
 set "SoftNameVersion="
+set "FileDLwB=dxwebsetup*.exe"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -190,41 +191,9 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-:: Check File Type
-if not "%FileType%"=="" (
-	if /i "%FileType%"=="msi" (
-		if /i "%Link:~-4%"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi"
-		) else if /i "%Link:~-4%"==".exe" (
-			set "FileName=%SoftName%-HieuckIT.exe"
-		) else if /i "%Link:~-4%"==".zip" (
-			set "FileName=%SoftName%-HieuckIT.zip"
-		) else (
-			set "FileName=%SoftName%-HieuckIT.msi"
-		)
-	) else if /i "%FileType%"=="exe" (
-		if /i "%Link:~-4%"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi"
-		) else if /i "%Link:~-4%"==".exe" (
-			set "FileName=%SoftName%-HieuckIT.exe"
-		) else if /i "%Link:~-4%"==".zip" (
-			set "FileName=%SoftName%-HieuckIT.zip"
-		) else (
-			set "FileName=%SoftName%-HieuckIT.exe"
-		)
-	) else if /i "%FileType%"=="zip" (
-		if /i "%Link:~-4%"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi"
-		) else if /i "%Link:~-4%"==".exe" (
-			set "FileName=%SoftName%-HieuckIT.exe"
-		) else if /i "%Link:~-4%"==".zip" (
-			set "FileName=%SoftName%-HieuckIT.zip"
-		) else (
-			set "FileName=%SoftName%-HieuckIT.zip"
-		)
-	) else (
-		set "FileName=%SoftName%.HieuckIT"
-	)
+:: Check File Name
+if not "%FileName%"=="" (
+	set "FileName=%FileName%"
 ) else if /i "%Link:~-4%"==".msi" (
 	set "FileName=%SoftName%-HieuckIT.msi"
 ) else if /i "%Link:~-4%"==".exe" (
@@ -398,7 +367,7 @@ echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-	Start "" "%FileName%" %QuietMode%
+	"%FileName%" "%QuietMode%"
 )
 
 setlocal
