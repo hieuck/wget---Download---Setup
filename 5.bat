@@ -76,8 +76,8 @@ if not "%Link:~-4%"=="" (
 :PrintResult
 echo Link2: %Link:~-4%
 echo BaseName2: %BaseName%
-echo Extension2: %Extension%
 echo LinkExtension: !LinkExtension!
+echo Extension2: %Extension%
 echo FileName2: %FileName%
 pause
 endlocal
