@@ -1,6 +1,6 @@
 @echo off
 set "SoftName=DirectX"
-set "FileName=exe"
+set "FileName="
 
 setlocal enabledelayedexpansion
 for %%F in ("%FileName%") do (
@@ -25,6 +25,10 @@ if not "%FileName%"=="" (
 		) else if /i "%FileName%"=="exe" (
 			set "BaseName=%SoftName%"
 			set "Extension=.exe"
+			set "FileName=!BaseName!!Extension!"
+		) else if /i "%FileName%"=="zip" (
+			set "BaseName=%SoftName%"
+			set "Extension=.zip"
 			set "FileName=!BaseName!!Extension!"
 		) else (
 			set "FileName=%BaseName%%Extension%"
