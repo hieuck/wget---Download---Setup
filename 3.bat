@@ -4,7 +4,7 @@ set "FileName=."
 
 setlocal enabledelayedexpansion
 
-rem Data structure to store format-extension information
+REM Data structure to store format-extension information
 set "Formats=msi exe zip"
 
 for %%F in ("%FileName%") do (
@@ -23,9 +23,9 @@ echo.
 
 if not "%FileName%"=="" (
     if not "%BaseName%"=="" (
-        rem Loop through the formats in the data structure
+        REM Loop through the formats in the data structure
         for %%F in (%Formats%) do (
-            rem Check if FileName matches the format
+            REM Check if FileName matches the format
             if /i "%FileName%"=="%%~F" (
                 set "BaseName=%SoftName%"
                 set "Extension=.%%~F"
@@ -33,7 +33,7 @@ if not "%FileName%"=="" (
             )
         )
         
-        rem Check if FileName doesn't match any format
+        REM Check if FileName doesn't match any format
         if not "!FileName!"=="!BaseName!!Extension!" (
             set "FileName=%BaseName%%Extension%"
         )
