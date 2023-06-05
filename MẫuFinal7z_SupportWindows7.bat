@@ -191,6 +191,7 @@ if /i "%License%"=="Yes" (
 	)
 )
 
+REM Check File Name
 REM Data structure to store format-extension information
 set "Formats=7z exe msi rar zip"
 
@@ -330,6 +331,7 @@ if not exist "%FileNameDLwB%" (
 ren "%FileNameDLwB%" "%FileName%"
 move "%FileName%" "%~dp0"
 
+:ExitDLwB
 pushd "%~dp0"
 
 if not exist "%FileName%" (
@@ -342,7 +344,6 @@ if not exist "%FileName%" (
 	exit
 )
 
-:ExitDLwB
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=120 lines=17
