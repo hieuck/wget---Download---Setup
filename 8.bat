@@ -1,7 +1,7 @@
 @echo off
 set "SoftName=DirectX"
-set "FileName=a.a"
-set "Link=https://example.com/file.zip.exe"
+set "FileName="
+set "Link=https://example.com/file.rar"
 
 setlocal enabledelayedexpansion
 
@@ -44,9 +44,8 @@ if not "%FileName%"=="" (
 		set "FileName=%SoftName%%Extension%"
 	)
 ) else (
-	if not "%Link:~-4%"=="" (
+	if not "%Link:~-3%"=="" (
 		REM Extract the extension from Link
-		set "Extension=%Link:~-4%"
 		set "BaseName=%SoftName%"
 		set "FileName=!BaseName!!Extension!"
 		goto :Continue
