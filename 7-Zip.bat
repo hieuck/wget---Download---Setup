@@ -48,7 +48,7 @@ REM Set code based on Windows Architecture
 REM Source Link: https://www.7-zip.org/download.html
 
 set "SoftNameVersion=2300"
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=7z*.exe"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
