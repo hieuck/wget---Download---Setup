@@ -30,7 +30,7 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-REM Set Extract7z License Soft Process File Name OldWindows 32-bit Support User Agent
+REM Required Configuration Settings
 
 set "Extract7z="
 set "License=Yes"
@@ -39,6 +39,8 @@ set "SoftName=AIDA64 Extreme"
 set "Process=aida64.exe"
 
 set "FileName="
+set "SoftNameVersion=688"
+set "FileDLwB=aida64extreme*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -46,9 +48,6 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 
 REM Set code based on Windows Architecture
 REM Source Link: https://www.aida64.com/downloads
-
-set "SoftNameVersion=688"
-set "FileDLwB=aida64extreme*.exe"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
