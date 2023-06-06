@@ -1,7 +1,7 @@
 @echo off
 set "SoftName=DirectX"
 set "FileName="
-set "Link=https://example.com/file.rar"
+set "Link=https://zalo.me/download/zalo-pc?utm=90000"
 
 setlocal enabledelayedexpansion
 
