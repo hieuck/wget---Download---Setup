@@ -1,7 +1,7 @@
 @echo off
 set "SoftName=DirectX"
 set "FileName="
-set "Link=https://zalo.me/download/zalo-pc?utm=90000.exe"
+set "Link=https://zalo.me/download/zalo-pc?utm=90000"
 
 REM Data structure to store format-extension information
 set "Formats=7z exe msi rar zip"
@@ -61,10 +61,10 @@ if not "%FileName%"=="" (
 
 	)
 ) else (
-	if not "%Link:~-3%"=="" (
+	if not "%Link:~-4%"=="" (
 		REM Extract the extension from Link
 		set "BaseName=%SoftName%"
-		set "LinkExtension=%Link:~-3%"
+		set "LinkExtension=%Link:~-4%"
 		REM Check if LinkExtension is not in Formats
 		echo %Formats% | find /i "%LinkExtension%" >nul
 		if errorlevel 1 (
@@ -74,7 +74,7 @@ if not "%FileName%"=="" (
 		)
 		set "FileName=%BaseName%%Extension%"
 		echo.
-		echo no value FileName: 
+		echo No Value FileName: 
 		echo BaseName: %BaseName%
 		echo Extension: %Extension%
 		echo FileName: %FileName%
@@ -92,14 +92,14 @@ if not "%FileName%"=="" (
 
 :Continue
 REM Check if Link's extension matches any format and differs from FileName's extension
-if not "%Link:~-3%"=="" (
-	set "LinkExtension=%Link:~-3%"
+if not "%Link:~-4%"=="" (
+	set "LinkExtension=%Link:~-4%"
 	for %%F in (%Formats%) do (
 		REM Check if the extracted extension matches the format and differs from FileName's extension
 		if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
 			set "BaseName=%SoftName%"
 			set "Extension=.%%~F"
-			set "FileName=%BaseName%!Extension!"
+			set "FileName=%BaseName%%Extension%"
 			echo.
 			echo BaseName: %BaseName%
 			echo Extension: %Extension%
@@ -110,7 +110,20 @@ if not "%Link:~-3%"=="" (
 	)
 	
 	REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
-	set "FileName=%BaseName%%Link:~-4%"
+	set "LinkExtension=%Link:~-4%"
+	set "FoundFormat="
+	for %%F in (%Formats%) do (
+	  if /i "%LinkExtension%"=="%%~F" (
+		set "FoundFormat=1"
+		set "Extension=.%%~F"
+	  )
+	)
+	if not defined FoundFormat (
+	  if "%Extension%"=="" (
+		set "Extension=.HieuckIT"
+	  )
+	)
+	set "FileName=%BaseName%%Extension%"
 	echo.
 	echo BaseName: %BaseName%
 	echo Extension: %Extension%
