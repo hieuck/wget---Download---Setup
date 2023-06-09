@@ -1,7 +1,7 @@
 @echo off
 set "SoftName=Zalo"
 set "FileName="
-set "Link=https://zalo.me/download/zalo-pc?utm=90000"
+set "Link=https://zalo.me/download/zalo-pc?utm=90000.exe"
 
 REM Data structure to store format-extension information
 set "Formats=7z exe msi rar zip"
@@ -132,6 +132,7 @@ if not "%Link:~-4%"=="" (
 )
 
 :PrintResult
+set "FileName=%BaseName%%Extension%"
 echo.
 echo BaseName: %BaseName%
 echo Extension: %Extension%
