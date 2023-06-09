@@ -1,5 +1,5 @@
 @echo off
-set "SoftName=DirectX"
+set "SoftName=Zalo"
 set "FileName="
 set "Link=https://zalo.me/download/zalo-pc?utm=90000"
 
@@ -132,5 +132,9 @@ if not "%Link:~-4%"=="" (
 )
 
 :PrintResult
+echo.
+echo BaseName: %BaseName%
+echo Extension: %Extension%
 echo FileName: %FileName%
+echo 8
 pause
