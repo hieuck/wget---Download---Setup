@@ -47,7 +47,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/latest/
 
-set "SoftNameVersion=8.5.3"
+set "SoftNameVersion=8.5.4"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
