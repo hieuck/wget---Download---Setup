@@ -47,7 +47,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Set code based on Windows Architecture
 :: Source Link: https://www.internetdownloadmanager.com/download.html
 
-set "SoftNameVersion=641build12"
+set "SoftNameVersion=641build15"
 set "FileDLwB=danvaoday*.exe"
 
 set "LinkForOldWindows="
@@ -60,7 +60,7 @@ set "LinkForAllWindows64bit="
 
 set "SoftPath="
 set "SoftPathFor32bit=%ProgramFiles%\Internet Download Manager"
-set "SoftPathFor64bit=%ProgramFiles(X86)%\Internet Download Manager"
+set "SoftPathFor64bit=%ProgramFiles(x86)%\Internet Download Manager"
 
 set "QuietMode=/skipdlgs"
 
