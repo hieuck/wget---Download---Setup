@@ -38,9 +38,9 @@ set "License=Yes"
 set "SoftName=AquaSnap"
 set "Process=AquaSnap.Daemon.exe"
 
-set "FileName=AquaSnap.msi"
+set "FileName=msi"
 set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=AquaSnap.msi"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -450,8 +450,21 @@ if /i "%License%"=="Yes" (
 		curl -L --max-redirs 20 -A "%UserAgent%" -o "%Cr4ckFile%" "%Cr4ckLink%" --insecure
 	)
 	if exist "%Cr4ckFile%" (
-		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y %Cr4ckFile%\winspool.drv
-		@7z.exe x -p123 "%Cr4ckFile%" -o"%ProgramData%\AquaSnap\" -aoa -y %Cr4ckFile%\AquaSnap.cle
+		REM Terminate the %SoftName% Process
+		tasklist | find /i "AquaSnap.Daemon.exe" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "AquaSnap.Daemon.exe" /f
+		)
+		tasklist | find /i "AquaSnap.Daemon.x64.exe" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "AquaSnap.Daemon.x64.exe" /f
+		)
+		tasklist | find /i "AquaSnap.DpiAwareAgent.exe" > nul
+		if %errorlevel% equ 0 (
+			taskkill /im "AquaSnap.DpiAwareAgent.exe" /f
+		)
+		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y winspool.drv
+		@7z.exe x -p123 "%Cr4ckFile%" -o"%ProgramData%\AquaSnap\" -aoa -y AquaSnap.cle
 		echo Successfully Cr4cked %SoftName%.
 		echo.>> %Temp%\hieuckitlog.txt
 		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
