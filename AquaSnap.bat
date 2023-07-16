@@ -33,7 +33,7 @@ echo.
 REM Required Configuration Settings
 
 set "Extract7z="
-set "License="
+set "License=Yes"
 
 set "SoftName=AquaSnap"
 set "Process=AquaSnap.Daemon.exe"
