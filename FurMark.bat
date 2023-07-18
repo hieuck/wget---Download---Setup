@@ -39,7 +39,7 @@ set "SoftName=FurMark"
 set "Process=FurMark.exe"
 
 set "FileName="
-set "SoftNameVersion=1.34.0.0"
+set "SoftNameVersion=1.35.0.0"
 set "FileDLwB=FurMark*Setup*.exe"
 
 set "SupportOldWindows=Yes"
@@ -47,13 +47,13 @@ set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
-REM Source Link: https://geeks3d.com/dl/show/717
+REM Source Link: https://geeks3d.com/dl/show/720
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://geeks3d.com/downloads/2023p/FurMark_!SoftNameVersion!_Setup.exe"
+set "Link=https://gpumagick.com/downloads/files/2023/abba3e5ee274a0a5a8755e83accae5e2f36671e967ea36d0f445151a0b7cc1fe/FurMark_!SoftNameVersion!_Setup.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -317,9 +317,9 @@ if %size% equ 0 (
 :DLwB
 pushd "%UserProfile%\Downloads"
 
-start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
-timeout /t 1
-start "" "https://geeks3d.com/dl/show/717"
+REM start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+REM timeout /t 1
+start "" "https://geeks3d.com/dl/get/720"
 timeout /t 1 /nobreak >nul
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
