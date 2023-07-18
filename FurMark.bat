@@ -318,7 +318,7 @@ if %size% equ 0 (
 pushd "%UserProfile%\Downloads"
 
 REM start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
-REM timeout /t 1
+timeout /t 1 /nobreak >nul
 start "" "https://geeks3d.com/dl/get/720"
 timeout /t 1 /nobreak >nul
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
