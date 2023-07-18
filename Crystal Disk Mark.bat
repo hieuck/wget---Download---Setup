@@ -30,7 +30,7 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-REM Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
+REM Required Configuration Settings
 
 set "Extract7z="
 set "License="
@@ -48,7 +48,7 @@ set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
-REM Source Link: https://crystalmark.info/redirect.php?product=CrystalDiskInfoInstaller
+REM Source Link: https://crystalmark.info/redirect.php?product=CrystalDiskMarkInstaller
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="

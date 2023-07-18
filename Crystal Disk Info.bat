@@ -30,7 +30,7 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-REM Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
+REM Required Configuration Settings
 
 set "Extract7z="
 set "License="
