@@ -38,7 +38,7 @@ set "License="
 set "SoftName=Google Earth"
 set "Process=googleearth.exe"
 
-set "FileName=exe"
+set "FileName="
 set "SoftNameVersion=7.3.6"
 set "FileDLwB=googleearth*.exe"
 
