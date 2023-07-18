@@ -40,7 +40,7 @@ set "Process=FurMark.exe"
 
 set "FileName="
 set "SoftNameVersion=1.34.0.0"
-set "FileDLwB=FurMark*Setup.exe"
+set "FileDLwB=FurMark*Setup*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
