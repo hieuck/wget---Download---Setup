@@ -318,6 +318,9 @@ if %size% equ 0 (
 pushd "%UserProfile%\Downloads"
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+timeout /t 1
+start "" "https://geeks3d.com/dl/show/717"
+timeout /t 1 /nobreak >nul
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
 :CheckExist
