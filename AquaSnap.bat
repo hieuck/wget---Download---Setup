@@ -307,9 +307,6 @@ for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
 	goto DLwB
-) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
-	goto DLwB
 ) else (
 	goto ExitDLwB
 )
