@@ -189,6 +189,7 @@ if /i "%License%"=="Yes" (
 		set "Cr4ckPath=%SoftPath%"
 	)
 )
+
 REM Check File Name
 REM Data structure to store format-extension information
 set "Formats=7z exe msi rar zip"
