@@ -9,7 +9,7 @@
 @ECHO OFF
 pushd "%~dp0"
 
-:: Run As Administrator
+REM Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
@@ -30,7 +30,7 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-:: Set Extract7z License Soft Process File Name OldWindows 32-bit Support User Agent
+REM Required Configuration Settings
 
 set "Extract7z="
 set "License="
@@ -39,16 +39,15 @@ set "SoftName=DirectX End-User Runtime"
 set "Process=dxwsetup.exe"
 
 set "FileName=dxwebsetup.exe"
+set "SoftNameVersion="
+set "FileDLwB=dxwebsetup*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-:: Set code based on Windows Architecture
-:: Source Link: https://www.microsoft.com/en-us/download/confirmation.aspx?id=35
-
-set "SoftNameVersion="
-set "FileDLwB=dxwebsetup*.exe"
+REM Set code based on Windows Architecture
+REM Source Link: https://www.microsoft.com/en-us/download/confirmation.aspx?id=35
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -69,7 +68,7 @@ set "Cr4ckPath="
 
 set "Shortcut="
 
-:: Detect Windows Architecture and Check Compatibility for 32-bit
+REM Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x64"
 ) else (
@@ -155,7 +154,7 @@ if /i "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-:: Extract with 7z
+REM Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
@@ -178,7 +177,7 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-:: Set up information related to software cr4cking
+REM Set up information related to software cr4cking
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
@@ -191,15 +190,39 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-:: Check File Name
+REM Check File Name
+REM Data structure to store format-extension information
+set "Formats=7z exe msi rar zip"
+
+for %%F in ("%FileName%") do (
+	set "BaseName=%%~nF"
+	if not "%%~xF"=="" (
+		set "Extension=%%~xF"
+	) else (
+		set "Extension=.HieuckIT"
+		set "BaseName=!FileName!"
+	)
+)
+
 if not "%FileName%"=="" (
-	set "FileName=%FileName%"
-) else if /i "%Link:~-4%"==".msi" (
-	set "FileName=%SoftName%-HieuckIT.msi"
-) else if /i "%Link:~-4%"==".exe" (
-	set "FileName=%SoftName%-HieuckIT.exe"
-) else if /i "%Link:~-4%"==".zip" (
-	set "FileName=%SoftName%-HieuckIT.zip"
+	if not "%BaseName%"=="" (
+		REM Loop through the formats in the data structure
+		for %%F in (%Formats%) do (
+			REM Check if FileName matches the format
+			if /i "%FileName%"=="%%~F" (
+				set "BaseName=%SoftName%"
+				set "Extension=.%%~F"
+				set "FileName=!BaseName!!Extension!"
+			)
+		)
+
+		REM Check if FileName doesn't match any format
+		if not "!FileName!"=="!BaseName!!Extension!" (
+			set "FileName=%BaseName%%Extension%"
+		)
+	) else (
+		set "FileName=%SoftName%%Extension%"
+	)
 ) else (
 	set "FileName=%SoftName%.HieuckIT"
 )
@@ -216,7 +239,7 @@ echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
 timeout /t 2
 
-:: Check if Command Prompt is running with administrator privileges
+REM Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
@@ -237,16 +260,16 @@ if %errorlevel% == 0 (
 	)
 )
 
-:: Terminate the %SoftName% Process
+REM Terminate the %SoftName% Process
 tasklist | find /i "%Process%" > nul
 if %errorlevel% equ 0 (
 	taskkill /im "%Process%" /f
 )
 
-:: Save the value of the %time% variable before running the batch script
+REM Save the value of the %time% variable before running the batch script
 set start_time=%time%
 
-:: Download
+REM Download
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
 mode con:cols=120 lines=17
@@ -304,6 +327,7 @@ if not exist "%FileNameDLwB%" (
 ren "%FileNameDLwB%" "%FileName%"
 move "%FileName%" "%~dp0"
 
+:ExitDLwB
 pushd "%~dp0"
 
 if not exist "%FileName%" (
@@ -316,7 +340,6 @@ if not exist "%FileName%" (
 	exit
 )
 
-:ExitDLwB
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
 mode con:cols=120 lines=17
@@ -345,7 +368,7 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-:: Install
+REM Install
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
 mode con:cols=120 lines=17
@@ -367,11 +390,11 @@ echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-	"%FileName%" "%QuietMode%"
+	"%FileName%" %QuietMode%
 )
 
 setlocal
-:: Check DirectX version
+REM Check DirectX version
 reg query "HKLM\Software\Microsoft\DirectX" /v Version >nul 2>&1
 if %errorlevel% equ 0 (
     for /f "tokens=3" %%i in ('reg query "HKLM\Software\Microsoft\DirectX" /v Version') do (
@@ -379,17 +402,17 @@ if %errorlevel% equ 0 (
     )
 )
 
-:: Compare DirectX version with maximum supported version
+REM Compare DirectX version with maximum supported version
 if "%directx_version%" geq "4.09.00.0904" (
     echo DirectX End-User Runtime is up to date.
 ) else (
     echo DirectX End-User Runtime is not up to date.
 )
 
-:: Check if .NET Framework 3.5 is already enabled
+REM Check if .NET Framework 3.5 is already enabled
 reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5" /v Install >nul 2>&1
 
-:: If .NET Framework 3.5 is not enabled, enable it using DISM
+REM If .NET Framework 3.5 is not enabled, enable it using DISM
 if %errorlevel% neq 0 (
     echo .NET Framework 3.5 is not enabled on this system
     echo Enabling .NET Framework 3.5...
@@ -405,7 +428,7 @@ if %errorlevel% neq 0 (
 endlocal
 timeout /t 2
 
-:: License
+REM License
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
 mode con:cols=120 lines=17
@@ -450,7 +473,7 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-:: Shortcut
+REM Shortcut
 if /i "%Shortcut%"=="No" (
 	echo Creating Shortcut is skipped.
 	goto CleanUp
@@ -483,7 +506,7 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut failed.
 )
 
-:: Clean Up
+REM Clean Up
 :CleanUp
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
@@ -529,14 +552,14 @@ goto waitloopcheck
 echo Timeout: Deletion failed. Please delete the file manually.
 echo Timeout: Deletion failed. Please delete the file manually.>> %Temp%\hieuckitlog.txt
 :endcheck
-:: Save the value of the %time% variable after the batch script finishes
+REM Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
 
-:: Convert the start and end times to seconds
+REM Convert the start and end times to seconds
 for /f "tokens=1-3 delims=:." %%a in ("%start_time%") do set /a "start_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
 for /f "tokens=1-3 delims=:." %%a in ("%end_time%") do set /a "end_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
 
-:: Calculate the elapsed time in seconds
+REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
