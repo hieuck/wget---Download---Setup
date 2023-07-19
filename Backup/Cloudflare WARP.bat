@@ -9,7 +9,7 @@
 @ECHO OFF
 pushd "%~dp0"
 
-REM Run As Administrator
+:: Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
@@ -30,7 +30,7 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-REM Required Configuration Settings
+:: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
 
 set "Extract7z="
 set "License="
@@ -38,16 +38,16 @@ set "License="
 set "SoftName=Cloudflare WARP"
 set "Process=Cloudflare WARP.exe"
 
-set "FileName="
-set "SoftNameVersion="
-set "FileDLwB=Cloudflare_WARP*"
+set "FileType="
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=No"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-REM Set code based on Windows Architecture
-REM Source Link: 
+:: Set code based on Windows Architecture
+:: Source Link: 
+
+set "SoftNameVersion="
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -68,7 +68,7 @@ set "Cr4ckPath="
 
 set "Shortcut="
 
-REM Detect Windows Architecture and Check Compatibility for 32-bit
+:: Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x64"
 ) else (
@@ -154,7 +154,7 @@ if /i "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-REM Extract with 7z
+:: Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
@@ -177,7 +177,7 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-REM Set up information related to software cr4cking
+:: Set up information related to software cr4cking
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
@@ -190,73 +190,50 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-REM Check File Name
-setlocal enabledelayedexpansion
-
-REM Data structure to store format-extension information
-set "Formats=7z exe msi rar zip"
-
-for %%F in ("%FileName%") do (
-	set "BaseName=%%~nF"
-	if not "%%~xF"=="" (
-		set "Extension=%%~xF"
-	) else (
-		set "Extension=.HieuckIT"
-		set "BaseName=!FileName!"
-	)
-)
-
-if not "%FileName%"=="" (
-	if not "%BaseName%"=="" (
-		REM Loop through the formats in the data structure
-		for %%F in (%Formats%) do (
-			REM Check if FileName matches the format
-			if /i "%FileName%"=="%%~F" (
-				set "BaseName=%SoftName%"
-				set "Extension=.%%~F"
-				set "FileName=!BaseName!!Extension!"
-				goto :Continue_Check_FileName
-			)
+:: Check File Type
+if not "%FileType%"=="" (
+	if /i "%FileType%"=="msi" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.msi"
 		)
-		
-		REM Check if FileName doesn't match any format
-		if not "!FileName!"=="!BaseName!!Extension!" (
-			set "FileName=%BaseName%%Extension%"
+	) else if /i "%FileType%"=="exe" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.exe"
 		)
-	) else (
-		set "FileName=%SoftName%%Extension%"
-	)
-) else (
-	if not "%Link:~-3%"=="" (
-		REM Extract the extension from Link
-		set "BaseName=%SoftName%"
-		set "FileName=!BaseName!!Extension!"
-		goto :Continue_Check_FileName
+	) else if /i "%FileType%"=="zip" (
+		if /i "%Link:~-4%"==".msi" (
+			set "FileName=%SoftName%-HieuckIT.msi"
+		) else if /i "%Link:~-4%"==".exe" (
+			set "FileName=%SoftName%-HieuckIT.exe"
+		) else if /i "%Link:~-4%"==".zip" (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		) else (
+			set "FileName=%SoftName%-HieuckIT.zip"
+		)
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
+) else if /i "%Link:~-4%"==".msi" (
+	set "FileName=%SoftName%-HieuckIT.msi"
+) else if /i "%Link:~-4%"==".exe" (
+	set "FileName=%SoftName%-HieuckIT.exe"
+) else if /i "%Link:~-4%"==".zip" (
+	set "FileName=%SoftName%-HieuckIT.zip"
+) else (
+	set "FileName=%SoftName%.HieuckIT"
 )
-
-:Continue_Check_FileName
-REM Check if Link's extension matches any format and differs from FileName's extension
-if not "%Link:~-3%"=="" (
-	set "LinkExtension=%Link:~-3%"
-	for %%F in (%Formats%) do (
-		REM Check if the extracted extension matches the format and differs from FileName's extension
-		if /i "!LinkExtension!"=="%%~F" if not "!Extension!"=="%%~F" (
-			set "BaseName=%SoftName%"
-			set "Extension=.%%~F"
-			set "FileName=!BaseName!!Extension!"
-			goto :ExportResult
-		)
-	)
-	
-	REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
-	REM set "FileName=%BaseName%%Link:~-4%"
-)
-endlocal
-
-:ExportResult
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
@@ -270,7 +247,7 @@ echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
 timeout /t 2
 
-REM Check if Command Prompt is running with administrator privileges
+:: Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
@@ -291,16 +268,16 @@ if %errorlevel% == 0 (
 	)
 )
 
-REM Terminate the %SoftName% Process
+:: Terminate the %SoftName% Process
 tasklist | find /i "%Process%" > nul
 if %errorlevel% equ 0 (
 	taskkill /im "%Process%" /f
 )
 
-REM Save the value of the %time% variable before running the batch script
+:: Save the value of the %time% variable before running the batch script
 set start_time=%time%
 
-REM Download
+:: Download
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
 mode con:cols=120 lines=17
@@ -336,33 +313,9 @@ if exist "wget.exe" (
 
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
-	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
-	goto DLwB
-) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
-	goto DLwB
-) else (
-	goto ExitDLwB
+	echo %SoftName% download failed. File size is 0KB.
+	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 )
-
-:DLwB
-pushd "%UserProfile%\Downloads"
-
-start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
-if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
-
-:CheckExist
-for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
-if not exist "%FileNameDLwB%" (
-	timeout /t 1 /nobreak >nul
-	goto CheckExist
-)
-
-ren "%FileNameDLwB%" "%FileName%"
-move "%FileName%" "%~dp0"
-
-:ExitDLwB
-pushd "%~dp0"
 
 if not exist "%FileName%" (
 	echo Download %SoftName% failed.
@@ -402,7 +355,7 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-REM Install
+:: Install
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
 mode con:cols=120 lines=17
@@ -427,7 +380,7 @@ if /i "%Extract7z%"=="Yes" (
 	"%FileName%" %QuietMode%
 )
 
-REM Check Installation Process
+:: Check Installation Process
 echo Checking if %SoftName% installation is complete...
 setlocal EnableDelayedExpansion
 set count=0
@@ -447,7 +400,7 @@ echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
 timeout /t 2
 :end
 
-REM License
+:: License
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
 mode con:cols=120 lines=17
@@ -492,7 +445,7 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-REM Shortcut
+:: Shortcut
 if /i "%Shortcut%"=="No" (
 	echo Creating Shortcut is skipped.
 	goto CleanUp
@@ -525,7 +478,7 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut failed.
 )
 
-REM Clean Up
+:: Clean Up
 :CleanUp
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
@@ -571,14 +524,14 @@ goto waitloopcheck
 echo Timeout: Deletion failed. Please delete the file manually.
 echo Timeout: Deletion failed. Please delete the file manually.>> %Temp%\hieuckitlog.txt
 :endcheck
-REM Save the value of the %time% variable after the batch script finishes
+:: Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
 
-REM Convert the start and end times to seconds
+:: Convert the start and end times to seconds
 for /f "tokens=1-3 delims=:." %%a in ("%start_time%") do set /a "start_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
 for /f "tokens=1-3 delims=:." %%a in ("%end_time%") do set /a "end_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
 
-REM Calculate the elapsed time in seconds
+:: Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
