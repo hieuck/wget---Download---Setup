@@ -313,7 +313,11 @@ if %size% equ 0 (
 )
 
 :DLwB
-pushd "%UserProfile%\Downloads"
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"

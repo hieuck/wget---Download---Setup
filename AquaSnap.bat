@@ -38,9 +38,9 @@ set "License=Yes"
 set "SoftName=AquaSnap"
 set "Process=AquaSnap.Daemon.exe"
 
-set "FileName=msi"
-set "SoftNameVersion="
-set "FileDLwB=AquaSnap.msi"
+set "FileName=AquaSnap-HieuckIT.msi"
+set "SoftNameVersion=1.23.15"
+set "FileDLwB=AquaSnap*.msi"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -66,7 +66,7 @@ set "QuietMode=/quiet /norestart"
 set "Cr4ckFile=AquaSnapCr4ck"
 set "Cr4ckPath="
 
-set "Shortcut="
+set "Shortcut=Yes"
 
 REM Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
@@ -312,7 +312,11 @@ if %size% equ 0 (
 )
 
 :DLwB
-pushd "%UserProfile%\Downloads"
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
