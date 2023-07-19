@@ -39,7 +39,7 @@ set "SoftName=AirCluster"
 set "Process=AirCluster.exe"
 
 set "FileName="
-set "SoftNameVersion="
+set "SoftNameVersion=1.3.0"
 set "FileDLwB=AirCluster*.exe"
 
 set "SupportOldWindows=Yes"
@@ -315,7 +315,11 @@ if %size% equ 0 (
 )
 
 :DLwB
-pushd "%UserProfile%\Downloads"
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
