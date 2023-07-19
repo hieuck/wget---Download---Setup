@@ -39,7 +39,7 @@ set "SoftName=7-Zip"
 set "Process=7zFM.exe"
 
 set "FileName="
-set "SoftNameVersion=2300"
+set "SoftNameVersion=2301"
 set "FileDLwB=7z*.exe"
 
 set "SupportOldWindows=Yes"
