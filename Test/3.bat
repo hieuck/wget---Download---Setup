@@ -1,11 +1,12 @@
 @echo off
 set "SoftName=DirectX"
-set "FileName=."
+set "FileName=7z"
+set "Link=https://example.com/file.zip"
 
 setlocal enabledelayedexpansion
 
 REM Data structure to store format-extension information
-set "Formats=msi exe zip"
+set "Formats=7z exe msi rar zip"
 
 for %%F in ("%FileName%") do (
     set "BaseName=%%~nF"
@@ -17,8 +18,8 @@ for %%F in ("%FileName%") do (
     )
 )
 
-echo BaseName: %BaseName%
-echo Extension: %Extension%
+echo BaseName1: %BaseName%
+echo Extension1: %Extension%
 echo.
 
 if not "%FileName%"=="" (
@@ -44,6 +45,7 @@ if not "%FileName%"=="" (
     set "FileName=%SoftName%.HieuckIT"
 )
 
+echo Link: %Link:~-4%
 echo BaseName: %BaseName%
 echo Extension: %Extension%
 echo FileName: %FileName%

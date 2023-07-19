@@ -1,7 +1,7 @@
 @echo off
 set "SoftName=Zalo"
-set "FileName="
-set "Link=https://zalo.me/download/zalo-pc?utm=90000.exe"
+set "FileName=exe"
+set "Link=https://zalo.me/download/zalo-pc?utm=90000.exe.msi"
 
 REM Data structure to store format-extension information
 set "Formats=7z exe msi rar zip"
