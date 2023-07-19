@@ -39,7 +39,7 @@ set "SoftName=AnyDesk"
 set "Process=AnyDesk.exe"
 
 set "FileName="
-set "SoftNameVersion="
+set "SoftNameVersion=6.1.0"
 set "FileDLwB=AnyDesk*.exe"
 
 set "SupportOldWindows=Yes"
@@ -53,7 +53,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/AnyDesk.6.1.0.exe"
+set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/AnyDesk.!SoftNameVersion!.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -312,7 +312,11 @@ if %size% equ 0 (
 )
 
 :DLwB
-pushd "%UserProfile%\Downloads"
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
