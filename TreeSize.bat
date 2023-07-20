@@ -40,20 +40,20 @@ set "Process=TreeSize.exe"
 
 set "FileName=TreeSize"
 set "SoftNameVersion="
-set "FileDLwB=TreeSize*"
+set "FileDLwB=TreeSize*exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
-REM Source Link: 
+REM Source Link: https://customers.jam-software.de/downloadTrial.php?language=EN&article_no=80
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://downloads.jam-software.de/treesize/TreeSize-Setup.exe"
+set "Link=https://downloads.jam-software.de/treesize_free/TreeSizeFreeSetup.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -315,7 +315,11 @@ if %size% equ 0 (
 )
 
 :DLwB
-pushd "%UserProfile%\Downloads"
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"

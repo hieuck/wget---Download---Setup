@@ -40,14 +40,14 @@ set "Process=TreeSize.exe"
 
 set "FileName="
 set "SoftNameVersion=8.6.1.1764"
-set "FileDLwB=TreeSize*.exe"
+set "FileDLwB=TreeSize*exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
-REM Source Link: https://customers.jam-software.de/downloadTrial.php?language=EN&article_no=90
+REM Source Link: https://customers.jam-software.de/downloadTrial.php?language=EN&article_no=101
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
