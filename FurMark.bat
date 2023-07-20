@@ -303,6 +303,7 @@ if exist "wget.exe" (
 	)
 )
 
+REM Download with browser
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
@@ -315,23 +316,25 @@ if %size% equ 0 (
 )
 
 :DLwB
-pushd "%UserProfile%\Downloads"
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
 
 REM start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 timeout /t 1 /nobreak >nul
-start "" "https://geeks3d.com/dl/get/720"
+start "" "https://geeks3d.com/dl/show/720"
 timeout /t 1 /nobreak >nul
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
 :CheckExist
 for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
 if not exist "%FileNameDLwB%" (
-	timeout /t 1 /nobreak >nul
-	goto CheckExist
+	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
-ren "%FileNameDLwB%" "%FileName%"
-move "%FileName%" "%~dp0"
+move /y "%FileNameDLwB%" "%~dp0%FileName%"
 
 :ExitDLwB
 pushd "%~dp0"
