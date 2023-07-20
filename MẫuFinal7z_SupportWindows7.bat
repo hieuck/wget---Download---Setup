@@ -326,7 +326,7 @@ start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
 :CheckExist
-for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
+for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
 if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 )
