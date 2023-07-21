@@ -1,7 +1,7 @@
 @echo off
 set "SoftName=Zalo"
-set "FileName=exe"
-set "Link=https://zalo.me/download/zalo-pc?utm=90000.exe.msi"
+set "FileName="
+set "Link=https://zalo.me/download/zalo-pc?utm=90000.exe"
 
 REM Data structure to store format-extension information
 set "Formats=7z exe msi rar zip"
@@ -20,7 +20,7 @@ echo Original:
 echo BaseName: %BaseName%
 echo Extension: %Extension%
 echo FileName: %FileName%
-echo 0 
+echo 0
 
 if not "%FileName%"=="" (
 	if not "%BaseName%"=="" (
@@ -40,7 +40,7 @@ if not "%FileName%"=="" (
 				goto :Continue
 			)
 		)
-		
+
 		REM Check if FileName doesn't match any format
 		if not "%FileName%"=="%BaseName%%Extension%" (
 			set "FileName=%BaseName%%Extension%"
@@ -58,7 +58,6 @@ if not "%FileName%"=="" (
 		echo Extension: %Extension%
 		echo FileName: %FileName%
 		echo 3
-
 	)
 ) else (
 	if not "%Link:~-4%"=="" (
@@ -113,15 +112,21 @@ if not "%Link:~-4%"=="" (
 	set "LinkExtension=%Link:~-4%"
 	set "FoundFormat="
 	for %%F in (%Formats%) do (
-	  if /i "%LinkExtension%"=="%%~F" (
-		set "FoundFormat=1"
-		set "Extension=.%%~F"
-	  )
+		if /i "%LinkExtension%"=="%%~F" (
+			set "FoundFormat=1"
+			set "Extension=.%%~F"
+		)
 	)
+	echo.
+	echo BaseName: %BaseName%
+	echo Extension: %Extension%
+	echo FileName: %FileName%
+	echo 6.1
+
 	if not defined FoundFormat (
-	  if "%Extension%"=="" (
-		set "Extension=.HieuckIT"
-	  )
+		if "%Extension%"=="" (
+			set "Extension=.HieuckIT"
+		)
 	)
 	set "FileName=%BaseName%%Extension%"
 	echo.
