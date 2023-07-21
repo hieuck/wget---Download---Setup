@@ -40,7 +40,7 @@ if not "%FileName%"=="" (
 				goto :Continue
 			)
 		)
-		
+
 		REM Check if FileName doesn't match any format
 		if not "%FileName%"=="%BaseName%%Extension%" (
 			set "FileName=%BaseName%%Extension%"
@@ -58,7 +58,6 @@ if not "%FileName%"=="" (
 		echo Extension: %Extension%
 		echo FileName: %FileName%
 		echo 3
-
 	)
 ) else (
 	if not "%Link:~-4%"=="" (
@@ -123,7 +122,7 @@ if not "%Link:~-4%"=="" (
 	echo Extension: %Extension%
 	echo FileName: %FileName%
 	echo 6.1
-	
+
 	if not defined FoundFormat (
 		if "%Extension%"=="" (
 			set "Extension=.HieuckIT"
