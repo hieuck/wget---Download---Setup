@@ -47,7 +47,7 @@ set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
-REM Source Link: https://geeks3d.com/dl/show/720
+REM Source Link: https://www.geeks3d.com/furmark/
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -356,6 +356,9 @@ for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
 	goto DLwB
+) else if %size% lss 1048576 (
+	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
+	goto DLwB
 ) else (
 	goto ExitDLwB
 )
@@ -367,9 +370,7 @@ if exist "%UserProfile%\OneDrive\Downloads" (
 	pushd "%UserProfile%\Downloads"
 )
 
-REM start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
-timeout /t 1 /nobreak >nul
-start "" "https://geeks3d.com/dl/show/720"
+start "" "https://www.geeks3d.com/furmark/"
 timeout /t 1 /nobreak >nul
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
@@ -379,6 +380,7 @@ if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
+echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 
 :ExitDLwB
