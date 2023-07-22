@@ -401,12 +401,12 @@ for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
 for /R %%i in ("%NameFFmpeg%.zip") do set "FileNameDLwBFFmpeg=%%i"
 if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
-) else if not exist "%NameFFmpeg%.zip" (
+) else if not exist "%FileNameDLwBFFmpeg%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
-move /y "%NameFFmpeg%.zip" "%~dp0"
+move /y "%FileNameDLwBFFmpeg%" "%~dp0%NameFFmpeg%.zip"
 
 :ExitDLwB
 pushd "%~dp0"
@@ -601,7 +601,7 @@ set deleteSuccess=0
 :waitloopcheck
 if exist "7z.dll" del "7z.dll">> %Temp%\hieuckitlog.txt 2>&1
 if exist "7z.exe" del "7z.exe">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%NameFFmpeg%.zip" del "%NameFFmpeg%.zip"
+if exist "%NameFFmpeg%.zip" del "%NameFFmpeg%.zip">> %Temp%\hieuckitlog.txt 2>&1
 rmdir /s /q "%SoftPath%\%NameFFmpeg%\"
 if exist "%FileName%" (
 	del "%FileName%">> %Temp%\hieuckitlog.txt 2>&1
