@@ -40,7 +40,7 @@ set "Process=EpicGamesLauncher.exe"
 
 set "FileName="
 set "SoftNameVersion="
-set "FileDLwB=EpicGamesLauncher*"
+set "FileDLwB=EpicGamesLauncher*msi"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=No"
@@ -271,7 +271,6 @@ if not defined FoundFormat (
 		set "Extension=.HieuckIT"
 	)
 )
-set "FileName=%BaseName%%Extension%"
 
 :ExportResult
 set "FileName=%BaseName%%Extension%"
