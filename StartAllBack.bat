@@ -33,14 +33,14 @@ echo.
 REM Required Configuration Settings
 
 set "Extract7z="
-set "License="
+set "License=Yes"
 
 set "SoftName=StartAllBack"
 set "Process=StartAllBackCfg.exe"
 
 set "FileName="
 set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=StartAllBack*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
