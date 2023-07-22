@@ -9,7 +9,7 @@
 @ECHO OFF
 pushd "%~dp0"
 
-:: Run As Administrator
+REM Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
@@ -30,29 +30,30 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-:: Set Extract7z License Soft Process Name FileType OldWindows 32-bit Support User Agent
+REM Required Configuration Settings
 
 set "Extract7z="
 set "License=Yes"
+
 set "SoftName=Foxit PDF Editor"
 set "Process=FoxitPDFEditor.exe"
 
-set "FileType="
+set "FileName="
+set "SoftNameVersion=12.1.3"
+set "FileDLwB=FoxitPDFEditor*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-:: Set code based on Windows Architecture
-:: Source Link: https://www.foxit.com/downloads/pdf-editor-thanks.html?product=Foxit-PhantomPDF-Business&platform=Windows&version=12.1.2.15332&package_type=exe&language=English&formId=download-phantom-bussiness&form=submit
-
-set "SoftNameVersion="
+REM Set code based on Windows Architecture
+REM Source Link: https://www.foxit.com/downloads/pdf-editor-thanks.html?product=Foxit-PhantomPDF-Business&platform=Windows&version=12.1.2.15332&package_type=exe&language=English&formId=download-phantom-bussiness&form=submit
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://cdn01.foxitsoftware.com/product/phantomPDF/desktop/win/12.1.1/FoxitPDFEditor1211_L10N_Setup_Website.exe"
+set "Link=https://cdn01.foxitsoftware.com/product/phantomPDF/desktop/win/!SoftNameVersion!/FoxitPDFEditor!SoftNameVersion:.=!_enu_Setup_Website.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -67,7 +68,7 @@ set "Cr4ckPath="
 
 set "Shortcut="
 
-:: Detect Windows Architecture and Check Compatibility for 32-bit
+REM Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
 	set "ARCH=x64"
 ) else (
@@ -153,7 +154,7 @@ if /i "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-:: Extract with 7z
+REM Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
@@ -176,7 +177,7 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-:: Set up information related to software cr4cking
+REM Set up information related to software cr4cking
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
@@ -189,50 +190,90 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-:: Check File Type
-if not "%FileType%"=="" (
-	if /i "%FileType%"=="msi" (
-		if /i "%Link:~-4%"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi"
-		) else if /i "%Link:~-4%"==".exe" (
-			set "FileName=%SoftName%-HieuckIT.exe"
-		) else if /i "%Link:~-4%"==".zip" (
-			set "FileName=%SoftName%-HieuckIT.zip"
-		) else (
-			set "FileName=%SoftName%-HieuckIT.msi"
+REM Check File Name
+REM Data structure to store format-extension information
+set "Formats=7z exe msi rar zip"
+
+for %%F in ("%FileName%") do (
+	set "BaseName=%%~nF"
+	if not "%%~xF"=="" (
+		set "Extension=%%~xF"
+	) else (
+		set "Extension=.HieuckIT"
+		set "BaseName=%FileName%"
+	)
+)
+
+if not "%FileName%"=="" (
+	if not "%BaseName%"=="" (
+		REM Loop through the formats in the data structure
+		for %%F in (%Formats%) do (
+			REM Check if FileName matches the format
+			if /i "%FileName%"=="%%~F" (
+				set "BaseName=%SoftName%"
+				set "Extension=.%%~F"
+				set "FileName=%BaseName%%Extension%"
+				goto :Continue_Check_FileName
+			)
 		)
-	) else if /i "%FileType%"=="exe" (
-		if /i "%Link:~-4%"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi"
-		) else if /i "%Link:~-4%"==".exe" (
-			set "FileName=%SoftName%-HieuckIT.exe"
-		) else if /i "%Link:~-4%"==".zip" (
-			set "FileName=%SoftName%-HieuckIT.zip"
-		) else (
-			set "FileName=%SoftName%-HieuckIT.exe"
+
+		REM Check if FileName doesn't match any format
+		if not "%FileName%"=="%BaseName%%Extension%" (
+			set "FileName=%BaseName%%Extension%"
 		)
-	) else if /i "%FileType%"=="zip" (
-		if /i "%Link:~-4%"==".msi" (
-			set "FileName=%SoftName%-HieuckIT.msi"
-		) else if /i "%Link:~-4%"==".exe" (
-			set "FileName=%SoftName%-HieuckIT.exe"
-		) else if /i "%Link:~-4%"==".zip" (
-			set "FileName=%SoftName%-HieuckIT.zip"
+	) else (
+		set "FileName=%SoftName%%Extension%"
+	)
+) else (
+	if not "%Link:~-3%"=="" (
+		REM Extract the extension from Link
+		set "BaseName=%SoftName%"
+		set "LinkExtension=%Link:~-3%"
+		REM Check if LinkExtension is not in Formats
+		echo %Formats% | find /i "%LinkExtension%" >nul
+		if errorlevel 1 (
+			set "Extension=%LinkExtension%"
 		) else (
-			set "FileName=%SoftName%-HieuckIT.zip"
+			set "Extension=.HieuckIT"
 		)
+		set "FileName=%BaseName%%Extension%"
+		goto :Continue_Check_FileName
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 	)
-) else if /i "%Link:~-4%"==".msi" (
-	set "FileName=%SoftName%-HieuckIT.msi"
-) else if /i "%Link:~-4%"==".exe" (
-	set "FileName=%SoftName%-HieuckIT.exe"
-) else if /i "%Link:~-4%"==".zip" (
-	set "FileName=%SoftName%-HieuckIT.zip"
-) else (
-	set "FileName=%SoftName%.HieuckIT"
 )
+
+:Continue_Check_FileName
+REM Check if Link's extension matches any format and differs from FileName's extension
+set "LinkExtension=%Link:~-3%"
+for %%F in (%Formats%) do (
+	REM Check if the extracted extension matches the format and differs from FileName's extension
+	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
+		set "BaseName=%SoftName%"
+		set "Extension=.%%~F"
+		set "FileName=%BaseName%%Extension%"
+		goto :ExportResult
+	)
+)
+
+REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
+set "LinkExtension=%Link:~-3%"
+set "FoundFormat="
+for %%F in (%Formats%) do (
+	if /i "%LinkExtension%"=="%%~F" (
+		set "FoundFormat=1"
+		set "Extension=.%%~F"
+	)
+)
+
+if not defined FoundFormat (
+	if "%Extension%"=="" (
+		set "Extension=.HieuckIT"
+	)
+)
+
+:ExportResult
+set "FileName=%BaseName%%Extension%"
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
@@ -246,7 +287,7 @@ echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
 type "%Temp%\hieuckitlog.txt"
 timeout /t 2
 
-:: Check if Command Prompt is running with administrator privileges
+REM Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
@@ -267,16 +308,16 @@ if %errorlevel% == 0 (
 	)
 )
 
-:: Terminate the %SoftName% Process
+REM Terminate the %SoftName% Process
 tasklist | find /i "%Process%" > nul
 if %errorlevel% equ 0 (
 	taskkill /im "%Process%" /f
 )
 
-:: Save the value of the %time% variable before running the batch script
+REM Save the value of the %time% variable before running the batch script
 set start_time=%time%
 
-:: Download
+REM Download
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
 mode con:cols=120 lines=17
@@ -310,11 +351,39 @@ if exist "wget.exe" (
 	)
 )
 
+REM Download with browser
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
-	echo %SoftName% download failed. File size is 0KB.
-	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
+	goto DLwB
+) else if %size% lss 1048576 (
+	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
+	goto DLwB
+) else (
+	goto ExitDLwB
 )
+
+:DLwB
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
+
+start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
+
+:CheckExist
+for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
+if not exist "%FileNameDLwB%" (
+	timeout /t 1 /nobreak >nul & goto CheckExist
+)
+
+echo Download completed with the browser. Installation in progress...
+move /y "%FileNameDLwB%" "%~dp0%FileName%"
+
+:ExitDLwB
+pushd "%~dp0"
 
 if not exist "%FileName%" (
 	echo Download %SoftName% failed.
@@ -354,7 +423,7 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-:: Install
+REM Install
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
 mode con:cols=120 lines=17
@@ -379,7 +448,7 @@ if /i "%Extract7z%"=="Yes" (
 	"%FileName%" %QuietMode%
 )
 
-:: Check Installation Process
+REM Check Installation Process
 echo Checking if %SoftName% installation is complete...
 setlocal EnableDelayedExpansion
 set count=0
@@ -399,7 +468,7 @@ echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
 timeout /t 2
 :end
 
-:: License
+REM License
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
 mode con:cols=120 lines=17
@@ -444,7 +513,7 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-:: Shortcut
+REM Shortcut
 if /i "%Shortcut%"=="No" (
 	echo Creating Shortcut is skipped.
 	goto CleanUp
@@ -477,7 +546,7 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut failed.
 )
 
-:: Clean Up
+REM Clean Up
 :CleanUp
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
@@ -523,14 +592,14 @@ goto waitloopcheck
 echo Timeout: Deletion failed. Please delete the file manually.
 echo Timeout: Deletion failed. Please delete the file manually.>> %Temp%\hieuckitlog.txt
 :endcheck
-:: Save the value of the %time% variable after the batch script finishes
+REM Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
 
-:: Convert the start and end times to seconds
+REM Convert the start and end times to seconds
 for /f "tokens=1-3 delims=:." %%a in ("%start_time%") do set /a "start_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
 for /f "tokens=1-3 delims=:." %%a in ("%end_time%") do set /a "end_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
 
-:: Calculate the elapsed time in seconds
+REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
