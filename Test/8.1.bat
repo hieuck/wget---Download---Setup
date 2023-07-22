@@ -1,7 +1,7 @@
 @echo off
 set "SoftName=Zalo"
 set "FileName="
-set "Link=https://zalo.me/download/zalo-pc?utm=90000.exe"
+set "Link=https://zalo.me/download/zalo-pc?utm=90000"
 
 REM Data structure to store format-extension information
 set "Formats=7z exe msi rar zip"
@@ -37,7 +37,7 @@ if not "%FileName%"=="" (
 				echo Extension: %Extension%
 				echo FileName: %FileName%
 				echo 1
-				goto :Continue
+				goto :Continue_Check_FileName
 			)
 		)
 
@@ -60,10 +60,10 @@ if not "%FileName%"=="" (
 		echo 3
 	)
 ) else (
-	if not "%Link:~-4%"=="" (
+	if not "%Link:~-3%"=="" (
 		REM Extract the extension from Link
 		set "BaseName=%SoftName%"
-		set "LinkExtension=%Link:~-4%"
+		set "LinkExtension=%Link:~-3%"
 		REM Check if LinkExtension is not in Formats
 		echo %Formats% | find /i "%LinkExtension%" >nul
 		if errorlevel 1 (
@@ -78,7 +78,7 @@ if not "%FileName%"=="" (
 		echo Extension: %Extension%
 		echo FileName: %FileName%
 		echo 4
-		goto :Continue
+		goto :Continue_Check_FileName
 	) else (
 		set "FileName=%SoftName%.HieuckIT"
 		echo.
@@ -89,54 +89,52 @@ if not "%FileName%"=="" (
 	)
 )
 
-:Continue
+:Continue_Check_FileName
 REM Check if Link's extension matches any format and differs from FileName's extension
-if not "%Link:~-4%"=="" (
-	set "LinkExtension=%Link:~-4%"
-	for %%F in (%Formats%) do (
-		REM Check if the extracted extension matches the format and differs from FileName's extension
-		if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
-			set "BaseName=%SoftName%"
-			set "Extension=.%%~F"
-			set "FileName=%BaseName%%Extension%"
-			echo.
-			echo BaseName: %BaseName%
-			echo Extension: %Extension%
-			echo FileName: %FileName%
-			echo 6
-			goto :PrintResult
-		)
+set "LinkExtension=%Link:~-3%"
+for %%F in (%Formats%) do (
+	REM Check if the extracted extension matches the format and differs from FileName's extension
+	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
+		set "BaseName=%SoftName%"
+		set "Extension=.%%~F"
+		set "FileName=%BaseName%%Extension%"
+		echo.
+		echo BaseName: %BaseName%
+		echo Extension: %Extension%
+		echo FileName: %FileName%
+		echo 6
+		goto :ExportResult
 	)
-	
-	REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
-	set "LinkExtension=%Link:~-4%"
-	set "FoundFormat="
-	for %%F in (%Formats%) do (
-		if /i "%LinkExtension%"=="%%~F" (
-			set "FoundFormat=1"
-			set "Extension=.%%~F"
-		)
-	)
-	echo.
-	echo BaseName: %BaseName%
-	echo Extension: %Extension%
-	echo FileName: %FileName%
-	echo 6.1
-
-	if not defined FoundFormat (
-		if "%Extension%"=="" (
-			set "Extension=.HieuckIT"
-		)
-	)
-	set "FileName=%BaseName%%Extension%"
-	echo.
-	echo BaseName: %BaseName%
-	echo Extension: %Extension%
-	echo FileName: %FileName%
-	echo 7
 )
 
-:PrintResult
+REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
+set "LinkExtension=%Link:~-3%"
+set "FoundFormat="
+for %%F in (%Formats%) do (
+	if /i "%LinkExtension%"=="%%~F" (
+		set "FoundFormat=1"
+		set "Extension=.%%~F"
+	)
+)
+echo.
+echo BaseName: %BaseName%
+echo Extension: %Extension%
+echo FileName: %FileName%
+echo 6.1
+
+if not defined FoundFormat (
+	if "%Extension%"=="" (
+		set "Extension=.HieuckIT"
+	)
+)
+set "FileName=%BaseName%%Extension%"
+echo.
+echo BaseName: %BaseName%
+echo Extension: %Extension%
+echo FileName: %FileName%
+echo 7
+
+:ExportResult
 set "FileName=%BaseName%%Extension%"
 echo.
 echo BaseName: %BaseName%
