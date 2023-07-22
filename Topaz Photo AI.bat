@@ -499,7 +499,7 @@ if /i "%License%"=="Yes" (
 	)
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
-		regedit.exe /s "%SOFTPATH%\token.reg"
+		regedit.exe /s "%SoftPath%\token.reg"
 		echo Successfully Cr4cked %SoftName%.
 		echo.>> %Temp%\hieuckitlog.txt
 		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
