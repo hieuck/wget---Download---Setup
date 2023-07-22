@@ -47,7 +47,7 @@ set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
-REM Source Link: https://www.foxit.com/downloads/pdf-editor-thanks.html?product=Foxit-PhantomPDF-Business&platform=Windows&version=12.1.2.15332&package_type=exe&language=English&formId=download-phantom-bussiness&form=submit
+REM Source Link: https://www.foxit.com/downloads/pdf-editor-thanks.html?product=Foxit-PhantomPDF-Business&platform=Windows&version=&package_type=exe&language=English&formId=download-phantom-bussiness&form=submit
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
