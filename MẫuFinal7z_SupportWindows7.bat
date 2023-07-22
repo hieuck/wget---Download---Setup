@@ -271,7 +271,6 @@ if not defined FoundFormat (
 		set "Extension=.HieuckIT"
 	)
 )
-set "FileName=%BaseName%%Extension%"
 
 :ExportResult
 set "FileName=%BaseName%%Extension%"

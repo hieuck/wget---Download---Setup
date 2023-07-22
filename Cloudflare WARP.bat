@@ -38,7 +38,7 @@ set "License="
 set "SoftName=Cloudflare WARP"
 set "Process=Cloudflare WARP.exe"
 
-set "FileName=msi"
+set "FileName="
 set "SoftNameVersion="
 set "FileDLwB=Cloudflare_WARP*msi"
 
@@ -200,7 +200,7 @@ for %%F in ("%FileName%") do (
 		set "Extension=%%~xF"
 	) else (
 		set "Extension=.HieuckIT"
-		set "BaseName=!FileName!"
+		set "BaseName=%FileName%"
 	)
 )
 
@@ -212,20 +212,68 @@ if not "%FileName%"=="" (
 			if /i "%FileName%"=="%%~F" (
 				set "BaseName=%SoftName%"
 				set "Extension=.%%~F"
-				set "FileName=!BaseName!!Extension!"
+				set "FileName=%BaseName%%Extension%"
+				goto :Continue_Check_FileName
 			)
 		)
 
 		REM Check if FileName doesn't match any format
-		if not "!FileName!"=="!BaseName!!Extension!" (
+		if not "%FileName%"=="%BaseName%%Extension%" (
 			set "FileName=%BaseName%%Extension%"
 		)
 	) else (
 		set "FileName=%SoftName%%Extension%"
 	)
 ) else (
-	set "FileName=%SoftName%.HieuckIT"
+	if not "%Link:~-3%"=="" (
+		REM Extract the extension from Link
+		set "BaseName=%SoftName%"
+		set "LinkExtension=%Link:~-3%"
+		REM Check if LinkExtension is not in Formats
+		echo %Formats% | find /i "%LinkExtension%" >nul
+		if errorlevel 1 (
+			set "Extension=%LinkExtension%"
+		) else (
+			set "Extension=.HieuckIT"
+		)
+		set "FileName=%BaseName%%Extension%"
+		goto :Continue_Check_FileName
+	) else (
+		set "FileName=%SoftName%.HieuckIT"
+	)
 )
+
+:Continue_Check_FileName
+REM Check if Link's extension matches any format and differs from FileName's extension
+set "LinkExtension=%Link:~-3%"
+for %%F in (%Formats%) do (
+	REM Check if the extracted extension matches the format and differs from FileName's extension
+	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
+		set "BaseName=%SoftName%"
+		set "Extension=.%%~F"
+		set "FileName=%BaseName%%Extension%"
+		goto :ExportResult
+	)
+)
+
+REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
+set "LinkExtension=%Link:~-3%"
+set "FoundFormat="
+for %%F in (%Formats%) do (
+	if /i "%LinkExtension%"=="%%~F" (
+		set "FoundFormat=1"
+		set "Extension=.%%~F"
+	)
+)
+
+if not defined FoundFormat (
+	if "%Extension%"=="" (
+		set "Extension=.HieuckIT"
+	)
+)
+
+:ExportResult
+set "FileName=%BaseName%%Extension%"
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
