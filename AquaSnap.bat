@@ -38,7 +38,7 @@ set "License=Yes"
 set "SoftName=AquaSnap"
 set "Process=AquaSnap.Daemon.exe"
 
-set "FileName=AquaSnap-HieuckIT.msi"
+set "FileName=AquaSnap-HieuckIT"
 set "SoftNameVersion=1.23.15"
 set "FileDLwB=AquaSnap*.msi"
 
@@ -249,7 +249,7 @@ set "LinkExtension=%Link:~-3%"
 for %%F in (%Formats%) do (
 	REM Check if the extracted extension matches the format and differs from FileName's extension
 	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
-		set "BaseName=%SoftName%"
+		REM set "BaseName=%SoftName%"
 		set "Extension=.%%~F"
 		set "FileName=%BaseName%%Extension%"
 		goto :ExportResult
