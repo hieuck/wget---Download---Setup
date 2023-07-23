@@ -64,6 +64,7 @@ set "SoftPathFor64bit="
 set "QuietMode=/S"
 
 set "Cr4ckFile=NppPlugins"
+if /i "%ARCH%"=="x86" set "Cr4ckFile=NppPlugins32"
 set "Cr4ckPath="
 
 set "Shortcut="
