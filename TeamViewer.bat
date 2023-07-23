@@ -200,7 +200,7 @@ for %%F in ("%FileName%") do (
 		set "Extension=%%~xF"
 	) else (
 		set "Extension=.HieuckIT"
-		set "BaseName=!FileName!"
+		set "BaseName=%FileName%"
 	)
 )
 
@@ -212,20 +212,68 @@ if not "%FileName%"=="" (
 			if /i "%FileName%"=="%%~F" (
 				set "BaseName=%SoftName%"
 				set "Extension=.%%~F"
-				set "FileName=!BaseName!!Extension!"
+				set "FileName=%BaseName%%Extension%"
+				goto :Continue_Check_FileName
 			)
 		)
 
 		REM Check if FileName doesn't match any format
-		if not "!FileName!"=="!BaseName!!Extension!" (
+		if not "%FileName%"=="%BaseName%%Extension%" (
 			set "FileName=%BaseName%%Extension%"
 		)
 	) else (
 		set "FileName=%SoftName%%Extension%"
 	)
 ) else (
-	set "FileName=%SoftName%.HieuckIT"
+	if not "%Link:~-3%"=="" (
+		REM Extract the extension from Link
+		set "BaseName=%SoftName%"
+		set "LinkExtension=%Link:~-3%"
+		REM Check if LinkExtension is not in Formats
+		echo %Formats% | find /i "%LinkExtension%" >nul
+		if errorlevel 1 (
+			set "Extension=%LinkExtension%"
+		) else (
+			set "Extension=.HieuckIT"
+		)
+		set "FileName=%BaseName%%Extension%"
+		goto :Continue_Check_FileName
+	) else (
+		set "FileName=%SoftName%.HieuckIT"
+	)
 )
+
+:Continue_Check_FileName
+REM Check if Link's extension matches any format and differs from FileName's extension
+set "LinkExtension=%Link:~-3%"
+for %%F in (%Formats%) do (
+	REM Check if the extracted extension matches the format and differs from FileName's extension
+	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
+		set "BaseName=%SoftName%"
+		set "Extension=.%%~F"
+		set "FileName=%BaseName%%Extension%"
+		goto :ExportResult
+	)
+)
+
+REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
+set "LinkExtension=%Link:~-3%"
+set "FoundFormat="
+for %%F in (%Formats%) do (
+	if /i "%LinkExtension%"=="%%~F" (
+		set "FoundFormat=1"
+		set "Extension=.%%~F"
+	)
+)
+
+if not defined FoundFormat (
+	if "%Extension%"=="" (
+		set "Extension=.HieuckIT"
+	)
+)
+
+:ExportResult
+set "FileName=%BaseName%%Extension%"
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
@@ -303,6 +351,7 @@ if exist "wget.exe" (
 	)
 )
 
+REM Download with browser
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
@@ -312,20 +361,23 @@ if %size% equ 0 (
 )
 
 :DLwB
-pushd "%UserProfile%\Downloads"
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
 
 start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
 :CheckExist
-for /R %%i in ("%FileDLwB%") do set FileNameDLwB="%%i"
+for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
 if not exist "%FileNameDLwB%" (
-	timeout /t 1 /nobreak >nul
-	goto CheckExist
+	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
-ren "%FileNameDLwB%" "%FileName%"
-move "%FileName%" "%~dp0"
+echo Download completed with the browser. Installation in progress...
+move /y "%FileNameDLwB%" "%~dp0%FileName%"
 
 :ExitDLwB
 pushd "%~dp0"
@@ -432,7 +484,7 @@ echo.
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 if /i "%License%"=="Yes" (
-	echo Downloading %SOFTNAME% ID Reset...
+	echo Downloading %SoftName% ID Reset...
 	if exist "wget.exe" (
 		if not exist "7z.dll" if not exist "7z.exe" (
 			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
@@ -448,12 +500,12 @@ if /i "%License%"=="Yes" (
 	)
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
-		echo Successfully Downloaded %SOFTNAME% ID Reset.
+		echo Successfully Downloaded %SoftName% ID Reset.
 		echo.>> %Temp%\hieuckitlog.txt
-		echo Successfully Downloaded %SOFTNAME% ID Reset.>> %Temp%\hieuckitlog.txt
+		echo Successfully Downloaded %SoftName% ID Reset.>> %Temp%\hieuckitlog.txt
 		del "%Cr4ckFile%"
 	) else (
-		echo Downloading %SOFTNAME% ID Reset failed.
+		echo Downloading %SoftName% ID Reset failed.
 		echo Please try running the script as Administrator.
 	)
 )

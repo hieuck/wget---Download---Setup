@@ -376,6 +376,7 @@ if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
+echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 
 :ExitDLwB
@@ -465,7 +466,7 @@ timeout /t 2
 :end
 
 REM License
-title _Hieuck.IT_'s Windows Application Cr4cking...
+title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
 mode con:cols=120 lines=17
 if not exist "wget.exe" mode con:cols=80 lines=17
@@ -483,7 +484,7 @@ echo.
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 if /i "%License%"=="Yes" (
-	echo Cr4cking %SoftName%...
+	echo Downloading %SoftName% Plugins...
 	if exist "wget.exe" (
 		if not exist "7z.dll" if not exist "7z.exe" (
 			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
@@ -499,12 +500,12 @@ if /i "%License%"=="Yes" (
 	)
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
-		echo Successfully Cr4cked %SoftName%.
+		echo Successfully Downloaded %SoftName% Plugins.
 		echo.>> %Temp%\hieuckitlog.txt
-		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
+		echo Successfully Downloaded %SoftName% Plugins.>> %Temp%\hieuckitlog.txt
 		del "%Cr4ckFile%"
 	) else (
-		echo Cr4cking %SoftName% failed.
+		echo Downloading %SoftName% Plugins failed.
 		echo Please try running the script as Administrator.
 	)
 )
