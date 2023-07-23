@@ -405,6 +405,7 @@ if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
+echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 move /y "%FileNameDLwBFFmpeg%" "%~dp0%NameFFmpeg%.zip"
 
