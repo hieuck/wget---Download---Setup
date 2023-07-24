@@ -120,7 +120,7 @@ if exist "wget.exe" (
 		start "" "%Temp%\hieuckitlog.txt"
 	)
 )
-pause
+
 REM Install
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
