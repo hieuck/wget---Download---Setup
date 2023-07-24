@@ -480,6 +480,8 @@ if %errorlevel% neq 0 (
 endlocal
 timeout /t 2
 
+pushd "%~dp0"
+"%FileName%" %QuietMode%
 REM License
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
