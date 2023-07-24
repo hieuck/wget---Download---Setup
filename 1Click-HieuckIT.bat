@@ -32,23 +32,14 @@ echo.
 @echo off
 REM Required Configuration Settings
 
-set "Extract7z="
-set "License="
-
 set "SoftName=1-Click"
-set "Process=danvaoday.exe"
 
-set "FileName="
-set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
-
-set "SupportOldWindows=Yes"
-set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
 REM Source Link: https://github.com/hieuck/curl-uri-wget-download-setup
 
+set "wget=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/wget.exe"
 set "AnyDesk=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/AnyDesk.bat"
 set "CocCoc=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Coc%20Coc.bat"
 set "EVKey=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/EVKey.bat"
@@ -64,158 +55,8 @@ set "WinRAR=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setu
 set "Zalo=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Zalo.bat"
 
 :: Create download folder
-set "download_folder=%~dp0\1Click"
+set "download_folder=%~dp0\1Click-HieuckIT"
 md "%download_folder%" 2>NUL
-
-set "LinkForOldWindows="
-set "LinkForOldWindows32bit="
-set "LinkForOldWindows64bit="
-
-set "Link="
-set "LinkForAllWindows32bit="
-set "LinkForAllWindows64bit="
-
-set "SoftPath="
-set "SoftPathFor32bit="
-set "SoftPathFor64bit="
-
-set "QuietMode=/S"
-
-set "Cr4ckFile="
-set "Cr4ckPath="
-
-set "Shortcut="
-
-REM Detect Windows Architecture and Check Compatibility for 32-bit
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
-)
-
-if /i "%Support32Bit%"=="No" (
-	if /i "%ARCH%"=="x86" (
-		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
-		for /l %%i in (3,-1,1) do (
-			echo Exiting in %%i seconds...
-			timeout /t 1 /nobreak >nul
-		)
-		exit
-	)
-)
-
-::Check Windows OS Version and Check Support Old Windows
-setlocal EnableDelayedExpansion
-for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-	set "version1=%%i"
-)
-
-for /f "tokens=5 delims=[.] " %%i in ('ver') do (
-	set "version2=%%i"
-)
-set "version=%version1%.%version2%"
-
-if "%version%"=="6.1" goto ForOldWindows
-goto ForNewWindows
-endlocal
-
-:ForOldWindows
-if /i "%SupportOldWindows%"=="No" (
-	echo Sorry, this software is not compatible with Windows 7. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
-) else (
-	if /i "%ARCH%"=="x86" (
-		if not "%LinkForOldWindows32bit%"=="" (
-			set "Link=%LinkForOldWindows32bit%"
-		) else (
-			if not "%LinkForOldWindows%"=="" (
-				set "Link=%LinkForOldWindows%"
-			) else (
-				if not "%LinkForAllWindows32bit%"=="" (
-					set "Link="%LinkForAllWindows32bit%"
-				) else (
-					set "Link=%Link%"
-				)
-			)
-		)
-		if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
-	) else (
-		if not "%LinkForOldWindows64bit%"=="" (
-			set "Link=%LinkForOldWindows64bit%"
-		) else (
-			if not "%LinkForOldWindows%"=="" (
-				set "Link=%LinkForOldWindows%"
-			) else (
-				if not "%LinkForAllWindows64bit%"=="" (
-					set "Link=%LinkForAllWindows64bit%"
-				) else (
-					set "Link=%Link%"
-				)
-			)
-		)
-		if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
-	)
-)
-goto NextStepForCheckOSVersion
-
-:ForNewWindows
-if /i "%ARCH%"=="x86" (
-	if not "%LinkForAllWindows32bit%"=="" set "Link=%LinkForAllWindows32bit%"
-	if not "%SoftPathFor32bit%"=="" set "SoftPath=%SoftPathFor32bit%"
-) else (
-	if not "%LinkForAllWindows64bit%"=="" set "Link=%LinkForAllWindows64bit%"
-	if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
-)
-
-:NextStepForCheckOSVersion
-REM Extract with 7z
-if /i "%Extract7z%"=="Yes" (
-	set "Admin=Yes"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-	if not "%SoftPath%"=="" (
-		set "SoftPath=%SoftPath%"
-	) else (
-		set "SoftPath=%ProgramFiles%\%SoftName%"
-	)
-	if not "%Shortcut%"=="" (
-		set "Shortcut=%Shortcut%"
-	) else (
-		set "Shortcut=Yes"
-	)
-) else (
-	if not "%Shortcut%"=="" (
-		set "Shortcut=%Shortcut%"
-	) else (
-		set "Shortcut=No"
-	)
-)
-
-REM Check if Command Prompt is running with administrator privileges
-net session >nul 2>&1
-if %errorlevel% == 0 (
-	echo Command Prompt is running as Administrator.
-) else (
-	if /i "%Admin%"=="Yes" (
-		echo Please Run as Administrator. Exiting in 3 seconds...
-		for /l %%i in (3,-1,1) do (
-			echo Exiting in %%i seconds...
-			timeout /t 1 /nobreak >nul
-		)
-		exit
-	) else (
-		echo Warning: This program may not function correctly without administrator privileges.
-		for /l %%i in (3,-1,1) do (
-			echo Starting in %%i seconds...
-			timeout /t 1 /nobreak >nul
-		)
-	)
-)
-
 
 REM Save the value of the %time% variable before running the batch script
 set start_time=%time%
@@ -240,6 +81,7 @@ echo.
 @echo off
 echo Downloading %SoftName%...
 if exist "wget.exe" (
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\wget.exe" -U "%UserAgent%" "%wget%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\AnyDesk.bat" -U "%UserAgent%" "%AnyDesk%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\Coc Coc.bat" -U "%UserAgent%" "%CocCoc%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\EVKey.bat" -U "%UserAgent%" "%EVKey%"
@@ -254,6 +96,7 @@ if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\WinRAR.bat" -U "%UserAgent%" "%WinRAR%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\Zalo.bat" -U "%UserAgent%" "%Zalo%"
 ) else (
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\wget.exe" "%wget%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\AnyDesk.bat" "%AnyDesk%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Coc Coc.bat" "%CocCoc%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\EVKey.bat" "%EVKey%" --insecure
@@ -277,7 +120,7 @@ if exist "wget.exe" (
 		start "" "%Temp%\hieuckitlog.txt"
 	)
 )
-
+pause
 REM Install
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
@@ -297,23 +140,32 @@ echo.
 @echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
 echo Installing %SoftName%...
-if /i "%Extract7z%"=="Yes" (
-	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
-) else (
-	call "%download_folder%\AnyDesk.bat"
-	call "%download_folder%\Coc Coc.bat"
-	call "%download_folder%\EVKey.bat"
-	call "%download_folder%\Foxit PDF Reader.bat"
-	call "%download_folder%\Google Chrome.bat"
-	call "%download_folder%\K-Lite Codec Pack Mega.bat"
-	call "%download_folder%\Microsoft DirectX End-User Runtime.bat"
-	call "%download_folder%\Microsoft Office.bat"
-	call "%download_folder%\Revo Uninstaller.bat"
-	call "%download_folder%\TeamViewer.bat"
-	call "%download_folder%\UltraViewer.bat"
-	call "%download_folder%\WinRAR.bat"
-	call "%download_folder%\Zalo.bat"
-)
+pushd "%~dp0"
+call "%download_folder%\AnyDesk.bat"
+pushd "%~dp0"
+call "%download_folder%\Coc Coc.bat"
+pushd "%~dp0"
+call "%download_folder%\Foxit PDF Reader.bat"
+pushd "%~dp0"
+call "%download_folder%\Google Chrome.bat"
+pushd "%~dp0"
+call "%download_folder%\K-Lite Codec Pack Mega.bat"
+pushd "%~dp0"
+call "%download_folder%\Microsoft DirectX End-User Runtime.bat"
+pushd "%~dp0"
+call "%download_folder%\Microsoft Office.bat"
+pushd "%~dp0"
+call "%download_folder%\Revo Uninstaller.bat"
+pushd "%~dp0"
+call "%download_folder%\TeamViewer.bat"
+pushd "%~dp0"
+call "%download_folder%\UltraViewer.bat"
+pushd "%~dp0"
+call "%download_folder%\WinRAR.bat"
+pushd "%~dp0"
+call "%download_folder%\Zalo.bat"
+pushd "%~dp0"
+call "%download_folder%\EVKey.bat"
 
 REM Clean Up
 :CleanUp
@@ -340,13 +192,19 @@ setlocal EnableDelayedExpansion
 set count=0
 set deleteSuccess=0
 :waitloopcheck
+if exist "%download_folder%\AnyDesk.bat" del "%download_folder%\AnyDesk.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Coc Coc.bat" del "%download_folder%\Coc Coc.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\EVKey.bat" del "%download_folder%\EVKey.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Foxit PDF Reader.bat" del "%download_folder%\Foxit PDF Reader.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Google Chrome.bat" del "%download_folder%\Google Chrome.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\K-Lite Codec Pack Mega.bat" del "%download_folder%\K-Lite Codec Pack Mega.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Microsoft DirectX End-User Runtime.bat" del "%download_folder%\Microsoft DirectX End-User Runtime.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Microsoft Office.bat" del "%download_folder%\Microsoft Office.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\TeamViewer.bat" del "%download_folder%\TeamViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\UltraViewer.bat" del "%download_folder%\UltraViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\WinRAR.bat" del "%download_folder%\WinRAR.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Zalo.bat" del "%download_folder%\Zalo.bat">> %Temp%\hieuckitlog.txt 2>&1
 rmdir /s /q "%download_folder%"
-if exist "7z.dll" del "7z.dll">> %Temp%\hieuckitlog.txt 2>&1
-if exist "7z.exe" del "7z.exe">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%FileName%" (
-	del "%FileName%">> %Temp%\hieuckitlog.txt 2>&1
-	if not exist "%FileName%" set deleteSuccess=1
-)
 timeout /t 1 /nobreak > nul
 set /a count+=1
 if !deleteSuccess! equ 1 (
