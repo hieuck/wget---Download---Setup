@@ -50,17 +50,17 @@ REM Set code based on Windows Architecture
 REM Source Link: https://github.com/hieuck/curl-uri-wget-download-setup
 
 set "AnyDesk=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/AnyDesk.bat"
-set "CocCoc=https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x86.exe"
-set "EVKey=https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x86.exe"
-set "FoxitPDFReader=https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x86.exe"
-set "GoogleChrome=https://download.visualstudio.microsoft.com/download/pr/10912113/5da66ddebb0ad32ebd4b922fd82e8e25/vcredist_x86.exe"
-set "MicrosoftOffice=https://download.visualstudio.microsoft.com/download/pr/6a4c74cd-8ee0-4757-9620-a11a5b48b1a7/CE4843A946EE3732EB2BFC098DB5741DC5495C7BEA204E11D379336DCC68E875/VC_redist.x86.exe"
-set "RevoUninstaller=https://download.microsoft.com/download/8/B/4/8B42259F-5D70-43F4-AC2E-4B208FD8D66A/vcredist_x64.EXE"
-set "TeamViewer=https://download.microsoft.com/download/5/D/8/5D8C65CB-C849-4025-8E95-C3966CAFD8AE/vcredist_x64.exe"
-set "UltraViewer=https://download.microsoft.com/download/1/6/5/165255E7-1014-4D0A-B094-B6A430A6BFFC/vcredist_x64.exe"
-set "WinRAR=https://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x64.exe"
-set "Zalo=https://download.visualstudio.microsoft.com/download/pr/10912041/cee5d6bca2ddbcd039da727bf4acb48a/vcredist_x64.exe"
-set "vc2015x64=https://download.visualstudio.microsoft.com/download/pr/bcb0cef1-f8cb-4311-8a5c-650a5b694eab/2257B3FBE3C7559DE8B31170155A433FAF5B83829E67C589D5674FF086B868B9/VC_redist.x64.exe"
+set "CocCoc=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Coc%20Coc.bat"
+set "EVKey=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/EVKey.bat"
+set "FoxitPDFReader=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Foxit%20PDF%20Reader.bat"
+set "GoogleChrome=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Google%20Chrome.bat"
+set "K-LiteCodecPackMega=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/K-Lite%20Codec%20Pack%20Mega.bat"
+set "MicrosoftOffice=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Microsoft%20Office.bat"
+set "RevoUninstaller=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Revo%20Uninstaller.bat"
+set "TeamViewer=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/TeamViewer.bat"
+set "UltraViewer=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/UltraViewer.bat"
+set "WinRAR=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/WinRAR.bat"
+set "Zalo=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Zalo.bat"
 
 :: Create download folder
 set "download_folder=%~dp0\1Click"
@@ -354,7 +354,18 @@ echo.
 @echo off
 echo Downloading %SoftName%...
 if exist "wget.exe" (
-	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
 		echo.
