@@ -249,7 +249,7 @@ set "LinkExtension=%Link:~-3%"
 for %%F in (%Formats%) do (
 	REM Check if the extracted extension matches the format and differs from FileName's extension
 	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
-		set "BaseName=%SoftName%"
+		REM set "BaseName=%SoftName%"
 		set "Extension=.%%~F"
 		set "FileName=%BaseName%%Extension%"
 		goto :ExportResult
@@ -376,6 +376,7 @@ if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
+echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 
 :ExitDLwB
