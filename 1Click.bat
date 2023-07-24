@@ -35,7 +35,7 @@ REM Required Configuration Settings
 set "Extract7z="
 set "License="
 
-set "SoftName=danvaoday"
+set "SoftName=1-Click"
 set "Process=danvaoday.exe"
 
 set "FileName="
@@ -55,6 +55,7 @@ set "EVKey=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup
 set "FoxitPDFReader=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Foxit%20PDF%20Reader.bat"
 set "GoogleChrome=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Google%20Chrome.bat"
 set "K-LiteCodecPackMega=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/K-Lite%20Codec%20Pack%20Mega.bat"
+set "MicrosoftDirectX=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Microsoft%20DirectX%20End-User%20Runtime.bat"
 set "MicrosoftOffice=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Microsoft%20Office.bat"
 set "RevoUninstaller=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Revo%20Uninstaller.bat"
 set "TeamViewer=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/TeamViewer.bat"
@@ -194,116 +195,6 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-REM Set up information related to software cr4cking
-if /i "%License%"=="Yes" (
-	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-	if not "%Cr4ckPath%"=="" (
-		set "Cr4ckPath=%Cr4ckPath%"
-	) else (
-		set "Cr4ckPath=%SoftPath%"
-	)
-)
-
-REM Check File Name
-REM Data structure to store format-extension information
-set "Formats=7z exe msi rar zip"
-
-for %%F in ("%FileName%") do (
-	set "BaseName=%%~nF"
-	if not "%%~xF"=="" (
-		set "Extension=%%~xF"
-	) else (
-		set "Extension=.HieuckIT"
-		set "BaseName=%FileName%"
-	)
-)
-
-if not "%FileName%"=="" (
-	if not "%BaseName%"=="" (
-		REM Loop through the formats in the data structure
-		for %%F in (%Formats%) do (
-			REM Check if FileName matches the format
-			if /i "%FileName%"=="%%~F" (
-				set "BaseName=%SoftName%"
-				set "Extension=.%%~F"
-				set "FileName=%BaseName%%Extension%"
-				goto :Continue_Check_FileName
-			)
-		)
-
-		REM Check if FileName doesn't match any format
-		if not "%FileName%"=="%BaseName%%Extension%" (
-			set "FileName=%BaseName%%Extension%"
-		)
-	) else (
-		set "FileName=%SoftName%%Extension%"
-	)
-) else (
-	if not "%Link:~-3%"=="" (
-		REM Extract the extension from Link
-		set "BaseName=%SoftName%"
-		set "LinkExtension=%Link:~-3%"
-		REM Check if LinkExtension is not in Formats
-		echo %Formats% | find /i "%LinkExtension%" >nul
-		if errorlevel 1 (
-			set "Extension=%LinkExtension%"
-		) else (
-			set "Extension=.HieuckIT"
-		)
-		set "FileName=%BaseName%%Extension%"
-		goto :Continue_Check_FileName
-	) else (
-		set "FileName=%SoftName%.HieuckIT"
-	)
-)
-
-:Continue_Check_FileName
-REM Check if Link's extension matches any format and differs from FileName's extension
-set "LinkExtension=%Link:~-3%"
-for %%F in (%Formats%) do (
-	REM Check if the extracted extension matches the format and differs from FileName's extension
-	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
-		REM set "BaseName=%SoftName%"
-		set "Extension=.%%~F"
-		set "FileName=%BaseName%%Extension%"
-		goto :ExportResult
-	)
-)
-
-REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
-set "LinkExtension=%Link:~-3%"
-set "FoundFormat="
-for %%F in (%Formats%) do (
-	if /i "%LinkExtension%"=="%%~F" (
-		set "FoundFormat=1"
-		set "Extension=.%%~F"
-	)
-)
-
-if not defined FoundFormat (
-	if "%Extension%"=="" (
-		set "Extension=.HieuckIT"
-	)
-)
-
-:ExportResult
-set "FileName=%BaseName%%Extension%"
-
-echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
-echo.>> %Temp%\hieuckitlog.txt
-echo Link: %Link:&=^&%>> %Temp%\hieuckitlog.txt
-echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
-if not "%SoftPath%"=="" echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
-if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
-if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
-if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
-echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
-type "%Temp%\hieuckitlog.txt"
-timeout /t 2
-
 REM Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
@@ -325,11 +216,6 @@ if %errorlevel% == 0 (
 	)
 )
 
-REM Terminate the %SoftName% Process
-tasklist | find /i "%Process%" > nul
-if %errorlevel% equ 0 (
-	taskkill /im "%Process%" /f
-)
 
 REM Save the value of the %time% variable before running the batch script
 set start_time=%time%
@@ -354,20 +240,33 @@ echo.
 @echo off
 echo Downloading %SoftName%...
 if exist "wget.exe" (
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\danvaoday" -U "%UserAgent%" "%Link%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\AnyDesk.bat" -U "%UserAgent%" "%AnyDesk%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Coc Coc.bat" -U "%UserAgent%" "%CocCoc%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\EVKey.bat" -U "%UserAgent%" "%EVKey%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Foxit PDF Reader.bat" -U "%UserAgent%" "%FoxitPDFReader%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Google Chrome.bat" -U "%UserAgent%" "%GoogleChrome%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\K-Lite Codec Pack Mega.bat" -U "%UserAgent%" "%K-LiteCodecPackMega%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Microsoft DirectX End-User Runtime.bat" -U "%UserAgent%" "%MicrosoftDirectX%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Microsoft Office.bat" -U "%UserAgent%" "%MicrosoftOffice%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Revo Uninstaller.bat" -U "%UserAgent%" "%RevoUninstaller%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\TeamViewer.bat" -U "%UserAgent%" "%TeamViewer%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\UltraViewer.bat" -U "%UserAgent%" "%UltraViewer%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\WinRAR.bat" -U "%UserAgent%" "%WinRAR%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Zalo.bat" -U "%UserAgent%" "%Zalo%"
 ) else (
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure || (
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\AnyDesk.bat" "%AnyDesk%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Coc Coc.bat" "%CocCoc%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\EVKey.bat" "%EVKey%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Foxit PDF Reader.bat" "%FoxitPDFReader%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Google Chrome.bat" "%GoogleChrome%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\K-Lite Codec Pack Mega.bat" "%LiteCodecPackMega%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Microsoft DirectX End-User Runtime.bat" "%MicrosoftDirectX%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Microsoft Office.bat" "%MicrosoftOffice%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Revo Uninstaller.bat" "%RevoUninstaller%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\TeamViewer.bat" "%TeamViewer%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\UltraViewer.bat" "%UltraViewer%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\WinRAR.bat" "%WinRAR%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Zalo.bat" "%Zalo%" --insecure || (
 		echo.
 		echo wget.exe or curl.exe not found to download, please download at: > %Temp%\hieuckitlog.txt
 		echo. >> %Temp%\hieuckitlog.txt
@@ -376,78 +275,6 @@ if exist "wget.exe" (
 		echo curl: https://curl.se/download.html >> %Temp%\hieuckitlog.txt
 		type "%Temp%\hieuckitlog.txt"
 		start "" "%Temp%\hieuckitlog.txt"
-	)
-)
-
-REM Download with browser
-for %%F in ("%FileName%") do set "size=%%~zF"
-if %size% equ 0 (
-	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
-	goto DLwB
-) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
-	goto DLwB
-) else (
-	goto ExitDLwB
-)
-
-:DLwB
-if exist "%UserProfile%\OneDrive\Downloads" (
-	pushd "%UserProfile%\OneDrive\Downloads"
-) else (
-	pushd "%UserProfile%\Downloads"
-)
-
-start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
-if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
-
-:CheckExist
-for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
-if not exist "%FileNameDLwB%" (
-	timeout /t 1 /nobreak >nul & goto CheckExist
-)
-
-echo Download completed with the browser. Installation in progress...
-move /y "%FileNameDLwB%" "%~dp0%FileName%"
-
-:ExitDLwB
-pushd "%~dp0"
-
-if not exist "%FileName%" (
-	echo Download %SoftName% failed.
-	echo Please check your network connection. Exiting in 3 seconds...
-	for /l %%i in (3,-1,1) do (
-		echo Exiting in %%i seconds...
-		timeout /t 1 /nobreak >nul
-	)
-	exit
-)
-
-title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
-color 0B
-mode con:cols=120 lines=17
-if not exist "wget.exe" mode con:cols=80 lines=17
-@cls
-echo.
-echo.
-echo.
-@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
-@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
-@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
-@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
-@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
-@echo.
-@echo                 The current date and time are: %date% %time%
-@echo                 Dang Tai 7-Zip. Vui Long Cho...
-@echo off
-echo Downloading 7-Zip...
-if /i "%Extract7z%"=="Yes" (
-	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
-	) else (
-		curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.dll" "%Link7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.exe" "%Link7zexe%" --insecure
 	)
 )
 
@@ -473,105 +300,19 @@ echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-	"%FileName%" %QuietMode%
-)
-
-REM Check Installation Process
-echo Checking if %SoftName% installation is complete...
-setlocal EnableDelayedExpansion
-set count=0
-:waitloop
-timeout /t 1 /nobreak > nul
-set /a count+=1
-if exist "%SoftPath%\%Process%" goto installed
-if !count! equ 30 goto timeout
-goto waitloop
-:timeout
-echo Timeout: %SoftName% installation has not completed in 30 seconds.
-goto end
-:installed
-echo %SoftName% has been installed successfully.
-echo.>> %Temp%\hieuckitlog.txt
-echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
-timeout /t 2
-:end
-
-REM License
-title _Hieuck.IT_'s Windows Application Cr4cking...
-color 0B
-mode con:cols=120 lines=17
-if not exist "wget.exe" mode con:cols=80 lines=17
-@cls
-echo.
-echo.
-echo.
-@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
-@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
-@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
-@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
-@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
-@echo.
-@echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
-@echo off
-if /i "%License%"=="Yes" (
-	echo Cr4cking %SoftName%...
-	if exist "wget.exe" (
-		if not exist "7z.dll" if not exist "7z.exe" (
-			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
-			wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
-		)
-		wget --no-check-certificate --show-progress -q -O "%Cr4ckFile%" -U "%UserAgent%" "%Cr4ckLink%"
-	) else (
-		if not exist "7z.dll" if not exist "7z.exe" (
-			curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.dll" "%Link7zdll%" --insecure
-			curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.exe" "%Link7zexe%" --insecure
-		)
-		curl -L --max-redirs 20 -A "%UserAgent%" -o "%Cr4ckFile%" "%Cr4ckLink%" --insecure
-	)
-	if exist "%Cr4ckFile%" (
-		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
-		echo Successfully Cr4cked %SoftName%.
-		echo.>> %Temp%\hieuckitlog.txt
-		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
-		del "%Cr4ckFile%"
-	) else (
-		echo Cr4cking %SoftName% failed.
-		echo Please try running the script as Administrator.
-	)
-)
-
-REM Shortcut
-if /i "%Shortcut%"=="No" (
-	echo Creating Shortcut is skipped.
-	goto CleanUp
-)
-
-if exist "%SoftPath%\%Process%" (
-	set "TargetFile=%SoftPath%\%Process%"
-) else (
-	echo %SoftName% does not exist in directory "%SoftPath%". Exiting script.
-	exit /b 1
-)
-
-set "ShortcutName=%SoftName%.lnk"
-set "ShortcutPath=%Public%\Desktop\%ShortcutName%"
-
-echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
-echo sLinkFile = "%ShortcutPath%" >> CreateShortcut.vbs
-echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
-echo oLink.TargetPath = "%TargetFile%" >> CreateShortcut.vbs
-echo oLink.WorkingDirectory = "%SoftPath%" >> CreateShortcut.vbs
-echo oLink.Description = "Shortcut to %SoftName%" >> CreateShortcut.vbs
-echo oLink.Save >> CreateShortcut.vbs
-cscript CreateShortcut.vbs
-del CreateShortcut.vbs
-
-if exist "%Public%\Desktop\%ShortcutName%" (
-	echo Creating Shortcut complete.
-	echo Creating Shortcut complete.>> %Temp%\hieuckitlog.txt
-) else (
-	echo Creating Shortcut failed.
+	call "%download_folder%\AnyDesk.bat"
+	call "%download_folder%\Coc Coc.bat"
+	call "%download_folder%\EVKey.bat"
+	call "%download_folder%\Foxit PDF Reader.bat"
+	call "%download_folder%\Google Chrome.bat"
+	call "%download_folder%\K-Lite Codec Pack Mega.bat"
+	call "%download_folder%\Microsoft DirectX End-User Runtime.bat"
+	call "%download_folder%\Microsoft Office.bat"
+	call "%download_folder%\Revo Uninstaller.bat"
+	call "%download_folder%\TeamViewer.bat"
+	call "%download_folder%\UltraViewer.bat"
+	call "%download_folder%\WinRAR.bat"
+	call "%download_folder%\Zalo.bat"
 )
 
 REM Clean Up
@@ -599,6 +340,7 @@ setlocal EnableDelayedExpansion
 set count=0
 set deleteSuccess=0
 :waitloopcheck
+rmdir /s /q "%download_folder%"
 if exist "7z.dll" del "7z.dll">> %Temp%\hieuckitlog.txt 2>&1
 if exist "7z.exe" del "7z.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%FileName%" (
