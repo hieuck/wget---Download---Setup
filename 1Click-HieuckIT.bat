@@ -192,6 +192,7 @@ setlocal EnableDelayedExpansion
 set count=0
 set deleteSuccess=0
 :waitloopcheck
+if exist "%download_folder%\wget.exe" del "%download_folder%\wget.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\AnyDesk.bat" del "%download_folder%\AnyDesk.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Coc Coc.bat" del "%download_folder%\Coc Coc.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\EVKey.bat" del "%download_folder%\EVKey.bat">> %Temp%\hieuckitlog.txt 2>&1
