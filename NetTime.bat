@@ -36,7 +36,7 @@ set "Extract7z="
 set "License="
 
 set "SoftName=NetTime"
-set "Process=danvaoday.exe"
+set "Process=NetTime.exe"
 
 set "FileName="
 set "SoftNameVersion=320a3"
