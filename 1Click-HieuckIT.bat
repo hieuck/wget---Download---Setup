@@ -48,6 +48,7 @@ set "GoogleChrome=https://raw.githubusercontent.com/hieuck/curl-uri-wget-downloa
 set "K-LiteCodecPackMega=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/K-Lite%20Codec%20Pack%20Mega.bat"
 set "MicrosoftDirectX=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Microsoft%20DirectX%20End-User%20Runtime.bat"
 set "MicrosoftOffice=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Microsoft%20Office.bat"
+set "Notepad=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Notepad++.bat"
 set "RevoUninstaller=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Revo%20Uninstaller.bat"
 set "TeamViewer=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/TeamViewer.bat"
 set "UltraViewer=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/UltraViewer.bat"
@@ -90,6 +91,7 @@ if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\K-Lite Codec Pack Mega.bat" -U "%UserAgent%" "%K-LiteCodecPackMega%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\Microsoft DirectX End-User Runtime.bat" -U "%UserAgent%" "%MicrosoftDirectX%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\Microsoft Office.bat" -U "%UserAgent%" "%MicrosoftOffice%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Notepad++.bat" -U "%UserAgent%" "%Notepad%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\Revo Uninstaller.bat" -U "%UserAgent%" "%RevoUninstaller%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\TeamViewer.bat" -U "%UserAgent%" "%TeamViewer%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\UltraViewer.bat" -U "%UserAgent%" "%UltraViewer%"
@@ -105,6 +107,7 @@ if exist "wget.exe" (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\K-Lite Codec Pack Mega.bat" "%LiteCodecPackMega%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Microsoft DirectX End-User Runtime.bat" "%MicrosoftDirectX%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Microsoft Office.bat" "%MicrosoftOffice%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Notepad++.bat" "%Notepad%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Revo Uninstaller.bat" "%RevoUninstaller%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\TeamViewer.bat" "%TeamViewer%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\UltraViewer.bat" "%UltraViewer%" --insecure
@@ -155,6 +158,8 @@ call "%download_folder%\Microsoft DirectX End-User Runtime.bat"
 pushd "%~dp0"
 call "%download_folder%\Microsoft Office.bat"
 pushd "%~dp0"
+call "%download_folder%\Notepad++.bat"
+pushd "%~dp0"
 call "%download_folder%\Revo Uninstaller.bat"
 pushd "%~dp0"
 call "%download_folder%\TeamViewer.bat"
@@ -201,6 +206,7 @@ if exist "%download_folder%\Google Chrome.bat" del "%download_folder%\Google Chr
 if exist "%download_folder%\K-Lite Codec Pack Mega.bat" del "%download_folder%\K-Lite Codec Pack Mega.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Microsoft DirectX End-User Runtime.bat" del "%download_folder%\Microsoft DirectX End-User Runtime.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Microsoft Office.bat" del "%download_folder%\Microsoft Office.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Notepad++.bat" del "%download_folder%\Notepad++.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\TeamViewer.bat" del "%download_folder%\TeamViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\UltraViewer.bat" del "%download_folder%\UltraViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\WinRAR.bat" del "%download_folder%\WinRAR.bat">> %Temp%\hieuckitlog.txt 2>&1
