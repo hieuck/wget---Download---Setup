@@ -197,6 +197,8 @@ setlocal EnableDelayedExpansion
 set count=0
 set deleteSuccess=0
 :waitloopcheck
+if exist "%download_folder%\7z.dll" del "%download_folder%\7z.dll">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\7z.exe" del "%download_folder%\7z.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\wget.exe" del "%download_folder%\wget.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\AnyDesk.bat" del "%download_folder%\AnyDesk.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Coc Coc.bat" del "%download_folder%\Coc Coc.bat">> %Temp%\hieuckitlog.txt 2>&1
@@ -206,6 +208,7 @@ if exist "%download_folder%\Google Chrome.bat" del "%download_folder%\Google Chr
 if exist "%download_folder%\K-Lite Codec Pack Mega.bat" del "%download_folder%\K-Lite Codec Pack Mega.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Microsoft DirectX End-User Runtime.bat" del "%download_folder%\Microsoft DirectX End-User Runtime.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Microsoft Office.bat" del "%download_folder%\Microsoft Office.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Configuration.xml" del "%download_folder%\Configuration.xml">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Notepad++.bat" del "%download_folder%\Notepad++.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\TeamViewer.bat" del "%download_folder%\TeamViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\UltraViewer.bat" del "%download_folder%\UltraViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
