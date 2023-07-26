@@ -249,7 +249,7 @@ set "LinkExtension=%Link:~-3%"
 for %%F in (%Formats%) do (
 	REM Check if the extracted extension matches the format and differs from FileName's extension
 	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
-		set "BaseName=%SoftName%"
+		REM set "BaseName=%SoftName%"
 		set "Extension=.%%~F"
 		set "FileName=%BaseName%%Extension%"
 		goto :ExportResult
@@ -352,6 +352,8 @@ if exist "wget.exe" (
 )
 
 REM Download with browser
+setlocal EnableDelayedExpansion
+
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
@@ -379,6 +381,7 @@ if not exist "%FileNameDLwB%" (
 echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 
+endlocal
 :ExitDLwB
 pushd "%~dp0"
 

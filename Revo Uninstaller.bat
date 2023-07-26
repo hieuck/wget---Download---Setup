@@ -352,6 +352,8 @@ if exist "wget.exe" (
 )
 
 REM Download with browser
+setlocal EnableDelayedExpansion
+
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
@@ -382,6 +384,7 @@ if not exist "%FileNameDLwB%" (
 echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 
+endlocal
 :ExitDLwB
 pushd "%~dp0"
 
