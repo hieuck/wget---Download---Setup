@@ -41,7 +41,7 @@ if /i "%ARCH%"=="x86" set "Process=BatteryMon.exe"
 
 set "FileName="
 set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=batmon*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
