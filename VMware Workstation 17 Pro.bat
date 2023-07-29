@@ -61,7 +61,7 @@ set "SoftPath=%ProgramFiles(x86)%\VMware\VMware Workstation"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=QuietMode=/s /v"/qn EULAS_AGREED=1 SERIALNUMBER="MC60H-DWHD5-H80U9-6V85M-8280D" ADDLOCAL=ALL REBOOT=ReallySuppress""
+set "QuietMode=/s /v"/qn EULAS_AGREED=1 SERIALNUMBER="MC60H-DWHD5-H80U9-6V85M-8280D" ADDLOCAL=ALL REBOOT=ReallySuppress""
 
 set "Cr4ckFile="
 set "Cr4ckPath="
