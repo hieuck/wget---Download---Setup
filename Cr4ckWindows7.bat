@@ -53,7 +53,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link="
+set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -63,7 +63,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/S"
 
-set "Cr4ckFile="
+set "Cr4ckFile=Cr4ckWindows7"
 set "Cr4ckPath="
 
 set "Shortcut="
@@ -454,7 +454,7 @@ echo.
 @echo off
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
-	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
+	@7z.exe x -p123 "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
 	"%FileName%" %QuietMode%
 )
