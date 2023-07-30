@@ -159,6 +159,10 @@ if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%SoftPath%"=="" (
 		set "SoftPath=%SoftPath%"
 	) else (
@@ -183,6 +187,10 @@ if /i "%License%"=="Yes" (
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%Cr4ckPath%"=="" (
 		set "Cr4ckPath=%Cr4ckPath%"
 	) else (
@@ -249,7 +257,7 @@ set "LinkExtension=%Link:~-3%"
 for %%F in (%Formats%) do (
 	REM Check if the extracted extension matches the format and differs from FileName's extension
 	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
-		set "BaseName=%SoftName%"
+		REM set "BaseName=%SoftName%"
 		set "Extension=.%%~F"
 		set "FileName=%BaseName%%Extension%"
 		goto :ExportResult
@@ -352,6 +360,8 @@ if exist "wget.exe" (
 )
 
 REM Download with browser
+setlocal EnableDelayedExpansion
+
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
@@ -382,6 +392,7 @@ if not exist "%FileNameDLwB%" (
 echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 
+endlocal
 :ExitDLwB
 pushd "%~dp0"
 
