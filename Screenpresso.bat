@@ -325,6 +325,46 @@ if %errorlevel% equ 0 (
 REM Save the value of the %time% variable before running the batch script
 set start_time=%time%
 
+REM Check if .NET Framework 4.8 is installed
+setlocal EnableDelayedExpansion
+
+:ndp48check
+set "InstallCount=0"
+
+:ndp48checkAgain
+reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" /v Release | find "0x8234d" >nul
+
+if errorlevel 1 (
+	REM .NET Framework 4.8 is not installed, prompt for installation
+	echo .NET Framework 4.8 is not installed on your computer.
+	echo We will proceed with the installation.
+	echo Please wait...
+	goto ndp48download
+) else (
+	echo .NET Framework 4.8 is already installed on your computer.
+	goto ndp48end
+)
+
+:ndp48download
+REM Replace the "NetFx48_Download_URL" below with the actual download URL for .NET Framework 4.8
+REM You can download the installer from the official Microsoft website or any trusted source.
+set "Linkndp48=https://go.microsoft.com/fwlink/?LinkId=2085155"
+if exist "wget.exe" (
+	wget --no-check-certificate --show-progress -q -O "ndp48-web.exe" -U "%UserAgent%" "%Linkndp48%"
+) else (
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "ndp48-web.exe" "%Linkndp48%" --insecure
+)
+
+for /R %%i in ("ndp48*exe") do set "ndp48=%%i"
+%ndp48% /q /norestart
+
+set /A "InstallCount+=1"
+if !InstallCount! LSS 2 goto ndp48checkAgain
+goto ndp48end
+
+:ndp48end
+endlocal
+
 REM Download
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
