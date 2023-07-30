@@ -36,7 +36,7 @@ set "Extract7z="
 set "License="
 
 set "SoftName=WeMod"
-set "Process=danvaoday.exe"
+set "Process=WeMod.exe"
 
 set "FileName="
 set "SoftNameVersion="
@@ -57,7 +57,7 @@ set "Link=https://www.wemod.com/download/direct"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "SoftPath="
+set "SoftPath=%LocalAppData%\WeMod"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
@@ -365,9 +365,6 @@ setlocal EnableDelayedExpansion
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
-	goto DLwB
-) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
 	goto DLwB
 ) else (
 	goto ExitDLwB
