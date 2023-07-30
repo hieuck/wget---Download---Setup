@@ -159,6 +159,10 @@ if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%SoftPath%"=="" (
 		set "SoftPath=%SoftPath%"
 	) else (
@@ -183,6 +187,10 @@ if /i "%License%"=="Yes" (
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%Cr4ckPath%"=="" (
 		set "Cr4ckPath=%Cr4ckPath%"
 	) else (
@@ -357,9 +365,6 @@ setlocal EnableDelayedExpansion
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
-	goto DLwB
-) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
 	goto DLwB
 ) else (
 	goto ExitDLwB
