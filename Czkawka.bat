@@ -162,6 +162,10 @@ if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%SoftPath%"=="" (
 		set "SoftPath=%SoftPath%"
 	) else (
@@ -186,6 +190,10 @@ if /i "%License%"=="Yes" (
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%Cr4ckPath%"=="" (
 		set "Cr4ckPath=%Cr4ckPath%"
 	) else (
@@ -363,6 +371,8 @@ if exist "wget.exe" (
 if exist "FFmpeg.zip" move /y "FFmpeg.zip" "%NameFFmpeg%.zip"
 
 REM Download with browser
+setlocal EnableDelayedExpansion
+
 for %%F in ("%FileName%") do set "size=%%~zF"
 for %%F in ("%NameFFmpeg%.zip") do set "sizeFFmpeg=%%~zF"
 
@@ -409,6 +419,7 @@ echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 move /y "%FileNameDLwBFFmpeg%" "%~dp0%NameFFmpeg%.zip"
 
+endlocal
 :ExitDLwB
 pushd "%~dp0"
 
