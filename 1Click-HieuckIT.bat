@@ -41,15 +41,15 @@ REM Source Link: https://github.com/hieuck/curl-uri-wget-download-setup
 
 set "wget=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/wget.exe"
 set "AnyDesk=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/AnyDesk.bat"
-set "CocCoc=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Coc Coc.bat"
+set "CocCoc=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/CocCoc.bat"
 set "EVKey=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/EVKey.bat"
-set "FoxitPDFReader=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Foxit PDF Reader.bat"
-set "GoogleChrome=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Google Chrome.bat"
-set "K-LiteCodecPackMega=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/K-Lite Codec Pack Mega.bat"
-set "MicrosoftDirectX=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Microsoft DirectX End-User Runtime.bat"
-set "MicrosoftOffice=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Microsoft Office.bat"
+set "FoxitPDFReader=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/FoxitPDFReader.bat"
+set "GoogleChrome=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/GoogleChrome.bat"
+set "K-LiteCodecPackMega=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/K-LiteCodecPackMega.bat"
+set "MicrosoftDirectX=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/MicrosoftDirectXEnd-UserRuntime.bat"
+set "MicrosoftOffice=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/MicrosoftOffice.bat"
 set "Notepad=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Notepad++.bat"
-set "RevoUninstaller=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Revo Uninstaller.bat"
+set "RevoUninstaller=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/RevoUninstaller.bat"
 set "TeamViewer=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/TeamViewer.bat"
 set "UltraViewer=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/UltraViewer.bat"
 set "WinRAR=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/WinRAR.bat"
@@ -84,15 +84,15 @@ echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\wget.exe" -U "%UserAgent%" "%wget%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\AnyDesk.bat" -U "%UserAgent%" "%AnyDesk%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\Coc Coc.bat" -U "%UserAgent%" "%CocCoc%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\CocCoc.bat" -U "%UserAgent%" "%CocCoc%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\EVKey.bat" -U "%UserAgent%" "%EVKey%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\Foxit PDF Reader.bat" -U "%UserAgent%" "%FoxitPDFReader%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\Google Chrome.bat" -U "%UserAgent%" "%GoogleChrome%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\K-Lite Codec Pack Mega.bat" -U "%UserAgent%" "%K-LiteCodecPackMega%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\Microsoft DirectX End-User Runtime.bat" -U "%UserAgent%" "%MicrosoftDirectX%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\Microsoft Office.bat" -U "%UserAgent%" "%MicrosoftOffice%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\FoxitPDFReader.bat" -U "%UserAgent%" "%FoxitPDFReader%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\GoogleChrome.bat" -U "%UserAgent%" "%GoogleChrome%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\K-LiteCodecPackMega.bat" -U "%UserAgent%" "%K-LiteCodecPackMega%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\MicrosoftDirectXEnd-UserRuntime.bat" -U "%UserAgent%" "%MicrosoftDirectX%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\MicrosoftOffice.bat" -U "%UserAgent%" "%MicrosoftOffice%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\Notepad++.bat" -U "%UserAgent%" "%Notepad%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\Revo Uninstaller.bat" -U "%UserAgent%" "%RevoUninstaller%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\RevoUninstaller.bat" -U "%UserAgent%" "%RevoUninstaller%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\TeamViewer.bat" -U "%UserAgent%" "%TeamViewer%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\UltraViewer.bat" -U "%UserAgent%" "%UltraViewer%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\WinRAR.bat" -U "%UserAgent%" "%WinRAR%"
@@ -100,15 +100,15 @@ if exist "wget.exe" (
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\wget.exe" "%wget%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\AnyDesk.bat" "%AnyDesk%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Coc Coc.bat" "%CocCoc%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\CocCoc.bat" "%CocCoc%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\EVKey.bat" "%EVKey%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Foxit PDF Reader.bat" "%FoxitPDFReader%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Google Chrome.bat" "%GoogleChrome%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\K-Lite Codec Pack Mega.bat" "%LiteCodecPackMega%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Microsoft DirectX End-User Runtime.bat" "%MicrosoftDirectX%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Microsoft Office.bat" "%MicrosoftOffice%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\FoxitPDFReader.bat" "%FoxitPDFReader%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\GoogleChrome.bat" "%GoogleChrome%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\K-LiteCodecPackMega.bat" "%LiteCodecPackMega%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\MicrosoftDirectXEnd-UserRuntime.bat" "%MicrosoftDirectX%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\MicrosoftOffice.bat" "%MicrosoftOffice%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Notepad++.bat" "%Notepad%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Revo Uninstaller.bat" "%RevoUninstaller%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\RevoUninstaller.bat" "%RevoUninstaller%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\TeamViewer.bat" "%TeamViewer%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\UltraViewer.bat" "%UltraViewer%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\WinRAR.bat" "%WinRAR%" --insecure
@@ -146,21 +146,21 @@ echo Installing %SoftName%...
 pushd "%~dp0"
 call "%download_folder%\AnyDesk.bat"
 pushd "%~dp0"
-call "%download_folder%\Coc Coc.bat"
+call "%download_folder%\CocCoc.bat"
 pushd "%~dp0"
-call "%download_folder%\Foxit PDF Reader.bat"
+call "%download_folder%\FoxitPDFReader.bat"
 pushd "%~dp0"
-call "%download_folder%\Google Chrome.bat"
+call "%download_folder%\GoogleChrome.bat"
 pushd "%~dp0"
-call "%download_folder%\K-Lite Codec Pack Mega.bat"
+call "%download_folder%\K-LiteCodecPackMega.bat"
 pushd "%~dp0"
-call "%download_folder%\Microsoft DirectX End-User Runtime.bat"
+call "%download_folder%\MicrosoftDirectXEnd-UserRuntime.bat"
 pushd "%~dp0"
-call "%download_folder%\Microsoft Office.bat"
+call "%download_folder%\MicrosoftOffice.bat"
 pushd "%~dp0"
 call "%download_folder%\Notepad++.bat"
 pushd "%~dp0"
-call "%download_folder%\Revo Uninstaller.bat"
+call "%download_folder%\RevoUninstaller.bat"
 pushd "%~dp0"
 call "%download_folder%\TeamViewer.bat"
 pushd "%~dp0"
@@ -201,13 +201,13 @@ if exist "%download_folder%\7z.dll" del "%download_folder%\7z.dll">> %Temp%\hieu
 if exist "%download_folder%\7z.exe" del "%download_folder%\7z.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\wget.exe" del "%download_folder%\wget.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\AnyDesk.bat" del "%download_folder%\AnyDesk.bat">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%download_folder%\Coc Coc.bat" del "%download_folder%\Coc Coc.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\CocCoc.bat" del "%download_folder%\CocCoc.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\EVKey.bat" del "%download_folder%\EVKey.bat">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%download_folder%\Foxit PDF Reader.bat" del "%download_folder%\Foxit PDF Reader.bat">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%download_folder%\Google Chrome.bat" del "%download_folder%\Google Chrome.bat">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%download_folder%\K-Lite Codec Pack Mega.bat" del "%download_folder%\K-Lite Codec Pack Mega.bat">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%download_folder%\Microsoft DirectX End-User Runtime.bat" del "%download_folder%\Microsoft DirectX End-User Runtime.bat">> %Temp%\hieuckitlog.txt 2>&1
-if exist "%download_folder%\Microsoft Office.bat" del "%download_folder%\Microsoft Office.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\FoxitPDFReader.bat" del "%download_folder%\FoxitPDFReader.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\GoogleChrome.bat" del "%download_folder%\GoogleChrome.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\K-LiteCodecPackMega.bat" del "%download_folder%\K-LiteCodecPackMega.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\MicrosoftDirectXEnd-UserRuntime.bat" del "%download_folder%\MicrosoftDirectXEnd-UserRuntime.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\MicrosoftOffice.bat" del "%download_folder%\MicrosoftOffice.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Configuration.xml" del "%download_folder%\Configuration.xml">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Notepad++.bat" del "%download_folder%\Notepad++.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\TeamViewer.bat" del "%download_folder%\TeamViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
