@@ -57,9 +57,9 @@ set "Link="
 set "LinkForAllWindows32bit=https://files-cdn.coccoc.com/browser/coccoc_vi_machine.exe"
 set "LinkForAllWindows64bit=https://files-cdn.coccoc.com/browser/x64/coccoc_vi_machine.exe"
 
-set "SoftPath=%ProgramFiles%\CocCoc\Browser\Application"
-set "SoftPathFor32bit="
-set "SoftPathFor64bit="
+set "SoftPath="
+set "SoftPathFor32bit=%ProgramFiles%\CocCoc\Browser\Application"
+set "SoftPathFor64bit=%ProgramFiles(x86)%\CocCoc\Browser\Application"
 
 set "QuietMode=/silent /forcedcmdline "do-not-launch-chrome --force-add-firewall-rules" /install"
 
