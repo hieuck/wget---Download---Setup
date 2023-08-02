@@ -38,7 +38,7 @@ set "License="
 set "SoftName=GitHub Desktop"
 set "Process=GitHubDesktop.exe"
 
-set "FileName="
+set "FileName=exe"
 set "SoftNameVersion="
 set "FileDLwB=GitHubDesktop*.exe"
 
