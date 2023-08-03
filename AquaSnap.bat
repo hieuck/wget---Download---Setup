@@ -503,18 +503,9 @@ if /i "%License%"=="Yes" (
 	)
 	if exist "%Cr4ckFile%" (
 		REM Terminate the %SoftName% Process
-		tasklist | find /i "AquaSnap.Daemon.exe" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "AquaSnap.Daemon.exe" /f
-		)
-		tasklist | find /i "AquaSnap.Daemon.x64.exe" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "AquaSnap.Daemon.x64.exe" /f
-		)
-		tasklist | find /i "AquaSnap.DpiAwareAgent.exe" > nul
-		if %errorlevel% equ 0 (
-			taskkill /im "AquaSnap.DpiAwareAgent.exe" /f
-		)
+		tasklist | find /i "AquaSnap.Daemon.exe" > nul && taskkill /im "AquaSnap.Daemon.exe" /f
+		tasklist | find /i "AquaSnap.Daemon.x64.exe" > nul && taskkill /im "AquaSnap.Daemon.x64.exe" /f
+		tasklist | find /i "AquaSnap.DpiAwareAgent.exe" > nul && taskkill /im "AquaSnap.DpiAwareAgent.exe" /f
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y winspool.drv
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%ProgramData%\AquaSnap\" -aoa -y AquaSnap.cle
 		echo Successfully Cr4cked %SoftName%.

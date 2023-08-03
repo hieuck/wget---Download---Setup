@@ -202,6 +202,9 @@ if exist "%download_folder%\7z.exe" del "%download_folder%\7z.exe">> %Temp%\hieu
 if exist "%download_folder%\wget.exe" del "%download_folder%\wget.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\AnyDesk.bat" del "%download_folder%\AnyDesk.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\CocCoc.bat" del "%download_folder%\CocCoc.bat">> %Temp%\hieuckitlog.txt 2>&1
+REM Terminate the EVKey Process
+tasklist | find /i "EVKey64.exe" > nul && taskkill /im "EVKey64.exe" /f
+tasklist | find /i "EVKey32.exe" > nul && taskkill /im "EVKey32.exe" /f
 if exist "%download_folder%\EVKey.bat" del "%download_folder%\EVKey.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\FoxitPDFReader.bat" del "%download_folder%\FoxitPDFReader.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\GoogleChrome.bat" del "%download_folder%\GoogleChrome.bat">> %Temp%\hieuckitlog.txt 2>&1
