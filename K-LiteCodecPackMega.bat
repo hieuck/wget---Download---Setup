@@ -37,6 +37,7 @@ set "License="
 
 set "SoftName=K-Lite Codec Pack Mega"
 set "Process=mpc-hc64.exe"
+if /i "%ARCH%"=="x86" set "Process=mpc-hc.exe"
 
 set "FileName="
 set "SoftNameVersion=1768"
