@@ -57,7 +57,7 @@ set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "SoftPath=C:\Z_HieuckIT_Z"
+set "SoftPath=C:\Z_Hieuck.IT_Z"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
@@ -66,7 +66,7 @@ set "QuietMode=/S"
 set "Cr4ckFile=Cr4ckWindows7"
 set "Cr4ckPath="
 
-set "Shortcut="
+set "Shortcut=No"
 
 REM Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
@@ -621,4 +621,5 @@ for /l %%i in (3,-1,1) do (
 	timeout /t 1 /nobreak >nul
 )
 echo Please close the script manually if automatically close fails.
+"C:\Z_Hieuck.IT_Z\Windows Loader.exe" /silent /preactivate
 popd

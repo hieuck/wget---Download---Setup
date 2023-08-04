@@ -62,6 +62,35 @@ md "%download_folder%" 2>NUL
 REM Save the value of the %time% variable before running the batch script
 set start_time=%time%
 
+::Check Windows OS Version and Check Support Old Windows
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" goto ForOldWindows
+goto ForNewWindows
+endlocal
+
+:ForOldWindows
+%SystemRoot%\System32\control.exe /name Microsoft.NetworkAndSharingCenter
+%SystemRoot%\System32\wscui.cpl
+%SystemRoot%\System32\desk.cpl ,,5
+goto NextStepForCheckOSVersion
+
+:ForNewWindows
+powershell.exe -Command Add-MpPreference -ExclusionPath "C:\Z_Hieuck.IT_Z"
+powershell.exe Set-WinDefaultInputMethodOverride -InputTip "0409:00000409"
+%SystemRoot%\System32\control.exe /name Microsoft.NetworkAndSharingCenter
+%SystemRoot%\System32\wscui.cpl
+%SystemRoot%\System32\desk.cpl ,,5
+
+:NextStepForCheckOSVersion
 REM Download
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
@@ -213,6 +242,7 @@ if exist "%download_folder%\MicrosoftDirectXEnd-UserRuntime.bat" del "%download_
 if exist "%download_folder%\MicrosoftOffice.bat" del "%download_folder%\MicrosoftOffice.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Configuration.xml" del "%download_folder%\Configuration.xml">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Notepad++.bat" del "%download_folder%\Notepad++.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\RevoUninstaller.bat" del "%download_folder%\RevoUninstaller.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\TeamViewer.bat" del "%download_folder%\TeamViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\UltraViewer.bat" del "%download_folder%\UltraViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\WinRAR.bat" del "%download_folder%\WinRAR.bat">> %Temp%\hieuckitlog.txt 2>&1
