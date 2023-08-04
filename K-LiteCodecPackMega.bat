@@ -58,7 +58,7 @@ set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
 set "SoftPath="
-set "SoftPathFor32bit=%ProgramFiles%\K-Lite Codec Pack\MPC-HC64"
+set "SoftPathFor32bit=%ProgramFiles%\K-Lite Codec Pack\MPC-HC"
 set "SoftPathFor64bit=%ProgramFiles(x86)%\K-Lite Codec Pack\MPC-HC64"
 
 set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
