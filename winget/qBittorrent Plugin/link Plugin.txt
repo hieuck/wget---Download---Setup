@@ -1,0 +1,8 @@
+
+http://plugins.qbittorrent.org
+
+https://gist.githubusercontent.com/BurningMop/fa750daea6d9fa86c8fe5d686f12ed35/raw/16397ff605b1e2f60c70379166c3e7f8df28867d/one337x.py
+
+https://raw.githubusercontent.com/nindogo/qbtSearchScripts/master/torrentgalaxy.py
+
+https://raw.githubusercontent.com/khensolomon/leyts/master/yts.py
