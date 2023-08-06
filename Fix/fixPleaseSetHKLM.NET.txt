@@ -1,0 +1,5 @@
+HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\.NETFramework
+InstallRoot=C:\Windows\Microsoft.NET\Framework\
+
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\.NETFramework
+InstallRoot=C:\Windows\Microsoft.NET\Framework64\
