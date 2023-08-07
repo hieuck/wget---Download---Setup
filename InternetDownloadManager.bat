@@ -39,7 +39,7 @@ set "SoftName=Internet Download Manager"
 set "Process=IDMan.exe"
 
 set "FileName="
-set "SoftNameVersion=641build15"
+set "SoftNameVersion=641build17"
 set "FileDLwB=idman*.exe"
 
 set "SupportOldWindows=Yes"
