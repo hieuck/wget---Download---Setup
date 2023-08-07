@@ -78,13 +78,16 @@ goto ForNewWindows
 endlocal
 
 :ForOldWindows
+mkdir "C:\Z_Hieuck.IT_Z"
 %SystemRoot%\System32\control.exe /name Microsoft.NetworkAndSharingCenter
 %SystemRoot%\System32\wscui.cpl
 %SystemRoot%\System32\desk.cpl ,,5
 goto NextStepForCheckOSVersion
 
 :ForNewWindows
+mkdir "C:\Z_Hieuck.IT_Z"
 powershell.exe -Command Add-MpPreference -ExclusionPath "C:\Z_Hieuck.IT_Z"
+powershell.exe -Command Add-MpPreference -ExclusionPath "%Public%\Desktop\Z_Hieuck.IT_Z"
 powershell.exe Set-WinDefaultInputMethodOverride -InputTip "0409:00000409"
 %SystemRoot%\System32\control.exe /name Microsoft.NetworkAndSharingCenter
 %SystemRoot%\System32\wscui.cpl
