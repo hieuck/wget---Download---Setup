@@ -489,7 +489,6 @@ if %errorlevel% neq 0 (
     echo .NET Framework 3.5 is already enabled on this system
 )
 endlocal
-timeout /t 2
 
 pushd "%~dp0"
 "%FileName%" %QuietMode%
