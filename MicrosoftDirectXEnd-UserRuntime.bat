@@ -456,6 +456,12 @@ if /i "%Extract7z%"=="Yes" (
 	"%FileName%" %QuietMode%
 )
 
+REM Terminate the %SoftName% Process
+tasklist | find /i "%Process%" > nul
+if %errorlevel% equ 0 (
+	taskkill /im "%Process%" /f
+)
+
 setlocal
 REM Check DirectX version
 reg query "HKLM\Software\Microsoft\DirectX" /v Version >nul 2>&1
