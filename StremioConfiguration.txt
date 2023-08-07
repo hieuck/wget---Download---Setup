@@ -11,3 +11,5 @@ https://a0da031547f5-hanime-stremio-main.baby-beamup.club/manifest.json
 https://app.strem.io/shell-v4.4/#/addons/community/all?addon=https%3A%2F%2Fa0da031547f5-hanime-stremio-main.baby-beamup.club%2Fmanifest.json
 
 https://2ecbbd610840-kisskh.baby-beamup.club/%7B%22sub%22%3A%22All%20Subtitles%22%7D/manifest.json
+
+https://app.strem.io/shell-v4.4/#/addons/community/all?addon=https%3A%2F%2F7a82163c306e-stremio-netflix-catalog-addon.baby-beamup.club%2FbmZ4LGRucCxhbXAsYXRwLGhibSxwbXAscGNwLGhsdSxoYXksZm1uLG1nbCxjdHMsY2x2LGdvcCxoc3QsemVlLG5seixzc3QsYmx2LHZpbDo6OjE2OTE0MTkzOTAzNjU%253D%2Fmanifest.json
