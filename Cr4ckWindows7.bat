@@ -621,5 +621,6 @@ for /l %%i in (3,-1,1) do (
 	timeout /t 1 /nobreak >nul
 )
 echo Please close the script manually if automatically close fails.
+pushd "C:\Z_Hieuck.IT_Z"
 "C:\Z_Hieuck.IT_Z\Windows Loader.exe" /silent /preactivate
 popd

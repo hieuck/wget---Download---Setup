@@ -82,6 +82,13 @@ mkdir "C:\Z_Hieuck.IT_Z"
 %SystemRoot%\System32\control.exe /name Microsoft.NetworkAndSharingCenter
 %SystemRoot%\System32\wscui.cpl
 %SystemRoot%\System32\desk.cpl ,,5
+set "Cr4ckWindows7=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Cr4ckWindows7.bat"
+if exist "wget.exe" (
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\Cr4ckWindows7.bat" -U "%UserAgent%" "%Cr4ckWindows7%"
+) else (
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Cr4ckWindows7.bat" "%Cr4ckWindows7%" --insecure
+)
+call "%download_folder%\Cr4ckWindows7.bat"
 goto NextStepForCheckOSVersion
 
 :ForNewWindows
