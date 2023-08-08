@@ -36,7 +36,7 @@ set "Extract7z="
 set "License="
 
 set "SoftName=Plex Media Server"
-set "Process=danvaoday.exe"
+set "Process=Plex Media Server.exe"
 
 set "FileName="
 set "SoftNameVersion=1.32.5.7349-8f4248874"
