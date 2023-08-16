@@ -1,0 +1,6 @@
+https://adsbypasser.github.io/releases/adsbypasser.full.es7.user.js
+https://greasyfork.org/scripts/9099-abpvn-adsblock/code/ABPVN%20AdsBlock.user.js
+https://userscripts.adtidy.org/release/popup-blocker/2.5/popupblocker.user.js
+https://greasyfork.org/scripts/406535-instagram-download-button/code/Instagram%20Download%20Button.user.js
+https://greasyfork.org/scripts/423001-twitter-media-downloader/code/Twitter%20Media%20Downloader.user.js
+https://greasyfork.org/scripts/431691-bypass-all-shortlinks/code/Bypass%20All%20Shortlinks.user.js
