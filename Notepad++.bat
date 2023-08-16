@@ -39,7 +39,7 @@ set "SoftName=Notepad++"
 set "Process=Notepad++.exe"
 
 set "FileName="
-set "SoftNameVersion=8.5.4"
+set "SoftNameVersion=8.5.6"
 set "FileDLwB=npp*.exe"
 
 set "SupportOldWindows=Yes"
