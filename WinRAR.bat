@@ -39,7 +39,7 @@ set "SoftName=WinRAR"
 set "Process=WinRAR.exe"
 
 set "FileName="
-set "SoftNameVersion=622"
+set "SoftNameVersion=623"
 set "FileDLwB=winrar*.exe"
 
 set "SupportOldWindows=Yes"
