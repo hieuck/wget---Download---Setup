@@ -42,7 +42,6 @@ rem Determine the full path for Zalo
 rem Change the path to the actual Zalo installation directory here
 set "ZaloPath=!DriveChar!:\Zalo"
 
-@echo Dang Tao Thu Muc O !ZaloPath!
 md "!ZaloPath!\ZaloPC"2>NUL>> %Temp%\hieuckitlog.txt
 md "!ZaloPath!\ZaloData"2>NUL>> %Temp%\hieuckitlog.txt
 md "!ZaloPath!\Zalo Received Files"2>NUL>> %Temp%\hieuckitlog.txt
