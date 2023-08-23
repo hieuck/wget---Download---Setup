@@ -34,7 +34,7 @@ set "ZaloPath="
 
 :InputDrive
 echo Enter the drive character for Zalo (e.g., D, E, F):
-echo Nhap kt tu cua o cho Zalo (vi du: D, E, F):
+echo Nhap ky tu cua o cho Zalo (vi du: D, E, F):
 
 set /p "DriveChar="
 
