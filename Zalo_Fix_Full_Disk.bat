@@ -58,8 +58,8 @@ taskkill /im "ZaloCall.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
 taskkill /im "ZaloCap.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
 taskkill /im "ZaviMeet.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
 
-xcopy "%LocalAppData%\ZaloPC\" "!ZaloPath!\ZaloPC" /I /E /Y>> %Temp%\hieuckitlog.txt
-xcopy "%AppData%\ZaloData\" "!ZaloPath!\ZaloData" /I /E /Y>> %Temp%\hieuckitlog.txt
+xcopy "%LocalAppData%\ZaloPC" "!ZaloPath!\ZaloPC" /I /E /Y>> %Temp%\hieuckitlog.txt
+xcopy "%AppData%\ZaloData" "!ZaloPath!\ZaloData" /I /E /Y>> %Temp%\hieuckitlog.txt
 if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
 	xcopy "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files" /I /E /Y>> %Temp%\hieuckitlog.txt
 ) else (
@@ -67,15 +67,15 @@ if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
 )
 
 rmdir "%LocalAppData%\ZaloPC" /s /q>> %Temp%\hieuckitlog.txt
-rmdir "%AppData%\ZaloData\" /s /q>> %Temp%\hieuckitlog.txt
+rmdir "%AppData%\ZaloData" /s /q>> %Temp%\hieuckitlog.txt
 if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
 	rmdir "%UserProfile%\OneDrive\Documents\Zalo Received Files" /s /q>> %Temp%\hieuckitlog.txt
 ) else (
 	rmdir "%UserProfile%\Documents\Zalo Received Files" /s /q>> %Temp%\hieuckitlog.txt
 )
 
-mklink /D "%LocalAppData%\ZaloPC\" "!ZaloPath!\ZaloPC">> %Temp%\hieuckitlog.txt
-mklink /D "%AppData%\ZaloData\" "!ZaloPath!\ZaloData">> %Temp%\hieuckitlog.txt
+mklink /D "%LocalAppData%\ZaloPC" "!ZaloPath!\ZaloPC">> %Temp%\hieuckitlog.txt
+mklink /D "%AppData%\ZaloData" "!ZaloPath!\ZaloData">> %Temp%\hieuckitlog.txt
 if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
 	mklink /D "%UserProfile%\OneDrive\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files">> %Temp%\hieuckitlog.txt
 ) else (
