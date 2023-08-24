@@ -13,7 +13,7 @@ REM Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
-title _Hieuck.IT_'s Windows Application...
+title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -26,7 +26,8 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 Dang Fix Full Disk Zalo Tu Dong. Vui Long Cho
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
 @echo off
 setlocal EnableDelayedExpansion
 
@@ -52,11 +53,45 @@ if not exist "!ZaloPath!" (
 	goto InputDrive
 )
 
+title _Hieuck.IT_'s Windows Application Stopping Zalo...
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo off
+
 net stop "Zalo" >2>NUL> %Temp%\hieuckitlog.txt
 taskkill /im "Zalo.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
 taskkill /im "ZaloCall.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
 taskkill /im "ZaloCap.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
 taskkill /im "ZaviMeet.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
+
+title _Hieuck.IT_'s Windows Application Coppying Zalo...
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo off
 
 xcopy "%LocalAppData%\ZaloPC" "!ZaloPath!\ZaloPC" /I /E /Y>> %Temp%\hieuckitlog.txt
 xcopy "%AppData%\ZaloData" "!ZaloPath!\ZaloData" /I /E /Y>> %Temp%\hieuckitlog.txt
@@ -66,6 +101,23 @@ if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
 	xcopy "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files" /I /E /Y>> %Temp%\hieuckitlog.txt
 )
 
+title _Hieuck.IT_'s Windows Application Deleting Zalo...
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo off
+
 rmdir "%LocalAppData%\ZaloPC" /s /q>> %Temp%\hieuckitlog.txt
 rmdir "%AppData%\ZaloData" /s /q>> %Temp%\hieuckitlog.txt
 if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
@@ -73,6 +125,23 @@ if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
 ) else (
 	rmdir "%UserProfile%\Documents\Zalo Received Files" /s /q>> %Temp%\hieuckitlog.txt
 )
+
+title _Hieuck.IT_'s Windows Application Linking Zalo...
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo off
 
 mklink /D "%LocalAppData%\ZaloPC" "!ZaloPath!\ZaloPC">> %Temp%\hieuckitlog.txt
 mklink /D "%AppData%\ZaloData" "!ZaloPath!\ZaloData">> %Temp%\hieuckitlog.txt
