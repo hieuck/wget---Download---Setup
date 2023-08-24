@@ -26,8 +26,8 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
-@echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh Zalo. Vui Long Cho...> %Temp%\hieuckitlog.txt
+@echo                 The current date and time are: %date% %time%> %Temp%\hieuckitlog.txt
+@echo                 Dang Cau Hinh Zalo. Vui Long Cho...>> %Temp%\hieuckitlog.txt
 @echo off
 setlocal EnableDelayedExpansion
 
