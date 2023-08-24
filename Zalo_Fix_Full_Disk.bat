@@ -148,4 +148,29 @@ mklink /D "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Receive
 @echo Zalo path has been set to: !ZaloPath!>> %Temp%\hieuckitlog.txt
 @echo Da Hoan Thanh Chuyen Zalo Sang !ZaloPath!
 @echo Da Hoan Thanh Chuyen Zalo Sang !ZaloPath!>> %Temp%\hieuckitlog.txt
-pause
+
+title _Hieuck.IT_'s Windows Application Opening Zalo...
+color 0B
+mode con:cols=100 lines=15
+@cls
+echo.
+echo.
+echo.
+@echo     Бл          ллл   ллл ллл лллллл ллл   ллл  ллллл  ллл  лл ллл ллллллллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo        Вл       ллллллллл ллл лллллл ллл   ллл ллл     ллллл   ллл    ллл
+@echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
+@echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
+@echo.  
+@echo                 The current date and time are: %date% %time%
+@echo                 Dang Chuan Bi Mo Zalo. Vui Long Cho...
+@echo off
+
+@echo Press Enter or Z to start Zalo, or any other key to exit:
+choice /c:abcdefghijklmnopqrstuvwxy /n /t 5 /d a /m " "
+if errorlevel 2 (
+	echo Exiting...
+	exit
+) else (
+	start "" "%LocalAppData%\Programs\Zalo\Zalo.exe"
+)
