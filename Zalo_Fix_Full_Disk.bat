@@ -26,7 +26,9 @@ echo.
 @echo       л         ллл   ллл ллл ллл    ллл   ллл ллл   л ллл лл  ллл    ллл
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
+@echo                 The current date and time are: %date% %time%
 @echo                 The current date and time are: %date% %time%> %Temp%\hieuckitlog.txt
+@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
 @echo                 Dang Cau Hinh Zalo. Vui Long Cho...>> %Temp%\hieuckitlog.txt
 @echo off
 setlocal EnableDelayedExpansion
@@ -142,6 +144,8 @@ mklink /D "%AppData%\ZaloData" "!ZaloPath!\ZaloData">> %Temp%\hieuckitlog.txt
 if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" do mklink /D "%UserProfile%\OneDrive\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files">> %Temp%\hieuckitlog.txt
 mklink /D "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files">> %Temp%\hieuckitlog.txt
 
-echo Zalo path has been set to: !ZaloPath!
-echo Da Hoan Thanh Chuyen Zalo Sang !ZaloPath!
+@echo Zalo path has been set to: !ZaloPath!
+@echo Zalo path has been set to: !ZaloPath!>> %Temp%\hieuckitlog.txt
+@echo Da Hoan Thanh Chuyen Zalo Sang !ZaloPath!
+@echo Da Hoan Thanh Chuyen Zalo Sang !ZaloPath!>> %Temp%\hieuckitlog.txt
 pause
