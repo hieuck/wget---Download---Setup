@@ -67,7 +67,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo                 Dang Tat Zalo. Vui Long Cho...
 @echo off
 
 net stop "Zalo" >2>NUL> %Temp%\hieuckitlog.txt
@@ -90,7 +90,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo                 Dang Sao Chep Zalo. Vui Long Cho...
 @echo off
 
 xcopy "%LocalAppData%\ZaloPC" "!ZaloPath!\ZaloPC" /I /E /Y>> %Temp%\hieuckitlog.txt
@@ -101,7 +101,7 @@ if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
 	xcopy "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files" /I /E /Y>> %Temp%\hieuckitlog.txt
 )
 
-title _Hieuck.IT_'s Windows Application Deleting Zalo...
+title _Hieuck.IT_'s Windows Application Cleaning Zalo...
 color 0B
 mode con:cols=100 lines=15
 @cls
@@ -115,7 +115,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo                 Dang Don Dep Zalo. Vui Long Cho...
 @echo off
 
 rmdir "%LocalAppData%\ZaloPC" /s /q>> %Temp%\hieuckitlog.txt
@@ -140,7 +140,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo                 Dang Lien Ket Zalo. Vui Long Cho...
 @echo off
 
 mklink /D "%LocalAppData%\ZaloPC" "!ZaloPath!\ZaloPC">> %Temp%\hieuckitlog.txt
