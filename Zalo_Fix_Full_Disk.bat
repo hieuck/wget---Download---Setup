@@ -27,7 +27,7 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.  
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh Zalo. Vui Long Cho...
+@echo                 Dang Cau Hinh Zalo. Vui Long Cho...> %Temp%\hieuckitlog.txt
 @echo off
 setlocal EnableDelayedExpansion
 
@@ -70,7 +70,7 @@ echo.
 @echo                 Dang Tat Zalo. Vui Long Cho...
 @echo off
 
-net stop "Zalo" >2>NUL> %Temp%\hieuckitlog.txt
+net stop "Zalo" >2>NUL>> %Temp%\hieuckitlog.txt
 taskkill /im "Zalo.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
 taskkill /im "ZaloCall.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
 taskkill /im "ZaloCap.exe" /f >2>NUL>> %Temp%\hieuckitlog.txt
