@@ -166,11 +166,17 @@ echo.
 @echo                 Dang Chuan Bi Mo Zalo. Vui Long Cho...
 @echo off
 
-@echo Press Enter or Z to start Zalo, or any other key to exit:
-choice /c:abcdefghijklmnopqrstuvwxy /n /t 5 /d a /m " "
-if errorlevel 2 (
+rem Get the user's input
+set "choice="
+set /p choice="Press Z or the Space and Enter key to open Zalo, or any other key to exit: "
+
+rem Check if the user pressed Z, Enter, or any other key
+if /i "%choice%" == "Z" (
+	start "" "%LocalAppData%\Programs\Zalo\Zalo.exe"
+) else if /i "%choice%" == " " (
+	start "" "%LocalAppData%\Programs\Zalo\Zalo.exe"
+) else (
 	echo Exiting...
 	exit
-) else (
-	start "" "%LocalAppData%\Programs\Zalo\Zalo.exe"
 )
+popd
