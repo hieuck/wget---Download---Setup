@@ -175,6 +175,8 @@ if /i "%choice%" == "Z" (
 	start "" "%LocalAppData%\Programs\Zalo\Zalo.exe"
 ) else if /i "%choice%" == " " (
 	start "" "%LocalAppData%\Programs\Zalo\Zalo.exe"
+) else if /i "%choice%" == "" (
+	start "" "%LocalAppData%\Programs\Zalo\Zalo.exe"
 ) else (
 	echo Exiting...
 	exit
