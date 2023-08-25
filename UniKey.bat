@@ -36,7 +36,7 @@ set "Extract7z=Yes"
 set "License="
 
 set "SoftName=UniKey"
-set "Process=danvaoday.exe"
+set "Process=UniKeyNT.exe"
 
 set "FileName="
 set "SoftNameVersion="
