@@ -33,21 +33,21 @@ echo.
 REM Required Configuration Settings
 
 set "Extract7z=Yes"
-set "License="
+set "License=Yes"
 
 set "SoftName=UniKey"
 set "Process=UniKeyNT.exe"
 
 set "FileName="
-set "SoftNameVersion="
-set "FileDLwB=UniKey*.zip"
+set "SoftNameVersion=4.5RC1"
+set "FileDLwB=UniKey*"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
-REM Source Link: 
+REM Source Link: https://www.unikey.org/download.html
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -63,7 +63,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/S"
 
-set "Cr4ckFile="
+set "Cr4ckFile=UniKeySetting"
 set "Cr4ckPath="
 
 set "Shortcut="
@@ -181,7 +181,7 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-REM Set up information related to software cr4cking
+REM Set up information related to software Setting up
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
@@ -477,7 +477,7 @@ timeout /t 2
 :end
 
 REM License
-title _Hieuck.IT_'s Windows Application Cr4cking...
+title _Hieuck.IT_'s Windows Application Setting up...
 color 0B
 mode con:cols=120 lines=17
 if not exist "wget.exe" mode con:cols=80 lines=17
@@ -495,7 +495,7 @@ echo.
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 if /i "%License%"=="Yes" (
-	echo Cr4cking %SoftName%...
+	echo Setting up %SoftName%...
 	if exist "wget.exe" (
 		if not exist "7z.dll" if not exist "7z.exe" (
 			wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
@@ -511,12 +511,12 @@ if /i "%License%"=="Yes" (
 	)
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
-		echo Successfully Cr4cked %SoftName%.
+		echo Successfully Setting up %SoftName%.
 		echo.>> %Temp%\hieuckitlog.txt
-		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
+		echo Successfully Setting up %SoftName%.>> %Temp%\hieuckitlog.txt
 		del "%Cr4ckFile%"
 	) else (
-		echo Cr4cking %SoftName% failed.
+		echo Setting up %SoftName% failed.
 		echo Please try running the script as Administrator.
 	)
 )
