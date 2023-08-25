@@ -143,7 +143,7 @@ if exist "wget.exe" (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\EVKey.bat" "%EVKey%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\FoxitPDFReader.bat" "%FoxitPDFReader%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\GoogleChrome.bat" "%GoogleChrome%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\K-LiteCodecPackMega.bat" "%LiteCodecPackMega%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\K-LiteCodecPackMega.bat" "%K-LiteCodecPackMega%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\MicrosoftDirectXEnd-UserRuntime.bat" "%MicrosoftDirectX%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\MicrosoftOffice.bat" "%MicrosoftOffice%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Notepad++.bat" "%Notepad%" --insecure
