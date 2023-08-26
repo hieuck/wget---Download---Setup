@@ -63,7 +63,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/quiet /norestart"
 
-set "Cr4ckFile="
+set "Cr4ckFile=TechSmithCamtasiaCr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
