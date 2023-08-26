@@ -39,7 +39,7 @@ set "SoftName=Topaz Video AI"
 set "Process=Topaz Video AI.exe"
 
 set "FileName=msi"
-set "SoftNameVersion=3.3.3"
+set "SoftNameVersion=3.4.1"
 set "FileDLwB=TopazVideoAI*.msi"
 
 set "SupportOldWindows=Yes"
