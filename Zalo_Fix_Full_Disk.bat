@@ -119,15 +119,21 @@ echo.
 
 echo Please Check Your Zalo Storage Before Pressing Enter.
 echo Vui Long Kiem Tra Dung Luong Zalo Truoc Khi Nhan Enter.
-dir /s "%LocalAppData%\ZaloPC">> %Temp%\hieuckitlog.txt
-dir /s "!ZaloPath!\ZaloPC">> %Temp%\hieuckitlog.txt
-dir /s "%AppData%\ZaloData">> %Temp%\hieuckitlog.txt
-dir /s "!ZaloPath!\ZaloData">> %Temp%\hieuckitlog.txt
-if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" do dir /s "%UserProfile%\OneDrive\Documents\Zalo Received Files">> %Temp%\hieuckitlog.txt
-dir /s "%UserProfile%\Documents\Zalo Received Files">> %Temp%\hieuckitlog.txt
-dir /s "!ZaloPath!\Zalo Received Files">> %Temp%\hieuckitlog.txt
+cd "%LocalAppData%\ZaloPC"
+start.
+cd "!ZaloPath!\ZaloPC"
+start.
+cd "%AppData%\ZaloData"
+start.
+cd "!ZaloPath!\ZaloData"
+start.
+if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" do cd "%UserProfile%\OneDrive\Documents\Zalo Received Files"
+start.
+cd "%UserProfile%\Documents\Zalo Received Files"
+start.
+cd "!ZaloPath!\Zalo Received Files"
+start.
 pause
-
 rmdir "%LocalAppData%\ZaloPC" /s /q>> %Temp%\hieuckitlog.txt
 rmdir "%AppData%\ZaloData" /s /q>> %Temp%\hieuckitlog.txt
 if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" do rmdir "%UserProfile%\OneDrive\Documents\Zalo Received Files" /s /q>> %Temp%\hieuckitlog.txt
