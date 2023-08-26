@@ -366,9 +366,6 @@ for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
 	goto DLwB
-) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
-	goto DLwB
 ) else (
 	goto ExitDLwB
 )
@@ -522,6 +519,27 @@ if /i "%License%"=="Yes" (
 	) else (
 		echo Cr4cking %SoftName% failed.
 		echo Please try running the script as Administrator.
+	)
+	set "hostsFile=%SystemRoot%\System32\drivers\etc\hosts"
+
+	REM Check the content to be added
+	set "content=# Camtasia^
+	127.0.0.1 activation.cloud.techsmith.com^
+	127.0.0.1 oscount.techsmith.com^
+	127.0.0.1 updater.techsmith.com^
+	127.0.0.1 camtasiatudi.techsmith.com^
+	127.0.0.1 tsccloud.cloudapp.net^
+	127.0.0.1 assets.cloud.techsmith.com"
+
+	REM Check if the content already exists in the hosts file
+	findstr /C:"%content%" "%hostsFile%" >nul
+
+	REM If the content is not found, add it to the end of the hosts file
+	if %errorlevel% neq 0 (
+		echo.%content%>>"%hostsFile%"
+		echo.Content has been added to the hosts file.
+	) else (
+		echo.Content already exists in the hosts file.
 	)
 )
 
