@@ -33,7 +33,7 @@ echo.
 REM Required Configuration Settings
 
 set "Extract7z="
-set "License="
+set "License=Yes"
 
 set "SoftName=Camtasia 2022"
 set "Process=danvaoday.exe"
@@ -514,6 +514,7 @@ if /i "%License%"=="Yes" (
 	)
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
+		"auto-reg__Camtasia_22.5.2.exe"
 		echo Successfully Cr4cked %SoftName%.
 		echo.>> %Temp%\hieuckitlog.txt
 		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
