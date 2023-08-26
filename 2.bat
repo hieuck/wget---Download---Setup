@@ -1,4 +1,5 @@
 @echo off
+REM Request to edit the hosts file.
 setlocal enabledelayedexpansion
 
 REM IP address to add to the hosts file
