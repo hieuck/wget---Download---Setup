@@ -511,7 +511,7 @@ if /i "%License%"=="Yes" (
 	)
 	if exist "%Cr4ckFile%" (
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
-		"auto-reg__Camtasia_22.5.2.exe"
+		"%Cr4ckPath%\auto-reg__Camtasia_22.5.2.exe"
 		echo Successfully Cr4cked %SoftName%.
 		echo.>> %Temp%\hieuckitlog.txt
 		echo Successfully Cr4cked %SoftName%.>> %Temp%\hieuckitlog.txt
@@ -520,28 +520,87 @@ if /i "%License%"=="Yes" (
 		echo Cr4cking %SoftName% failed.
 		echo Please try running the script as Administrator.
 	)
-	set "hostsFile=%SystemRoot%\System32\drivers\etc\hosts"
-
-	REM Check the content to be added
-	set "content=# Camtasia^
-	127.0.0.1 activation.cloud.techsmith.com^
-	127.0.0.1 oscount.techsmith.com^
-	127.0.0.1 updater.techsmith.com^
-	127.0.0.1 camtasiatudi.techsmith.com^
-	127.0.0.1 tsccloud.cloudapp.net^
-	127.0.0.1 assets.cloud.techsmith.com"
-
-	REM Check if the content already exists in the hosts file
-	findstr /C:"%content%" "%hostsFile%" >nul
-
-	REM If the content is not found, add it to the end of the hosts file
-	if %errorlevel% neq 0 (
-		echo.%content%>>"%hostsFile%"
-		echo.Content has been added to the hosts file.
-	) else (
-		echo.Content already exists in the hosts file.
-	)
 )
+
+REM Request to edit the hosts file.
+setlocal enabledelayedexpansion
+
+REM IP address to add to the hosts file
+set ip_address=127.0.0.1
+
+REM Comment to be added
+set "comment=Camtasia"
+
+REM List of hostnames to block
+set "hosts_to_block=activation.cloud.techsmith.com oscount.techsmith.com updater.techsmith.com camtasiatudi.techsmith.com tsccloud.cloudapp.net assets.cloud.techsmith.com"
+
+REM Check if the hosts file exists
+if not exist "%SystemRoot%\System32\drivers\etc\hosts" (
+	echo The hosts file does not exist.
+	if exist "wget.exe" (
+		wget --no-check-certificate --show-progress -q -O "%SystemRoot%\System32\drivers\etc\hosts" -U "%UserAgent%" "https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/hosts"
+	) else (
+		curl -L --max-redirs 20 -A "%UserAgent%" -o "%SystemRoot%\System32\drivers\etc\hosts" "https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/hosts" --insecure
+	)
+	exit /b
+)
+
+REM Read the hosts file line by line into an array
+set /a index=0
+for /f "tokens=*" %%a in ('type "%SystemRoot%\System32\drivers\etc\hosts"') do (
+	set "lines[!index!]=%%a"
+	set /a index+=1
+)
+REM Check if each comment is already in the hosts file
+for %%i in (!comment!) do (
+	set found=false
+	for /l %%j in (0,1,!index!) do (
+		echo !lines[%%j]! | findstr /i "%%i" >nul
+		if errorlevel 1 (
+			echo !found! | findstr /i "true" >nul
+			if not errorlevel 1 (
+				set found=false
+			)
+		) else (
+			set found=true
+			echo %%i is already present in the hosts file, no need to add.
+			goto EndCheckComment
+		)
+	)
+	if "!found!"=="false" (
+		echo Adding %%i to the hosts file...
+		REM Add the comment line
+		echo. >> "%SystemRoot%\System32\drivers\etc\hosts"
+		echo # %comment% >> "%SystemRoot%\System32\drivers\etc\hosts"
+    )
+)
+
+:EndCheckComment
+REM Check if each hostname is already in the hosts file
+for %%i in (!hosts_to_block!) do (
+	set found=false
+	for /l %%j in (0,1,!index!) do (
+		echo !lines[%%j]! | findstr /i "%%i" >nul
+		if errorlevel 1 (
+			echo !found! | findstr /i "true" >nul
+			if not errorlevel 1 (
+				set found=false
+			)
+		) else (
+			set found=true
+			echo %%i is already present in the hosts file, no need to add.
+			goto EndCheckHostsFile
+		)
+	)
+	if "!found!"=="false" (
+		echo Adding %%i to the hosts file...
+		echo %ip_address% %%i >> "%SystemRoot%\System32\drivers\etc\hosts"
+    )
+)
+
+:EndCheckHostsFile
+REM Display completion message
+echo Editing the hosts file completed.
 
 REM Shortcut
 if /i "%Shortcut%"=="No" (
