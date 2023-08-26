@@ -39,7 +39,7 @@ set "SoftName=CapCut"
 set "Process=CapCut.exe"
 
 set "FileName="
-set "SoftNameVersion=2_3_0_569"
+set "SoftNameVersion=2_5_0_723"
 set "FileDLwB=CapCut*.exe"
 
 set "SupportOldWindows=Yes"
