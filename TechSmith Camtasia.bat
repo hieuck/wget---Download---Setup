@@ -36,10 +36,10 @@ set "Extract7z="
 set "License=Yes"
 
 set "SoftName=Camtasia 2022"
-set "Process=danvaoday.exe"
+set "Process=CamtasiaStudio.exe"
 
 set "FileName="
-set "SoftNameVersion="
+set "SoftNameVersion=22.5.2.44147"
 set "FileDLwB=Camtasia*.exe"
 
 set "SupportOldWindows=Yes"
