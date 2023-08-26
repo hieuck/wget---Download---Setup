@@ -597,6 +597,7 @@ for %%i in (!hosts_to_block!) do (
 		echo %ip_address% %%i >> "%SystemRoot%\System32\drivers\etc\hosts"
     )
 )
+endlocal
 
 :EndCheckHostsFile
 REM Display completion message
