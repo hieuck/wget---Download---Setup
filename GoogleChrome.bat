@@ -49,7 +49,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetup32.exe
 
-set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/109.0.5414.120_chrome_installer.exe"
+set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetupOld.exe"
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
