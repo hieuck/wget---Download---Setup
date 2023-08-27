@@ -521,6 +521,34 @@ if /i "%License%"=="Yes" (
 	)
 )
 
+REM Check Windows OS Version and Check Support Old Windows to Set Google Chrome as the default browser
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" goto ForOldWindowsMakeChromeDefault
+goto ForNewWindowsMakeChromeDefault
+endlocal
+
+:ForOldWindowsMakeChromeDefault
+reg add HKLM\SOFTWARE\Classes\http\shell\open\command /d "%SoftPath%\%Process%" /f
+reg add HKLM\SOFTWARE\Classes\https\shell\open\command /d "%SoftPath%\%Process%" /f
+goto EndMakeChromeDefault
+
+:ForNewWindowsMakeChromeDefault
+REM Set Google Chrome as the default browser
+echo Set Google Chrome as the default browser
+powershell -Command "Start-Process '%SoftPath%\%Process%' -ArgumentList '--make-default-browser'"
+powershell -Command "Start-Process 'ms-settings:defaultapps'"
+
+:EndMakeChromeDefault
+
 REM Shortcut
 if /i "%Shortcut%"=="No" (
 	echo Creating Shortcut is skipped.
@@ -553,32 +581,6 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 ) else (
 	echo Creating Shortcut failed.
 )
-
-REM Check Windows OS Version and Check Support Old Windows to Set Google Chrome as the default browser
-setlocal EnableDelayedExpansion
-for /f "tokens=4 delims=[.] " %%i in ('ver') do (
-	set "version1=%%i"
-)
-
-for /f "tokens=5 delims=[.] " %%i in ('ver') do (
-	set "version2=%%i"
-)
-set "version=%version1%.%version2%"
-
-if "%version%"=="6.1" goto ForOldWindowsMakeChromeDefault
-goto ForNewWindowsMakeChromeDefault
-endlocal
-
-:ForOldWindowsMakeChromeDefault
-reg add HKLM\SOFTWARE\Classes\http\shell\open\command /d "%SoftPath%\%Process%" /f
-reg add HKLM\SOFTWARE\Classes\https\shell\open\command /d "%SoftPath%\%Process%" /f
-goto CleanUp
-
-:ForNewWindowsMakeChromeDefault
-REM Set Google Chrome as the default browser
-echo Set Google Chrome as the default browser
-powershell -Command "Start-Process '%SoftPath%\%Process%' -ArgumentList '--make-default-browser'"
-powershell -Command "Start-Process 'ms-settings:defaultapps'"
 
 REM Clean Up
 :CleanUp
