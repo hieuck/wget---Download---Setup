@@ -463,7 +463,8 @@ set count=0
 :waitloop
 timeout /t 1 /nobreak > nul
 set /a count+=1
-if exist "%SoftPath%\%Process%" goto installed
+if exist "%SoftPathFor32bit%\%Process%" goto installed
+if exist "%SoftPathFor64bit%\%Process%" goto installed
 if !count! equ 30 goto timeout
 goto waitloop
 :timeout
