@@ -13,6 +13,13 @@ REM Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
+REM Detect Windows Architecture
+if exist "%SYSTEMROOT%\SysWOW64" (
+	set "ARCH=x64"
+) else (
+	set "ARCH=x86"
+)
+
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
 mode con:cols=120 lines=17
@@ -69,13 +76,7 @@ set "Cr4ckPath="
 
 set "Shortcut="
 
-REM Detect Windows Architecture and Check Compatibility for 32-bit
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
-)
-
+REM Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="No" (
 	if /i "%ARCH%"=="x86" (
 		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
