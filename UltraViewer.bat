@@ -40,7 +40,7 @@ set "Process=UltraViewer_Desktop.exe"
 
 set "FileName="
 set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=UltraViewer*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
