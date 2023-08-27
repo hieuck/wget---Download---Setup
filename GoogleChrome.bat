@@ -556,8 +556,8 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 
 REM Set Google Chrome as the default browser
 echo Set Google Chrome as the default browser
-ms-settings:defaultapps
 powershell -Command "Start-Process '%SoftPath%\%Process%' -ArgumentList '--make-default-browser'"
+powershell -Command "Start-Process 'ms-settings:defaultapps'"
 
 REM Clean Up
 :CleanUp
