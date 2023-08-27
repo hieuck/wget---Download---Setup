@@ -40,7 +40,7 @@ set "Process=UltraViewer_Desktop.exe"
 
 set "FileName="
 set "SoftNameVersion="
-set "FileDLwB=UltraViewer*.exe"
+set "FileDLwB=danvaoday*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -49,45 +49,11 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: https://www.ultraviewer.net/vi/download.html
 
-setlocal
-
-:menu
-echo Do you want to use the old version?
-echo 1. New version (N)
-echo 2. Old version - maybe no ads (O)
-set /p choice=Select an option (1/N or 2/O): 
-
-if "%choice%"=="1" (
-	echo You have chosen to use the new version.
-	rem Add the code for the new version here.
-	set "Link=https://www.ultraviewer.net/vi/UltraViewer_setup_6.6_vi.exe"
-) else if /i "%choice%"=="N" (
-	echo You have chosen to use the new version.
-	rem Add the code for the new version here.
-	set "Link=https://www.ultraviewer.net/vi/UltraViewer_setup_6.6_vi.exe"
-) else if "%choice%"=="2" (
-	echo You have chosen to use the old version - maybe no ads.
-	rem Add the code for the old version here.
-	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/UltraViewer_setup_6.5_vi.exe"
-) else if /i "%choice%"=="O" (
-	echo You have chosen to use the old version - maybe no ads.
-	rem Add the code for the old version here.
-	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/UltraViewer_setup_6.5_vi.exe"
-) else (
-	echo Invalid choice. Please select 1/N or 2/O.
-	goto menu
-)
-
-:: Set the Link as an environment variable
-setx Link "%Link%"
-
-endlocal
-
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=%Link%"
+set "Link=https://www.ultraviewer.net/vi/UltraViewer_setup_6.6_vi.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
