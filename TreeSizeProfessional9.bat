@@ -39,7 +39,7 @@ set "SoftName=TreeSize Professional"
 set "Process=TreeSize.exe"
 
 set "FileName="
-set "SoftNameVersion=8.6.1.1764"
+set "SoftNameVersion=9.0.3.1852"
 set "FileDLwB=TreeSize*exe"
 
 set "SupportOldWindows=Yes"
