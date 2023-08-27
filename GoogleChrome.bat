@@ -537,12 +537,12 @@ goto ForNewWindowsMakeChromeDefault
 endlocal
 
 :ForOldWindowsMakeChromeDefault
+echo Set Google Chrome as the default browser
 reg add HKLM\SOFTWARE\Classes\http\shell\open\command /d "%SoftPath%\%Process%" /f
 reg add HKLM\SOFTWARE\Classes\https\shell\open\command /d "%SoftPath%\%Process%" /f
 goto EndMakeChromeDefault
 
 :ForNewWindowsMakeChromeDefault
-REM Set Google Chrome as the default browser
 echo Set Google Chrome as the default browser
 powershell -Command "Start-Process '%SoftPath%\%Process%' -ArgumentList '--make-default-browser'"
 powershell -Command "Start-Process 'ms-settings:defaultapps'"
