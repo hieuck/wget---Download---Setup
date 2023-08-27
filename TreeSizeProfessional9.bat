@@ -42,7 +42,7 @@ set "FileName="
 set "SoftNameVersion=9.0.3.1852"
 set "FileDLwB=TreeSize*exe"
 
-set "SupportOldWindows=Yes"
+set "SupportOldWindows=No"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -61,7 +61,8 @@ set "SoftPath=%ProgramFiles%\JAM Software\TreeSize"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /PASSWORD=4LGX7A-5TR7AX-JDZ2VK-UU5DHV-ZXSULR-4A3AMJ-5VEFLX"
+set "TS_INSTALL_PASSWORD=4LGX7A-5TR7AX-JDZ2VK-UU5DHV-ZXSULR-4A3AMJ-5VEFLX"
+set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP- /PASSWORD=%TS_INSTALL_PASSWORD%"
 
 set "Cr4ckFile=TreeSizeProfessional9Cr4ck"
 set "Cr4ckPath="
