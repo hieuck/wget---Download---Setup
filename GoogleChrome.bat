@@ -554,6 +554,10 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut failed.
 )
 
+REM Set Google Chrome as the default browser
+echo Set Google Chrome as the default browser
+powershell -Command "Start-Process '%SoftPath%\%Process%' -ArgumentList '--make-default-browser'"
+
 REM Clean Up
 :CleanUp
 title _Hieuck.IT_'s Windows Application Cleaning Up...
@@ -618,6 +622,4 @@ for /l %%i in (3,-1,1) do (
 	timeout /t 1 /nobreak >nul
 )
 echo Please close the script manually if automatically close fails.
-REM Set Google Chrome as the default browser
-powershell -Command "Start-Process '%SoftPath%\%Process%' -ArgumentList '--make-default-browser'"
 popd
