@@ -86,7 +86,7 @@ if /i "%Support32Bit%"=="No" (
 	)
 )
 
-::Check Windows OS Version and Check Support Old Windows
+REM Check Windows OS Version and Check Support Old Windows
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
