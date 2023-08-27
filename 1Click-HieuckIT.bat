@@ -42,7 +42,7 @@ REM Source Link: https://github.com/hieuck/curl-uri-wget-download-setup
 set "wget=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/wget.exe"
 set "AnyDesk=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/AnyDesk.bat"
 set "CocCoc=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/CocCoc.bat"
-set "EVKey=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/EVKey.bat"
+set "EVKeyFor1Click=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/EVKeyFor1Click.bat"
 set "FoxitPDFReader=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/FoxitPDFReader.bat"
 set "GoogleChrome=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/GoogleChrome.bat"
 set "K-LiteCodecPackMega=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/K-LiteCodecPackMega.bat"
@@ -124,7 +124,7 @@ if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\wget.exe" -U "%UserAgent%" "%wget%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\AnyDesk.bat" -U "%UserAgent%" "%AnyDesk%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\CocCoc.bat" -U "%UserAgent%" "%CocCoc%"
-	wget --no-check-certificate --show-progress -q -O "%download_folder%\EVKey.bat" -U "%UserAgent%" "%EVKey%"
+	wget --no-check-certificate --show-progress -q -O "%download_folder%\EVKeyFor1Click.bat" -U "%UserAgent%" "%EVKeyFor1Click%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\FoxitPDFReader.bat" -U "%UserAgent%" "%FoxitPDFReader%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\GoogleChrome.bat" -U "%UserAgent%" "%GoogleChrome%"
 	wget --no-check-certificate --show-progress -q -O "%download_folder%\K-LiteCodecPackMega.bat" -U "%UserAgent%" "%K-LiteCodecPackMega%"
@@ -140,7 +140,7 @@ if exist "wget.exe" (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\wget.exe" "%wget%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\AnyDesk.bat" "%AnyDesk%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\CocCoc.bat" "%CocCoc%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\EVKey.bat" "%EVKey%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\EVKeyFor1Click.bat" "%EVKeyFor1Click%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\FoxitPDFReader.bat" "%FoxitPDFReader%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\GoogleChrome.bat" "%GoogleChrome%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\K-LiteCodecPackMega.bat" "%K-LiteCodecPackMega%" --insecure
@@ -187,6 +187,8 @@ call "%download_folder%\AnyDesk.bat"
 pushd "%~dp0"
 call "%download_folder%\CocCoc.bat"
 pushd "%~dp0"
+call "%download_folder%\EVKeyFor1Click.bat"
+pushd "%~dp0"
 call "%download_folder%\FoxitPDFReader.bat"
 pushd "%~dp0"
 call "%download_folder%\GoogleChrome.bat"
@@ -208,8 +210,6 @@ pushd "%~dp0"
 call "%download_folder%\WinRAR.bat"
 pushd "%~dp0"
 call "%download_folder%\Zalo.bat"
-pushd "%~dp0"
-call "%download_folder%\EVKey.bat"
 
 REM Clean Up
 :CleanUp
@@ -241,10 +241,7 @@ if exist "%download_folder%\7z.exe" del "%download_folder%\7z.exe">> %Temp%\hieu
 if exist "%download_folder%\wget.exe" del "%download_folder%\wget.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\AnyDesk.bat" del "%download_folder%\AnyDesk.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\CocCoc.bat" del "%download_folder%\CocCoc.bat">> %Temp%\hieuckitlog.txt 2>&1
-REM Terminate the EVKey Process
-tasklist | find /i "EVKey64.exe" > nul && taskkill /im "EVKey64.exe" /f
-tasklist | find /i "EVKey32.exe" > nul && taskkill /im "EVKey32.exe" /f
-if exist "%download_folder%\EVKey.bat" del "%download_folder%\EVKey.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\EVKeyFor1Click.bat" del "%download_folder%\EVKeyFor1Click.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\FoxitPDFReader.bat" del "%download_folder%\FoxitPDFReader.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\GoogleChrome.bat" del "%download_folder%\GoogleChrome.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\K-LiteCodecPackMega.bat" del "%download_folder%\K-LiteCodecPackMega.bat">> %Temp%\hieuckitlog.txt 2>&1
