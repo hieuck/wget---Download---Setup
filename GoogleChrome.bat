@@ -86,7 +86,7 @@ if /i "%Support32Bit%"=="No" (
 	)
 )
 
-::Check Windows OS Version and Check Support Old Windows
+REM Check Windows OS Version and Check Support Old Windows
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
@@ -554,6 +554,25 @@ if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut failed.
 )
 
+REM Check Windows OS Version and Check Support Old Windows to Set Google Chrome as the default browser
+setlocal EnableDelayedExpansion
+for /f "tokens=4 delims=[.] " %%i in ('ver') do (
+	set "version1=%%i"
+)
+
+for /f "tokens=5 delims=[.] " %%i in ('ver') do (
+	set "version2=%%i"
+)
+set "version=%version1%.%version2%"
+
+if "%version%"=="6.1" goto ForOldWindowsMakeChromeDefault
+goto ForNewWindowsMakeChromeDefault
+endlocal
+
+:ForOldWindowsMakeChromeDefault
+goto CleanUp
+
+:ForNewWindowsMakeChromeDefault
 REM Set Google Chrome as the default browser
 echo Set Google Chrome as the default browser
 powershell -Command "Start-Process '%SoftPath%\%Process%' -ArgumentList '--make-default-browser'"
