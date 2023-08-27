@@ -47,14 +47,14 @@ set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 REM Set code based on Windows Architecture
-REM Source Link: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetup32.exe
+REM Source Link: 
 
 set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetupOld.exe"
-set "LinkForOldWindows32bit="
-set "LinkForOldWindows64bit="
+set "LinkForOldWindows32bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetupOld32.exe"
+set "LinkForOldWindows64bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetupOld64.exe"
 
 set "Link=https://dl.google.com/chrome/install/latest/chrome_installer.exe"
-set "LinkForAllWindows32bit="
+set "LinkForAllWindows32bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetup32.exe"
 set "LinkForAllWindows64bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetup64.exe"
 
 set "SoftPath=%ProgramFiles%\Google\Chrome\Application"
@@ -570,6 +570,8 @@ goto ForNewWindowsMakeChromeDefault
 endlocal
 
 :ForOldWindowsMakeChromeDefault
+reg add HKLM\SOFTWARE\Classes\http\shell\open\command /d "%SoftPath%\%Process%" /f
+reg add HKLM\SOFTWARE\Classes\https\shell\open\command /d "%SoftPath%\%Process%" /f
 goto CleanUp
 
 :ForNewWindowsMakeChromeDefault
