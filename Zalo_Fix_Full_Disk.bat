@@ -97,7 +97,9 @@ echo.
 
 xcopy "%LocalAppData%\ZaloPC" "!ZaloPath!\ZaloPC" /I /E /Y>> %Temp%\hieuckitlog.txt
 xcopy "%AppData%\ZaloData" "!ZaloPath!\ZaloData" /I /E /Y>> %Temp%\hieuckitlog.txt
-if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" do xcopy "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files" /I /E /Y>> %Temp%\hieuckitlog.txt
+if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
+	xcopy "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files" /I /E /Y>> %Temp%\hieuckitlog.txt
+)
 xcopy "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files" /I /E /Y>> %Temp%\hieuckitlog.txt
 
 title _Hieuck.IT_'s Windows Application Cleaning Zalo...
@@ -127,8 +129,10 @@ cd "%AppData%\ZaloData"
 start.
 cd "!ZaloPath!\ZaloData"
 start.
-if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" do cd "%UserProfile%\OneDrive\Documents\Zalo Received Files"
-start.
+if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
+	cd "%UserProfile%\OneDrive\Documents\Zalo Received Files"
+	start.
+)
 cd "%UserProfile%\Documents\Zalo Received Files"
 start.
 cd "!ZaloPath!\Zalo Received Files"
@@ -136,7 +140,9 @@ start.
 pause
 rmdir "%LocalAppData%\ZaloPC" /s /q>> %Temp%\hieuckitlog.txt
 rmdir "%AppData%\ZaloData" /s /q>> %Temp%\hieuckitlog.txt
-if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" do rmdir "%UserProfile%\OneDrive\Documents\Zalo Received Files" /s /q>> %Temp%\hieuckitlog.txt
+if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
+	rmdir "%UserProfile%\OneDrive\Documents\Zalo Received Files" /s /q>> %Temp%\hieuckitlog.txt
+)
 rmdir "%UserProfile%\Documents\Zalo Received Files" /s /q>> %Temp%\hieuckitlog.txt
 
 title _Hieuck.IT_'s Windows Application Linking Zalo...
@@ -158,7 +164,9 @@ echo.
 
 mklink /D "%LocalAppData%\ZaloPC" "!ZaloPath!\ZaloPC">> %Temp%\hieuckitlog.txt
 mklink /D "%AppData%\ZaloData" "!ZaloPath!\ZaloData">> %Temp%\hieuckitlog.txt
-if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" do mklink /D "%UserProfile%\OneDrive\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files">> %Temp%\hieuckitlog.txt
+if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
+	mklink /D "%UserProfile%\OneDrive\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files">> %Temp%\hieuckitlog.txt
+)
 mklink /D "%UserProfile%\Documents\Zalo Received Files" "!ZaloPath!\Zalo Received Files">> %Temp%\hieuckitlog.txt
 
 @echo Zalo path has been set to: !ZaloPath!
