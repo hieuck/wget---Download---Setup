@@ -1,0 +1,33 @@
+setlocal
+
+:menu
+echo Do you want to use the old version?
+echo 1. New version (N)
+echo 2. Old version (O)
+set /p choice=Select an option (1/N or 2/O): 
+
+if "%choice%"=="1" (
+	echo You have chosen to use the new version.
+	rem Add the code for the new version here.
+	set "Link="
+) else if /i "%choice%"=="N" (
+	echo You have chosen to use the new version.
+	rem Add the code for the new version here.
+	set "Link="
+) else if "%choice%"=="2" (
+	echo You have chosen to use the old version.
+	rem Add the code for the old version here.
+	set "Link="
+) else if /i "%choice%"=="O" (
+	echo You have chosen to use the old version.
+	rem Add the code for the old version here.
+	set "Link="
+) else (
+	echo Invalid choice. Please select 1/N or 2/O.
+	goto menu
+)
+
+:: Set the Link as an environment variable
+setx Link "%Link%"
+
+endlocal
