@@ -57,7 +57,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/Cr4ckWindows7.rar"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -67,7 +67,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/S"
 
-set "Cr4ckFile=Cr4ckWindows7"
+set "Cr4ckFile="
 set "Cr4ckPath="
 
 set "Shortcut=No"

@@ -13,6 +13,10 @@ REM Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
+REM Detect Windows Architecture
+set "ARCH=x86"
+if exist "%SystemRoot%\SysWOW64" set "ARCH=x64"
+
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
 mode con:cols=120 lines=17
@@ -69,13 +73,7 @@ set "Cr4ckPath="
 
 set "Shortcut="
 
-REM Detect Windows Architecture and Check Compatibility for 32-bit
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
-)
-
+REM Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="No" (
 	if /i "%ARCH%"=="x86" (
 		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
@@ -87,7 +85,7 @@ if /i "%Support32Bit%"=="No" (
 	)
 )
 
-::Check Windows OS Version and Check Support Old Windows
+REM Check Windows OS Version and Check Support Old Windows
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
@@ -160,6 +158,10 @@ if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%SoftPath%"=="" (
 		set "SoftPath=%SoftPath%"
 	) else (
@@ -184,6 +186,10 @@ if /i "%License%"=="Yes" (
 	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%Cr4ckPath%"=="" (
 		set "Cr4ckPath=%Cr4ckPath%"
 	) else (
