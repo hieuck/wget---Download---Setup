@@ -88,7 +88,6 @@ if exist "wget.exe" (
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%download_folder%\Cr4ckWindows7.bat" "%Cr4ckWindows7%" --insecure
 )
-call "%download_folder%\Cr4ckWindows7.bat"
 goto NextStepForCheckOSVersion
 
 :ForNewWindows
@@ -211,6 +210,8 @@ pushd "%~dp0"
 call "%download_folder%\WinRAR.bat"
 pushd "%~dp0"
 call "%download_folder%\Zalo.bat"
+pushd "%~dp0"
+if exist"%download_folder%\Cr4ckWindows7.bat" call "%download_folder%\Cr4ckWindows7.bat"
 
 REM Clean Up
 :CleanUp
@@ -289,4 +290,16 @@ for /l %%i in (3,-1,1) do (
 	timeout /t 1 /nobreak >nul
 )
 echo Please close the script manually if automatically close fails.
+
+setlocal
+
+REM Check if the EVKey64.exe or EVKey32.exe process is running
+tasklist | findstr /i "EVKey64.exe EVKey32.exe"
+if %errorlevel% neq 0 (
+    REM If no process is found, start EVKey.lnk on the Desktop
+    start "" "%userprofile%\Desktop\EVKey.lnk"
+)
+
+endlocal
+
 popd
