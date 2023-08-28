@@ -256,7 +256,7 @@ if exist "%download_folder%\TeamViewer.bat" del "%download_folder%\TeamViewer.ba
 if exist "%download_folder%\UltraViewer.bat" del "%download_folder%\UltraViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\WinRAR.bat" del "%download_folder%\WinRAR.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Zalo.bat" del "%download_folder%\Zalo.bat">> %Temp%\hieuckitlog.txt 2>&1
-rmdir /s /q "%download_folder%"
+REM rmdir /s /q "%download_folder%"
 timeout /t 1 /nobreak > nul
 set /a count+=1
 if !deleteSuccess! equ 1 (
