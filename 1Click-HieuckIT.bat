@@ -39,7 +39,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: https://github.com/hieuck/curl-uri-wget-download-setup
 
-set "wget=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/wget.exe"
+set "wget=https://media.githubusercontent.com/media/hieuck/curl-uri-wget-download-setup/main/wget.exe?download=true"
 set "AnyDesk=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/AnyDesk.bat"
 set "CocCoc=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/CocCoc.bat"
 set "EVKeyFor1Click=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/EVKeyFor1Click.bat"
@@ -256,6 +256,7 @@ if exist "%download_folder%\TeamViewer.bat" del "%download_folder%\TeamViewer.ba
 if exist "%download_folder%\UltraViewer.bat" del "%download_folder%\UltraViewer.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\WinRAR.bat" del "%download_folder%\WinRAR.bat">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%download_folder%\Zalo.bat" del "%download_folder%\Zalo.bat">> %Temp%\hieuckitlog.txt 2>&1
+if exist "%download_folder%\Cr4ckWindows7.bat" del "%download_folder%\Cr4ckWindows7.bat">> %Temp%\hieuckitlog.txt 2>&1
 REM rmdir /s /q "%download_folder%"
 timeout /t 1 /nobreak > nul
 set /a count+=1
