@@ -298,7 +298,7 @@ REM Check if the EVKey64.exe or EVKey32.exe process is running
 tasklist | findstr /i "EVKey64.exe EVKey32.exe"
 if %errorlevel% neq 0 (
     REM If no process is found, start EVKey.lnk on the Desktop
-    start "" "%userprofile%\Desktop\EVKey.lnk"
+    start "" "%Public%\Desktop\EVKey.lnk"
 )
 
 endlocal
