@@ -211,7 +211,7 @@ call "%download_folder%\WinRAR.bat"
 pushd "%~dp0"
 call "%download_folder%\Zalo.bat"
 pushd "%~dp0"
-if exist"%download_folder%\Cr4ckWindows7.bat" call "%download_folder%\Cr4ckWindows7.bat"
+if exist "%download_folder%\Cr4ckWindows7.bat" call "%download_folder%\Cr4ckWindows7.bat"
 
 REM Clean Up
 :CleanUp
