@@ -1,11 +1,11 @@
 ﻿<Configuration>
-  <Remove All="True" />
   <Add OfficeClientEdition="64" Channel="Current" AllowCdnFallback="true" OfficeMgmtCOM="false">
     <Product ID="ProPlusRetail">
       <Language ID="en-us" />
     </Product>
   </Add>
+  <Remove All="true" />
   <Display AcceptEULA="True" />
   <Updates Enabled="false" />
-  <Extend DownloadFirst="true" CreateShortcuts="true" />
+  <Extend DownloadFirst="true" Module="1" CreateShortcuts="true" />
 </Configuration>
