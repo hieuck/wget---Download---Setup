@@ -355,7 +355,6 @@ echo.
 @echo off
 echo Downloading %SoftName%...
 if exist "wget.exe" (
-<<<<<<< HEAD
 	wget --no-check-certificate --show-progress -q -O "RemoveAll.xml" -U "%UserAgent%" "%OfficeRemovecfg%"
 	wget --no-check-certificate --show-progress -q -O "cleanospp.exe" -U "%UserAgent%" "%OfficeRemoveexe%"
 	wget --no-check-certificate --show-progress -q -O "msvcr100.dll" -U "%UserAgent%" "%OfficeRemovedll%"
@@ -365,11 +364,6 @@ if exist "wget.exe" (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "RemoveAll.xml" "%OfficeRemovecfg%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "cleanospp.exe" "%OfficeRemoveexe%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "msvcr100.dll" "%OfficeRemovedll%" --insecure
-=======
-	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
-	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%UserAgent%" "%OfficeConfiguration%"
-) else (
->>>>>>> parent of e1f1621 (add Remove before Install)
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "Configuration.xml" "%OfficeConfiguration%" --insecure || (
 		echo.
@@ -388,7 +382,6 @@ setlocal EnableDelayedExpansion
 
 for %%F in ("%FileName%") do set "size=%%~zF"
 for %%F in ("Configuration*.xml") do set "sizeCfg=%%~zF"
-<<<<<<< HEAD
 for %%F in ("cleanospp.exe") do set "sizeCl=%%~zF"
 for %%F in ("msvcr100.dll") do set "sizeCldll=%%~zF"
 for %%F in ("RemoveAll.xml") do set "sizeClcfg=%%~zF"
@@ -403,13 +396,6 @@ if %size% equ 0 (
 			echo Configuration.xml download failed. File size is 0KB. Downloading with browser...
 			goto DLwB
 		)
-=======
-
-if %size% equ 0 (
-	if %sizeCfg% equ 0 (
-		echo %SoftName% and Configuration.xml download failed. Both file sizes are 0KB. Downloading with browser...
-		goto DLwB
->>>>>>> parent of e1f1621 (add Remove before Install)
 	) else (
 		echo %SoftName% download failed. File size is 0KB. Downloading with browser...
 		goto DLwB
@@ -417,7 +403,6 @@ if %size% equ 0 (
 ) else if %sizeCfg% equ 0 (
 	echo Configuration.xml download failed. File size is 0KB. Downloading with browser...
 	goto DLwB
-<<<<<<< HEAD
 ) else if %sizeCl% equ 0 (
 	echo cleanospp.exe download failed. File size is 0KB. Downloading with browser...
 	goto DLwB
@@ -428,8 +413,6 @@ if %size% equ 0 (
 ) else if %sizeClcfg% equ 0 (
 	echo RemoveAll.xml download failed. File size is 0KB. Downloading with browser...
 	goto DLwB
-=======
->>>>>>> parent of e1f1621 (add Remove before Install)
 )
 
 goto ExitDLwB
@@ -445,52 +428,40 @@ if %size% equ 0 (
 	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 ) else if %sizeCfg% equ 0 (
 	start "" "%OfficeConfiguration%" /WAIT /D "%~dp0" /B "Configuration.xml"
-<<<<<<< HEAD
 ) else if %sizeCl% equ 0 (
 	start "" "%OfficeRemoveexe%" /WAIT /D "%~dp0" /B "cleanospp.exe"
 ) else if %sizeCldll% equ 0 (
 	start "" "%OfficeRemovedll%" /WAIT /D "%~dp0" /B "msvcr100.dll"
 ) else if %sizeClcfg% equ 0 (
 	start "" "%OfficeRemovecfg%" /WAIT /D "%~dp0" /B "RemoveAll.xml"
-=======
->>>>>>> parent of e1f1621 (add Remove before Install)
 )
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
 :CheckExist
 for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
 for /R %%i in ("Configuration*.xml") do set "FileNameDLwBCfg=%%i"
-<<<<<<< HEAD
 for /R %%i in ("cleanospp.exe") do set "FileNameDLwBCl=%%i"
 for /R %%i in ("msvcr100.dll") do set "FileNameDLwBCldll=%%i"
 for /R %%i in ("RemoveAll.xml") do set "FileNameDLwBClcfg=%%i"
 
-=======
->>>>>>> parent of e1f1621 (add Remove before Install)
 if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 ) else if not exist "%FileNameDLwBCfg%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
-<<<<<<< HEAD
 ) else if not exist "%FileNameDLwBCl%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 ) else if not exist "%FileNameDLwBCldll%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 ) else if not exist "%FileNameDLwBClcfg%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
-=======
->>>>>>> parent of e1f1621 (add Remove before Install)
 )
 
 echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 move /y "%FileNameDLwBCfg%" "%~dp0Configuration.xml"
-<<<<<<< HEAD
 move /y "%FileNameDLwBCl%" "%~dp0cleanospp.exe"
 move /y "%FileNameDLwBCldll%" "%~dp0msvcr100.dll"
 move /y "%FileNameDLwBClcfg%" "%~dp0RemoveAll.xml"
-=======
->>>>>>> parent of e1f1621 (add Remove before Install)
 
 endlocal
 :ExitDLwB
@@ -556,10 +527,7 @@ echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-<<<<<<< HEAD
 	"%FileName%" %QuietModeRemove%
-=======
->>>>>>> parent of e1f1621 (add Remove before Install)
 	"%FileName%" %QuietMode%
 )
 
@@ -637,8 +605,8 @@ if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" copy /y
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%Public%\Desktop"
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%Public%\Desktop"
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%Public%\Desktop"
-
-::Check Windows OS Version
+pause
+::Check Windows OS Version to Cr4ck Office
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
