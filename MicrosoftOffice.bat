@@ -61,6 +61,7 @@ set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
+set "OfficeRemoveAll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/cleanospp.exe"
 set "OfficeConfiguration="
 set "OfficeConfigurationForOldWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-32.xml"
 set "OfficeConfigurationForOldWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Configuration-2016-64.xml"
@@ -354,9 +355,11 @@ echo.
 @echo off
 echo Downloading %SoftName%...
 if exist "wget.exe" (
+	wget --no-check-certificate --show-progress -q -O "cleanospp.exe" -U "%UserAgent%" "%OfficeRemoveAll%"
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%UserAgent%" "%OfficeConfiguration%"
 ) else (
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "cleanospp.exe"" "%OfficeRemoveAll%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "Configuration.xml" "%OfficeConfiguration%" --insecure || (
 		echo.
@@ -375,17 +378,26 @@ setlocal EnableDelayedExpansion
 
 for %%F in ("%FileName%") do set "size=%%~zF"
 for %%F in ("Configuration*.xml") do set "sizeCfg=%%~zF"
+for %%F in ("cleanospp.exe") do set "sizeCl=%%~zF"
 
 if %size% equ 0 (
 	if %sizeCfg% equ 0 (
-		echo %SoftName% and Configuration.xml download failed. Both file sizes are 0KB. Downloading with browser...
-		goto DLwB
+		if %sizeCl% equ 0 (
+			echo %SoftName%, cleanospp.exe, and Configuration.xml download failed. All three files have a size of 0KB. Downloading with a browser...
+			goto DLwB
+		) else (
+			echo Configuration.xml download failed. File size is 0KB. Downloading with browser...
+			goto DLwB
+		)
 	) else (
 		echo %SoftName% download failed. File size is 0KB. Downloading with browser...
 		goto DLwB
 	)
 ) else if %sizeCfg% equ 0 (
 	echo Configuration.xml download failed. File size is 0KB. Downloading with browser...
+	goto DLwB
+) else if %sizeCl% equ 0 (
+	echo cleanospp.exe download failed. File size is 0KB. Downloading with browser...
 	goto DLwB
 )
 
@@ -402,6 +414,8 @@ if %size% equ 0 (
 	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 ) else if %sizeCfg% equ 0 (
 	start "" "%OfficeConfiguration%" /WAIT /D "%~dp0" /B "Configuration.xml"
+) else %sizeCl% equ 0 (
+	start "" "%OfficeRemoveAll%" /WAIT /D "%~dp0" /B "cleanospp.exe"
 )
 
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
@@ -409,15 +423,20 @@ if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 :CheckExist
 for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
 for /R %%i in ("Configuration*.xml") do set "FileNameDLwBCfg=%%i"
+for /R %%i in ("cleanospp.exe") do set "FileNameDLwBCl=%%i"
+
 if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 ) else if not exist "%FileNameDLwBCfg%" (
+	timeout /t 1 /nobreak >nul & goto CheckExist
+) else if not exist "%FileNameDLwBCl%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
 echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 move /y "%FileNameDLwBCfg%" "%~dp0Configuration.xml"
+move /y "%FileNameDLwBCl%" "%~dp0cleanospp.exe"
 
 endlocal
 :ExitDLwB
@@ -483,6 +502,7 @@ echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
+	"%~dp0cleanospp.exe" /all
 	"%FileName%" %QuietMode%
 )
 
@@ -560,8 +580,8 @@ if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" copy /y
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%Public%\Desktop"
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%Public%\Desktop"
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%Public%\Desktop"
-
-::Check Windows OS Version
+pause
+::Check Windows OS Version to Cr4ck Office
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
