@@ -1,0 +1,13 @@
+﻿<Configuration>
+  <Remove All="True" />
+  <Add OfficeClientEdition="32" Channel="PerpetualVL2021" AllowCdnFallback="true" OfficeMgmtCOM="false">
+    <Product ID="ProPlus2021Volume" PIDKEY="N9J9Q-Q7MMP-XDDM6-63KKP-76FPM">
+      <Language ID="en-us" />
+      <ExcludeApp ID="Teams" />
+    </Product>
+  </Add>
+  <Display AcceptEULA="True" />
+  <Property Name="AutoActivate" Value="1" />
+  <Updates Enabled="false" />
+  <Extend DownloadFirst="true" CreateShortcuts="true" />
+</Configuration>
