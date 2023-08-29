@@ -362,12 +362,12 @@ echo.
 echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "cleanospp.exe" -U "%UserAgent%" "%OfficeRemoveAll%"
-	wget --no-check-certificate --show-progress -q -O "msvcr100.dll" -U "%UserAgent%" "%OfficeRemoveAll%"
+	wget --no-check-certificate --show-progress -q -O "msvcr100.dll" -U "%UserAgent%" "%OfficeRemoveAlldll%"
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%UserAgent%" "%OfficeConfiguration%"
 ) else (
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "cleanospp.exe" "%OfficeRemoveAll%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "msvcr100.dll" "%OfficeRemoveAll%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "msvcr100.dll" "%OfficeRemoveAlldll%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "Configuration.xml" "%OfficeConfiguration%" --insecure || (
 		echo.
@@ -387,11 +387,13 @@ setlocal EnableDelayedExpansion
 for %%F in ("%FileName%") do set "size=%%~zF"
 for %%F in ("Configuration*.xml") do set "sizeCfg=%%~zF"
 for %%F in ("cleanospp.exe") do set "sizeCl=%%~zF"
+for %%F in ("msvcr100.dll") do set "sizeCldll=%%~zF"
+
 
 if %size% equ 0 (
 	if %sizeCfg% equ 0 (
 		if %sizeCl% equ 0 (
-			echo %SoftName%, cleanospp.exe, and Configuration.xml download failed. All three files have a size of 0KB. Downloading with a browser...
+			echo %SoftName%, cleanospp.exe, and Configuration.xml download failed. All files have a size of 0KB. Downloading with a browser...
 			goto DLwB
 		) else (
 			echo Configuration.xml download failed. File size is 0KB. Downloading with browser...
@@ -406,6 +408,9 @@ if %size% equ 0 (
 	goto DLwB
 ) else if %sizeCl% equ 0 (
 	echo cleanospp.exe download failed. File size is 0KB. Downloading with browser...
+	goto DLwB
+) else if %sizeCldll% equ 0 (
+	echo msvcr100.dll download failed. File size is 0KB. Downloading with browser...
 	goto DLwB
 )
 
@@ -422,16 +427,18 @@ if %size% equ 0 (
 	start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
 ) else if %sizeCfg% equ 0 (
 	start "" "%OfficeConfiguration%" /WAIT /D "%~dp0" /B "Configuration.xml"
-) else %sizeCl% equ 0 (
+) else if %sizeCl% equ 0 (
 	start "" "%OfficeRemoveAll%" /WAIT /D "%~dp0" /B "cleanospp.exe"
+) else if %sizeCl% equ 0 (
+	start "" "%OfficeRemoveAlldll%" /WAIT /D "%~dp0" /B "msvcr100.dll"
 )
-
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
 :CheckExist
 for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
 for /R %%i in ("Configuration*.xml") do set "FileNameDLwBCfg=%%i"
 for /R %%i in ("cleanospp.exe") do set "FileNameDLwBCl=%%i"
+for /R %%i in ("msvcr100.dll") do set "FileNameDLwBCldll=%%i"
 
 if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
@@ -439,12 +446,15 @@ if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 ) else if not exist "%FileNameDLwBCl%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
+) else if not exist "%FileNameDLwBCldll%" (
+	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
 echo Download completed with the browser. Installation in progress...
 move /y "%FileNameDLwB%" "%~dp0%FileName%"
 move /y "%FileNameDLwBCfg%" "%~dp0Configuration.xml"
 move /y "%FileNameDLwBCl%" "%~dp0cleanospp.exe"
+move /y "%FileNameDLwBCldll%" "%~dp0msvcr100.dll"
 
 endlocal
 :ExitDLwB
@@ -675,6 +685,8 @@ set deleteSuccess=0
 if exist "7z.dll" del "7z.dll">> %Temp%\hieuckitlog.txt 2>&1
 if exist "7z.exe" del "7z.exe">> %Temp%\hieuckitlog.txt 2>&1
 if exist "Configuration.xml" del "Configuration.xml">> %Temp%\hieuckitlog.txt 2>&1
+if exist "cleanospp.exe" del "cleanospp.exe">> %Temp%\hieuckitlog.txt 2>&1
+if exist "msvcr100.dll" del "msvcr100.dll">> %Temp%\hieuckitlog.txt 2>&1
 if exist "%FileName%" (
 	del "%FileName%">> %Temp%\hieuckitlog.txt 2>&1
 	if not exist "%FileName%" set deleteSuccess=1
