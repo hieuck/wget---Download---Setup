@@ -61,11 +61,12 @@ set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "OfficeRemoveAll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/cleanospp.exe"
-set "OfficeRemoveAlldll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/msvcr100.dll"
+set "OfficeRemovecfg=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-RemoveAll.xml"
+set "OfficeRemoveexe=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/cleanospp.exe"
+set "OfficeRemovedll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/msvcr100.dll"
 if /i "%ARCH%"=="x86" (
-	set "OfficeRemoveAll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x86/cleanospp.exe"
-	set "OfficeRemoveAlldll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x86/msvcr100.dll"
+	set "OfficeRemoveexe=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x86/cleanospp.exe"
+	set "OfficeRemovedll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x86/msvcr100.dll"
 )
 
 set "OfficeConfiguration="
@@ -361,13 +362,13 @@ echo.
 @echo off
 echo Downloading %SoftName%...
 if exist "wget.exe" (
-	wget --no-check-certificate --show-progress -q -O "cleanospp.exe" -U "%UserAgent%" "%OfficeRemoveAll%"
-	wget --no-check-certificate --show-progress -q -O "msvcr100.dll" -U "%UserAgent%" "%OfficeRemoveAlldll%"
+	wget --no-check-certificate --show-progress -q -O "cleanospp.exe" -U "%UserAgent%" "%OfficeRemoveexe%"
+	wget --no-check-certificate --show-progress -q -O "msvcr100.dll" -U "%UserAgent%" "%OfficeRemovedll%"
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%UserAgent%" "%OfficeConfiguration%"
 ) else (
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "cleanospp.exe" "%OfficeRemoveAll%" --insecure
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "msvcr100.dll" "%OfficeRemoveAlldll%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "cleanospp.exe" "%OfficeRemoveexe%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "msvcr100.dll" "%OfficeRemovedll%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "Configuration.xml" "%OfficeConfiguration%" --insecure || (
 		echo.
@@ -428,9 +429,9 @@ if %size% equ 0 (
 ) else if %sizeCfg% equ 0 (
 	start "" "%OfficeConfiguration%" /WAIT /D "%~dp0" /B "Configuration.xml"
 ) else if %sizeCl% equ 0 (
-	start "" "%OfficeRemoveAll%" /WAIT /D "%~dp0" /B "cleanospp.exe"
+	start "" "%OfficeRemoveexe%" /WAIT /D "%~dp0" /B "cleanospp.exe"
 ) else if %sizeCl% equ 0 (
-	start "" "%OfficeRemoveAlldll%" /WAIT /D "%~dp0" /B "msvcr100.dll"
+	start "" "%OfficeRemovedll%" /WAIT /D "%~dp0" /B "msvcr100.dll"
 )
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
