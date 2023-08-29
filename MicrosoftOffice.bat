@@ -61,14 +61,6 @@ set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "OfficeRemovecfg=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/RemoveAll.xml"
-set "OfficeRemoveexe=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/cleanospp.exe"
-set "OfficeRemovedll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/msvcr100.dll"
-if /i "%ARCH%"=="x86" (
-	set "OfficeRemoveexe=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x86/cleanospp.exe"
-	set "OfficeRemovedll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x86/msvcr100.dll"
-)
-
 set "OfficeConfiguration="
 set "OfficeConfigurationForOldWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-32.xml"
 set "OfficeConfigurationForOldWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
@@ -79,6 +71,7 @@ set "SoftPath=%ProgramFiles%\Common Files\Microsoft Shared\ClickToRun"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
+set "QuietModeRemove=/uninstall Configuration.xml"
 set "QuietMode=/configure Configuration.xml"
 
 set "Cr4ckFile=MAS_AIO"
@@ -534,8 +527,7 @@ echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-	"%FileName%" /configure RemoveAll.xml
-	"%~dp0cleanospp.exe" /all
+	"%FileName%" %QuietModeRemove%
 	"%FileName%" %QuietMode%
 )
 
