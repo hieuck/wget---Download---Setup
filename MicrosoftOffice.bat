@@ -53,24 +53,26 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: 
 
-set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/MicrosoftOfficeSetupWindows7.exe"
+set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows7.exe"
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/MicrosoftOfficeSetupWindows10.exe"
+set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
 set "OfficeRemoveAll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/clean/x64/cleanospp.exe"
+set "OfficeRemoveAlldll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/msvcr100.dll"
 if /i "%ARCH%"=="x86" (
 	set "OfficeRemoveAll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x86/cleanospp.exe"
+	set "OfficeRemoveAlldll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x86/msvcr100.dll"
 )
 
 set "OfficeConfiguration="
-set "OfficeConfigurationForOldWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/Configuration-2016-32.xml"
-set "OfficeConfigurationForOldWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/Configuration-2016-64.xml"
-set "OfficeConfigurationForNewWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/Configuration-2021-32.xml"
-set "OfficeConfigurationForNewWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/Configuration-2021-64.xml"
+set "OfficeConfigurationForOldWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-32.xml"
+set "OfficeConfigurationForOldWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
+set "OfficeConfigurationForNewWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-32.xml"
+set "OfficeConfigurationForNewWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-64.xml"
 
 set "SoftPath=%ProgramFiles%\Common Files\Microsoft Shared\ClickToRun"
 set "SoftPathFor32bit="
@@ -301,7 +303,6 @@ echo.>> %Temp%\hieuckitlog.txt
 echo Link: %Link:&=^&%>> %Temp%\hieuckitlog.txt
 echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
 if not "%OfficeConfiguration%"=="" echo Office Configuration: %OfficeConfiguration%>> %Temp%\hieuckitlog.txt
-if not "%OfficeRemoveAll%"=="" echo Office Remove All: %OfficeRemoveAll%>> %Temp%\hieuckitlog.txt
 if not "%SoftPath%"=="" echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
@@ -361,10 +362,12 @@ echo.
 echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "cleanospp.exe" -U "%UserAgent%" "%OfficeRemoveAll%"
+	wget --no-check-certificate --show-progress -q -O "msvcr100.dll" -U "%UserAgent%" "%OfficeRemoveAll%"
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%UserAgent%" "%OfficeConfiguration%"
 ) else (
-	curl -L --max-redirs 20 -A "%UserAgent%" -o "cleanospp.exe"" "%OfficeRemoveAll%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "cleanospp.exe" "%OfficeRemoveAll%" --insecure
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "msvcr100.dll" "%OfficeRemoveAll%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "Configuration.xml" "%OfficeConfiguration%" --insecure || (
 		echo.
