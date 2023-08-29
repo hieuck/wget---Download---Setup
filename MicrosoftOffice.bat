@@ -71,7 +71,6 @@ set "SoftPath=%ProgramFiles%\Common Files\Microsoft Shared\ClickToRun"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietModeRemove=/uninstall Configuration.xml"
 set "QuietMode=/configure Configuration.xml"
 
 set "Cr4ckFile=MAS_AIO"
@@ -484,7 +483,6 @@ echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
-	"%FileName%" %QuietModeRemove%
 	"%FileName%" %QuietMode%
 )
 
