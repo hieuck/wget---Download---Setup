@@ -1,4 +1,5 @@
 ﻿<Configuration>
+  <Remove All="True" />
   <Add OfficeClientEdition="32" Channel="PerpetualVL2021" AllowCdnFallback="true" OfficeMgmtCOM="false">
     <Product ID="ProPlus2021Volume" PIDKEY="N9J9Q-Q7MMP-XDDM6-63KKP-76FPM">
       <Language ID="en-us" />

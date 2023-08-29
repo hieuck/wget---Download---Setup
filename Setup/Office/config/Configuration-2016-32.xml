@@ -1,4 +1,5 @@
 ﻿<Configuration>
+  <Remove All="True" />
   <Add OfficeClientEdition="32" Channel="Current" AllowCdnFallback="true" OfficeMgmtCOM="false">
     <Product ID="ProPlusRetail">
       <Language ID="en-us" />

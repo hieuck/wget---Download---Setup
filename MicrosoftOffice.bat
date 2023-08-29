@@ -362,11 +362,13 @@ echo.
 @echo off
 echo Downloading %SoftName%...
 if exist "wget.exe" (
+	wget --no-check-certificate --show-progress -q -O "RemoveAll.xml" -U "%UserAgent%" "%OfficeRemovecfg%"
 	wget --no-check-certificate --show-progress -q -O "cleanospp.exe" -U "%UserAgent%" "%OfficeRemoveexe%"
 	wget --no-check-certificate --show-progress -q -O "msvcr100.dll" -U "%UserAgent%" "%OfficeRemovedll%"
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
 	wget --no-check-certificate --show-progress -q -O "Configuration.xml" -U "%UserAgent%" "%OfficeConfiguration%"
 ) else (
+	curl -L --max-redirs 20 -A "%UserAgent%" -o "RemoveAll.xml" "%OfficeRemovecfg%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "cleanospp.exe" "%OfficeRemoveexe%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "msvcr100.dll" "%OfficeRemovedll%" --insecure
 	curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%Link%" --insecure
@@ -389,6 +391,7 @@ for %%F in ("%FileName%") do set "size=%%~zF"
 for %%F in ("Configuration*.xml") do set "sizeCfg=%%~zF"
 for %%F in ("cleanospp.exe") do set "sizeCl=%%~zF"
 for %%F in ("msvcr100.dll") do set "sizeCldll=%%~zF"
+for %%F in ("RemoveAll.xml") do set "sizeClcfg=%%~zF"
 
 
 if %size% equ 0 (
@@ -414,6 +417,10 @@ if %size% equ 0 (
 	echo msvcr100.dll download failed. File size is 0KB. Downloading with browser...
 	goto DLwB
 )
+) else if %sizeClcfg% equ 0 (
+	echo RemoveAll.xml download failed. File size is 0KB. Downloading with browser...
+	goto DLwB
+)
 
 goto ExitDLwB
 
@@ -430,8 +437,10 @@ if %size% equ 0 (
 	start "" "%OfficeConfiguration%" /WAIT /D "%~dp0" /B "Configuration.xml"
 ) else if %sizeCl% equ 0 (
 	start "" "%OfficeRemoveexe%" /WAIT /D "%~dp0" /B "cleanospp.exe"
-) else if %sizeCl% equ 0 (
+) else if %sizeCldll% equ 0 (
 	start "" "%OfficeRemovedll%" /WAIT /D "%~dp0" /B "msvcr100.dll"
+) else if %sizeClcfg% equ 0 (
+	start "" "%OfficeRemovecfg%" /WAIT /D "%~dp0" /B "RemoveAll.xml"
 )
 if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
 
@@ -440,6 +449,7 @@ for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
 for /R %%i in ("Configuration*.xml") do set "FileNameDLwBCfg=%%i"
 for /R %%i in ("cleanospp.exe") do set "FileNameDLwBCl=%%i"
 for /R %%i in ("msvcr100.dll") do set "FileNameDLwBCldll=%%i"
+for /R %%i in ("RemoveAll.xml") do set "FileNameDLwBClcfg=%%i"
 
 if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
@@ -449,6 +459,8 @@ if not exist "%FileNameDLwB%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
 ) else if not exist "%FileNameDLwBCldll%" (
 	timeout /t 1 /nobreak >nul & goto CheckExist
+) else if not exist "%FileNameDLwBClcfg%" (
+	timeout /t 1 /nobreak >nul & goto CheckExist
 )
 
 echo Download completed with the browser. Installation in progress...
@@ -456,6 +468,7 @@ move /y "%FileNameDLwB%" "%~dp0%FileName%"
 move /y "%FileNameDLwBCfg%" "%~dp0Configuration.xml"
 move /y "%FileNameDLwBCl%" "%~dp0cleanospp.exe"
 move /y "%FileNameDLwBCldll%" "%~dp0msvcr100.dll"
+move /y "%FileNameDLwBClcfg%" "%~dp0RemoveAll.xml"
 
 endlocal
 :ExitDLwB
@@ -521,6 +534,7 @@ echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
 	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
 ) else (
+	"%FileName%" /configure RemoveAll.xml
 	"%~dp0cleanospp.exe" /all
 	"%FileName%" %QuietMode%
 )
