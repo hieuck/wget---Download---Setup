@@ -53,13 +53,13 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: 
 
-set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetupOld.exe"
-set "LinkForOldWindows32bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetupOld32.exe"
-set "LinkForOldWindows64bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetupOld64.exe"
+set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeChromeSetupOld.exe"
+set "LinkForOldWindows32bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeChromeSetupOld32.exe"
+set "LinkForOldWindows64bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeChromeSetupOld64.exe"
 
 set "Link=https://dl.google.com/chrome/install/latest/chrome_installer.exe"
-set "LinkForAllWindows32bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetup32.exe"
-set "LinkForAllWindows64bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeSetup64.exe"
+set "LinkForAllWindows32bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeChromeSetup32.exe"
+set "LinkForAllWindows64bit=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/ChromeChromeSetup64.exe"
 
 set "SoftPath=%ProgramFiles%\Google\Chrome\Application"
 set "SoftPathFor32bit="
