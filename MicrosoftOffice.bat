@@ -61,7 +61,7 @@ set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "OfficeRemovecfg=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-RemoveAll.xml"
+set "OfficeRemovecfg=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/RemoveAll.xml"
 set "OfficeRemoveexe=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/cleanospp.exe"
 set "OfficeRemovedll=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/clean/x64/msvcr100.dll"
 if /i "%ARCH%"=="x86" (
