@@ -7,6 +7,6 @@
   </Add>
   <Remove All="true" />
   <Display AcceptEULA="True" />
-  <Updates Enabled="false" />
+  <Updates Enabled="true" />
   <Extend DownloadFirst="true" CreateShortcuts="true" />
 </Configuration>
