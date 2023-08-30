@@ -58,26 +58,31 @@ setlocal
 :menu
 echo Do you want to use which version of Microsoft Office?
 echo 1. Office ProPlusRetail				2. Office ProPlus2019Volume
+echo.
 echo 3. Office ProPlus2021Volume			4. Office O365ProPlusRetail
 set /p choice=Select an option (1 or 2 or 3 or 4): 
 
 if "%choice%"=="1" (
 	echo You have chosen to use Office Professional Plus 2016 - ProPlusRetail.
+	set "SoftName=Microsoft Office Professional Plus 2016"
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows7.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
 	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-32.xml"
 ) else if "%choice%"=="2" (
 	echo You have chosen to use Office Professional Plus 2019 Volume License - ProPlus2019Volume.
+	set "SoftName=Microsoft Office Professional Plus 2019 Volume License"
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2019-64.xml"
 	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2019-64.xml"
 ) else if "%choice%"=="3" (
 	echo You have chosen to use Office Professional Plus 2021 Volume License - ProPlus2021Volume.
+	set "SoftName=Microsoft Office Professional Plus 2021 Volume License"
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-64.xml"
 	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-32.xml"
 ) else if "%choice%"=="4" (
 	echo You have chosen to use Microsoft 365 Apps for Enterprise - O365ProPlusRetail.
+	set "SoftName=Microsoft Microsoft 365 Apps for Enterprise"
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOffice365Setup.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml"
 ) else (
@@ -87,7 +92,7 @@ if "%choice%"=="1" (
 
 :: Set the Link as an environment variable
 setx Link "%Link%"
-setx "OfficeConfiguration=%OfficeConfiguration%"
+setx OfficeConfiguration "%OfficeConfiguration%"
 
 endlocal
 
@@ -600,6 +605,12 @@ if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" co
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%Public%\Desktop"
 pause
 ::Check Windows OS Version to Cr4ck Office
+
+if "%OfficeConfiguration%"=="https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml" (
+	echo Microsoft 365 Apps for Enterprise requires an activation account.
+	goto NextStepAfterCr4ckForCheckOSVersion
+)
+
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
