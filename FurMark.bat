@@ -13,6 +13,10 @@ REM Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
+REM Detect Windows Architecture
+set "ARCH=x86"
+if exist "%SystemRoot%\SysWOW64" set "ARCH=x64"
+
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
 mode con:cols=120 lines=17
@@ -116,13 +120,7 @@ set "Cr4ckPath="
 
 set "Shortcut=Yes"
 
-REM Detect Windows Architecture and Check Compatibility for 32-bit
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
-)
-
+REM Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="No" (
 	if /i "%ARCH%"=="x86" (
 		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
@@ -134,7 +132,7 @@ if /i "%Support32Bit%"=="No" (
 	)
 )
 
-::Check Windows OS Version and Check Support Old Windows
+REM Check Windows OS Version and Check Support Old Windows
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
@@ -413,9 +411,6 @@ setlocal EnableDelayedExpansion
 for %%F in ("%FileName%") do set "size=%%~zF"
 if %size% equ 0 (
 	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
-	goto DLwB
-) else if %size% lss 1048576 (
-	echo %SoftName% download failed. File size is less than 1MB. Downloading with browser....
 	goto DLwB
 ) else (
 	goto ExitDLwB
