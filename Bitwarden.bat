@@ -43,7 +43,7 @@ set "SoftName=Bitwarden"
 set "Process=Bitwarden.exe"
 
 set "FileName="
-set "SoftNameVersion=2023.7.0"
+set "SoftNameVersion=2023.8.2"
 set "FileDLwB=Bitwarden*.exe"
 
 set "SupportOldWindows=Yes"
