@@ -61,7 +61,7 @@ set "Link=https://github.com/bitwarden/clients/releases/download/desktop-v%SoftN
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "SoftPath=%LocalAppData%\Programs\Bitwarden"
+set "SoftPath=%ProgramFiles%\Bitwarden"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
