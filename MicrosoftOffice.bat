@@ -67,13 +67,13 @@ echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]:
 choice /c 1234 /t 5 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
-if errorlevel 4 (
+if "%errorlevel%"=="4" (
 	set "choice=4"
-) else if errorlevel 3 (
+) else if "%errorlevel%"=="3" (
 	set "choice=3"
-) else if errorlevel 2 (
+) else if "%errorlevel%"=="2" (
 	set "choice=2"
-) else if errorlevel 1 (
+) else if "%errorlevel%"=="1" (
 	set "choice=1"
 )
 
