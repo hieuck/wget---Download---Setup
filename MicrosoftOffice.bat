@@ -41,8 +41,9 @@ set "License=Yes"
 
 REM set "SoftName=Microsoft Office Installer"
 set "Process=OfficeClickToRun.exe"
+set "Process2=OfficeC2RClient.exe"
 
-set "FileName="
+set "FileName=MicrosoftOfficeSetup.exe"
 set "SoftNameVersion="
 set "FileDLwB=MicrosoftOffice*.exe"
 
@@ -392,7 +393,14 @@ tasklist | find /i "%Process%" > nul
 if %errorlevel% equ 0 (
 	taskkill /im "%Process%" /f
 )
-
+tasklist | find /i "%Process2%" > nul
+if %errorlevel% equ 0 (
+	taskkill /im "%Process2%" /f
+)
+tasklist | find /i "%FileName%" > nul
+if %errorlevel% equ 0 (
+	taskkill /im "%FileName%" /f
+)
 REM Save the value of the %time% variable before running the batch script
 set start_time=%time%
 
