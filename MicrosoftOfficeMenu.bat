@@ -57,24 +57,29 @@ setlocal
 
 :menu
 echo Do you want to use which version of Microsoft Office?
-echo 1. Office ProPlusRetail
-echo 2. Office ProPlus2019Volume
-echo 2. Office ProPlus2021Volume
-echo 3. Office O365ProPlusRetail
+echo 1. Office ProPlusRetail				2. Office ProPlus2019Volume
+echo 3. Office ProPlus2021Volume			4. Office O365ProPlusRetail
 set /p choice=Select an option (1 or 2 or 3 or 4): 
 
 if "%choice%"=="1" (
 	echo You have chosen to use Office Professional Plus 2016 - ProPlusRetail.
-	set "Link=https://www.ultraviewer.net/vi/UltraViewer_setup_6.6_vi.exe"
+	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows7.exe"
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
+	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-32.xml"
 ) else if "%choice%"=="2" (
 	echo You have chosen to use Office Professional Plus 2019 Volume License - ProPlus2019Volume.
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2019-64.xml"
+	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2019-64.xml"
 ) else if "%choice%"=="3" (
 	echo You have chosen to use Office Professional Plus 2021 Volume License - ProPlus2021Volume.
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-64.xml"
+	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-32.xml"
 ) else if "%choice%"=="4" (
 	echo You have chosen to use Microsoft 365 Apps for Enterprise - O365ProPlusRetail.
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOffice365Setup.exe"
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml"
 ) else (
 	echo Invalid choice. Please select 1 or 2 or 3 or 4.
 	goto menu
@@ -82,10 +87,11 @@ if "%choice%"=="1" (
 
 :: Set the Link as an environment variable
 setx Link "%Link%"
+setx "OfficeConfiguration=%OfficeConfiguration%"
 
 endlocal
 
-set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows7.exe"
+set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
@@ -93,11 +99,11 @@ set "Link=%Link%"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "OfficeConfiguration="
-set "OfficeConfigurationForOldWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-32.xml"
-set "OfficeConfigurationForOldWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
-set "OfficeConfigurationForNewWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-32.xml"
-set "OfficeConfigurationForNewWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-64.xml"
+set "OfficeConfiguration=%OfficeConfiguration%"
+set "OfficeConfigurationForOldWindows32bit="
+set "OfficeConfigurationForOldWindows64bit="
+set "OfficeConfigurationForNewWindows32bit="
+set "OfficeConfigurationForNewWindows64bit="
 
 set "SoftPath=%ProgramFiles%\Common Files\Microsoft Shared\ClickToRun"
 set "SoftPathFor32bit="
