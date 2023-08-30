@@ -49,6 +49,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: https://www.fosshub.com/qBittorrent.html
 
+REM MenuChoice Configuration
 setlocal
 
 :menu
