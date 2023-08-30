@@ -70,9 +70,9 @@ if "%errorlevel%"=="1" (
 	set "choice=1"
 ) else if "%errorlevel%"=="2" (
 	set "choice=2"
-) else if "%errorlevel%"=="N" (
+) else if "%errorlevel%"=="3" (
 	set "choice=N"
-) else if "%errorlevel%"=="O" (
+) else if "%errorlevel%"=="4" (
 	set "choice=O"
 )
 
