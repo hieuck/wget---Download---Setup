@@ -568,6 +568,22 @@ echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
 timeout /t 2
 :end
 
+REM Create Shortcut
+if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" "%Public%\Desktop"
+if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%Public%\Desktop"
+if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%Public%\Desktop"
+if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%Public%\Desktop"
+
+REM Close Setup
+tasklist | find /i "OfficeC2RClient.exe" > nul
+if %errorlevel% equ 0 taskkill /im "OfficeC2RClient.exe" /f
+
+REM Check Windows OS Version to Cr4ck Office
+if "%OfficeConfiguration%"=="https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml" (
+	echo Microsoft 365 Apps for Enterprise requires an activation account.
+	goto NextStepAfterCr4ckForCheckOSVersion
+)
+
 REM License
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
@@ -613,23 +629,7 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-::Close Setup
-tasklist | find /i "OfficeC2RClient.exe" > nul
-if %errorlevel% equ 0 taskkill /im "OfficeC2RClient.exe" /f
-
-REM Create Shortcut
-if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" "%Public%\Desktop"
-if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%Public%\Desktop"
-if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%Public%\Desktop"
-if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%Public%\Desktop"
-
-::Check Windows OS Version to Cr4ck Office
-
-if "%OfficeConfiguration%"=="https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml" (
-	echo Microsoft 365 Apps for Enterprise requires an activation account.
-	goto NextStepAfterCr4ckForCheckOSVersion
-)
-
+REM Check Windows OS Version to Cr4ck Office
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
