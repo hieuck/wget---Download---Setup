@@ -560,7 +560,7 @@ if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Excel.lnk" copy /y
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Outlook.lnk" "%Public%\Desktop"
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" "%Public%\Desktop"
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%Public%\Desktop"
-pause
+
 ::Check Windows OS Version to Cr4ck Office
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
