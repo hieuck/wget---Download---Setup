@@ -107,9 +107,9 @@ if "%choice%"=="1" (
 )
 
 :: Set the Link as an environment variable
-setx SoftName "%SoftName%"
-setx Link "%Link%"
-setx OfficeConfiguration "%OfficeConfiguration%"
+setx SoftName "%SoftName%" >nul
+setx Link "%Link%" >nul
+setx OfficeConfiguration "%OfficeConfiguration%" >nul
 
 endlocal
 
