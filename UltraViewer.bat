@@ -53,11 +53,58 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: https://www.ultraviewer.net/vi/download.html
 
+setlocal
+
+:menu
+echo Do you want to use the old version?
+echo 1. New version (N)
+echo 2. Old version - maybe no ads (O)
+
+REM The number corresponding to the default choice
+set "defaultChoice=1"
+echo Select an option (1/N or 2/O) [Default is %defaultChoice%]: 
+choice /c 12no /t 5 /d %defaultChoice% /n >nul
+
+REM Check the errorlevel to determine the choice made by the user
+if "%errorlevel%"=="1" (
+	set "choice=1"
+) else if "%errorlevel%"=="2" (
+	set "choice=2"
+) else if "%errorlevel%"=="N" (
+	set "choice=N"
+) else if "%errorlevel%"=="O" (
+	set "choice=O"
+)
+
+if "%choice%"=="1" (
+	echo You have chosen to use the new version.
+	set "Link=https://www.ultraviewer.net/vi/UltraViewer_setup_6.6_vi.exe"
+	goto NextStepAfterChosen
+) else if /i "%choice%"=="N" (
+	echo You have chosen to use the new version.
+	set "Link=https://www.ultraviewer.net/vi/UltraViewer_setup_6.6_vi.exe"
+	goto NextStepAfterChosen
+) else if "%choice%"=="2" (
+	echo You have chosen to use the old version - maybe no ads.
+	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/UltraViewer_setup_6.5_vi.exe"
+	goto NextStepAfterChosen
+) else if /i "%choice%"=="O" (
+	echo You have chosen to use the old version - maybe no ads.
+	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/UltraViewer_setup_6.5_vi.exe"
+	goto NextStepAfterChosen
+) else (
+	echo Invalid choice. Please select 1/N or 2/O.
+	goto menu
+)
+
+endlocal
+:NextStepAfterChosen
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://www.ultraviewer.net/vi/UltraViewer_setup_6.6_vi.exe"
+set "Link=%Link%"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
