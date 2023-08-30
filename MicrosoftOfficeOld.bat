@@ -32,14 +32,14 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh Microsoft Office Installer. Vui Long Cho...
+@echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
 REM Required Configuration Settings
 
 set "Extract7z="
 set "License=Yes"
 
-REM set "SoftName=Microsoft Office Installer"
+set "SoftName=Microsoft Office"
 set "Process=OfficeClickToRun.exe"
 
 set "FileName="
@@ -53,81 +53,19 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: 
 
-setlocal
-
-:menu
-echo Do you want to use which version of Microsoft Office?
-echo 1. Office ProPlusRetail				2. Office ProPlus2019Volume
-echo.
-echo 3. Office ProPlus2021Volume			4. Office O365ProPlusRetail
-
-REM The number corresponding to the default choice
-set "defaultChoice=3"
-echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
-choice /c 1234 /t 5 /d %defaultChoice% /n >nul
-
-REM Check the errorlevel to determine the choice made by the user
-if errorlevel 4 (
-	set "choice=4"
-) else if errorlevel 3 (
-	set "choice=3"
-) else if errorlevel 2 (
-	set "choice=2"
-) else if errorlevel 1 (
-	set "choice=1"
-)
-
-REM Display the choice made
-if "%choice%"=="1" (
-	echo You have chosen to use Office Professional Plus 2016 - ProPlusRetail.
-	set "SoftName=Microsoft Office Professional Plus 2016"
-	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows7.exe"
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
-	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-32.xml"
-) else if "%choice%"=="2" (
-	echo You have chosen to use Office Professional Plus 2019 Volume License - ProPlus2019Volume.
-	set "SoftName=Microsoft Office Professional Plus 2019 Volume License"
-	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2019-64.xml"
-	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2019-64.xml"
-) else if "%choice%"=="3" (
-	echo You have chosen to use Office Professional Plus 2021 Volume License - ProPlus2021Volume.
-	set "SoftName=Microsoft Office Professional Plus 2021 Volume License"
-	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-64.xml"
-	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-32.xml"
-) else if "%choice%"=="4" (
-	echo You have chosen to use Microsoft 365 Apps for Enterprise - O365ProPlusRetail.
-	set "SoftName=Microsoft Microsoft 365 Apps for Enterprise"
-	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOffice365Setup.exe"
-	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml"
-) else (
-	echo Invalid choice. Please select 1, 2, 3, or 4.
-	goto menu
-)
-
-:: Set the Link as an environment variable
-setx SoftName "%SoftName%"
-setx Link "%Link%"
-setx OfficeConfiguration "%OfficeConfiguration%"
-
-endlocal
-
-set "SoftName=%SoftName%"
-
-set "LinkForOldWindows="
+set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows7.exe"
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=%Link%"
+set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "OfficeConfiguration=%OfficeConfiguration%"
-set "OfficeConfigurationForOldWindows32bit="
-set "OfficeConfigurationForOldWindows64bit="
-set "OfficeConfigurationForNewWindows32bit="
-set "OfficeConfigurationForNewWindows64bit="
+set "OfficeConfiguration="
+set "OfficeConfigurationForOldWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-32.xml"
+set "OfficeConfigurationForOldWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
+set "OfficeConfigurationForNewWindows32bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-32.xml"
+set "OfficeConfigurationForNewWindows64bit=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-64.xml"
 
 set "SoftPath=%ProgramFiles%\Common Files\Microsoft Shared\ClickToRun"
 set "SoftPathFor32bit="
@@ -624,12 +562,6 @@ if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\PowerPoint.lnk" co
 if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" copy /y "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Word.lnk" "%Public%\Desktop"
 
 ::Check Windows OS Version to Cr4ck Office
-
-if "%OfficeConfiguration%"=="https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml" (
-	echo Microsoft 365 Apps for Enterprise requires an activation account.
-	goto NextStepAfterCr4ckForCheckOSVersion
-)
-
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
