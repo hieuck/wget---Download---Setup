@@ -32,14 +32,14 @@ echo.
 @echo     Бл   ВВВВВ  ллл   ллл ллл лллллл ллллллллл  ллллл  ллл  лл ллл    ллл В
 @echo.
 @echo                 The current date and time are: %date% %time%
-@echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
+@echo                 Dang Cau Hinh Microsoft Office Installer. Vui Long Cho...
 @echo off
 REM Required Configuration Settings
 
 set "Extract7z="
 set "License=Yes"
 
-set "SoftName=Microsoft Office"
+REM set "SoftName=Microsoft Office Installer"
 set "Process=OfficeClickToRun.exe"
 
 set "FileName="
@@ -91,10 +91,13 @@ if "%choice%"=="1" (
 )
 
 :: Set the Link as an environment variable
+setx SoftName "%SoftName%"
 setx Link "%Link%"
 setx OfficeConfiguration "%OfficeConfiguration%"
 
 endlocal
+
+set "SoftName=%SoftName%"
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
