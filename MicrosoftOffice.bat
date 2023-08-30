@@ -84,34 +84,34 @@ if "%choice%"=="1" (
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows7.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
 	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-32.xml"
+	goto NextStepAfterChosen
 ) else if "%choice%"=="2" (
 	echo You have chosen to use Office Professional Plus 2019 Volume License - ProPlus2019Volume.
 	set "SoftName=Microsoft Office Professional Plus 2019 Volume License"
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2019-64.xml"
 	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2019-64.xml"
+	goto NextStepAfterChosen
 ) else if "%choice%"=="3" (
 	echo You have chosen to use Office Professional Plus 2021 Volume License - ProPlus2021Volume.
 	set "SoftName=Microsoft Office Professional Plus 2021 Volume License"
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-64.xml"
 	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2021-32.xml"
+	goto NextStepAfterChosen
 ) else if "%choice%"=="4" (
 	echo You have chosen to use Microsoft 365 Apps for Enterprise - O365ProPlusRetail.
 	set "SoftName=Microsoft Microsoft 365 Apps for Enterprise"
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOffice365Setup.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml"
+	goto NextStepAfterChosen
 ) else (
 	echo Invalid choice. Please select 1, 2, 3, or 4.
 	goto menu
 )
 
-:: Set the Link as an environment variable
-setx SoftName "%SoftName%" >nul
-setx Link "%Link%" >nul
-setx OfficeConfiguration "%OfficeConfiguration%" >nul
-
 endlocal
+:NextStepAfterChosen
 
 set "SoftName=%SoftName%"
 
