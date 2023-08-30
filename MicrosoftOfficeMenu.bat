@@ -60,8 +60,24 @@ echo Do you want to use which version of Microsoft Office?
 echo 1. Office ProPlusRetail				2. Office ProPlus2019Volume
 echo.
 echo 3. Office ProPlus2021Volume			4. Office O365ProPlusRetail
-set /p choice=Select an option (1 or 2 or 3 or 4): 
 
+REM The number corresponding to the default choice
+set "defaultChoice=3"
+echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
+choice /c 1234 /t 5 /d %defaultChoice% /n >nul
+
+REM Check the errorlevel to determine the choice made by the user
+if errorlevel 4 (
+	set "choice=4"
+) else if errorlevel 3 (
+	set "choice=3"
+) else if errorlevel 2 (
+	set "choice=2"
+) else if errorlevel 1 (
+	set "choice=1"
+)
+
+REM Display the choice made
 if "%choice%"=="1" (
 	echo You have chosen to use Office Professional Plus 2016 - ProPlusRetail.
 	set "SoftName=Microsoft Office Professional Plus 2016"
@@ -86,7 +102,7 @@ if "%choice%"=="1" (
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOffice365Setup.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml"
 ) else (
-	echo Invalid choice. Please select 1 or 2 or 3 or 4.
+	echo Invalid choice. Please select 1, 2, 3, or 4.
 	goto menu
 )
 
