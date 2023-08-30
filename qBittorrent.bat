@@ -39,7 +39,7 @@ set "SoftName=qBittorrent"
 set "Process=qBittorrent.exe"
 
 set "FileName="
-set "SoftNameVersion=4.5.4"
+set "SoftNameVersion=4.5.5"
 set "FileDLwB=qbittorrent*setup*.exe"
 
 set "SupportOldWindows=Yes"
@@ -49,11 +49,58 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: https://www.fosshub.com/qBittorrent.html
 
+setlocal
+
+:menu
+echo Do you want to use the download link from my GitHub?
+echo 1. Yes (Y)
+echo 2. No (N)
+
+REM The number corresponding to the default choice
+set "defaultChoice=1"
+echo Select an option (1/Y or 2/N) [Default is %defaultChoice%]: 
+choice /c 12yn /t 5 /d %defaultChoice% /n >nul
+
+REM Check the errorlevel to determine the choice made by the user
+if "%errorlevel%"=="1" (
+	set "choice=1"
+) else if "%errorlevel%"=="2" (
+	set "choice=2"
+) else if "%errorlevel%"=="3" (
+	set "choice=Y"
+) else if "%errorlevel%"=="4" (
+	set "choice=N"
+)
+
+if "%choice%"=="1" (
+	echo You have chosen to use the download link from my GitHub.
+	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
+	goto NextStepAfterChosen
+) else if /i "%choice%"=="Y" (
+	echo You have chosen to use the download link from my GitHub.
+	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
+	goto NextStepAfterChosen
+) else if "%choice%"=="2" (
+	echo You have chosen to use the download link from FossHub.
+	set "Link=https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
+	goto NextStepAfterChosen
+) else if /i "%choice%"=="N" (
+	echo You have chosen to use the download link from FossHub.
+	set "Link=https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
+	goto NextStepAfterChosen
+) else (
+	echo Invalid choice. Please select 1/Y or 2/N.
+	goto menu
+)
+
+endlocal
+:NextStepAfterChosen
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
+set "Link=%Link%"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
