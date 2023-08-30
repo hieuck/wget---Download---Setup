@@ -578,7 +578,7 @@ REM Close Setup
 tasklist | find /i "OfficeC2RClient.exe" > nul
 if %errorlevel% equ 0 taskkill /im "OfficeC2RClient.exe" /f
 
-REM Check Windows OS Version to Cr4ck Office
+REM Check the Office version to perform Cr4ck.
 if "%OfficeConfiguration%"=="https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml" (
 	echo Microsoft 365 Apps for Enterprise requires an activation account.
 	goto NextStepAfterCr4ckForCheckOSVersion
