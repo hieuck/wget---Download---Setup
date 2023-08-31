@@ -59,13 +59,13 @@ set "LinkForOldWindows64bit="
 
 set "Link=https://github.com/bitwarden/clients/releases/download/desktop-v%SoftNameVersion%/Bitwarden-Installer-%SoftNameVersion%.exe"
 set "LinkForAllWindows32bit="
-set "LinkForAllWindows64bit="
+set "LinkForAllWindows64bit=https://vault.bitwarden.com/download/?app=desktop&platform=windows"
 
 set "SoftPath=%ProgramFiles%\Bitwarden"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/S"
+set "QuietMode=/allusers /S"
 
 set "Cr4ckFile="
 set "Cr4ckPath="
