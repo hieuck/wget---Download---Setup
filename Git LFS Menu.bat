@@ -1,15 +1,18 @@
 @echo off
 setlocal
-
+echo  Enter Repo Path: 
+set /p "LocalPath="
+pushd %LocalPath%
 :menu
 echo Git LFS
 echo 1. Git LFS Install				2. Git LFS Unsinstall
 echo.
-echo 3. Git LFS Track "*.exe"			4. Exit
+echo 3. Git LFS Track "*.exe"			4. Git LFS Untrack "*.exe"
+echo 5. Exit
 REM The number corresponding to the default choice
-set "defaultChoice=3"
+set "defaultChoice=4"
 echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
-choice /c 1234 /t 5 /d %defaultChoice% /n >nul
+choice /c 1234 /t 999 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
 if "%errorlevel%"=="1" (
@@ -28,6 +31,8 @@ if "%choice%"=="1" (
 ) else if "%choice%"=="3" (
 	git lfs track "*.exe"
 ) else if "%choice%"=="4" (
+	git lfs untrack "*.exe"
+) else if "%choice%"=="5" (
 	exit
 )
 goto menu
