@@ -2,7 +2,11 @@
 setlocal
 echo  Enter Repo Path: 
 set /p "LocalPath="
-pushd %LocalPath%
+
+pushd "%LocalPath%"
+cd  "%LocalPath%"
+git-lfs version
+
 :menu
 echo Git LFS
 echo 1. Git LFS Install				2. Git LFS Unsinstall
@@ -10,7 +14,7 @@ echo.
 echo 3. Git LFS Track "*.exe"			4. Git LFS Untrack "*.exe"
 echo 5. Exit
 REM The number corresponding to the default choice
-set "defaultChoice=4"
+set "defaultChoice=5"
 echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
 choice /c 1234 /t 999 /d %defaultChoice% /n >nul
 
