@@ -39,7 +39,7 @@ set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 REM Set code based on Windows Architecture
 REM Source Link: https://github.com/hieuck/curl-uri-wget-download-setup
 
-set "wget=https://media.githubusercontent.com/media/hieuck/curl-uri-wget-download-setup/main/wget.exe?download=true"
+set "wget=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/wget.exe"
 set "AnyDesk=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/AnyDesk.bat"
 set "CocCoc=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/CocCoc.bat"
 set "EVKeyFor1Click=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/EVKeyFor1Click.bat"
