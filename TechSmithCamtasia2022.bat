@@ -53,7 +53,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/TechSmithCamtasia2022Setup.exe"
+set "Link=https://www.dropbox.com/scl/fi/ehr9fiybekdwguhkx83wz/TechSmithCamtasia2022Setup.exe?rlkey=a9p1d0w3drdeubl6zw81c2xpb&dl=0"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -67,6 +67,11 @@ set "Cr4ckFile=TechSmithCamtasiaCr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
+
+REM Convert to direct download link.
+if "%Link:www.dropbox.com=%" neq "%Link%" (
+    set "Link=%Link:www.dropbox.com=dl.dropboxusercontent.com%"
+)
 
 REM Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
