@@ -80,6 +80,11 @@ set "Cr4ckPath="
 
 set "Shortcut="
 
+REM Convert to direct download link.
+if "%Link:www.dropbox.com=%" neq "%Link%" (
+    set "Link=%Link:www.dropbox.com=dl.dropboxusercontent.com%"
+)
+
 REM Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="No" (
 	if /i "%ARCH%"=="x86" (
