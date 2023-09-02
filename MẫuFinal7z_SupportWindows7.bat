@@ -81,40 +81,31 @@ set "Cr4ckPath="
 set "Shortcut="
 
 REM Convert to direct download Link.
-REM Check if the Link contains "www.dropbox.com"
-if "%Link:www.dropbox.com=%" neq "%Link%" (
-    set "Link=%Link:www.dropbox.com=dl.dropboxusercontent.com%"
+setlocal enabledelayedexpansion
+
+REM Check if the Link contains "www.dropbox.com" and replace it
+echo !Link! | findstr /i /c:"www.dropbox.com" >nul
+if !errorlevel!==0 (
+    set "Link=!Link:www.dropbox.com=dl.dropboxusercontent.com!"
+	goto TheNextStepOfDirectDownloadLink
 )
 
-REM Check if the Link contains "drive.google.com"
-setlocal enabledelayedexpansion
+REM Check if the Link contains "drive.google.com" and convert it
 echo !Link! | findstr /i /c:"drive.google.com" >nul
 if !errorlevel!==0 (
-	REM Find the position of "file/d/" in the URL
-	for /f "tokens=*" %%a in ('echo !Link! ^| findstr /i /c:"file/d/"') do (
-		set "url_with_id=%%a"
-	)
+	REM Replace "open?id=" with "uc?export=download&id="
+    set "Link=!Link:open?id=uc?export=download&id!"
+	goto TheNextStepOfDirectDownloadLink
+)
 
-	REM Remove everything before "file/d/"
-	set "url_with_id=!url_with_id:*file/d/=!"
-
-	REM Check if "/view" is found after the ID
-	for /f "tokens=*" %%b in ('echo !url_with_id! ^| findstr /i /c:"/view"') do (
-		set "file_id=%%b"
-	)
-
-	REM Remove the trailing "/view"
-	set "file_id=!file_id:/view=!"
-
-	REM Check if the file_id is not empty
-	if not "!file_id!"=="" (
-		set "Link=https://drive.google.com/uc?export=download&id=!file_id!"
-		goto TheNextStepOfDirectDownloadLink
-	) else (
-		echo Failed to extract file ID.
-	)
-) else (
-	echo Link does not match the pattern.
+REM Check if the Link contains "sharepoint.com" and convert it
+echo !Link! | findstr /i /c:"sharepoint.com" >nul
+if !errorlevel!==0 (
+    for /f "delims=? tokens=1" %%a in ("!Link!") do (
+        set "Base_Link=%%a"
+    )
+    set "Link=!Base_Link!?download=1"
+	goto TheNextStepOfDirectDownloadLink
 )
 endlocal
 :TheNextStepOfDirectDownloadLink
