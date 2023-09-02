@@ -109,7 +109,7 @@ if !errorlevel!==0 (
 	REM Check if the file_id is not empty
 	if not "!file_id!"=="" (
 		set "Link=https://drive.google.com/uc?export=download&id=!file_id!"
-		goto TheNextStepOfDirectDownloadLinkFromGoogleDrive
+		goto TheNextStepOfDirectDownloadLink
 	) else (
 		echo Failed to extract file ID.
 	)
@@ -117,7 +117,7 @@ if !errorlevel!==0 (
 	echo Link does not match the pattern.
 )
 endlocal
-:TheNextStepOfDirectDownloadLinkFromGoogleDrive
+:TheNextStepOfDirectDownloadLink
 
 REM Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="No" (
