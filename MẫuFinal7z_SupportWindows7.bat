@@ -80,10 +80,44 @@ set "Cr4ckPath="
 
 set "Shortcut="
 
-REM Convert to direct download link.
+REM Convert to direct download Link.
+REM Check if the Link contains "www.dropbox.com"
 if "%Link:www.dropbox.com=%" neq "%Link%" (
     set "Link=%Link:www.dropbox.com=dl.dropboxusercontent.com%"
 )
+
+REM Check if the Link contains "drive.google.com"
+setlocal enabledelayedexpansion
+echo !Link! | findstr /i /c:"drive.google.com" >nul
+if !errorlevel!==0 (
+	REM Find the position of "file/d/" in the URL
+	for /f "tokens=*" %%a in ('echo !Link! ^| findstr /i /c:"file/d/"') do (
+		set "url_with_id=%%a"
+	)
+
+	REM Remove everything before "file/d/"
+	set "url_with_id=!url_with_id:*file/d/=!"
+
+	REM Check if "/view" is found after the ID
+	for /f "tokens=*" %%b in ('echo !url_with_id! ^| findstr /i /c:"/view"') do (
+		set "file_id=%%b"
+	)
+
+	REM Remove the trailing "/view"
+	set "file_id=!file_id:/view=!"
+
+	REM Check if the file_id is not empty
+	if not "!file_id!"=="" (
+		set "Link=https://drive.google.com/uc?export=download&id=!file_id!"
+		goto TheNextStepOfDirectDownloadLinkFromGoogleDrive
+	) else (
+		echo Failed to extract file ID.
+	)
+) else (
+	echo Link does not match the pattern.
+)
+endlocal
+:TheNextStepOfDirectDownloadLinkFromGoogleDrive
 
 REM Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="No" (
