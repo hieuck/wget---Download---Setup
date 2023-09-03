@@ -86,28 +86,39 @@ setlocal enabledelayedexpansion
 REM Check if the Link contains "www.dropbox.com" and replace it
 echo !Link! | findstr /i /c:"www.dropbox.com" >nul
 if !errorlevel!==0 (
-    set "Link=!Link:www.dropbox.com=dl.dropboxusercontent.com!"
+	set "Link=!Link:www.dropbox.com=dl.dropboxusercontent.com!"
 	goto TheNextStepOfDirectDownloadLink
 )
 
-REM Check if the Link contains "drive.google.com" and convert it
-echo !Link! | findstr /i /c:"drive.google.com" >nul
+REM Check if the Link contains "/view" and extract the file ID
+echo !Link! | findstr /i /c:"/view" >nul
+if !errorlevel!==0 (
+	for /f "tokens=5 delims=/" %%a in ("!Link!") do (
+		set "file_id=%%a"
+	)
+	REM Remove "/view?pli=1" and construct the download link
+	set "Link=https://drive.google.com/uc?export=download&id=!file_id!"
+	goto TheNextStepOfDirectDownloadLink
+)
+
+REM Check if the Link contains "open?id=" and convert it
+echo !Link! | findstr /i /c:"open?id=" >nul
 if !errorlevel!==0 (
 	REM Replace "open?id=" with "uc?export=download&id="
-    set "Link=!Link:open?id=uc?export=download&id!"
+	set "Link=!Link:open?id=uc?export=download&id!"
 	goto TheNextStepOfDirectDownloadLink
 )
 
 REM Check if the Link contains "sharepoint.com" and convert it
 echo !Link! | findstr /i /c:"sharepoint.com" >nul
 if !errorlevel!==0 (
-    for /f "delims=? tokens=1" %%a in ("!Link!") do (
-        set "Base_Link=%%a"
-    )
-    set "Link=!Base_Link!?download=1"
+	for /f "delims=? tokens=1" %%a in ("!Link!") do (
+		set "Base_Link=%%a"
+	)
+	set "Link=!Base_Link!?download=1"
 	goto TheNextStepOfDirectDownloadLink
 )
-endlocal
+
 :TheNextStepOfDirectDownloadLink
 
 REM Check Compatibility for 32-bit
