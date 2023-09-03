@@ -61,11 +61,65 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 REM Set code based on Windows Architecture
 REM Source Link: 
 
+setlocal
+
+:menu
+set "Menu1=Official Website"
+set "Menu2=My Github"
+set "Menu3=My Dropbox"
+set "Menu4="
+
+echo Do you want to use the download link from:
+echo 1. %Menu1%				2. %Menu2%
+echo.
+echo 3. %Menu3%				4. %Menu4%
+
+REM The number corresponding to the default choice
+set "defaultChoice=1"
+echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
+choice /c 1234 /t 5 /d %defaultChoice% /n >nul
+
+REM Check the errorlevel to determine the choice made by the user
+if "%errorlevel%"=="1" (
+	set "choice=1"
+) else if "%errorlevel%"=="2" (
+	set "choice=2"
+) else if "%errorlevel%"=="3" (
+	set "choice=3"
+) else if "%errorlevel%"=="4" (
+	set "choice=4"
+)
+
+REM Display the choice made
+if "%choice%"=="1" (
+	echo You have chosen to download from: %Menu1%
+	set "Link="
+	goto NextStepAfterChosen
+) else if "%choice%"=="2" (
+	echo You have chosen to download from: %Menu2%
+	set "Link="
+	goto NextStepAfterChosen
+) else if "%choice%"=="3" (
+	echo You have chosen to download from: %Menu3%
+	set "Link="
+	goto NextStepAfterChosen
+) else if "%choice%"=="4" (
+	echo You have chosen to download from: %Menu4%
+	set "Link="
+	goto NextStepAfterChosen
+) else (
+	echo Invalid choice. Please select 1, 2, 3, or 4.
+	goto menu
+)
+
+endlocal
+:NextStepAfterChosen
+
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link="
+set "Link=%Link%"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
