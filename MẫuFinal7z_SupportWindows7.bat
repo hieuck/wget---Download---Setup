@@ -72,7 +72,11 @@ set "Menu4="
 echo Do you want to use the download link from:
 echo 1. %Menu1%				2. %Menu2%
 echo.
-echo 3. %Menu3%				4. %Menu4%
+if not "%Menu4%"=="" (
+	echo 3. %Menu3%				4. %Menu4%
+) else (
+	echo 3. %Menu3%
+)
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
@@ -144,13 +148,13 @@ if !errorlevel!==0 (
 	goto TheNextStepOfDirectDownloadLink
 )
 
-REM Check if the Link contains "/view" and extract the file ID
+REM Check if the Link contains "/view*" and extract the file ID
 echo !Link! | findstr /i /c:"/view" >nul
 if !errorlevel!==0 (
 	for /f "tokens=5 delims=/" %%a in ("!Link!") do (
 		set "file_id=%%a"
 	)
-	REM Remove "/view?pli=1" and construct the download link
+	REM Remove "/view*" and construct the download link
 	set "Link=https://drive.google.com/uc?export=download&id=!file_id!"
 	goto TheNextStepOfDirectDownloadLink
 )
@@ -178,7 +182,7 @@ if !errorlevel!==0 (
 	set "Link=!Base_Link!?download=1"
 	goto TheNextStepOfDirectDownloadLink
 )
-
+endlocal
 :TheNextStepOfDirectDownloadLink
 
 REM Check Compatibility for 32-bit
