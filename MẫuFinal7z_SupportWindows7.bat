@@ -106,6 +106,12 @@ echo !Link! | findstr /i /c:"open?id=" >nul
 if !errorlevel!==0 (
 	REM Replace "open?id=" with "uc?export=download&id="
 	set "Link=!Link:open?id=uc?export=download&id!"
+	
+	REM Split the Link at "&usp=drive_fs" and keep the first part
+	for /f "tokens=2,* delims=&" %%a in ("!Link!") do (
+		set "Link=https://drive.google.com/uc?export=download&%%a"
+	)
+
 	goto TheNextStepOfDirectDownloadLink
 )
 
