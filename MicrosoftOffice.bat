@@ -57,10 +57,15 @@ REM Source Link:
 setlocal
 
 :menu
+set "Menu1=Office ProPlusRetail"
+set "Menu2=Office ProPlus2019Volume"
+set "Menu3=Office ProPlus2021Volume"
+set "Menu4=Office O365ProPlusRetail"
+
 echo Do you want to use which version of Microsoft Office?
-echo 1. Office ProPlusRetail				2. Office ProPlus2019Volume
+echo 1. %Menu1%				2. %Menu2%
 echo.
-echo 3. Office ProPlus2021Volume			4. Office O365ProPlusRetail
+echo 3. %Menu3%			4. %Menu4%
 
 REM The number corresponding to the default choice
 set "defaultChoice=3"
