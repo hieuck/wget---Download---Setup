@@ -50,6 +50,14 @@ set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
+REM Split the version number into parts %Major%.%Minor%.%Build%.%Revision%=!SoftNameVersion!
+for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
+	set "Major=%%a"
+	set "Minor=%%b"
+	set "Build=%%c"
+	set "Revision=%%d"
+)
+
 REM Set code based on Windows Architecture
 REM Source Link: https://www.geeks3d.com/furmark/
 
