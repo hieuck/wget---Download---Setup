@@ -68,7 +68,7 @@ setlocal
 set "Menu1=Official Website"
 set "Menu2=My Github"
 set "Menu3=My Dropbox"
-set "Menu4="
+set "Menu4=My OneDrive"
 
 echo Do you want to use the download link from:
 echo 1. %Menu1%				2. %Menu2%
@@ -163,7 +163,7 @@ if !errorlevel!==0 (
 REM Check if the Link contains "open?id=" and convert it
 echo !Link! | findstr /i /c:"open?id=" >nul
 if !errorlevel!==0 (
-	REM Replace "open?id=" with "uc?export=download&id="
+	REM Replace "open?id=" with "uc?export=download&id"
 	set "Link=!Link:open?id=uc?export=download&id!"
 	
 	REM Split the Link at "&usp=drive_fs" and keep the first part
