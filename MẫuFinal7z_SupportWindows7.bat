@@ -138,6 +138,7 @@ set "Cr4ckFile="
 set "Cr4ckPath="
 
 set "Shortcut="
+set "NoticeOption="
 
 REM Convert to direct download Link.
 setlocal enabledelayedexpansion
@@ -404,8 +405,11 @@ if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
 echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
-type "%Temp%\hieuckitlog.txt"
-timeout /t 2
+
+if /i "%NoticeOption%"=="Yes" (
+	type "%Temp%\hieuckitlog.txt"
+	timeout /t 2
+)
 
 REM Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
