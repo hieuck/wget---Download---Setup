@@ -567,7 +567,12 @@ echo.
 @echo off
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
-	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
+	@7z l "%FileName%" > nul 2>&1
+	if %errorlevel% equ 0 (
+		@7z x -p123 "%FileName%" -o"%SoftPath%" -aoa -y
+	) else (
+		@7z x "%FileName%" -o"%SoftPath%" -aoa -y
+	)
 ) else (
 	"%FileName%" %QuietMode%
 )
