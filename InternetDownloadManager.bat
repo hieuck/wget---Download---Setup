@@ -43,7 +43,7 @@ set "SoftName=Internet Download Manager"
 set "Process=IDMan.exe"
 
 set "FileName="
-set "SoftNameVersion=641build20"
+set "SoftNameVersion=641.20"
 set "FileDLwB=idman*.exe"
 
 set "SupportOldWindows=Yes"
@@ -98,7 +98,7 @@ if "%errorlevel%"=="1" (
 REM Display the choice made
 if "%choice%"=="1" (
 	echo You have chosen to download from: %Menu1%
-	set "Link=https://mirror2.internetdownloadmanager.com/idman!SoftNameVersion!.exe"
+	set "Link=https://mirror2.internetdownloadmanager.com/idman%Major%build%Minor%.exe"
 	goto NextStepAfterChosen
 ) else if "%choice%"=="2" (
 	echo You have chosen to download from: %Menu2%
@@ -567,7 +567,12 @@ echo.
 @echo off
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
-	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
+	@7z l "%FileName%" > nul 2>&1
+	if %errorlevel% equ 0 (
+		@7z x -p123 "%FileName%" -o"%SoftPath%" -aoa -y
+	) else (
+		@7z x "%FileName%" -o"%SoftPath%" -aoa -y
+	)
 ) else (
 	"%FileName%" %QuietMode%
 )
