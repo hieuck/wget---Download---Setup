@@ -59,7 +59,7 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 )
 
 REM Set code based on Windows Architecture
-REM Source Link: https://www.topazlabs.com/downloads
+REM Source Link: https://www.topazlabs.com/downloads https://downloads.topazlabs.com/deploy/TopazPhotoAI/1.5.4/TopazPhotoAI-1.5.4.msi
 
 REM MenuChoice Configuration
 setlocal
