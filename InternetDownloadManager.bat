@@ -73,11 +73,7 @@ set "Menu4=My OneDrive"
 echo Do you want to use the download link from:
 echo 1. %Menu1%				2. %Menu2%
 echo.
-if not "%Menu4%"=="" (
-	echo 3. %Menu3%				4. %Menu4%
-) else (
-	echo 3. %Menu3%
-)
+echo 3. %Menu3%				4. %Menu4%
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
