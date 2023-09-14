@@ -51,9 +51,18 @@ set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
+REM Split the version number into parts %Major%.%Minor%.%Build%.%Revision%=!SoftNameVersion!
+for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
+	set "Major=%%a"
+	set "Minor=%%b"
+	set "Build=%%c"
+	set "Revision=%%d"
+)
+
 REM Set code based on Windows Architecture
 REM Source Link: 
 
+REM MenuChoice Configuration
 setlocal
 
 :menu
@@ -145,6 +154,54 @@ set "Cr4ckFile=MAS_AIO"
 set "Cr4ckPath=C:\Z_Hieuck.IT_Z"
 
 set "Shortcut="
+set "NoticeOption="
+
+REM Convert to direct download Link.
+setlocal enabledelayedexpansion
+
+REM Check if the Link contains "www.dropbox.com" and replace it
+echo !Link! | findstr /i /c:"www.dropbox.com" >nul
+if !errorlevel!==0 (
+	set "Link=!Link:www.dropbox.com=dl.dropboxusercontent.com!"
+	goto TheNextStepOfDirectDownloadLink
+)
+
+REM Check if the Link contains "/view*" and extract the file ID
+echo !Link! | findstr /i /c:"/view" >nul
+if !errorlevel!==0 (
+	for /f "tokens=5 delims=/" %%a in ("!Link!") do (
+		set "file_id=%%a"
+	)
+	REM Remove "/view*" and construct the download link
+	set "Link=https://drive.google.com/uc?export=download&id=!file_id!"
+	goto TheNextStepOfDirectDownloadLink
+)
+
+REM Check if the Link contains "open?id=" and convert it
+echo !Link! | findstr /i /c:"open?id=" >nul
+if !errorlevel!==0 (
+	REM Replace "open?id=" with "uc?export=download&id"
+	set "Link=!Link:open?id=uc?export=download&id!"
+	
+	REM Split the Link at "&usp=drive_fs" and keep the first part
+	for /f "tokens=2,* delims=&" %%a in ("!Link!") do (
+		set "Link=https://drive.google.com/uc?export=download&%%a"
+	)
+
+	goto TheNextStepOfDirectDownloadLink
+)
+
+REM Check if the Link contains "sharepoint.com" and convert it
+echo !Link! | findstr /i /c:"sharepoint.com" >nul
+if !errorlevel!==0 (
+	for /f "delims=? tokens=1" %%a in ("!Link!") do (
+		set "Base_Link=%%a"
+	)
+	set "Link=!Base_Link!?download=1"
+	goto TheNextStepOfDirectDownloadLink
+)
+endlocal
+:TheNextStepOfDirectDownloadLink
 
 REM Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="No" (
@@ -370,8 +427,11 @@ if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
 echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
-type "%Temp%\hieuckitlog.txt"
-timeout /t 2
+
+if /i "%NoticeOption%"=="Yes" (
+	type "%Temp%\hieuckitlog.txt"
+	timeout /t 2
+)
 
 REM Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
@@ -557,7 +617,12 @@ echo.
 @echo off
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
-	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
+	@7z l "%FileName%" > nul 2>&1
+	if %errorlevel% equ 0 (
+		@7z x -p123 "%FileName%" -o"%SoftPath%" -aoa -y
+	) else (
+		@7z x "%FileName%" -o"%SoftPath%" -aoa -y
+	)
 ) else (
 	"%FileName%" %QuietMode%
 )
