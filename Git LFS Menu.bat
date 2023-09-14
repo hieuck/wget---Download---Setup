@@ -1,22 +1,41 @@
 @echo off
 setlocal
-echo  Enter Repo Path: 
+
+git-lfs version
+
+:InputPath
+echo Enter Repo Path: 
 set /p "LocalPath="
 
 pushd "%LocalPath%"
 cd  "%LocalPath%"
-git-lfs version
+
+rem Check if the path has been set
+if not exist "%LocalPath%" (
+	echo Repo "%LocalPath%" not found
+	goto InputPath
+)
 
 :menu
-echo Git LFS
-echo 1. Git LFS Install				2. Git LFS Unsinstall
+set "Menu1=Git LFS Install"
+set "Menu2=Git LFS Unsinstall"
+set "Menu3=Git LFS Track "*.exe""
+set "Menu4=Git LFS Untrack "*.exe""
+set "Menu5=Restart
+set "Menu6=Exit (999s)
+
 echo.
-echo 3. Git LFS Track "*.exe"			4. Git LFS Untrack "*.exe"
-echo 5. Exit
+echo Git LFS
+echo 1. %Menu1%				2. %Menu2%
+echo.
+echo 3. %Menu3%			4. %Menu4%
+echo.
+echo 5/R. %Menu5%					6/E. %Menu6%
+
 REM The number corresponding to the default choice
-set "defaultChoice=5"
-echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
-choice /c 1234 /t 999 /d %defaultChoice% /n >nul
+set "defaultChoice=E"
+echo Select an option (1 or 2 or 3 or R or E) [Default is %defaultChoice%]: 
+choice /c 1234re /t 999 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
 if "%errorlevel%"=="1" (
@@ -27,7 +46,12 @@ if "%errorlevel%"=="1" (
 	set "choice=3"
 ) else if "%errorlevel%"=="4" (
 	set "choice=4"
+) else if "%errorlevel%"=="5" (
+	set "choice=r"
+) else if "%errorlevel%"=="6" (
+	set "choice=e"
 )
+
 if "%choice%"=="1" (
 	git lfs install
 ) else if "%choice%"=="2" (
@@ -36,8 +60,9 @@ if "%choice%"=="1" (
 	git lfs track "*.exe"
 ) else if "%choice%"=="4" (
 	git lfs untrack "*.exe"
-) else if "%choice%"=="5" (
+) else if /i "%choice%"=="r" (
+	goto InputPath
+) else if /i "%choice%"=="e" (
 	exit
 )
-goto menu
 endlocal
