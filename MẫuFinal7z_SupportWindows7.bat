@@ -93,18 +93,22 @@ if "%errorlevel%"=="1" (
 
 REM Display the choice made
 if "%choice%"=="1" (
+	REM Official Website
 	echo You have chosen to download from: %Menu1%
 	set "Link="
 	goto NextStepAfterChosen
 ) else if "%choice%"=="2" (
+	REM My Github
 	echo You have chosen to download from: %Menu2%
 	set "Link="
 	goto NextStepAfterChosen
 ) else if "%choice%"=="3" (
+	REM My Dropbox
 	echo You have chosen to download from: %Menu3%
 	set "Link="
 	goto NextStepAfterChosen
 ) else if "%choice%"=="4" (
+	REM My OneDrive
 	echo You have chosen to download from: %Menu4%
 	set "Link="
 	goto NextStepAfterChosen
