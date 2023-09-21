@@ -59,7 +59,7 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 )
 
 REM Set code based on Windows Architecture
-REM Source Link: 
+REM Source Link: https://www.macrocreator.com/download/
 
 REM MenuChoice Configuration
 setlocal
