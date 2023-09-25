@@ -96,6 +96,7 @@ if "%choice%"=="1" (
 	REM Official Website
 	echo You have chosen to download from: %Menu1%
 	set "Link="
+	if /i "%ARCH%"=="x86" set "Link="
 	goto NextStepAfterChosen
 ) else if "%choice%"=="2" (
 	REM My Github
