@@ -46,7 +46,7 @@ set "FileName="
 set "SoftNameVersion="
 set "FileDLwB=Cloudflare_WARP*msi"
 
-set "SupportOldWindows=Yes"
+set "SupportOldWindows=No"
 set "Support32Bit=No"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
