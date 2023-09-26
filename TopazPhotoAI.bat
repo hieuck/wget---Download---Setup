@@ -43,7 +43,7 @@ set "SoftName=Topaz Photo AI"
 set "Process=Topaz Photo AI.exe"
 
 set "FileName=msi"
-set "SoftNameVersion=2.0.0"
+set "SoftNameVersion=2.0.2"
 set "FileDLwB=TopazPhotoAI*.msi"
 
 set "SupportOldWindows=Yes"
@@ -73,7 +73,7 @@ set "Menu4=My OneDrive"
 echo Do you want to use the download link from:
 echo 1. %Menu1%				2. %Menu2%
 echo.
-echo 3. %Menu3%				4. %Menu4%
+echo 3. %Menu3%					4. %Menu4%
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
@@ -93,18 +93,23 @@ if "%errorlevel%"=="1" (
 
 REM Display the choice made
 if "%choice%"=="1" (
+	REM Official Website
 	echo You have chosen to download from: %Menu1%
 	set "Link=https://topazlabs.com/d/photo/latest/win/full"
+	if /i "%ARCH%"=="x86" set "Link="
 	goto NextStepAfterChosen
 ) else if "%choice%"=="2" (
+	REM My Github
 	echo You have chosen to download from: %Menu2%
 	set "Link="
 	goto NextStepAfterChosen
 ) else if "%choice%"=="3" (
+	REM My Dropbox
 	echo You have chosen to download from: %Menu3%
 	set "Link="
 	goto NextStepAfterChosen
 ) else if "%choice%"=="4" (
+	REM My OneDrive
 	echo You have chosen to download from: %Menu4%
 	set "Link="
 	goto NextStepAfterChosen
