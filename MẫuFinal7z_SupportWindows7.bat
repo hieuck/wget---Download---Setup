@@ -102,16 +102,25 @@ if "%choice%"=="1" (
 	REM My Github
 	echo You have chosen to download from: %Menu2%
 	set "Link="
+	if "%Link%"=="" (
+		echo No download link available yet in %Menu2%.&echo.&goto menu
+	)
 	goto NextStepAfterChosen
 ) else if "%choice%"=="3" (
 	REM My Dropbox
 	echo You have chosen to download from: %Menu3%
 	set "Link="
+	if "%Link%"=="" (
+		echo No download link available yet in %Menu3%.&echo.&goto menu
+	)
 	goto NextStepAfterChosen
 ) else if "%choice%"=="4" (
 	REM My OneDrive
 	echo You have chosen to download from: %Menu4%
 	set "Link="
+	if "%Link%"=="" (
+		echo No download link available yet in %Menu4%.&echo.&goto menu
+	)
 	goto NextStepAfterChosen
 ) else (
 	echo Invalid choice. Please select 1, 2, 3, or 4.
