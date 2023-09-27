@@ -615,8 +615,8 @@ for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 )
-echo Please close the script manually if automatically close fails.
 pushd "C:\Z_Hieuck.IT_Z"
 echo "Windows Loader.exe" /silent /preactivate>Cr4ckWindows7LD.bat
 call "Cr4ckWindows7LD.bat"
+echo Please close the script manually if automatically close fails.
 popd
