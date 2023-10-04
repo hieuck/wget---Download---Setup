@@ -83,7 +83,7 @@ set "Cr4ckFile=UniKeySetting"
 set "Cr4ckPath="
 
 set "Shortcut="
-set "NoticeOption=Yes"
+set "NoticeOption="
 
 REM MenuChoice Configuration
 setlocal enabledelayedexpansion
