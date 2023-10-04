@@ -94,10 +94,52 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
-echo Do you want to use the download link from:
-echo 1. %Menu1%				2. %Menu2%
-echo.
-echo 3. %Menu3%					4. %Menu4%
+if not "%LinkFromOneDrive%"=="" (
+	if not "%LinkFromDropbox%%"=="" (
+		if not "%LinkFromGithub%"=="" (
+			echo Do you want to use the download link from:
+			echo 1. %Menu1%				2. %Menu2%
+			echo.
+			echo 3. %Menu3%					4. %Menu4%
+		) else (
+			echo Do you want to use the download link from:
+			echo 1. %Menu1%				2. %Menu3%
+			echo.
+			echo 3. %Menu4%
+		)
+	) else (
+		if not "%LinkFromGithub%"=="" (
+			echo Do you want to use the download link from:
+			echo 1. %Menu1%				2. %Menu2%
+			echo.
+			echo 3. %Menu4%
+		) else (
+			echo Do you want to use the download link from:
+			echo 1. %Menu1%				2. %Menu4%
+		)
+	)
+) else if not "%LinkFromDropbox%%"=="" (
+	if not "%LinkFromGithub%"=="" (
+		echo Do you want to use the download link from:
+		echo 1. %Menu1%				2. %Menu2%
+		echo.
+		echo 3. %Menu3%
+	) else (
+		echo Do you want to use the download link from:
+		echo 1. %Menu1%				2. %Menu3%
+	)
+) else if not "%LinkFromGithub%"=="" (
+	echo Do you want to use the download link from:
+	echo 1. %Menu1%				2. %Menu2%
+) else (
+	echo Do you want to use the download link from:
+	echo 1. %Menu1%
+)
+
+REM echo Do you want to use the download link from:
+REM echo 1. %Menu1%				2. %Menu2%
+REM echo.
+REM echo 3. %Menu3%					4. %Menu4%
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
