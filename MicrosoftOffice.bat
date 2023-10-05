@@ -724,13 +724,13 @@ goto Cr4ckForWindows10
 endlocal
 
 :Cr4ckForWindows7
-call "%Cr4ckPath%\MAS_AIO.cmd" /KMS-Office /S
+call "%Cr4ckPath%\MAS_AIO.cmd" /Ohook /KMS-Office /S
 timeout /t 3
-call "%Cr4ckPath%\MAS_AIO.cmd" /KMS-ActAndRenewalTask /KMS-Office /S
+call "%Cr4ckPath%\MAS_AIO.cmd" /Ohook /KMS-ActAndRenewalTask /KMS-Office /S
 goto NextStepAfterCr4ckForCheckOSVersion
 
 :Cr4ckForWindows10
-call "%Cr4ckPath%\MAS_AIO.cmd" /HWID /KMS-ActAndRenewalTask /KMS-Office /S
+call "%Cr4ckPath%\MAS_AIO.cmd" /HWID /Ohook /KMS-ActAndRenewalTask /KMS-Office /S
 
 :NextStepAfterCr4ckForCheckOSVersion
 REM Shortcut
