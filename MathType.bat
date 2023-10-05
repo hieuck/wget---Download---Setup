@@ -43,7 +43,8 @@ set "SoftName=MathType"
 set "Process=MathType.exe"
 
 set "FileName="
-set "SoftNameVersion=7.7.0.237"
+REM set "SoftNameVersion=7.7.0.237"
+set "SoftNameVersion=7.6.0.156"
 set "FileDLwB=MathType*.exe"
 
 set "SupportOldWindows=Yes"
@@ -69,8 +70,8 @@ set "Link=https://downloads.wiris.com/mathtype/windows/MathType-win-en-!SoftName
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MathType-win-en-7.6.0.156.exe"
-set "LinkFromDropbox="
+set "LinkFromGithub=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MathType/MathType-win-en-!SoftNameVersion!.exe"
+set "LinkFromDropbox=https://downloads.wiris.com/mathtype/windows/MathType-win-en-7.5.0.125.exe"
 set "LinkFromOneDrive="
 
 set "SoftPath="
@@ -79,7 +80,7 @@ set "SoftPathFor64bit=%ProgramFiles(x86)%\MathType"
 
 set "QuietMode=/S"
 
-set "Cr4ckFile=MathTypeCr4ck"
+set "Cr4ckFile=MathType!SoftNameVersion!Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
@@ -147,7 +148,6 @@ if "%choice%"=="1" (
 		set "Link=%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
-		set "Cr4ckFile=MathType7.6.0.156"
 		goto NextStepAfterChosen
 	) else (
 		echo No download link available yet in %Menu2%.&echo.&goto menu
