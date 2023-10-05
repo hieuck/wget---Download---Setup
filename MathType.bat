@@ -71,7 +71,7 @@ set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
 set "LinkFromGithub=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/MathType/MathType-win-en-!SoftNameVersion!.exe"
-set "LinkFromDropbox=https://downloads.wiris.com/mathtype/windows/MathType-win-en-7.5.0.125.exe"
+set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
 set "SoftPath="
