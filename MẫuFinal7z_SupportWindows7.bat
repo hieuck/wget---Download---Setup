@@ -443,7 +443,7 @@ if not defined FoundFormat (
 )
 
 :ExportResult
-set "FileName=%BaseName%%Extension%"
+set "FileName=%BaseName%%SoftNameVersion%%Extension%"
 
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
