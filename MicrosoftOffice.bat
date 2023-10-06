@@ -66,13 +66,13 @@ REM MenuChoice Configuration
 setlocal
 
 :menu
-set "Menu1=Office ProPlusRetail"
+set "Menu1=Office ProPlus2016Retail"
 set "Menu2=Office ProPlus2019Volume"
 set "Menu3=Office ProPlus2021Volume"
 set "Menu4=Office O365ProPlusRetail"
 
 echo Do you want to use which version of Microsoft Office?
-echo 1. %Menu1%				2. %Menu2%
+echo 1. %Menu1%			2. %Menu2%
 echo.
 echo 3. %Menu3%			4. %Menu4%
 
@@ -94,7 +94,7 @@ if "%errorlevel%"=="1" (
 
 REM Display the choice made
 if "%choice%"=="1" (
-	echo You have chosen to use Office Professional Plus 2016 - ProPlusRetail.
+	echo You have chosen to use Office Professional Plus 2016 - ProPlus2016Retail.
 	set "SoftName=Microsoft Office Professional Plus 2016"
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows7.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2016-64.xml"
