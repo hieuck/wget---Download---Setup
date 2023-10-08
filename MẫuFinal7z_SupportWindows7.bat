@@ -86,7 +86,7 @@ set "Shortcut="
 set "NoticeOption="
 
 REM MenuChoice Configuration
-setlocal enabledelayedexpansion
+setlocal EnableDelayedExpansion
 
 :menu
 set "Menu1=Official Website"
