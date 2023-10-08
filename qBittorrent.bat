@@ -116,7 +116,7 @@ if not "!MenuOptions!"=="" (
 )
 
 REM The number corresponding to the default choice
-set "defaultChoice=1"
+set "defaultChoice=2"
 echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
 choice /c 1234 /t 5 /d %defaultChoice% /n >nul
 
