@@ -37,7 +37,7 @@ echo.
 REM Required Configuration Settings
 
 set "Extract7z="
-set "License="
+set "License=Yes"
 
 set "SoftName=Mountain Duck"
 set "Process=Mountain Duck.exe"
@@ -59,13 +59,13 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 )
 
 REM Set code based on Windows Architecture
-REM Source Link: 
+REM Source Link: https://mountainduck.io/
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://dist.mountainduck.io/Mountain%20Duck%20Installer-!SoftNameVersion!.exe"
+set "Link=https://dist.mountainduck.io/Mountain Duck Installer-!SoftNameVersion!.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
