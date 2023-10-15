@@ -40,11 +40,11 @@ set "Extract7z="
 set "License="
 
 set "SoftName=Mountain Duck"
-set "Process=danvaoday.exe"
+set "Process=Mountain Duck.exe"
 
 set "FileName="
 set "SoftNameVersion=4.14.4.21440"
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=Mountain*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -73,13 +73,13 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath="
+set "SoftPath=%ProgramFiles%\Mountain Duck"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
 set "QuietMode=/quiet /norestart"
 
-set "Cr4ckFile="
+set "Cr4ckFile=MountainDuckCr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
