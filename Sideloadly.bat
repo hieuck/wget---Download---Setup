@@ -7,14 +7,20 @@
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
+pushd "%~dp0"
 
-:: Run As Administrator
+REM Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
+REM Detect Windows Architecture
+set "ARCH=x86"
+if exist "%SystemRoot%\SysWOW64" set "ARCH=x64"
+
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -28,18 +34,32 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
-:: Set License Extract7z Soft Process Name OldWindows 32-bit Support User Agent
-set "License="
+REM Required Configuration Settings
+
 set "Extract7z="
+set "License="
+
 set "SoftName=Sideloadly"
 set "Process=Sideloadly.exe"
+
+set "FileName="
+set "SoftNameVersion="
+set "FileDLwB=danvaoday*.exe"
+
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
-:: Set code based on Windows Architecture
-:: Source Link: https://sideloadly.io/#download
+REM Split the version number into parts %Major%.%Minor%.%Build%.%Revision%=!SoftNameVersion!
+for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
+	set "Major=%%a"
+	set "Minor=%%b"
+	set "Build=%%c"
+	set "Revision=%%d"
+)
+
+REM Set code based on Windows Architecture
+REM Source Link: https://sideloadly.io/#download
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -48,6 +68,10 @@ set "LinkForOldWindows64bit="
 set "Link="
 set "LinkForAllWindows32bit=https://sideloadly.io/SideloadlySetup32.exe"
 set "LinkForAllWindows64bit=https://sideloadly.io/SideloadlySetup64.exe"
+
+set "LinkFromGithub="
+set "LinkFromDropbox="
+set "LinkFromOneDrive="
 
 set "SoftPath=%LocalAppData%\Sideloadly"
 set "SoftPathFor32bit="
@@ -58,15 +82,161 @@ set "QuietMode=/S"
 set "Cr4ckFile="
 set "Cr4ckPath="
 
-set "Shortcut=Yes"
+set "Shortcut="
+set "NoticeOption="
 
-:: Detect Windows Architecture and Check Compatibility for 32-bit
-if exist "%SYSTEMROOT%\SysWOW64" (
-	set "ARCH=x64"
-) else (
-	set "ARCH=x86"
+REM MenuChoice Configuration
+setlocal EnableDelayedExpansion
+
+:menu
+set "Menu1=Official Website"
+set "Menu2=My Github"
+set "Menu3=My Dropbox"
+set "Menu4=My OneDrive"
+
+set "MenuOptions="
+if not "!LinkFromGithub!"=="" (
+	set "MenuOptions=!MenuOptions!2. %Menu2%	"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "MenuOptions=!MenuOptions!3. %Menu3%	"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "MenuOptions=!MenuOptions!4. %Menu4%"
 )
 
+if not "!MenuOptions!"=="" (
+	echo Do you want to use the download link from:
+	echo.
+	echo 1. %Menu1%	%MenuOptions%
+
+) else (
+	echo You have chosen to download from: %Menu1%
+	goto NextStepAfterChosen
+)
+
+REM The number corresponding to the default choice
+set "defaultChoice=1"
+echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
+choice /c 1234 /t 5 /d %defaultChoice% /n >nul
+
+REM Check the errorlevel to determine the choice made by the user
+if "%errorlevel%"=="1" (
+	set "choice=1"
+) else if "%errorlevel%"=="2" (
+	set "choice=2"
+) else if "%errorlevel%"=="3" (
+	set "choice=3"
+) else if "%errorlevel%"=="4" (
+	set "choice=4"
+)
+
+REM Display the choice made
+if "%choice%"=="1" (
+	REM Official Website
+	echo You have chosen to download from: %Menu1%
+	goto NextStepAfterChosen
+) else if "%choice%"=="2" (
+	REM My Github
+	echo You have chosen to download from: %Menu2%
+	if not "%LinkFromGithub%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromGithub%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu2%.&echo.&goto menu
+	)
+) else if "%choice%"=="3" (
+	REM My Dropbox
+	echo You have chosen to download from: %Menu3%
+	if not "%LinkFromDropbox%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromDropbox%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu3%.&echo.&goto menu
+	)
+) else if "%choice%"=="4" (
+	REM My OneDrive
+	echo You have chosen to download from: %Menu4%
+	if not "%LinkFromOneDrive%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromOneDrive%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu4%.&echo.&goto menu
+	)
+) else (
+	echo Invalid choice. Please select 1, 2, 3, or 4.
+	goto menu
+)
+
+endlocal
+:NextStepAfterChosen
+
+REM Convert to direct download Link.
+setlocal enabledelayedexpansion
+
+REM Check if the Link contains "www.dropbox.com" and replace it
+echo !Link! | findstr /i /c:"www.dropbox.com" >nul
+if !errorlevel!==0 (
+	set "Link=!Link:www.dropbox.com=dl.dropboxusercontent.com!"
+	goto TheNextStepOfDirectDownloadLink
+)
+
+REM Check if the Link contains "/view*" and extract the file ID
+echo !Link! | findstr /i /c:"/view" >nul
+if !errorlevel!==0 (
+	for /f "tokens=5 delims=/" %%a in ("!Link!") do (
+		set "file_id=%%a"
+	)
+	REM Remove "/view*" and construct the download link
+	set "Link=https://drive.google.com/uc?export=download&id=!file_id!"
+	goto TheNextStepOfDirectDownloadLink
+)
+
+REM Check if the Link contains "open?id=" and convert it
+echo !Link! | findstr /i /c:"open?id=" >nul
+if !errorlevel!==0 (
+	REM Replace "open?id=" with "uc?export=download&id"
+	set "Link=!Link:open?id=uc?export=download&id!"
+	
+	REM Split the Link at "&usp=drive_fs" and keep the first part
+	for /f "tokens=2,* delims=&" %%a in ("!Link!") do (
+		set "Link=https://drive.google.com/uc?export=download&%%a"
+	)
+
+	goto TheNextStepOfDirectDownloadLink
+)
+
+REM Check if the Link contains "sharepoint.com" and convert it
+echo !Link! | findstr /i /c:"sharepoint.com" >nul
+if !errorlevel!==0 (
+	for /f "delims=? tokens=1" %%a in ("!Link!") do (
+		set "Base_Link=%%a"
+	)
+	set "Link=!Base_Link!?download=1"
+	goto TheNextStepOfDirectDownloadLink
+)
+endlocal
+:TheNextStepOfDirectDownloadLink
+
+REM Check Compatibility for 32-bit
 if /i "%Support32Bit%"=="No" (
 	if /i "%ARCH%"=="x86" (
 		echo Notice: This software is only compatible with Windows 64-bit operating systems. Exiting in 3 seconds...
@@ -78,7 +248,7 @@ if /i "%Support32Bit%"=="No" (
 	)
 )
 
-::Check Windows OS Version and Check Support Old Windows
+REM Check Windows OS Version and Check Support Old Windows
 setlocal EnableDelayedExpansion
 for /f "tokens=4 delims=[.] " %%i in ('ver') do (
 	set "version1=%%i"
@@ -146,25 +316,15 @@ if /i "%ARCH%"=="x86" (
 )
 
 :NextStepForCheckOSVersion
-:: Set up information related to software cr4cking
-if /i "%License%"=="Yes" (
-	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
-	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
-	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
-	if not "%Cr4ckPath%"=="" (
-		set "Cr4ckPath=%Cr4ckPath%"
-	) else (
-		set "Cr4ckPath=%SoftPath%"
-	)
-)
-
-:: Extract with 7z
+REM Extract with 7z
 if /i "%Extract7z%"=="Yes" (
 	set "Admin=Yes"
-	set "FileName=%SoftName%-HieuckIT.zip"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
 	if not "%SoftPath%"=="" (
 		set "SoftPath=%SoftPath%"
 	) else (
@@ -176,7 +336,6 @@ if /i "%Extract7z%"=="Yes" (
 		set "Shortcut=Yes"
 	)
 ) else (
-	set "FileName=%SoftName%-HieuckIT.exe "
 	if not "%Shortcut%"=="" (
 		set "Shortcut=%Shortcut%"
 	) else (
@@ -184,19 +343,124 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
+REM Set up information related to software cr4cking
+if /i "%License%"=="Yes" (
+	set "Admin=Yes"
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
+	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
+	if /i "%ARCH%"=="x86" (
+		set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.dll"
+		set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z32/7z.exe"
+	)
+	if not "%Cr4ckPath%"=="" (
+		set "Cr4ckPath=%Cr4ckPath%"
+	) else (
+		set "Cr4ckPath=%SoftPath%"
+	)
+)
+
+REM Check File Name
+REM Data structure to store format-extension information
+set "Formats=7z exe msi rar zip"
+
+for %%F in ("%FileName%") do (
+	set "BaseName=%%~nF"
+	if not "%%~xF"=="" (
+		set "Extension=%%~xF"
+	) else (
+		set "Extension=.HieuckIT"
+		set "BaseName=%FileName%"
+	)
+)
+
+if not "%FileName%"=="" (
+	if not "%BaseName%"=="" (
+		REM Loop through the formats in the data structure
+		for %%F in (%Formats%) do (
+			REM Check if FileName matches the format
+			if /i "%FileName%"=="%%~F" (
+				set "BaseName=%SoftName%"
+				set "Extension=.%%~F"
+				set "FileName=%BaseName%%Extension%"
+				goto :Continue_Check_FileName
+			)
+		)
+
+		REM Check if FileName doesn't match any format
+		if not "%FileName%"=="%BaseName%%Extension%" (
+			set "FileName=%BaseName%%Extension%"
+		)
+	) else (
+		set "FileName=%SoftName%%Extension%"
+	)
+) else (
+	if not "%Link:~-3%"=="" (
+		REM Extract the extension from Link
+		set "BaseName=%SoftName%"
+		set "LinkExtension=%Link:~-3%"
+		REM Check if LinkExtension is not in Formats
+		echo %Formats% | find /i "%LinkExtension%" >nul
+		if errorlevel 1 (
+			set "Extension=%LinkExtension%"
+		) else (
+			set "Extension=.HieuckIT"
+		)
+		set "FileName=%BaseName%%Extension%"
+		goto :Continue_Check_FileName
+	) else (
+		set "FileName=%SoftName%.HieuckIT"
+	)
+)
+
+:Continue_Check_FileName
+REM Check if Link's extension matches any format and differs from FileName's extension
+set "LinkExtension=%Link:~-3%"
+for %%F in (%Formats%) do (
+	REM Check if the extracted extension matches the format and differs from FileName's extension
+	if /i "%LinkExtension%"=="%%~F" if not "%Extension%"=="%%~F" (
+		REM set "BaseName=%SoftName%"
+		set "Extension=.%%~F"
+		set "FileName=%BaseName%%Extension%"
+		goto :ExportResult
+	)
+)
+
+REM If Link's extension didn't match any format or matched FileName's extension, use Link's extension for FileName
+set "LinkExtension=%Link:~-3%"
+set "FoundFormat="
+for %%F in (%Formats%) do (
+	if /i "%LinkExtension%"=="%%~F" (
+		set "FoundFormat=1"
+		set "Extension=.%%~F"
+	)
+)
+
+if not defined FoundFormat (
+	if "%Extension%"=="" (
+		set "Extension=.HieuckIT"
+	)
+)
+
+:ExportResult
+set "FileName=%BaseName%%Extension%"
+
 echo Information related to %SoftName%:> %Temp%\hieuckitlog.txt
 echo.>> %Temp%\hieuckitlog.txt
 echo Link: %Link:&=^&%>> %Temp%\hieuckitlog.txt
 echo FileName: %FileName%>> %Temp%\hieuckitlog.txt
-echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
+if not "%SoftPath%"=="" echo SoftPath: %SoftPath%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckFile%"=="" echo Cr4ckFile: %Cr4ckFile%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckLink%"=="" echo Cr4ckLink: %Cr4ckLink%>> %Temp%\hieuckitlog.txt
 if not "%Cr4ckPath%"=="" echo Cr4ckPath: %Cr4ckPath%>> %Temp%\hieuckitlog.txt
 echo Shortcut: %Shortcut%>> %Temp%\hieuckitlog.txt
-type "%Temp%\hieuckitlog.txt"
-timeout /t 3
 
-:: Check if Command Prompt is running with administrator privileges
+if /i "%NoticeOption%"=="Yes" (
+	type "%Temp%\hieuckitlog.txt"
+	timeout /t 2
+)
+
+REM Check if Command Prompt is running with administrator privileges
 net session >nul 2>&1
 if %errorlevel% == 0 (
 	echo Command Prompt is running as Administrator.
@@ -217,20 +481,20 @@ if %errorlevel% == 0 (
 	)
 )
 
-:: Terminate the %SoftName% Process
+REM Terminate the %SoftName% Process
 tasklist | find /i "%Process%" > nul
 if %errorlevel% equ 0 (
 	taskkill /im "%Process%" /f
 )
 
-:: Save the value of the %time% variable before running the batch script
+REM Save the value of the %time% variable before running the batch script
 set start_time=%time%
 
-:: Download
-@ECHO OFF
+REM Download
 title _Hieuck.IT_'s Windows Application Downloading...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -244,7 +508,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading %SoftName%...
 if exist "wget.exe" (
 	wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%Link%"
@@ -261,6 +524,40 @@ if exist "wget.exe" (
 	)
 )
 
+REM Download with browser
+setlocal EnableDelayedExpansion
+
+for %%F in ("%FileName%") do set "size=%%~zF"
+if %size% equ 0 (
+	echo %SoftName% download failed. File size is 0KB. Downloading with browser....
+	goto DLwB
+) else (
+	goto ExitDLwB
+)
+
+:DLwB
+if exist "%UserProfile%\OneDrive\Downloads" (
+	pushd "%UserProfile%\OneDrive\Downloads"
+) else (
+	pushd "%UserProfile%\Downloads"
+)
+
+start "" "%Link%" /WAIT /D "%~dp0" /B "%FileName%"
+if not "%FileDLwB%"=="" set "FileDLwB=%FileDLwB%"
+
+:CheckExist
+for /R %%i in ("%FileDLwB%") do set "FileNameDLwB=%%i"
+if not exist "%FileNameDLwB%" (
+	timeout /t 1 /nobreak >nul & goto CheckExist
+)
+
+echo Download completed with the browser. Installation in progress...
+move /y "%FileNameDLwB%" "%~dp0%FileName%"
+
+endlocal
+:ExitDLwB
+pushd "%~dp0"
+
 if not exist "%FileName%" (
 	echo Download %SoftName% failed.
 	echo Please check your network connection. Exiting in 3 seconds...
@@ -271,10 +568,10 @@ if not exist "%FileName%" (
 	exit
 )
 
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Downloading 7-Zip...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -288,7 +585,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Tai 7-Zip. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Downloading 7-Zip...
 if /i "%Extract7z%"=="Yes" (
 	if exist "wget.exe" (
@@ -300,11 +596,11 @@ if /i "%Extract7z%"=="Yes" (
 	)
 )
 
-:: Install
-@ECHO OFF
+REM Install
 title _Hieuck.IT_'s Windows Application Installing...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -318,15 +614,19 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Installing %SoftName%...
 if /i "%Extract7z%"=="Yes" (
-	@7z.exe x "%FileName%" -o"%SoftPath%" -aoa -y
+	@7z l "%FileName%" > nul 2>&1
+	if %errorlevel% equ 0 (
+		@7z x -p123 "%FileName%" -o"%SoftPath%" -aoa -y
+	) else (
+		@7z x "%FileName%" -o"%SoftPath%" -aoa -y
+	)
 ) else (
 	"%FileName%" %QuietMode%
 )
 
-:: Check Installation Process
+REM Check Installation Process
 echo Checking if %SoftName% installation is complete...
 setlocal EnableDelayedExpansion
 set count=0
@@ -343,14 +643,14 @@ goto end
 echo %SoftName% has been installed successfully.
 echo.>> %Temp%\hieuckitlog.txt
 echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
-timeout /t 3
+timeout /t 2
 :end
 
-:: License
-@ECHO OFF
+REM License
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -364,7 +664,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 if /i "%License%"=="Yes" (
 	echo Cr4cking %SoftName%...
 	if exist "wget.exe" (
@@ -392,10 +691,10 @@ if /i "%License%"=="Yes" (
 	)
 )
 
-:: Shortcut
+REM Shortcut
 if /i "%Shortcut%"=="No" (
-    echo Creating Shortcut is skipped.
-    goto CleanUp
+	echo Creating Shortcut is skipped.
+	goto CleanUp
 )
 
 if exist "%SoftPath%\%Process%" (
@@ -420,16 +719,17 @@ del CreateShortcut.vbs
 
 if exist "%Public%\Desktop\%ShortcutName%" (
 	echo Creating Shortcut complete.
+	echo Creating Shortcut complete.>> %Temp%\hieuckitlog.txt
 ) else (
 	echo Creating Shortcut failed.
 )
 
-:: Clean Up
+REM Clean Up
 :CleanUp
-@ECHO OFF
 title _Hieuck.IT_'s Windows Application Cleaning Up...
 color 0B
-mode con:cols=100 lines=17
+mode con:cols=120 lines=17
+if not exist "wget.exe" mode con:cols=80 lines=17
 @cls
 echo.
 echo.
@@ -443,7 +743,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Don Dep %SoftName%. Vui Long Cho...
 @echo off
-pushd "%~dp0"
 echo Cleaning up temporary files...
 echo.>> %Temp%\hieuckitlog.txt
 setlocal EnableDelayedExpansion
@@ -469,15 +768,16 @@ if !count! equ 30 goto timeoutcheck
 goto waitloopcheck
 :timeoutcheck
 echo Timeout: Deletion failed. Please delete the file manually.
+echo Timeout: Deletion failed. Please delete the file manually.>> %Temp%\hieuckitlog.txt
 :endcheck
-:: Save the value of the %time% variable after the batch script finishes
+REM Save the value of the %time% variable after the batch script finishes
 set end_time=%time%
 
-:: Convert the start and end times to seconds
+REM Convert the start and end times to seconds
 for /f "tokens=1-3 delims=:." %%a in ("%start_time%") do set /a "start_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
 for /f "tokens=1-3 delims=:." %%a in ("%end_time%") do set /a "end_seconds=(((%%a*60)+1%%b %% 100)*60)+1%%c %% 100"
 
-:: Calculate the elapsed time in seconds
+REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
