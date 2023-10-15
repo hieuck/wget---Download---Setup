@@ -43,7 +43,7 @@ set "SoftName=WinRAR"
 set "Process=WinRAR.exe"
 
 set "FileName="
-set "SoftNameVersion=623"
+set "SoftNameVersion=624"
 set "FileDLwB=winrar*.exe"
 
 set "SupportOldWindows=Yes"
@@ -61,8 +61,32 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 REM Set code based on Windows Architecture
 REM Source Link: https://www.rarlab.com/download.htm
 
+set "LinkForOldWindows="
+set "LinkForOldWindows32bit="
+set "LinkForOldWindows64bit="
+
+set "Link="
+set "LinkForAllWindows32bit=https://www.rarlab.com/rar/winrar-x32-!SoftNameVersion!.exe"
+set "LinkForAllWindows64bit=https://www.rarlab.com/rar/winrar-x64-!SoftNameVersion!.exe"
+
+set "LinkFromGithub="
+set "LinkFromDropbox="
+set "LinkFromOneDrive="
+
+set "SoftPath=%ProgramFiles%\WinRAR"
+set "SoftPathFor32bit="
+set "SoftPathFor64bit="
+
+set "QuietMode=/S"
+
+set "Cr4ckFile=WinRARCr4ck"
+set "Cr4ckPath="
+
+set "Shortcut="
+set "NoticeOption="
+
 REM MenuChoice Configuration
-setlocal
+setlocal EnableDelayedExpansion
 
 :menu
 set "Menu1=Official Website"
@@ -70,10 +94,26 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
-echo Do you want to use the download link from:
-echo 1. %Menu1%				2. %Menu2%
-echo.
-echo 3. %Menu3%					4. %Menu4%
+set "MenuOptions="
+if not "!LinkFromGithub!"=="" (
+	set "MenuOptions=!MenuOptions!2. %Menu2%	"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "MenuOptions=!MenuOptions!3. %Menu3%	"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "MenuOptions=!MenuOptions!4. %Menu4%"
+)
+
+if not "!MenuOptions!"=="" (
+	echo Do you want to use the download link from:
+	echo.
+	echo 1. %Menu1%	%MenuOptions%
+
+) else (
+	echo You have chosen to download from: %Menu1%
+	goto NextStepAfterChosen
+)
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
@@ -95,24 +135,52 @@ REM Display the choice made
 if "%choice%"=="1" (
 	REM Official Website
 	echo You have chosen to download from: %Menu1%
-	set "Link=https://www.rarlab.com/rar/winrar-x64-!SoftNameVersion!.exe"
-	if /i "%ARCH%"=="x86" set "Link=https://www.rarlab.com/rar/winrar-x32-!SoftNameVersion!.exe"
 	goto NextStepAfterChosen
 ) else if "%choice%"=="2" (
 	REM My Github
 	echo You have chosen to download from: %Menu2%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromGithub%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromGithub%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu2%.&echo.&goto menu
+	)
 ) else if "%choice%"=="3" (
 	REM My Dropbox
 	echo You have chosen to download from: %Menu3%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromDropbox%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromDropbox%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu3%.&echo.&goto menu
+	)
 ) else if "%choice%"=="4" (
 	REM My OneDrive
 	echo You have chosen to download from: %Menu4%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromOneDrive%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromOneDrive%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu4%.&echo.&goto menu
+	)
 ) else (
 	echo Invalid choice. Please select 1, 2, 3, or 4.
 	goto menu
@@ -120,26 +188,6 @@ if "%choice%"=="1" (
 
 endlocal
 :NextStepAfterChosen
-
-set "LinkForOldWindows="
-set "LinkForOldWindows32bit="
-set "LinkForOldWindows64bit="
-
-set "Link=%Link%"
-set "LinkForAllWindows32bit="
-set "LinkForAllWindows64bit="
-
-set "SoftPath=%ProgramFiles%\WinRAR"
-set "SoftPathFor32bit="
-set "SoftPathFor64bit="
-
-set "QuietMode=/S"
-
-set "Cr4ckFile=WinRARCr4ck"
-set "Cr4ckPath="
-
-set "Shortcut="
-set "NoticeOption="
 
 REM Convert to direct download Link.
 setlocal enabledelayedexpansion
