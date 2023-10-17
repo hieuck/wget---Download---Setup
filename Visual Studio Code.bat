@@ -73,11 +73,11 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath="
+set "SoftPath=%LocalAppData%\Programs\Microsoft VS Code"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/S"
+set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
 set "Cr4ckFile="
 set "Cr4ckPath="
