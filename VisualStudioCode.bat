@@ -39,7 +39,7 @@ REM Required Configuration Settings
 set "Extract7z="
 set "License="
 
-set "SoftName=danvaoday"
+set "SoftName=Visual Studio Code"
 set "Process=danvaoday.exe"
 
 set "FileName="
