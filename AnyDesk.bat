@@ -649,7 +649,7 @@ timeout /t 2
 :end
 
 REM add Reset License
-echo del "%AppData%\AnyDesk\user.conf" >>"%SoftPath%\%SoftName% ID Reset.bat"
+echo del "%AppData%\AnyDesk\user.conf" >"%SoftPath%\%SoftName% ID Reset.bat"
 
 if exist "%SoftPath%\%SoftName% ID Reset.bat" (
 	set "TargetFile=%SoftPath%\%SoftName% ID Reset.bat"
