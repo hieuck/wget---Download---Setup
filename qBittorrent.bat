@@ -46,6 +46,8 @@ set "FileName="
 set "SoftNameVersion=4.5.5"
 set "FileDLwB=qbittorrent*setup*.exe"
 
+set "OpenAfterInstall="
+
 set "SupportOldWindows=Yes"
 set "Support32Bit=No"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -69,7 +71,7 @@ set "Link=https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_!SoftNameVers
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
+set "LinkFromGithub=qBittorrent/qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
@@ -144,7 +146,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
@@ -784,6 +786,11 @@ REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
+
+REM Open After Install
+if not "%OpenAfterInstall%"=="" (
+	call "%SoftPath%\%Process%"
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
