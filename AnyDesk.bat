@@ -46,6 +46,8 @@ set "FileName="
 set "SoftNameVersion=6.1.0"
 set "FileDLwB=AnyDesk*.exe"
 
+set "OpenAfterInstall="
+
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -144,7 +146,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
@@ -646,6 +648,35 @@ echo %SoftName% has been installed successfully.>> %Temp%\hieuckitlog.txt
 timeout /t 2
 :end
 
+REM add Reset License
+echo del "%AppData%\AnyDesk\user.conf" >>"%SoftPath%\%SoftName% ID Reset.bat"
+
+if exist "%SoftPath%\%SoftName% ID Reset.bat" (
+	set "TargetFile=%SoftPath%\%SoftName% ID Reset.bat"
+) else (
+	echo %SoftName% ID Reset does not exist in directory "%SoftPath%". Exiting script.
+	exit /b 1
+)
+set "ShortcutName=%SoftName% ID Reset.lnk"
+set "ShortcutPath=%ProgramData%\Microsoft\Windows\Start Menu\Programs\%ShortcutName%"
+
+echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
+echo sLinkFile = "%ShortcutPath%" >> CreateShortcut.vbs
+echo Set oLink = oWS.CreateShortcut(sLinkFile) >> CreateShortcut.vbs
+echo oLink.TargetPath = "%TargetFile%" >> CreateShortcut.vbs
+echo oLink.WorkingDirectory = "%SoftPath%" >> CreateShortcut.vbs
+echo oLink.Description = "Shortcut to %SoftName% ID Reset" >> CreateShortcut.vbs
+echo oLink.Save >> CreateShortcut.vbs
+cscript CreateShortcut.vbs
+del CreateShortcut.vbs
+
+if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\%ShortcutName%" (
+	echo Creating Shortcut complete.
+	echo Creating Shortcut complete.>> %Temp%\hieuckitlog.txt
+) else (
+	echo Creating Shortcut failed.
+)
+
 REM License
 title _Hieuck.IT_'s Windows Application Cr4cking...
 color 0B
@@ -781,6 +812,11 @@ REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
+
+REM Open After Install
+if not "%OpenAfterInstall%"=="" (
+	call "%SoftPath%\%Process%"
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
