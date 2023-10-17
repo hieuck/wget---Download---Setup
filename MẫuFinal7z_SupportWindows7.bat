@@ -69,6 +69,7 @@ set "Link="
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
+REM My Github Link: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/
 set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
