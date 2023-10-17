@@ -658,7 +658,7 @@ if exist "%SoftPath%\%SoftName% ID Reset.bat" (
 	exit /b 1
 )
 set "ShortcutName=%SoftName% ID Reset.lnk"
-set "ShortcutPath=%ProgramData%\Microsoft\Windows\Start Menu\Programs\%ShortcutName%"
+set "ShortcutPath=%ProgramData%\Microsoft\Windows\Start Menu\Programs\%SoftName%\%ShortcutName%"
 
 echo Set oWS = WScript.CreateObject("WScript.Shell") > CreateShortcut.vbs
 echo sLinkFile = "%ShortcutPath%" >> CreateShortcut.vbs
@@ -670,7 +670,7 @@ echo oLink.Save >> CreateShortcut.vbs
 cscript CreateShortcut.vbs
 del CreateShortcut.vbs
 
-if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\%ShortcutName%" (
+if exist "%ProgramData%\Microsoft\Windows\Start Menu\Programs\%SoftName%\%ShortcutName%" (
 	echo Creating Shortcut complete.
 	echo Creating Shortcut complete.>> %Temp%\hieuckitlog.txt
 ) else (
