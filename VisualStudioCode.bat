@@ -69,7 +69,8 @@ set "Link="
 set "LinkForAllWindows32bit=https://az764295.vo.msecnd.net/stable/f1b07bd25dfad64b0167beb15359ae573aecd2cc/VSCodeUserSetup-ia32-!SoftNameVersion!.exe"
 set "LinkForAllWindows64bit=https://az764295.vo.msecnd.net/stable/f1b07bd25dfad64b0167beb15359ae573aecd2cc/VSCodeUserSetup-x64-!SoftNameVersion!.exe"
 
-set "LinkFromGithub="
+REM My Github Link: https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/
+set "LinkFromGithub=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/VSCode/VSCodeUserSetup-x64-!SoftNameVersion!.exe"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
