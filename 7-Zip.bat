@@ -46,6 +46,8 @@ set "FileName="
 set "SoftNameVersion=2301"
 set "FileDLwB=7z*.exe"
 
+set "OpenAfterInstall="
+
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -86,7 +88,7 @@ set "Shortcut="
 set "NoticeOption=Yes"
 
 REM MenuChoice Configuration
-setlocal
+setlocal EnableDelayedExpansion
 
 :menu
 set "Menu1=Official Website"
@@ -94,10 +96,26 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
-echo Do you want to use the download link from:
-echo 1. %Menu1%				2. %Menu2%
-echo.
-echo 3. %Menu3%					4. %Menu4%
+set "MenuOptions="
+if not "!LinkFromGithub!"=="" (
+	set "MenuOptions=!MenuOptions!2. %Menu2%	"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "MenuOptions=!MenuOptions!3. %Menu3%	"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "MenuOptions=!MenuOptions!4. %Menu4%"
+)
+
+if not "!MenuOptions!"=="" (
+	echo Do you want to use the download link from:
+	echo.
+	echo 1. %Menu1%	%MenuOptions%
+
+) else (
+	echo You have chosen to download from: %Menu1%
+	goto NextStepAfterChosen
+)
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
@@ -128,7 +146,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
@@ -765,6 +783,11 @@ REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
+
+REM Open After Install
+if not "%OpenAfterInstall%"=="" (
+	call "%SoftPath%\%Process%"
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
