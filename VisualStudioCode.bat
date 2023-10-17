@@ -40,7 +40,7 @@ set "Extract7z="
 set "License="
 
 set "SoftName=Visual Studio Code"
-set "Process=danvaoday.exe"
+set "Process=Code.exe"
 
 set "FileName="
 set "SoftNameVersion=1.83.1"
@@ -59,15 +59,15 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 )
 
 REM Set code based on Windows Architecture
-REM Source Link: 
+REM Source Link: https://code.visualstudio.com/download
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://code.visualstudio.com/docs/?dv=win"
-set "LinkForAllWindows32bit="
-set "LinkForAllWindows64bit="
+set "Link="
+set "LinkForAllWindows32bit=https://az764295.vo.msecnd.net/stable/f1b07bd25dfad64b0167beb15359ae573aecd2cc/VSCodeUserSetup-ia32-!SoftNameVersion!.exe"
+set "LinkForAllWindows64bit=https://az764295.vo.msecnd.net/stable/f1b07bd25dfad64b0167beb15359ae573aecd2cc/VSCodeUserSetup-x64-!SoftNameVersion!.exe"
 
 set "LinkFromGithub="
 set "LinkFromDropbox="
