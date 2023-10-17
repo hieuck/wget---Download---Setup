@@ -43,8 +43,8 @@ set "SoftName=Visual Studio Code"
 set "Process=danvaoday.exe"
 
 set "FileName="
-set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "SoftNameVersion=1.83.1"
+set "FileDLwB=VSCodeUserSetup*.exe"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
