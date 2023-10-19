@@ -85,7 +85,7 @@ set "Cr4ckFile="
 set "Cr4ckPath="
 
 set "Shortcut="
-set "NoticeOption=Yes"
+set "NoticeOption="
 
 REM MenuChoice Configuration
 setlocal EnableDelayedExpansion
