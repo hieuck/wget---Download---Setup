@@ -43,7 +43,7 @@ set "SoftName=Plex Media Server"
 set "Process=Plex Media Server.exe"
 
 set "FileName="
-set "SoftNameVersion=1.32.5.7349-8f4248874"
+set "SoftNameVersion=1.32.6.7557-1cf77d501"
 set "FileDLwB=PlexMediaServer*.exe"
 
 set "OpenAfterInstall="
@@ -61,7 +61,7 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 )
 
 REM Set code based on Windows Architecture
-REM Source Link: 
+REM Source Link: https://www.plex.tv/media-server-downloads/
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
