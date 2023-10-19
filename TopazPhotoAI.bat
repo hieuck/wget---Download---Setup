@@ -43,8 +43,10 @@ set "SoftName=Topaz Photo AI"
 set "Process=Topaz Photo AI.exe"
 
 set "FileName=msi"
-set "SoftNameVersion=2.0.4"
+set "SoftNameVersion=2.0.5"
 set "FileDLwB=TopazPhotoAI*.msi"
+
+set "OpenAfterInstall="
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=No"
@@ -86,7 +88,7 @@ set "Shortcut="
 set "NoticeOption="
 
 REM MenuChoice Configuration
-setlocal enabledelayedexpansion
+setlocal EnableDelayedExpansion
 
 :menu
 set "Menu1=Official Website"
@@ -144,7 +146,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
@@ -782,6 +784,11 @@ REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
+
+REM Open After Install
+if not "%OpenAfterInstall%"=="" (
+	call "%SoftPath%\%Process%"
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
