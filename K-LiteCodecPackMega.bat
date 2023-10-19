@@ -40,8 +40,8 @@ set "Extract7z="
 set "License="
 
 set "SoftName=K-Lite Codec Pack Mega"
-set "Process=mpc-hc64.exe"
-if /i "%ARCH%"=="x86" set "Process=mpc-hc.exe"
+set "Process=mpc-hc.exe"
+if exist "%SystemRoot%\SysWOW64" set "Process=mpc-hc64.exe"
 
 set "FileName="
 set "SoftNameVersion=1785"
@@ -784,6 +784,11 @@ REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
+
+REM Open After Install
+if not "%OpenAfterInstall%"=="" (
+	call "%SoftPath%\%Process%"
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
