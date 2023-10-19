@@ -13,6 +13,10 @@ REM Run As Administrator
 >nul reg add hkcu\software\classes\.Admin\shell\runas\command /f /ve /d "cmd /x /d /r set \"f0=%%2\" &call \"%%2\" %%3" &set _= %*
 >nul fltmc || if "%f0%" neq "%~f0" ( cd.>"%tmp%\runas.Admin" &start "%~n0" /high "%tmp%\runas.Admin" "%~f0" "%_:"=""%" &exit /b )
 
+REM Detect Windows Architecture
+set "ARCH=x86"
+if exist "%SystemRoot%\SysWOW64" set "ARCH=x64"
+
 title _Hieuck.IT_'s Windows Application Setting Up...
 color 0B
 mode con:cols=120 lines=17
@@ -39,8 +43,10 @@ set "SoftName=Topaz Video AI"
 set "Process=Topaz Video AI.exe"
 
 set "FileName=msi"
-set "SoftNameVersion=3.5.0"
+set "SoftNameVersion=4.0.0"
 set "FileDLwB=TopazVideoAI*.msi"
+
+set "OpenAfterInstall="
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=No"
@@ -57,8 +63,32 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 REM Set code based on Windows Architecture
 REM Source Link: https://www.topazlabs.com/downloads
 
+set "LinkForOldWindows="
+set "LinkForOldWindows32bit="
+set "LinkForOldWindows64bit="
+
+set "Link=https://topazlabs.com/d/tvai/latest/win/full"
+set "LinkForAllWindows32bit="
+set "LinkForAllWindows64bit="
+
+set "LinkFromGithub="
+set "LinkFromDropbox="
+set "LinkFromOneDrive="
+
+set "SoftPath=%ProgramFiles%\Topaz Labs LLC\Topaz Video AI"
+set "SoftPathFor32bit="
+set "SoftPathFor64bit="
+
+set "QuietMode=/quiet /norestart"
+
+set "Cr4ckFile=TopazVideoAICr4ck"
+set "Cr4ckPath="
+
+set "Shortcut="
+set "NoticeOption="
+
 REM MenuChoice Configuration
-setlocal
+setlocal EnableDelayedExpansion
 
 :menu
 set "Menu1=Official Website"
@@ -66,10 +96,26 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
-echo Do you want to use the download link from:
-echo 1. %Menu1%				2. %Menu2%
-echo.
-echo 3. %Menu3%					4. %Menu4%
+set "MenuOptions="
+if not "!LinkFromGithub!"=="" (
+	set "MenuOptions=!MenuOptions!2. %Menu2%	"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "MenuOptions=!MenuOptions!3. %Menu3%	"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "MenuOptions=!MenuOptions!4. %Menu4%"
+)
+
+if not "!MenuOptions!"=="" (
+	echo Do you want to use the download link from:
+	echo.
+	echo 1. %Menu1%	%MenuOptions%
+
+) else (
+	echo You have chosen to download from: %Menu1%
+	goto NextStepAfterChosen
+)
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
@@ -91,24 +137,52 @@ REM Display the choice made
 if "%choice%"=="1" (
 	REM Official Website
 	echo You have chosen to download from: %Menu1%
-	set "Link=https://topazlabs.com/d/tvai/latest/win/full"
-	if /i "%ARCH%"=="x86" set "Link="
 	goto NextStepAfterChosen
 ) else if "%choice%"=="2" (
 	REM My Github
 	echo You have chosen to download from: %Menu2%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromGithub%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu2%.&echo.&goto menu
+	)
 ) else if "%choice%"=="3" (
 	REM My Dropbox
 	echo You have chosen to download from: %Menu3%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromDropbox%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromDropbox%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu3%.&echo.&goto menu
+	)
 ) else if "%choice%"=="4" (
 	REM My OneDrive
 	echo You have chosen to download from: %Menu4%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromOneDrive%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromOneDrive%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu4%.&echo.&goto menu
+	)
 ) else (
 	echo Invalid choice. Please select 1, 2, 3, or 4.
 	goto menu
@@ -116,26 +190,6 @@ if "%choice%"=="1" (
 
 endlocal
 :NextStepAfterChosen
-
-set "LinkForOldWindows="
-set "LinkForOldWindows32bit="
-set "LinkForOldWindows64bit="
-
-set "Link=%Link%"
-set "LinkForAllWindows32bit="
-set "LinkForAllWindows64bit="
-
-set "SoftPath=%ProgramFiles%\Topaz Labs LLC\Topaz Video AI"
-set "SoftPathFor32bit="
-set "SoftPathFor64bit="
-
-set "QuietMode=/quiet /norestart"
-
-set "Cr4ckFile=TopazVideoAICr4ck"
-set "Cr4ckPath="
-
-set "Shortcut="
-set "NoticeOption="
 
 REM Convert to direct download Link.
 setlocal enabledelayedexpansion
@@ -729,6 +783,11 @@ REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
+
+REM Open After Install
+if not "%OpenAfterInstall%"=="" (
+	call "%SoftPath%\%Process%"
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
