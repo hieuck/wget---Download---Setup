@@ -182,6 +182,14 @@ echo.
 @echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
 echo Installing %SoftName%...
+
+set KeyName=HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer
+set ValueName=Link
+set ValueType=REG_BINARY
+set ValueData=00000000
+
+reg add "%KeyName%" /v "%ValueName%" /t %ValueType% /d %ValueData% /f
+
 pushd "%~dp0"
 call "%download_folder%\AnyDesk.bat"
 pushd "%~dp0"
