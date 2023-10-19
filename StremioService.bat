@@ -71,11 +71,11 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath=%LocalAppData%\Programs\Programs\StremioService"
+set "SoftPath=%LocalAppData%\Programs\StremioService"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/S"
+set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
 set "Cr4ckFile="
 set "Cr4ckPath="
