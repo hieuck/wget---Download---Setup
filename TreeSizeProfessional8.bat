@@ -67,7 +67,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/TreeSize-!SoftNameVersion!-Setup.exe"
+set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/TreeSize/TreeSize-!SoftNameVersion!-Setup.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
