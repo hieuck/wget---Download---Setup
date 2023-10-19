@@ -39,7 +39,7 @@ REM Required Configuration Settings
 set "Extract7z="
 set "License=Yes"
 
-set "SoftName=TreeSize Professional"
+set "SoftName=TreeSize Professional 9"
 set "Process=TreeSize.exe"
 
 set "FileName="
@@ -71,7 +71,7 @@ set "Link=https://downloads.jam-software.de/treesize/TreeSize-Setup.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
+set "LinkFromGithub=TreeSize/TreeSize-!SoftNameVersion!-Setup.exe"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
@@ -82,7 +82,7 @@ set "SoftPathFor64bit="
 REM set "TS_INSTALL_PASSWORD=4LGX7A-5TR7AX-JDZ2VK-UU5DHV-ZXSULR-4A3AMJ-5VEFLX" /PASSWORD=%TS_INSTALL_PASSWORD%
 set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
-set "Cr4ckFile=TreeSizeProfessional9Cr4ck"
+set "Cr4ckFile=TreeSizeProfessional-!SoftNameVersion!-Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
