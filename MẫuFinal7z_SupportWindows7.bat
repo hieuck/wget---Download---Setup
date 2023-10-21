@@ -111,7 +111,6 @@ if not "!MenuOptions!"=="" (
 	echo Do you want to use the download link from:
 	echo.
 	echo 1. %Menu1%	%MenuOptions%
-
 ) else (
 	echo You have chosen to download from: %Menu1%
 	goto NextStepAfterChosen
