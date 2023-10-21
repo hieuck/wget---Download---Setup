@@ -43,8 +43,10 @@ set "SoftName=Internet Download Manager"
 set "Process=IDMan.exe"
 
 set "FileName="
-set "SoftNameVersion=641.20"
+set "SoftNameVersion=641.22"
 set "FileDLwB=idman*.exe"
+
+set "OpenAfterInstall="
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -96,20 +98,19 @@ set "Menu4=My OneDrive"
 
 set "MenuOptions="
 if not "!LinkFromGithub!"=="" (
-	set "MenuOptions=!MenuOptions!2. %Menu2%	"
+	set "MenuOptions=!MenuOptions!	2. %Menu2%"
 )
 if not "!LinkFromDropbox!"=="" (
-	set "MenuOptions=!MenuOptions!3. %Menu3%	"
+	set "MenuOptions=!MenuOptions!	3. %Menu3%"
 )
 if not "!LinkFromOneDrive!"=="" (
-	set "MenuOptions=!MenuOptions!4. %Menu4%"
+	set "MenuOptions=!MenuOptions!	4. %Menu4%"
 )
 
 if not "!MenuOptions!"=="" (
 	echo Do you want to use the download link from:
 	echo.
-	echo 1. %Menu1%	%MenuOptions%
-
+	echo 1. %Menu1%%MenuOptions%
 ) else (
 	echo You have chosen to download from: %Menu1%
 	goto NextStepAfterChosen
@@ -117,7 +118,18 @@ if not "!MenuOptions!"=="" (
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
-echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
+
+set "OptionsChoice="
+if not "!LinkFromGithub!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 2"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 3"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 4"
+)
+echo Select an option (1%OptionsChoice%) [Default is %defaultChoice%]: 
 choice /c 1234 /t 5 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
@@ -144,7 +156,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
@@ -781,6 +793,11 @@ REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
+
+REM Open After Install
+if not "%OpenAfterInstall%"=="" (
+	call "%SoftPath%\%Process%"
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
