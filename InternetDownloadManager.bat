@@ -804,7 +804,6 @@ for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 )
-pause
 
 REM License
 title _Hieuck.IT_'s Windows Application Cr4cking...
