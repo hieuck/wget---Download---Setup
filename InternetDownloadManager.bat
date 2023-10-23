@@ -823,6 +823,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-"%Cr4ckPath%\IAS_0.7_CRC32_58F0EACC.cmd" /act /s
+"%Cr4ckPath%\IAS.cmd" /act /s
 echo Please close the script manually if automatically close fails.
 popd
