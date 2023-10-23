@@ -82,7 +82,7 @@ set "SoftPathFor64bit=%ProgramFiles(x86)%\Internet Download Manager"
 set "QuietMode=/skipdlgs"
 
 set "Cr4ckFile=IDMCr4ck"
-set "Cr4ckPath="
+set "Cr4ckPath=C:\Z_Hieuck.IT_Z"
 
 set "Shortcut="
 set "NoticeOption="
@@ -804,6 +804,7 @@ for /l %%i in (3,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 )
+pause
 
 REM License
 title _Hieuck.IT_'s Windows Application Cr4cking...
