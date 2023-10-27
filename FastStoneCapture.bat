@@ -46,6 +46,8 @@ set "FileName="
 set "SoftNameVersion=102"
 set "FileDLwB=FSCaptureSetup*.exe"
 
+set "OpenAfterInstall="
+
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
 set "UserAgent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
@@ -61,8 +63,32 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 REM Set code based on Windows Architecture
 REM Source Link: https://www.faststone.org/download.htm
 
+set "LinkForOldWindows="
+set "LinkForOldWindows32bit="
+set "LinkForOldWindows64bit="
+
+set "Link=https://www.faststone.org/DN/FSCaptureSetup!SoftNameVersion!.exe"
+set "LinkForAllWindows32bit="
+set "LinkForAllWindows64bit="
+
+set "LinkFromGithub="
+set "LinkFromDropbox="
+set "LinkFromOneDrive="
+
+set "SoftPath="
+set "SoftPathFor32bit=%ProgramFiles%\FastStone Capture"
+set "SoftPathFor64bit=%ProgramFiles(x86)%\FastStone Capture"
+
+set "QuietMode=/S"
+
+set "Cr4ckFile=FastStoneCaptureCr4ck"
+set "Cr4ckPath=%LocalAppData%\FastStone\FSC"
+
+set "Shortcut="
+set "NoticeOption="
+
 REM MenuChoice Configuration
-setlocal
+setlocal EnableDelayedExpansion
 
 :menu
 set "Menu1=Official Website"
@@ -70,14 +96,40 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
-echo Do you want to use the download link from:
-echo 1. %Menu1%				2. %Menu2%
-echo.
-echo 3. %Menu3%					4. %Menu4%
+set "MenuOptions="
+if not "!LinkFromGithub!"=="" (
+	set "MenuOptions=!MenuOptions!	2. %Menu2%"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "MenuOptions=!MenuOptions!	3. %Menu3%"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "MenuOptions=!MenuOptions!	4. %Menu4%"
+)
+
+if not "!MenuOptions!"=="" (
+	echo Do you want to use the download link from:
+	echo.
+	echo 1. %Menu1%%MenuOptions%
+) else (
+	echo You have chosen to download from: %Menu1%
+	goto NextStepAfterChosen
+)
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
-echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
+
+set "OptionsChoice="
+if not "!LinkFromGithub!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 2"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 3"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 4"
+)
+echo Select an option (1%OptionsChoice%) [Default is %defaultChoice%]: 
 choice /c 1234 /t 5 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
@@ -93,21 +145,54 @@ if "%errorlevel%"=="1" (
 
 REM Display the choice made
 if "%choice%"=="1" (
+	REM Official Website
 	echo You have chosen to download from: %Menu1%
-	set "Link=https://www.faststone.org/DN/FSCaptureSetup!SoftNameVersion!.exe"
 	goto NextStepAfterChosen
 ) else if "%choice%"=="2" (
+	REM My Github
 	echo You have chosen to download from: %Menu2%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromGithub%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu2%.&echo.&goto menu
+	)
 ) else if "%choice%"=="3" (
+	REM My Dropbox
 	echo You have chosen to download from: %Menu3%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromDropbox%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromDropbox%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu3%.&echo.&goto menu
+	)
 ) else if "%choice%"=="4" (
+	REM My OneDrive
 	echo You have chosen to download from: %Menu4%
-	set "Link="
-	goto NextStepAfterChosen
+	if not "%LinkFromOneDrive%"=="" (
+		set "LinkForOldWindows="
+		set "LinkForOldWindows32bit="
+		set "LinkForOldWindows64bit="
+
+		set "Link=%LinkFromOneDrive%"
+		set "LinkForAllWindows32bit="
+		set "LinkForAllWindows64bit="
+		goto NextStepAfterChosen
+	) else (
+		echo No download link available yet in %Menu4%.&echo.&goto menu
+	)
 ) else (
 	echo Invalid choice. Please select 1, 2, 3, or 4.
 	goto menu
@@ -115,26 +200,6 @@ if "%choice%"=="1" (
 
 endlocal
 :NextStepAfterChosen
-
-set "LinkForOldWindows="
-set "LinkForOldWindows32bit="
-set "LinkForOldWindows64bit="
-
-set "Link=%Link%"
-set "LinkForAllWindows32bit="
-set "LinkForAllWindows64bit="
-
-set "SoftPath="
-set "SoftPathFor32bit=%ProgramFiles%\FastStone Capture"
-set "SoftPathFor64bit=%ProgramFiles(x86)%\FastStone Capture"
-
-set "QuietMode=/S"
-
-set "Cr4ckFile=FastStoneCaptureCr4ck"
-set "Cr4ckPath=%LocalAppData%\FastStone\FSC"
-
-set "Shortcut="
-set "NoticeOption="
 
 REM Convert to direct download Link.
 setlocal enabledelayedexpansion
@@ -728,6 +793,11 @@ REM Calculate the elapsed time in seconds
 set /a elapsed_time=%end_seconds%-%start_seconds%
 
 echo Time elapsed: %elapsed_time% seconds.
+
+REM Open After Install
+if not "%OpenAfterInstall%"=="" (
+	call "%SoftPath%\%Process%"
+)
 
 echo The script will automatically close in 3 seconds.
 for /l %%i in (3,-1,1) do (
