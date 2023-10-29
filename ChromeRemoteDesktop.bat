@@ -40,11 +40,11 @@ set "Extract7z="
 set "License="
 
 set "SoftName=Chrome Remote Desktop"
-set "Process=danvaoday.exe"
+set "Process=remoting_desktop.exe"
 
 set "FileName="
 set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=chromeremotedesktop*.msi"
 
 set "OpenAfterInstall="
 
@@ -76,10 +76,10 @@ set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
 set "SoftPath="
-set "SoftPathFor32bit="
-set "SoftPathFor64bit="
+set "SoftPathFor32bit=%ProgramFiles%\Google\Chrome Remote Desktop\CurrentVersion"
+set "SoftPathFor64bit=%ProgramFiles(x86)%\Google\Chrome Remote Desktop\CurrentVersion"
 
-set "QuietMode=/S"
+set "QuietMode=/quiet /norestart"
 
 set "Cr4ckFile="
 set "Cr4ckPath="
