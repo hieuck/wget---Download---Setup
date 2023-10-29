@@ -96,15 +96,16 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
+REM Use the pattern "2. %Menu2% & echo." !MenuOptions!3. %Menu3%" to break the line.
 set "MenuOptions="
 if not "!LinkFromGithub!"=="" (
-	set "MenuOptions=!MenuOptions!	2. %Menu2%"
+	set "MenuOptions=!MenuOptions!	2. %Menu2% & echo."
 )
 if not "!LinkFromDropbox!"=="" (
-	set "MenuOptions=!MenuOptions!	3. %Menu3%"
+	set "MenuOptions=!MenuOptions!3. %Menu3%"
 )
 if not "!LinkFromOneDrive!"=="" (
-	set "MenuOptions=!MenuOptions!	4. %Menu4%"
+	set "MenuOptions=!MenuOptions!	4. %Menu4% & echo."
 )
 
 if not "!MenuOptions!"=="" (
