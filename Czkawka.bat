@@ -43,7 +43,7 @@ set "SoftName=Czkawka"
 set "Process=czkawka_gui.exe"
 
 set "FileName="
-set "SoftNameVersion=5.1.0"
+set "SoftNameVersion=6.1.0"
 set "FileDLwB=windows_czkawka*.zip"
 
 set "OpenAfterInstall="
