@@ -41,6 +41,7 @@ set "License="
 set "Extract7z="
 set "SOFTNAME=VLC"
 set "PROCESS=vlc.exe"
+set "SoftNameVersion=3.0.20"
 set "CheckOSVersion=No"
 set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
@@ -48,9 +49,9 @@ set "USERAGENT=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 :: Source link: https://www.videolan.org/vlc/
 
 if %ARCH%==x86 (
-	set "LINK=https://mirrors.ocf.berkeley.edu/videolan-ftp/vlc/3.0.18/win32/vlc-3.0.18-win32.exe"
+	set "LINK=https://mirror.kku.ac.th/videolan/vlc/%SoftNameVersion%/win32/vlc-%SoftNameVersion%-win32.exe"
 ) else (
-	set "LINK=https://veronanetworks.mm.fcix.net/videolan-ftp/vlc/3.0.18/win64/vlc-3.0.18-win64.exe"
+	set "LINK=https://mirror.kku.ac.th/videolan/vlc/%SoftNameVersion%/win64/vlc-%SoftNameVersion%-win64.exe"
 )
 
 set "QUIETMODE=/S"
