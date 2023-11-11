@@ -71,7 +71,7 @@ set "Link=https://www.nurgo-software.com/download/AquaSnap.msi"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub=AquaSnap/AquaSnap-!SoftNameVersion!"
+set "LinkFromGithub=AquaSnap/AquaSnap-!SoftNameVersion!.msi"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
