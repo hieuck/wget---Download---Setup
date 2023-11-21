@@ -32,7 +32,7 @@ for /f "usebackq" %%A in  (`dir "%%JIANYINGPRO_DIR%%\*" /a:d /o:-d /t:c /b`) do 
 )
 
 :FAIL
-@echo Fatal error: Can't find executable. Please check the installation path.
+@echo Fatal error: Can't find language file. Please check the installation path.
 pause
 exit /b 1
 
