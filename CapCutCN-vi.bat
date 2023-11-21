@@ -19,16 +19,16 @@ set JIANYINGPRO_DIR="%LocalAppData%\JianyingPro\Apps"
 rem Sort CAPCUT_DIR's subdirectories (/a:d) by reverse date (/o:-d) of
 rem creation (/t:c) and find the first one that contains the exe.
 for /f "usebackq" %%A in  (`dir "%%CAPCUT_DIR%%\*" /a:d /o:-d /t:c /b`) do (
-	set LANG_CapCut_PATH=!CAPCUT_DIR!\%%A\Resources\po\vi-VN.po
-	if exist "!LANG_CapCut_PATH!" (goto :JIANYINGPRO_GET_VER)
+	set LANG_CAPCUT_PATH=!CAPCUT_DIR!\%%A\Resources\po\vi-VN.po
+	if exist "!LANG_CAPCUT_PATH!" (goto :JIANYINGPRO_GET_VER)
 )
 
 :JIANYINGPRO_GET_VER
 rem Sort JIANYINGPRO_DIR's subdirectories (/a:d) by reverse date (/o:-d) of
 rem creation (/t:c) and find the first one that contains the exe.
 for /f "usebackq" %%A in  (`dir "%%JIANYINGPRO_DIR%%\*" /a:d /o:-d /t:c /b`) do (
-	set LANG_JianyingPro_PATH=!JIANYINGPRO_DIR!\%%A\Resources\po\zh-Hans.po
-	if exist "!LANG_JianyingPro_PATH!" (goto :RUN_IT)
+	set LANG_JIANYINGPRO_PATH=!JIANYINGPRO_DIR!\%%A\Resources\po\zh-Hans.po
+	if exist "!LANG_JIANYINGPRO_PATH!" (goto :RUN_IT)
 )
 
 :FAIL
@@ -37,11 +37,11 @@ pause
 exit /b 1
 
 :RUN_IT
-@echo Found CapCut path: !LANG_CapCut_PATH!
-@echo Found JianyingPro path: !LANG_JianyingPro_PATH!
+@echo Found CapCut path: !LANG_CAPCUT_PATH!
+@echo Found JianyingPro path: !LANG_JIANYINGPRO_PATH!
 echo.
-xcopy !LANG_JianyingPro_PATH! "zh-Hans.po.bak" /I /E /Y
-xcopy !LANG_CapCut_PATH! !LANG_JianyingPro_PATH! /I /E /Y
+xcopy !LANG_JIANYINGPRO_PATH! "zh-Hans.po.bak" /I /E /Y
+xcopy !LANG_CAPCUT_PATH! !LANG_JIANYINGPRO_PATH! /I /E /Y
 @echo.
 @echo Completed.
 @echo The script will automatically close in 3 seconds.
