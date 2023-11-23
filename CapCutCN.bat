@@ -40,11 +40,11 @@ set "Extract7z="
 set "License="
 
 set "SoftName=CapCut China"
-set "Process=danvaoday.exe"
+set "Process=JianyingPro.exe"
 
 set "FileName="
-set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "SoftNameVersion=4_9_0_10872"
+set "FileDLwB=Jianying*.exe"
 
 set "OpenAfterInstall="
 
@@ -67,7 +67,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://lf3-package.vlabstatic.com/obj/faceu-packages/Jianying_split_4_9_0_10872_jianyingpro_0.exe?ts=1700782679428"
+set "Link=https://lf3-package.vlabstatic.com/obj/faceu-packages/Jianying_split_!SoftNameVersion!_jianyingpro_0.exe?ts=1700782679428"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -75,11 +75,11 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath="
+set "SoftPath=%LocalAppData%\JianyingPro\Apps"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/S"
+set "QuietMode="
 
 set "Cr4ckFile="
 set "Cr4ckPath="
