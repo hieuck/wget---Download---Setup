@@ -43,7 +43,7 @@ set "SoftName=Topaz Photo AI"
 set "Process=Topaz Photo AI.exe"
 
 set "FileName=msi"
-set "SoftNameVersion=2.1.0"
+set "SoftNameVersion=2.1.3"
 set "FileDLwB=TopazPhotoAI*.msi"
 
 set "OpenAfterInstall="
