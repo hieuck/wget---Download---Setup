@@ -40,7 +40,7 @@ git --version >nul 2>&1
 if %errorlevel% neq 0 (
     echo Git is not installed. Downloading and installing Git...
 ) else (
-    echo Git is already installed.&goto RunSD
+    echo Git is already installed.&goto BeforeRunSD
 )
 
 set "Extract7z="
@@ -50,7 +50,7 @@ set "SoftName=Git for Windows"
 set "Process=git-cmd.exe"
 
 set "FileName="
-set "SoftNameVersion=2.42.0.2"
+set "SoftNameVersion=2.43.0.1"
 set "FileDLwB=Git*.exe"
 
 set "OpenAfterInstall="
@@ -103,6 +103,7 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
+REM Use the pattern "2. %Menu2% & echo." !MenuOptions!3. %Menu3%" to break the line.
 set "MenuOptions="
 if not "!LinkFromGithub!"=="" (
 	set "MenuOptions=!MenuOptions!	2. %Menu2%"
@@ -813,6 +814,7 @@ for /l %%i in (3,-1,1) do (
 )
 echo Please close the script manually if automatically close fails.
 
+:BeforeRunSD
 REM Doubly check after installation.
 git --version >nul 2>&1
 if %errorlevel% equ 0 (
