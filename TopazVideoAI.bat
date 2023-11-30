@@ -43,7 +43,7 @@ set "SoftName=Topaz Video AI"
 set "Process=Topaz Video AI.exe"
 
 set "FileName=msi"
-set "SoftNameVersion=4.0.4"
+set "SoftNameVersion=4.0.5"
 set "FileDLwB=TopazVideoAI*.msi"
 
 set "OpenAfterInstall="
