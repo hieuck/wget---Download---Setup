@@ -855,7 +855,8 @@ if not exist "%DriveChar%:\" (
 	goto InputDrive
 )
 
-if not exist "%DriveChar%:\stable-diffusion-webui" (
+pushd "%DriveChar%:\"
+if not exist "stable-diffusion-webui" (
 	git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 )
 
