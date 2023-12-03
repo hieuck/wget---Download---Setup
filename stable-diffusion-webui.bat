@@ -861,5 +861,14 @@ if not exist "stable-diffusion-webui" (
 )
 
 pushd "%DriveChar%:\stable-diffusion-webui"
-call "webui-user.bat"
+echo @echo off>webui-user-hieu.bat
+echo.>>webui-user-hieu.bat
+echo set PYTHON=>>webui-user-hieu.bat
+echo set GIT=>>webui-user-hieu.bat
+echo set VENV_DIR=>>webui-user-hieu.bat
+echo set COMMANDLINE_ARGS=--medvram --xformers>>webui-user-hieu.bat
+echo.>>webui-user-hieu.bat
+echo call webui.bat>>webui-user-hieu.bat
+
+call "webui-user-hieu.bat"
 popd
