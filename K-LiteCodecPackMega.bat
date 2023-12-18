@@ -44,7 +44,7 @@ set "Process=mpc-hc.exe"
 if exist "%SystemRoot%\SysWOW64" set "Process=mpc-hc64.exe"
 
 set "FileName="
-set "SoftNameVersion=1785"
+set "SoftNameVersion=1800"
 set "FileDLwB=K-Lite_Codec_Pack*.exe"
 
 set "OpenAfterInstall="
@@ -97,22 +97,22 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
+REM Use the pattern "2. %Menu2% & echo." !MenuOptions!3. %Menu3%" to break the line.
 set "MenuOptions="
 if not "!LinkFromGithub!"=="" (
-	set "MenuOptions=!MenuOptions!2. %Menu2%	"
+	set "MenuOptions=!MenuOptions!	2. %Menu2%"
 )
 if not "!LinkFromDropbox!"=="" (
-	set "MenuOptions=!MenuOptions!3. %Menu3%	"
+	set "MenuOptions=!MenuOptions!	3. %Menu3%"
 )
 if not "!LinkFromOneDrive!"=="" (
-	set "MenuOptions=!MenuOptions!4. %Menu4%"
+	set "MenuOptions=!MenuOptions!	4. %Menu4%"
 )
 
 if not "!MenuOptions!"=="" (
 	echo Do you want to use the download link from:
 	echo.
-	echo 1. %Menu1%	%MenuOptions%
-
+	echo 1. %Menu1%%MenuOptions%
 ) else (
 	echo You have chosen to download from: %Menu1%
 	goto NextStepAfterChosen
@@ -120,7 +120,18 @@ if not "!MenuOptions!"=="" (
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
-echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
+
+set "OptionsChoice="
+if not "!LinkFromGithub!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 2"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 3"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 4"
+)
+echo Select an option (1%OptionsChoice%) [Default is %defaultChoice%]: 
 choice /c 1234 /t 5 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
