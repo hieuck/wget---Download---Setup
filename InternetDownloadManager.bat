@@ -43,7 +43,7 @@ set "SoftName=Internet Download Manager"
 set "Process=IDMan.exe"
 
 set "FileName="
-set "SoftNameVersion=641.22"
+set "SoftNameVersion=642.3"
 set "FileDLwB=idman*.exe"
 
 set "OpenAfterInstall="
