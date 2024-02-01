@@ -43,7 +43,7 @@ set "SoftName=TreeSize Professional 9"
 set "Process=TreeSize.exe"
 
 set "FileName="
-set "SoftNameVersion=9.0.3.1852"
+set "SoftNameVersion=9.1.1.1869"
 set "FileDLwB=TreeSize*exe"
 
 set "OpenAfterInstall="
