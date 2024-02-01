@@ -81,7 +81,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/S"
 
-set "Cr4ckFile=AirExplorerPro-5.4.3-Cr4ck"
+set "Cr4ckFile=AirExplorerPro-!SoftNameVersion!-Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
