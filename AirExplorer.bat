@@ -43,7 +43,7 @@ set "SoftName=AirExplorer"
 set "Process=AirExplorer.exe"
 
 set "FileName="
-set "SoftNameVersion=4.0.1"
+set "SoftNameVersion=5.4.3"
 set "FileDLwB=AirExplorer*.exe"
 
 set "OpenAfterInstall="
@@ -67,7 +67,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/AirExplorer-Installer.exe"
+set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/AirExplorer-Installer-!SoftNameVersion!.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -81,7 +81,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/S"
 
-set "Cr4ckFile=AirExplorerProCr4ck"
+set "Cr4ckFile=AirExplorerPro-5.4.3-Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
@@ -96,22 +96,22 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
+REM Use the pattern "2. %Menu2% & echo." !MenuOptions!3. %Menu3%" to break the line.
 set "MenuOptions="
 if not "!LinkFromGithub!"=="" (
-	set "MenuOptions=!MenuOptions!2. %Menu2%	"
+	set "MenuOptions=!MenuOptions!	2. %Menu2%"
 )
 if not "!LinkFromDropbox!"=="" (
-	set "MenuOptions=!MenuOptions!3. %Menu3%	"
+	set "MenuOptions=!MenuOptions!	3. %Menu3%"
 )
 if not "!LinkFromOneDrive!"=="" (
-	set "MenuOptions=!MenuOptions!4. %Menu4%"
+	set "MenuOptions=!MenuOptions!	4. %Menu4%"
 )
 
 if not "!MenuOptions!"=="" (
 	echo Do you want to use the download link from:
 	echo.
-	echo 1. %Menu1%	%MenuOptions%
-
+	echo 1. %Menu1%%MenuOptions%
 ) else (
 	echo You have chosen to download from: %Menu1%
 	goto NextStepAfterChosen
@@ -119,7 +119,18 @@ if not "!MenuOptions!"=="" (
 
 REM The number corresponding to the default choice
 set "defaultChoice=1"
-echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
+
+set "OptionsChoice="
+if not "!LinkFromGithub!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 2"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 3"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 4"
+)
+echo Select an option (1%OptionsChoice%) [Default is %defaultChoice%]: 
 choice /c 1234 /t 5 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
