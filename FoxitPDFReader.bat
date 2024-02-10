@@ -43,7 +43,7 @@ set "SoftName=Foxit PDF Reader"
 set "Process=FoxitPDFReader.exe"
 
 set "FileName="
-set "SoftNameVersion=2023.2.0"
+set "SoftNameVersion=2023.3.0"
 set "FileDLwB=FoxitPDFReader*.exe"
 
 set "OpenAfterInstall="
@@ -67,7 +67,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://cdn78.foxitsoftware.com/product/phantomPDF/desktop/win/!SoftNameVersion!/FoxitPDFReader%Major%%Minor%_enu_Setup_Prom.exe" REM !SoftNameVersion:.=!
+set "Link=https://cdn78.foxitsoftware.com/product/reader/desktop/win/!SoftNameVersion!/FoxitPDFReader%Major%%Minor%_enu_Setup_Prom.exe" REM !SoftNameVersion:.=!
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
