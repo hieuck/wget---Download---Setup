@@ -71,7 +71,7 @@ set "Link=https://cdn78.foxitsoftware.com/product/reader/desktop/win/!SoftNameVe
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
+set "LinkFromGithub=FoxitPDFReader/FoxitPDFReader20233_enu_Setup_Prom.part1.rar"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
