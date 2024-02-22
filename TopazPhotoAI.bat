@@ -43,7 +43,7 @@ set "SoftName=Topaz Photo AI"
 set "Process=Topaz Photo AI.exe"
 
 set "FileName=msi"
-set "SoftNameVersion=2.1.3"
+set "SoftNameVersion=2.4.0"
 set "FileDLwB=TopazPhotoAI*.msi"
 
 set "OpenAfterInstall="
@@ -71,7 +71,7 @@ set "Link=https://topazlabs.com/d/photo/latest/win/full"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
+set "LinkFromGithub=https://downloads.topazlabs.com/deploy/TopazPhotoAI/!SoftNameVersion!/TopazPhotoAI-!SoftNameVersion!.msi"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
