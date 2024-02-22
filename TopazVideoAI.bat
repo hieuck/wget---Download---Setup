@@ -71,7 +71,7 @@ set "Link=https://topazlabs.com/d/tvai/latest/win/full"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
+set "LinkFromGithub=https://downloads.topazlabs.com/deploy/TopazVideoAI/!SoftNameVersion!/TopazVideoAI-!SoftNameVersion!.msi"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
