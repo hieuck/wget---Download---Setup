@@ -43,7 +43,7 @@ set "SoftName=Revo Uninstaller"
 set "Process=RevoUninPro.exe"
 
 set "FileName="
-set "SoftNameVersion="
+set "SoftNameVersion=5.2.5"
 set "FileDLwB=Revo*.exe"
 
 set "SupportOldWindows=Yes"
