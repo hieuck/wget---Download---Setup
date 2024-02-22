@@ -61,7 +61,7 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 )
 
 REM Set code based on Windows Architecture
-REM Source Link: https://www.topazlabs.com/downloads
+REM Source Link: https://www.topazlabs.com/downloads https://downloads.topazlabs.com/deploy/TopazVideoAI/4.1.2/TopazVideoAI-4.1.2.msi
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
