@@ -40,7 +40,7 @@ set "Process=TrafficMonitor.exe"
 
 set "FileName="
 set "SoftNameVersion=V1.84.1"
-set "FileDLwB=TrafficMonitor*.exe"
+set "FileDLwB=TrafficMonitor*.zip"
 
 set "SupportOldWindows=Yes"
 set "Support32Bit=Yes"
@@ -66,7 +66,7 @@ set "QuietMode=/S"
 set "Cr4ckFile="
 set "Cr4ckPath="
 
-set "Shortcut="
+set "Shortcut=Yes"
 
 REM Detect Windows Architecture and Check Compatibility for 32-bit
 if exist "%SYSTEMROOT%\SysWOW64" (
