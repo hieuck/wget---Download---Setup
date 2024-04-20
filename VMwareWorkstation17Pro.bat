@@ -43,7 +43,7 @@ set "SoftName=VMware Workstation 17 Pro"
 set "Process=vmware.exe"
 
 set "FileName="
-set "SoftNameVersion="
+set "SoftNameVersion=17.5.1"
 set "FileDLwB=VMware*.exe"
 
 set "SupportOldWindows=Yes"
