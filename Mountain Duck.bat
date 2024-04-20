@@ -43,7 +43,7 @@ set "SoftName=Mountain Duck"
 set "Process=Mountain Duck.exe"
 
 set "FileName="
-set "SoftNameVersion=4.14.4.21440"
+set "SoftNameVersion=4.15.7.22047"
 set "FileDLwB=Mountain*.exe"
 
 set "SupportOldWindows=Yes"
