@@ -44,7 +44,7 @@ set "Process=mpc-hc.exe"
 if exist "%SystemRoot%\SysWOW64" set "Process=mpc-hc64.exe"
 
 set "FileName="
-set "SoftNameVersion=1805"
+set "SoftNameVersion=1830"
 set "FileDLwB=K-Lite_Codec_Pack*.exe"
 
 set "OpenAfterInstall="
