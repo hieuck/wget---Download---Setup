@@ -43,7 +43,7 @@ set "SoftName=Czkawka"
 set "Process=czkawka_gui.exe"
 
 set "FileName="
-set "SoftNameVersion=6.1.0"
+set "SoftNameVersion=7.0.0"
 set "FileDLwB=windows_czkawka*.zip"
 
 set "OpenAfterInstall="
@@ -67,7 +67,7 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://github.com/qarmin/czkawka/releases/download/!SoftNameVersion!/windows_czkawka_gui.zip"
+set "Link=https://github.com/qarmin/czkawka/releases/download/!SoftNameVersion!/windows_czkawka_gui_gtk_46.zip"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -75,7 +75,7 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "NameFFmpeg=ffmpeg-n6.0-latest-win64-gpl-6.0"
+set "NameFFmpeg=ffmpeg-n7.0-latest-win64-gpl-7.0"
 set "LinkFFmpeg=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/%NameFFmpeg%.zip"
 
 set "SoftPath="
