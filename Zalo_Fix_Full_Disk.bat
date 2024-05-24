@@ -121,23 +121,26 @@ echo.
 
 echo Please Check Your Zalo Storage Before Pressing Enter.
 echo Vui Long Kiem Tra Dung Luong Zalo Truoc Khi Nhan Enter.
-cd "%LocalAppData%\ZaloPC"
-start.
-cd "!ZaloPath!\ZaloPC"
-start.
-cd "%AppData%\ZaloData"
-start.
-cd "!ZaloPath!\ZaloData"
-start.
+cd "%LocalAppData%\ZaloPC" &pushd "%LocalAppData%\ZaloPC"
+start. &popd
+cd "!ZaloPath!\ZaloPC" &pushd "!ZaloPath!\ZaloPC"
+start. &popd
+cd "%AppData%\ZaloData" &pushd "%AppData%\ZaloData"
+start. &popd
+cd "!ZaloPath!\ZaloData" &pushd "!ZaloPath!\ZaloData"
+start. &popd
 if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
-	cd "%UserProfile%\OneDrive\Documents\Zalo Received Files"
-	start.
+	cd "%UserProfile%\OneDrive\Documents\Zalo Received Files" &pushd "%UserProfile%\OneDrive\Documents\Zalo Received Files"
+	start. &popd
 )
-cd "%UserProfile%\Documents\Zalo Received Files"
-start.
-cd "!ZaloPath!\Zalo Received Files"
-start.
+if exist "%UserProfile%\Documents\Zalo Received Files" (
+	cd "%UserProfile%\Documents\Zalo Received Files" &pushd "%UserProfile%\Documents\Zalo Received Files"
+start. &popd
+)
+cd "!ZaloPath!\Zalo Received Files" &pushd "!ZaloPath!\Zalo Received Files"
+start. &popd
 pause
+
 rmdir "%LocalAppData%\ZaloPC" /s /q>> %Temp%\hieuckitlog.txt
 rmdir "%AppData%\ZaloData" /s /q>> %Temp%\hieuckitlog.txt
 if exist "%UserProfile%\OneDrive\Documents\Zalo Received Files" (
