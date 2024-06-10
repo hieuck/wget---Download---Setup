@@ -81,7 +81,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
-set "Cr4ckFile=TreeSize/TreeSizeProfessional-!SoftNameVersion!-Cr4ck"
+set "Cr4ckFile=TreeSizeCr4ck/TreeSizeProfessional-!SoftNameVersion!-Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
