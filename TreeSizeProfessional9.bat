@@ -82,7 +82,7 @@ set "SoftPathFor64bit="
 REM set "TS_INSTALL_PASSWORD=4LGX7A-5TR7AX-JDZ2VK-UU5DHV-ZXSULR-4A3AMJ-5VEFLX" /PASSWORD=%TS_INSTALL_PASSWORD%
 set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
-set "Cr4ckFile=TreeSizeProfessional-!SoftNameVersion!-Cr4ck"
+set "Cr4ckFile=TreeSize/TreeSizeProfessional-!SoftNameVersion!-Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
