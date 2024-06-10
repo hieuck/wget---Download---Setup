@@ -63,7 +63,7 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 REM Set code based on Windows Architecture
 REM Source Link: 
 
-set "LinkForOldWindows="
+set "LinkForOldWindows=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/TeraCopy.Pro.v3.6.0.4.exe"
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
@@ -71,7 +71,7 @@ set "Link=https://codesector.com/files/teracopy.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/TeraCopy.Pro.v3.6.0.4.exe"
+set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
