@@ -316,6 +316,7 @@ if /i "%SupportOldWindows%"=="No" (
 		)
 		if not "%SoftPathFor64bit%"=="" set "SoftPath=%SoftPathFor64bit%"
 	)
+	set "QuietMode=/S"
 )
 goto NextStepForCheckOSVersion
 
