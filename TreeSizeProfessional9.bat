@@ -349,7 +349,12 @@ if /i "%Extract7z%"=="Yes" (
 REM Set up information related to software cr4cking
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/TreeSizeCr4ck/!Cr4ckFile!.rar"
+	:: Extracting the necessary parts from Cr4ckFile
+	for /f "tokens=1,3 delims=-" %%a in ("%Cr4ckFile%") do (
+		set "prefix=%%a"
+		set "suffix=%%b"
+	)
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!prefix!!suffix!/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 	if /i "%ARCH%"=="x86" (
