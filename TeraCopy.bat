@@ -81,7 +81,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/exenoui /noprereqs /qn"
 
-set "Cr4ckFile=TeraCopyCr4ck/TeraCopy-!SoftNameVersion!-Cr4ck"
+set "Cr4ckFile=TeraCopy-!SoftNameVersion!-Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
@@ -359,7 +359,7 @@ if /i "%Extract7z%"=="Yes" (
 REM Set up information related to software cr4cking
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/TeraCopyCr4ck/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 	if /i "%ARCH%"=="x86" (
@@ -693,7 +693,7 @@ if /i "%License%"=="Yes" (
 		curl -L --max-redirs 20 -A "%UserAgent%" -o "%Cr4ckFile%" "%Cr4ckLink%" --insecure
 	)
 	if exist "%Cr4ckFile%" (
-		powershell -Command Add-MpPreference -ExclusionPath "%Cr4ckPath%"
+		powershell -Command Add-MpPreference -ExclusionPath '"%Cr4ckPath%"'
 		@7z.exe x -p123 "%Cr4ckFile%" -o"%Cr4ckPath%" -aoa -y
 		echo Successfully Cr4cked %SoftName%.
 		echo.>> %Temp%\hieuckitlog.txt
