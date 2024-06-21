@@ -61,7 +61,7 @@ for /f "tokens=1-4 delims=." %%a in ("%SoftNameVersion%") do (
 )
 
 REM Set code based on Windows Architecture
-REM Source Link: 
+REM Source Link: https://github.com/keepassxreboot/keepassxc/releases/
 
 set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
@@ -75,7 +75,7 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath="
+set "SoftPath=%ProgramFiles%\KeePassXC"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
