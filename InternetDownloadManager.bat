@@ -43,7 +43,7 @@ set "SoftName=Internet Download Manager"
 set "Process=IDMan.exe"
 
 set "FileName="
-set "SoftNameVersion=642.3"
+set "SoftNameVersion=642.12"
 set "FileDLwB=idman*.exe"
 
 set "OpenAfterInstall="
@@ -96,6 +96,7 @@ set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
+REM Use the pattern "2. %Menu2% & echo." !MenuOptions!3. %Menu3%" to break the line.
 set "MenuOptions="
 if not "!LinkFromGithub!"=="" (
 	set "MenuOptions=!MenuOptions!	2. %Menu2%"
@@ -358,7 +359,12 @@ if /i "%Extract7z%"=="Yes" (
 REM Set up information related to software cr4cking
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	:: Extracting the necessary parts from Cr4ckFile
+	for /f "tokens=1,3 delims=-" %%a in ("%Cr4ckFile%") do (
+		set "prefix=%%a"
+		set "suffix=%%b"
+	)
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!prefix!!suffix!/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 	if /i "%ARCH%"=="x86" (
@@ -823,6 +829,6 @@ echo.
 @echo                 The current date and time are: %date% %time%
 @echo                 Dang Cau Hinh %SoftName%. Vui Long Cho...
 @echo off
-"%Cr4ckPath%\IAS.cmd" /act /s
+"%Cr4ckPath%\IAS.cmd" /frz /s
 echo Please close the script manually if automatically close fails.
 popd
