@@ -674,26 +674,30 @@ tasklist | find /i "OfficeC2RClient.exe" > nul
 if %errorlevel% equ 0 taskkill /im "OfficeC2RClient.exe" /f
 
 REM Check the Office version to perform Cr4ck.
+
+REM The number corresponding to the default choice
+set "defaultChoice=1"
+echo Select an option (1 - Cr4ck or 2 - Login) to activate using [Default is %defaultChoice%]: 
+choice /c 12 /t 10 /d %defaultChoice% /n >nul
+
+REM Check the errorlevel to determine the choice made by the user
+if "%errorlevel%"=="1" (
+	set "choice=1"
+) else if "%errorlevel%"=="2" (
+	set "choice=2"
+)
+REM Display the choice made
+if "%choice%"=="1" (
+	echo You have chosen to activate using Cr4ck.
+) else if "%choice%"=="2" (
+	echo You have chosen to activate using an account.
+	goto NextStepAfterCr4ckForCheckOSVersion
+)
+
 if "%OfficeConfiguration%"=="https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml" (
 	echo Microsoft 365 Apps for Enterprise requires an activation account.
-	
-	REM The number corresponding to the default choice
-	set "defaultChoice=1"
-	echo Select an option (1 or 2) [Default is %defaultChoice%]: 
-	choice /c 12 /t 10 /d %defaultChoice% /n >nul
-	
-	REM Check the errorlevel to determine the choice made by the user
-	if "%errorlevel%"=="1" (
-		set "choice=1"
-	) else if "%errorlevel%"=="2" (
-		set "choice=2"
-	)
-	REM Display the choice made
-	if "%choice%"=="1" (
-		echo You have chosen to activate using an account.
-		goto NextStepAfterCr4ckForCheckOSVersion
-	) else if "%choice%"=="2" (
-		echo You have chosen to activate using Cr4ck.
+	echo Microsoft 365 Apps for Enterprise requires an activation account.>> %Temp%\hieuckitlog.txt
+	goto NextStepAfterCr4ckForCheckOSVersion
 )
 
 REM License
@@ -759,7 +763,6 @@ endlocal
 :Cr4ckForWindows7
 for /f "delims=" %%i in ('dir "%Cr4ckPath%\MAS_AIO-CRC32_*" /b /o:-d') do (
 	echo %%i
-	pause
 	call "%Cr4ckPath%\%%i" /KMS-Office /S
 	timeout /t 3
 	call "%Cr4ckPath%\%%i" /KMS-ActAndRenewalTask /KMS-Office /S
@@ -770,7 +773,6 @@ for /f "delims=" %%i in ('dir "%Cr4ckPath%\MAS_AIO-CRC32_*" /b /o:-d') do (
 REM call "%Cr4ckPath%\MAS_AIO.cmd" /HWID /Ohook /KMS-ActAndRenewalTask /KMS-Office /S
 for /f "delims=" %%i in ('dir "%Cr4ckPath%\MAS_AIO-CRC32_*" /b /o:-d') do (
 	echo %%i
-	pause
 	call "%Cr4ckPath%\%%i" /HWID /Ohook /S
 )
 
