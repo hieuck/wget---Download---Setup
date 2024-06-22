@@ -4,6 +4,7 @@
 ::		Github:				https://github.com/hieuck/curl-uri-wget-download-setup				::
 ::		Facebook:			https://www.facebook.com/ZzhieuhuhongzZ/							::
 ::		Donate to me:		Vietcombank - 9966595263 - LE TRUNG HIEU							::
+::							MoMo - 0966595263 - LE TRUNG HIEU									::
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
@@ -70,16 +71,17 @@ set "Menu1=Office ProPlus2016Retail"
 set "Menu2=Office ProPlus2019Volume"
 set "Menu3=Office ProPlus2021Volume"
 set "Menu4=Office O365ProPlusRetail"
+set "Menu5=Office ProPlus2024Volume"
 
 echo Do you want to use which version of Microsoft Office?
-echo 1. %Menu1%			2. %Menu2%
+echo 1. %Menu1%		2. %Menu2%		3. %Menu3%
 echo.
-echo 3. %Menu3%			4. %Menu4%
+echo 4. %Menu4%		5. %Menu5%
 
 REM The number corresponding to the default choice
 set "defaultChoice=3"
-echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
-choice /c 1234 /t 5 /d %defaultChoice% /n >nul
+echo Select an option (1 or 2 or 3 or 4 or 5) [Default is %defaultChoice%]: 
+choice /c 12345 /t 5 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
 if "%errorlevel%"=="1" (
@@ -90,6 +92,8 @@ if "%errorlevel%"=="1" (
 	set "choice=3"
 ) else if "%errorlevel%"=="4" (
 	set "choice=4"
+) else if "%errorlevel%"=="5" (
+	set "choice=5"
 )
 
 REM Display the choice made
@@ -120,8 +124,15 @@ if "%choice%"=="1" (
 	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOffice365Setup.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml"
 	goto NextStepAfterChosen
+) else if "%choice%"=="5" (
+	echo You have chosen to use Office Professional Plus 2024 Volume License - ProPlus2021Volume.
+	set "SoftName=Microsoft Office Professional Plus 2024 Volume License"
+	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
+	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2024-64.xml"
+	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2024-32.xml"
+	goto NextStepAfterChosen
 ) else (
-	echo Invalid choice. Please select 1, 2, 3, or 4.
+	echo Invalid choice. Please select 1, 2, 3, 4 or 5.
 	goto menu
 )
 
@@ -150,7 +161,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/configure Configuration.xml"
 
-set "Cr4ckFile=MAS_AIO"
+set "Cr4ckFile=MicrosoftCr4ck"
 set "Cr4ckPath=C:\Z_Hieuck.IT_Z"
 
 set "Shortcut="
@@ -665,7 +676,23 @@ if %errorlevel% equ 0 taskkill /im "OfficeC2RClient.exe" /f
 REM Check the Office version to perform Cr4ck.
 if "%OfficeConfiguration%"=="https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-365.xml" (
 	echo Microsoft 365 Apps for Enterprise requires an activation account.
-	goto NextStepAfterCr4ckForCheckOSVersion
+	
+	REM The number corresponding to the default choice
+	set "defaultChoice=1"
+	choice /c 12 /t 10 /d %defaultChoice% /n >nul
+	
+	REM Check the errorlevel to determine the choice made by the user
+	if "%errorlevel%"=="1" (
+		set "choice=1"
+	) else if "%errorlevel%"=="2" (
+		set "choice=2"
+	)
+	REM Display the choice made
+	if "%choice%"=="1" (
+		echo You have chosen to activate using an account.
+		goto NextStepAfterCr4ckForCheckOSVersion
+	) else if "%choice%"=="2" (
+		echo You have chosen to activate using Cr4ck.
 )
 
 REM License
@@ -729,14 +756,22 @@ goto Cr4ckForWindows10
 endlocal
 
 :Cr4ckForWindows7
-call "%Cr4ckPath%\MAS_AIO.cmd" /KMS-Office /S
-timeout /t 3
-call "%Cr4ckPath%\MAS_AIO.cmd" /KMS-ActAndRenewalTask /KMS-Office /S
-goto NextStepAfterCr4ckForCheckOSVersion
+for /f "delims=" %%i in ('dir "%Cr4ckPath%\MAS_AIO-CRC32_*" /b /o:-d') do (
+	echo %%i
+	pause
+	call "%Cr4ckPath%\%%i" /KMS-Office /S
+	timeout /t 3
+	call "%Cr4ckPath%\%%i" /KMS-ActAndRenewalTask /KMS-Office /S
+	goto NextStepAfterCr4ckForCheckOSVersion
+)
 
 :Cr4ckForWindows10
 REM call "%Cr4ckPath%\MAS_AIO.cmd" /HWID /Ohook /KMS-ActAndRenewalTask /KMS-Office /S
-call "%Cr4ckPath%\MAS_AIO.cmd" /HWID /Ohook /S
+for /f "delims=" %%i in ('dir "%Cr4ckPath%\MAS_AIO-CRC32_*" /b /o:-d') do (
+	echo %%i
+	pause
+	call "%Cr4ckPath%\%%i" /HWID /Ohook /S
+)
 
 :NextStepAfterCr4ckForCheckOSVersion
 REM Shortcut
