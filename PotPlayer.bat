@@ -40,11 +40,12 @@ set "Extract7z="
 set "License="
 
 set "SoftName=PotPlayer"
-set "Process=danvaoday.exe"
+set "Process=PotPlayerMini64.exe"
+if /i "%ARCH%"=="x86" set "Process=PotPlayerMini.exe"
 
 set "FileName="
 set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=PotPlayer*.exe"
 
 set "OpenAfterInstall="
 
@@ -75,7 +76,7 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath="
+set "SoftPath=%ProgramFiles%\DAUM\PotPlayer"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
