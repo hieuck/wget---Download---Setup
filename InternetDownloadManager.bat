@@ -806,7 +806,7 @@ if not "%OpenAfterInstall%"=="" (
 )
 
 echo The script will automatically close in 3 seconds.
-for /l %%i in (3,-1,1) do (
+for /l %%i in (5,-1,1) do (
 	echo Closing in %%i seconds...
 	timeout /t 1 /nobreak >nul
 )
