@@ -127,7 +127,7 @@ if "%choice%"=="1" (
 ) else if "%choice%"=="5" (
 	echo You have chosen to use Office Professional Plus 2024 Volume License - ProPlus2021Volume.
 	set "SoftName=Microsoft Office Professional Plus 2024 Volume License"
-	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows10.exe"
+	set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/Office/setup/MicrosoftOfficeSetupWindows11.exe"
 	set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2024-64.xml"
 	if /i "%ARCH%"=="x86" set "OfficeConfiguration=https://raw.githubusercontent.com/hieuck/curl-uri-wget-download-setup/main/Setup/Office/config/Configuration-2024-32.xml"
 	goto NextStepAfterChosen
@@ -679,6 +679,7 @@ if "%OfficeConfiguration%"=="https://raw.githubusercontent.com/hieuck/curl-uri-w
 	
 	REM The number corresponding to the default choice
 	set "defaultChoice=1"
+	echo Select an option (1 or 2) [Default is %defaultChoice%]: 
 	choice /c 12 /t 10 /d %defaultChoice% /n >nul
 	
 	REM Check the errorlevel to determine the choice made by the user
