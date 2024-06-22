@@ -43,7 +43,7 @@ set "SoftName=Plex Media Server"
 set "Process=Plex Media Server.exe"
 
 set "FileName="
-set "SoftNameVersion=1.32.6.7557-1cf77d501"
+set "SoftNameVersion=1.40.3.8555-fef15d30c"
 set "FileDLwB=PlexMediaServer*.exe"
 
 set "OpenAfterInstall="
