@@ -41,11 +41,11 @@ set "Extract7z="
 set "License="
 
 set "SoftName=Poe"
-set "Process=danvaoday.exe"
+set "Process=Poe.exe"
 
 set "FileName="
 set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "FileDLwB=Poe*.exe"
 
 set "OpenAfterInstall="
 
@@ -76,11 +76,11 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath="
+set "SoftPath=%LocalAppData%\Poe"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
-set "QuietMode=/S"
+set "QuietMode="
 
 set "Cr4ckFile="
 set "Cr4ckPath="
