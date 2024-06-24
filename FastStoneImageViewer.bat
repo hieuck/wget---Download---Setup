@@ -72,7 +72,7 @@ set "Link=https://www.faststone.org/DN/FSViewerSetup!SoftNameVersion!.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
+set "LinkFromGithub=FS-ViewerSetup!SoftNameVersion!"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 

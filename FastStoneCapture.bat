@@ -72,7 +72,7 @@ set "Link=https://www.faststone.org/DN/FSCaptureSetup!SoftNameVersion!.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
+set "LinkFromGithub=FS-CaptureSetup!SoftNameVersion!"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
