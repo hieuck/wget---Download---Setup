@@ -4,6 +4,7 @@
 ::		Github:				https://github.com/hieuck/curl-uri-wget-download-setup				::
 ::		Facebook:			https://www.facebook.com/ZzhieuhuhongzZ/							::
 ::		Donate to me:		Vietcombank - 9966595263 - LE TRUNG HIEU							::
+::							MoMo - 0966595263 - LE TRUNG HIEU									::
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
@@ -81,7 +82,7 @@ set "SoftPathFor64bit=%ProgramFiles(x86)%\FastStone MaxView"
 
 set "QuietMode=/S"
 
-set "Cr4ckFile=FastStoneMaxViewCr4ck"
+set "Cr4ckFile=FastStone-MaxView-Cr4ck"
 set "Cr4ckPath=%LocalAppData%\FastStone\FSMV"
 
 set "Shortcut="
@@ -89,6 +90,12 @@ set "NoticeOption="
 
 REM MenuChoice Configuration
 setlocal EnableDelayedExpansion
+
+:: Extracting the necessary parts from LinkFromGithub
+for /f "tokens=1,2 delims=-." %%a in ("%LinkFromGithub%") do (
+	set "prefixLFG=%%a"
+	set "versionLFG=%%b"
+)
 
 :menu
 set "Menu1=Official Website"
@@ -157,7 +164,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%prefixLFG%/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
@@ -359,7 +366,12 @@ if /i "%Extract7z%"=="Yes" (
 REM Set up information related to software cr4cking
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	:: Extracting the necessary parts from Cr4ckFile
+	for /f "tokens=1,3 delims=-" %%a in ("%Cr4ckFile%") do (
+		set "prefix=%%a"
+		set "suffix=%%b"
+	)
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!prefix!!suffix!/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 	if /i "%ARCH%"=="x86" (
