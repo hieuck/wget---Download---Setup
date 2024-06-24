@@ -4,6 +4,7 @@
 ::		Github:				https://github.com/hieuck/curl-uri-wget-download-setup				::
 ::		Facebook:			https://www.facebook.com/ZzhieuhuhongzZ/							::
 ::		Donate to me:		Vietcombank - 9966595263 - LE TRUNG HIEU							::
+::							MoMo - 0966595263 - LE TRUNG HIEU									::
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
@@ -71,7 +72,7 @@ set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
+set "LinkFromGithub=TreeSize-!SoftNameVersion!-Setup.exe"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
@@ -81,7 +82,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/VERYSILENT /SUPPRESSMSGBOXES /NORESTART /SP-"
 
-set "Cr4ckFile=TreeSizeProfessional-!SoftNameVersion!-Cr4ck"
+set "Cr4ckFile=TreeSize-!SoftNameVersion!-Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
@@ -90,36 +91,53 @@ set "NoticeOption="
 REM MenuChoice Configuration
 setlocal EnableDelayedExpansion
 
+:: Extracting the necessary parts from LinkFromGithub
+for /f "tokens=1,2 delims=-." %%a in ("%LinkFromGithub%") do (
+	set "prefixLFG=%%a"
+	set "versionLFG=%%b"
+)
+
 :menu
 set "Menu1=Official Website"
 set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
+REM Use the pattern "2. %Menu2% & echo." !MenuOptions!3. %Menu3%" to break the line.
 set "MenuOptions="
 if not "!LinkFromGithub!"=="" (
-	set "MenuOptions=!MenuOptions!2. %Menu2%	"
+	set "MenuOptions=!MenuOptions!	2. %Menu2%"
 )
 if not "!LinkFromDropbox!"=="" (
-	set "MenuOptions=!MenuOptions!3. %Menu3%	"
+	set "MenuOptions=!MenuOptions!	3. %Menu3%"
 )
 if not "!LinkFromOneDrive!"=="" (
-	set "MenuOptions=!MenuOptions!4. %Menu4%"
+	set "MenuOptions=!MenuOptions!	4. %Menu4%"
 )
 
 if not "!MenuOptions!"=="" (
 	echo Do you want to use the download link from:
 	echo.
-	echo 1. %Menu1%	%MenuOptions%
-
+	echo 1. %Menu1%%MenuOptions%
 ) else (
 	echo You have chosen to download from: %Menu1%
 	goto NextStepAfterChosen
 )
 
 REM The number corresponding to the default choice
-set "defaultChoice=1"
-echo Select an option (1 or 2 or 3 or 4) [Default is %defaultChoice%]: 
+set "defaultChoice=2"
+
+set "OptionsChoice="
+if not "!LinkFromGithub!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 2"
+)
+if not "!LinkFromDropbox!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 3"
+)
+if not "!LinkFromOneDrive!"=="" (
+	set "OptionsChoice=!OptionsChoice! or 4"
+)
+echo Select an option (1%OptionsChoice%) [Default is %defaultChoice%]: 
 choice /c 1234 /t 5 /d %defaultChoice% /n >nul
 
 REM Check the errorlevel to determine the choice made by the user
@@ -146,7 +164,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%prefixLFG%/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
