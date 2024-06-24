@@ -126,7 +126,7 @@ if not "!MenuOptions!"=="" (
 )
 
 REM The number corresponding to the default choice
-set "defaultChoice=1"
+set "defaultChoice=2"
 
 set "OptionsChoice="
 if not "!LinkFromGithub!"=="" (
