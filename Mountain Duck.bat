@@ -4,6 +4,7 @@
 ::		Github:				https://github.com/hieuck/curl-uri-wget-download-setup				::
 ::		Facebook:			https://www.facebook.com/ZzhieuhuhongzZ/							::
 ::		Donate to me:		Vietcombank - 9966595263 - LE TRUNG HIEU							::
+::							MoMo - 0966595263 - LE TRUNG HIEU									::
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
@@ -43,7 +44,7 @@ set "SoftName=Mountain Duck"
 set "Process=Mountain Duck.exe"
 
 set "FileName="
-set "SoftNameVersion=4.16.0.22153"
+set "SoftNameVersion=4.16.1.22256"
 set "FileDLwB=Mountain*.exe"
 
 set "OpenAfterInstall="
@@ -71,7 +72,7 @@ set "Link=https://dist.mountainduck.io/Mountain Duck Installer-!SoftNameVersion!
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
+set "LinkFromGithub=Mountain Duck Installer-!SoftNameVersion!.exe"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
@@ -81,7 +82,7 @@ set "SoftPathFor64bit="
 
 set "QuietMode=/quiet /norestart"
 
-set "Cr4ckFile=MountainDuckCr4ck"
+set "Cr4ckFile=MountainDuck-!SoftNameVersion!-Cr4ck"
 set "Cr4ckPath="
 
 set "Shortcut="
@@ -89,6 +90,12 @@ set "NoticeOption="
 
 REM MenuChoice Configuration
 setlocal EnableDelayedExpansion
+
+:: Extracting the necessary parts from LinkFromGithub
+for /f "tokens=1,2 delims=-." %%a in ("%LinkFromGithub%") do (
+	set "prefixLFG=%%a"
+	set "versionLFG=%%b"
+)
 
 :menu
 set "Menu1=Official Website"
@@ -157,7 +164,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%prefixLFG%/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
