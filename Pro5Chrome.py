@@ -133,12 +133,15 @@ def open_chrome_and_add_profile():
     else:
         print("Vui lòng chọn hoặc nhập một profile")
 
-# Hàm để lưu URL vào danh sách và `URL.js`
+# Hàm để lưu URL mới vào danh sách và `URL.js`, chỉ lưu khi URL là mới
 def save_url_to_list_and_file(url):
     urls = read_urls()
-    urls.append(url)
-    save_urls(urls)
-    update_urls_listbox()
+    if url not in urls:
+        urls.append(url)
+        save_urls(urls)
+        update_urls_listbox()
+    else:
+        print(f"URL '{url}' đã tồn tại trong danh sách.")
 
 # Hàm để xóa danh sách URL và cập nhật giao diện
 def clear_urls_list():
