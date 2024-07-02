@@ -49,11 +49,15 @@ def save_chrome_path(chrome_path):
 def open_user_data_folder():
     chrome_path = chrome_var.get() or read_chrome_path() or default_chrome_path
     
+    print(f"Chrome path used: {chrome_path}")
+    
     if 'google' in chrome_path.lower():
         user_data_path = os.path.join(os.getenv('LOCALAPPDATA'), 'Google', 'Chrome', 'User Data')
     elif 'centbrowser' in chrome_path.lower():
         chrome_folder_path = os.path.dirname(chrome_path)
         user_data_path = os.path.join(chrome_folder_path, 'User Data')  # Đường dẫn đến thư mục User Data của Cent Browser
+        
+        print(f"Cent Browser User Data path: {user_data_path}")
         
         if not os.path.exists(user_data_path):
             print(f"Thư mục User Data không tồn tại: {user_data_path}")
@@ -62,6 +66,7 @@ def open_user_data_folder():
         print("Không thể mở thư mục User Data cho đường dẫn này.")
         return
     
+    user_data_path = os.path.abspath(user_data_path)
     subprocess.Popen(['explorer', user_data_path])
 
 # Hàm để đọc danh sách URL từ tệp
