@@ -170,6 +170,23 @@ def open_all_chrome_profiles():
         profile_directory = f"--profile-directory=Profile {profile}"
         subprocess.Popen([chrome_path, profile_directory])
 
+# Hàm để mở URL với toàn bộ Chrome profiles
+def open_url_all_profiles():
+    chrome_path = chrome_var.get() or read_chrome_path() or default_chrome_path
+    
+    if not profiles:
+        print("Không có profile nào để mở.")
+        return
+    
+    selected_url_index = urls_listbox.curselection()
+    if selected_url_index:
+        selected_url = urls_listbox.get(selected_url_index[0])
+        for profile in profiles:
+            profile_directory = f"--profile-directory=Profile {profile}"
+            subprocess.Popen([chrome_path, profile_directory, selected_url])
+    else:
+        print("Vui lòng chọn một URL từ danh sách")
+
 # Hàm để xử lý khi nhấn Enter trên Combobox để mở Chrome
 def open_chrome_on_enter(event=None):
     if event and event.keysym == 'Return':
@@ -393,13 +410,17 @@ open_delete_frame.pack(fill=tk.X)
 open_url_button = ttk.Button(open_delete_frame, text="Mở URL được chọn", command=open_url_from_listbox)
 open_url_button.pack(side=tk.LEFT, padx=5, pady=10)
 
-# Nút để xóa danh sách URLs
-delete_urls_button = ttk.Button(open_delete_frame, text="Xóa danh sách URLs", command=clear_urls_list)
-delete_urls_button.pack(side=tk.LEFT, padx=5, pady=10)
-
 # Nút để xóa URL từ Listbox
-delete_url_button = ttk.Button(url_buttons_frame, text="Xóa URL được chọn", command=delete_selected_urls)
+delete_url_button = ttk.Button(open_delete_frame, text="Xóa URL được chọn", command=delete_selected_urls)
 delete_url_button.pack(side=tk.LEFT, padx=5, pady=10)
+
+# Nút để mở URL với toàn bộ profile
+open_all_profiles_button = ttk.Button(url_buttons_frame, text="Mở URL với Toàn Bộ Profiles", command=open_url_all_profiles)
+open_all_profiles_button.pack(side=tk.LEFT, padx=5, pady=10)
+
+# Nút để xóa danh sách URLs
+delete_urls_button = ttk.Button(url_buttons_frame, text="Xóa danh sách URLs", command=clear_urls_list)
+delete_urls_button.pack(side=tk.LEFT, padx=5, pady=10)
 
 # ----------------------------------
 # Nút để mở các tệp profiles.js, config.js và URL.js
