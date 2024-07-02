@@ -158,6 +158,18 @@ def update_urls_listbox():
     for url in urls:
         urls_listbox.insert(tk.END, url)
 
+# Hàm để mở toàn bộ Chrome với các profile
+def open_all_chrome_profiles():
+    chrome_path = chrome_var.get() or read_chrome_path() or default_chrome_path
+    
+    if not profiles:
+        print("Không có profile nào để mở.")
+        return
+    
+    for profile in profiles:
+        profile_directory = f"--profile-directory=Profile {profile}"
+        subprocess.Popen([chrome_path, profile_directory])
+
 # Hàm để xử lý khi nhấn Enter trên Combobox để mở Chrome
 def open_chrome_on_enter(event=None):
     if event and event.keysym == 'Return':
@@ -275,6 +287,10 @@ update_listbox()
 # Nút Đăng Nhập Google cho Listbox
 login_button_listbox = ttk.Button(listbox_frame, text="Đăng Nhập Google (Danh sách)", command=login_google_from_listbox)
 login_button_listbox.pack(side=tk.LEFT, padx=5)
+
+# Tạo nút để mở toàn bộ Chrome với các profile
+open_all_chrome_button = ttk.Button(listbox_frame, text="Mở Toàn Bộ Chrome", command=open_all_chrome_profiles)
+open_all_chrome_button.pack(side=tk.LEFT, padx=5)
 
 # Xử lý sự kiện nhấp đúp vào một profile trong Listbox
 profiles_listbox.bind('<Double-Button-1>', open_profile_from_listbox)
