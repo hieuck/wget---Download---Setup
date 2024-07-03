@@ -195,6 +195,11 @@ def open_chrome_on_enter(event=None):
     if event and event.keysym == 'Return':
         open_chrome_and_add_profile()
 
+# Hàm để xử lý khi nhấn phím Enter trên trường nhập URL
+def handle_enter(event):
+    if event.keysym == 'Return':
+        open_and_save_url()
+
 # Hàm để đăng nhập Google với profile từ Combobox
 def login_google_from_combobox(event=None):
     selected_profile = profile_var.get()
@@ -369,6 +374,9 @@ add_url_button.pack(side=tk.LEFT, padx=5)
 # Tạo frame mới cho khung URL
 url_buttons_frame = ttk.Frame(root)
 url_buttons_frame.pack(pady=10, fill=tk.X)
+
+# Gắn sự kiện nhấn phím Enter vào trường nhập URL
+new_url_entry.bind('<Return>', handle_enter)
 
 # Label cho danh sách URLs
 urls_label = ttk.Label(url_buttons_frame, text="Danh sách URLs:")
