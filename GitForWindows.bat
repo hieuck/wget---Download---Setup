@@ -43,7 +43,7 @@ set "SoftName=Git for Windows"
 set "Process=git-cmd.exe"
 
 set "FileName="
-set "SoftNameVersion=2.42.0.2"
+set "SoftNameVersion=2.45.2.1"
 set "FileDLwB=Git*.exe"
 
 set "OpenAfterInstall="
@@ -68,8 +68,8 @@ set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
 set "Link="
-set "LinkForAllWindows32bit=https://github.com/git-for-windows/git/releases/download/v%Major%.%Minor%.%Build%.windows.%Revision%/Git-!SoftNameVersion!-32-bit.exe"
-set "LinkForAllWindows64bit=https://github.com/git-for-windows/git/releases/download/v%Major%.%Minor%.%Build%.windows.%Revision%/Git-!SoftNameVersion!-64-bit.exe"
+set "LinkForAllWindows32bit=https://github.com/git-for-windows/git/releases/download/v%Major%.%Minor%.%Build%.windows.%Revision%/Git-%Major%.%Minor%.%Build%-32-bit.exe"
+set "LinkForAllWindows64bit=https://github.com/git-for-windows/git/releases/download/v%Major%.%Minor%.%Build%.windows.%Revision%/Git-%Major%.%Minor%.%Build%-64-bit.exe"
 
 set "LinkFromGithub="
 set "LinkFromDropbox="
@@ -90,12 +90,19 @@ set "NoticeOption="
 REM MenuChoice Configuration
 setlocal EnableDelayedExpansion
 
+:: Extracting the necessary parts from LinkFromGithub
+for /f "tokens=1,2 delims=-." %%a in ("%LinkFromGithub%") do (
+	set "prefixLFG=%%a"
+	set "versionLFG=%%b"
+)
+
 :menu
 set "Menu1=Official Website"
 set "Menu2=My Github"
 set "Menu3=My Dropbox"
 set "Menu4=My OneDrive"
 
+REM Use the pattern "2. %Menu2% & echo." !MenuOptions!3. %Menu3%" to break the line.
 set "MenuOptions="
 if not "!LinkFromGithub!"=="" (
 	set "MenuOptions=!MenuOptions!	2. %Menu2%"
@@ -156,7 +163,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%prefixLFG%/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
@@ -358,7 +365,12 @@ if /i "%Extract7z%"=="Yes" (
 REM Set up information related to software cr4cking
 if /i "%License%"=="Yes" (
 	set "Admin=Yes"
-	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!Cr4ckFile!.rar"
+	:: Extracting the necessary parts from Cr4ckFile
+	for /f "tokens=1,3 delims=-" %%a in ("%Cr4ckFile%") do (
+		set "prefix=%%a"
+		set "suffix=%%b"
+	)
+	set "Cr4ckLink=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Cr4ck/!prefix!!suffix!/!Cr4ckFile!.rar"
 	set "Link7zdll=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.dll"
 	set "Link7zexe=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/7z/7z.exe"
 	if /i "%ARCH%"=="x86" (
