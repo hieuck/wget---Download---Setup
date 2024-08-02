@@ -44,7 +44,7 @@ set "SoftName=Mountain Duck"
 set "Process=Mountain Duck.exe"
 
 set "FileName="
-set "SoftNameVersion=4.16.1.22256"
+set "SoftNameVersion=4.16.2.22310"
 set "FileDLwB=Mountain*.exe"
 
 set "OpenAfterInstall="

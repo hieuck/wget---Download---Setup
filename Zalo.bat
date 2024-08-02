@@ -4,6 +4,7 @@
 ::		Github:				https://github.com/hieuck/curl-uri-wget-download-setup				::
 ::		Facebook:			https://www.facebook.com/ZzhieuhuhongzZ/							::
 ::		Donate to me:		Vietcombank - 9966595263 - LE TRUNG HIEU							::
+::							MoMo - 0966595263 - LE TRUNG HIEU									::
 ::																								::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 @ECHO OFF
@@ -90,6 +91,12 @@ set "NoticeOption="
 REM MenuChoice Configuration
 setlocal EnableDelayedExpansion
 
+:: Extracting the necessary parts from LinkFromGithub
+for /f "tokens=1,2 delims=-." %%a in ("%LinkFromGithub%") do (
+	set "prefixLFG=%%a"
+	set "versionLFG=%%b"
+)
+
 :menu
 set "Menu1=Official Website"
 set "Menu2=My Github"
@@ -157,7 +164,7 @@ if "%choice%"=="1" (
 		set "LinkForOldWindows32bit="
 		set "LinkForOldWindows64bit="
 
-		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%"
+		set "Link=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%prefixLFG%/%LinkFromGithub%"
 		set "LinkForAllWindows32bit="
 		set "LinkForAllWindows64bit="
 		goto NextStepAfterChosen
