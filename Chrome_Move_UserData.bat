@@ -43,7 +43,7 @@ set /p "DriveChar="
 
 rem Determine the full path for Chrome
 rem Change the path to the actual Chrome installation directory here
-set "ChromePath=!DriveChar!:\Chrome"
+set "ChromePath=!DriveChar!:\Google\Chrome"
 
 md "!ChromePath!\User Data"2>NUL>> %Temp%\hieuckitlog.txt
 
