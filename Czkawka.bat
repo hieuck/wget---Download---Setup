@@ -75,7 +75,7 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "NameFFmpeg=ffmpeg-n7.0-latest-win64-gpl-7.0"
+set "NameFFmpeg=ffmpeg-master-latest-win64-gpl"
 set "LinkFFmpeg=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/%NameFFmpeg%.zip"
 
 set "SoftPath="
