@@ -43,7 +43,7 @@ set "SoftName=Notepad++"
 set "Process=Notepad++.exe"
 
 set "FileName="
-set "SoftNameVersion=8.6.9"
+set "SoftNameVersion=8.7.1"
 set "FileDLwB=npp*.exe"
 
 set "OpenAfterInstall="
