@@ -67,11 +67,11 @@ set "LinkForOldWindows="
 set "LinkForOldWindows32bit="
 set "LinkForOldWindows64bit="
 
-set "Link=https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
+set "Link=https://www.fosshub.com/qBittorrent.html?dwl=qbittorrent_!SoftNameVersion!_qt6_lt20_x64_setup.exe"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub=qBittorrent/qbittorrent_!SoftNameVersion!_lt20_qt6_x64_setup.exe"
+set "LinkFromGithub=qBittorrent/qbittorrent_!SoftNameVersion!_qt6_lt20_x64_setup.exe"
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
