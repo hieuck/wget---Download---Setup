@@ -41,11 +41,11 @@ set "Extract7z="
 set "License="
 
 set "SoftName=Cursor"
-set "Process=danvaoday.exe"
+set "Process=Cursor.exe"
 
 set "FileName="
-set "SoftNameVersion="
-set "FileDLwB=danvaoday*.exe"
+set "SoftNameVersion=0.42.4"
+set "FileDLwB=Cursor*.exe"
 
 set "OpenAfterInstall="
 
@@ -76,7 +76,7 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath="
+set "SoftPath=%LocalAppData%\Programs\cursor"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
