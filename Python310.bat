@@ -76,7 +76,7 @@ set "LinkFromGithub="
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
 
-set "SoftPath="
+set "SoftPath=%LocalAppData%\Programs\Python\Python310"
 set "SoftPathFor32bit="
 set "SoftPathFor64bit="
 
