@@ -43,7 +43,7 @@ set "SoftName=qBittorrent"
 set "Process=qBittorrent.exe"
 
 set "FileName="
-set "SoftNameVersion=4.6.5"
+set "SoftNameVersion=5.0.1"
 set "FileDLwB=qbittorrent*setup*.exe"
 
 set "OpenAfterInstall="
