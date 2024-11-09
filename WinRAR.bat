@@ -43,7 +43,7 @@ set "SoftName=WinRAR"
 set "Process=WinRAR.exe"
 
 set "FileName="
-set "SoftNameVersion=701"
+set "SoftNameVersion=710b1"
 set "FileDLwB=winrar*.exe"
 
 set "OpenAfterInstall="
