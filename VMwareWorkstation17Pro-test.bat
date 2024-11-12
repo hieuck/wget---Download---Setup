@@ -143,7 +143,23 @@ if "%choice%"=="1" (
 	echo You have chosen to download from: %Menu2%
 	if not "%LinkFromGithub%"=="" (
 		if not "%NumPartFromGithub%"=="" (
-			goto DownloadPartFromGithub
+			REM Check if there is a part in the link or not
+
+			for /l %%i in (1,1,%NumPartFromGithub%) do (
+				set "LinkPartFromGithub=%LinkFromGithub%/%FileName%.part%%i.rar"
+				set "FileNamePart=%FileName%.part%%i.rar"
+				
+				REM Log the part URLs and file names
+				echo Downloading part %%i: !LinkPartFromGithub! > "%Temp%\hieuckitlog.txt"
+				echo Saving as: !FileNamePart! >> "%Temp%\hieuckitlog.txt"
+				
+				REM Check if wget exists, otherwise use curl
+				if exist "wget.exe" (
+					wget --no-check-certificate --show-progress -q -O "!FileNamePart!" -U "%UserAgent%" "!LinkPartFromGithub!"
+				) else (
+					curl -L --max-redirs 20 -A "%UserAgent%" -o "!FileNamePart!" "!LinkPartFromGithub!" --insecure
+				)
+			)
 		)
 		set "LinkForOldWindows="
 		set "LinkForOldWindows32bit="
@@ -192,34 +208,6 @@ if "%choice%"=="1" (
 )
 
 endlocal
-
-:DownloadPartFromGithub
-REM Check if there is a part in the link or not
-
-for /l %%i in (1,1,%NumPartFromGithub%) do (
-    set "LinkPartFromGithub=%LinkFromGithub%/%FileName%.part%%i.rar"
-    set "FileNamePart=%FileName%.part%%i.rar"
-    
-    REM Log the part URLs and file names
-    echo Downloading part %%i: !LinkPartFromGithub! >> "%Temp%\hieuckitlog.txt"
-    echo Saving as: !FileNamePart! >> "%Temp%\hieuckitlog.txt"
-    
-    REM Check if wget exists, otherwise use curl
-    if exist "wget.exe" (
-        wget --no-check-certificate --show-progress -q -O "!FileNamePart!" -U "%UserAgent%" "!LinkPartFromGithub!"
-    ) else (
-        curl -L --max-redirs 20 -A "%UserAgent%" -o "!FileNamePart!" "!LinkPartFromGithub!" --insecure
-    )
-)
-
-REM Combine downloaded parts into a single file
-copy /b %FileName%.part*.rar %FileName%
-
-REM Clean up individual part files
-del %FileName%.part*.rar
-
-goto ExitDLwB
-
 :NextStepAfterChosen
 
 REM Convert to direct download Link.
@@ -620,13 +608,21 @@ echo.
 @echo off
 echo Downloading 7-Zip...
 if /i "%Extract7z%"=="Yes" (
-	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
-		wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
-	) else (
-		curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.dll" "%Link7zdll%" --insecure
-		curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.exe" "%Link7zexe%" --insecure
-	)
+    set "ConditionMet=1"
+) else if not "%NumPartFromGithub%"=="" (
+    set "ConditionMet=1"
+)
+
+if defined ConditionMet (
+    if exist "wget.exe" (
+        wget --no-check-certificate --show-progress -q -O "7z.dll" -U "%UserAgent%" "%Link7zdll%"
+        wget --no-check-certificate --show-progress -q -O "7z.exe" -U "%UserAgent%" "%Link7zexe%"
+    ) else (
+        curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.dll" "%Link7zdll%" --insecure
+        curl -L --max-redirs 20 -A "%UserAgent%" -o "7z.exe" "%Link7zexe%" --insecure
+    )
+) else (
+    echo Error: Both conditions failed.
 )
 
 REM Install
@@ -649,7 +645,18 @@ echo.
 @echo off
 echo Installing %SoftName%...
 if not "%NumPartFromGithub%"=="" (
-	@7z.exe x -p123 "%FileName%" -o"%FileName%" -aoa -y
+	set "FirstPart=%FileName%.part1.rar"
+	if exist "!FirstPart!" (
+		echo Extracting !FirstPart!...
+		7z.exe x -p123 "!FirstPart!" -o"%FileName%" -aoa -y
+		if %errorlevel%==0 (
+			echo Extraction successful.
+		) else (
+			echo Extraction failed. Check the file or password.
+		)
+	) else (
+		echo File !FirstPart! not found.
+	)
 )
 if /i "%Extract7z%"=="Yes" (
 	@7z l "%FileName%" > nul 2>&1
