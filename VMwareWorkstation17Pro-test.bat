@@ -42,7 +42,7 @@ set "License="
 set "SoftName=VMware Workstation 17 Pro"
 set "Process=vmware.exe"
 
-set "FileName="
+set "FileName=VMware-workstation-full-17.5.1-23298084"
 set "SoftNameVersion=17.5.1"
 set "FileDLwB=VMware*.exe"
 
@@ -69,8 +69,8 @@ set "Link=https://www.vmware.com/go/getworkstation-win"
 set "LinkForAllWindows32bit="
 set "LinkForAllWindows64bit="
 
-set "LinkFromGithub="
-set "NumPartLinkFromGithub="
+set "LinkFromGithub=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/VMware"
+set "NumPartFromGithub=5"
 
 set "LinkFromDropbox="
 set "LinkFromOneDrive="
@@ -142,8 +142,8 @@ if "%choice%"=="1" (
 	REM My Github
 	echo You have chosen to download from: %Menu2%
 	if not "%LinkFromGithub%"=="" (
-		if not "%NumPartLinkFromGithub%"=="" (
-			goto PartLinkFromGithub
+		if not "%NumPartFromGithub%"=="" (
+			goto DownloadPartFromGithub
 		)
 		set "LinkForOldWindows="
 		set "LinkForOldWindows32bit="
@@ -192,18 +192,33 @@ if "%choice%"=="1" (
 )
 
 endlocal
-:PartLinkFromGithub
+
+:DownloadPartFromGithub
 REM Check if there is a part in the link or not
 
-for /l %%i in (0,1,%NumPartLinkFromGithub%) do (
-	set LinkPartLinkFromGithub=https://github.com/hieuck/curl-uri-wget-download-setup/raw/main/Setup/%LinkFromGithub%.part%%i.rar"
-	if exist "wget.exe" (
-		wget --no-check-certificate --show-progress -q -O "%FileName%" -U "%UserAgent%" "%LinkPartLinkFromGithub%"
-	) else (
-		curl -L --max-redirs 20 -A "%UserAgent%" -o "%FileName%" "%LinkPartLinkFromGithub%" --insecure
-	)
-	start "" "!chromePath!" --profile-directory="Profile %%i" "!customURL!"
+for /l %%i in (1,1,%NumPartFromGithub%) do (
+    set "LinkPartFromGithub=%LinkFromGithub%/%FileName%.part%%i.rar"
+    set "FileNamePart=%FileName%.part%%i.rar"
+    
+    REM Log the part URLs and file names
+    echo Downloading part %%i: !LinkPartFromGithub! >> "%Temp%\hieuckitlog.txt"
+    echo Saving as: !FileNamePart! >> "%Temp%\hieuckitlog.txt"
+    
+    REM Check if wget exists, otherwise use curl
+    if exist "wget.exe" (
+        wget --no-check-certificate --show-progress -q -O "!FileNamePart!" -U "%UserAgent%" "!LinkPartFromGithub!"
+    ) else (
+        curl -L --max-redirs 20 -A "%UserAgent%" -o "!FileNamePart!" "!LinkPartFromGithub!" --insecure
+    )
 )
+
+REM Combine downloaded parts into a single file
+copy /b %FileName%.part*.rar %FileName%
+
+REM Clean up individual part files
+del %FileName%.part*.rar
+
+goto ExitDLwB
 
 :NextStepAfterChosen
 
@@ -633,6 +648,9 @@ echo.
 @echo                 Dang Cai Dat %SoftName%. Vui Long Cho...
 @echo off
 echo Installing %SoftName%...
+if not "%NumPartFromGithub%"=="" (
+	@7z.exe x -p123 "%FileName%" -o"%FileName%" -aoa -y
+)
 if /i "%Extract7z%"=="Yes" (
 	@7z l "%FileName%" > nul 2>&1
 	if %errorlevel% equ 0 (
