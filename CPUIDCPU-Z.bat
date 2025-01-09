@@ -43,7 +43,7 @@ set "SoftName=CPUID CPU-Z"
 set "Process=cpuz.exe"
 
 set "FileName="
-set "SoftNameVersion=2.08"
+set "SoftNameVersion=2.13"
 set "FileDLwB=cpu-z*.exe"
 
 set "SupportOldWindows=Yes"
